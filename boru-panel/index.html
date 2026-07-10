@@ -484,7 +484,7 @@ function md(src){
   src=src.replace(/^###\s+(.+)$/gm,'<h3>$1</h3>').replace(/^##\s+(.+)$/gm,'<h2>$1</h2>').replace(/^#\s+(.+)$/gm,'<h1>$1</h1>');
   src=src.replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>');
   src=src.replace(/(^|[^*\w])\*([^*\n]+)\*(?!\*)/g,'$1<em>$2</em>');
-  src=src.replace(/\[([^\]\n]+)\]\(([^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  src=src.replace(/\[([^\]\n]+)\]\(([^)\s]+)\)/g,(_,label,url)=>{const u=String(url).trim();if(!/^(https?:|mailto:|\/|#)/i.test(u))return label;return '<a href="'+u.replace(/"/g,'&quot;')+'" target="_blank" rel="noopener noreferrer">'+label+'</a>';});
   src=src.replace(/(?:^[-*]\s+.+(?:\n|$))+/gm,b=>'<ul>'+b.trim().split('\n').map(l=>'<li>'+l.replace(/^[-*]\s+/,'')+'</li>').join('')+'</ul>');
   src=src.replace(/(?:^\d+\.\s+.+(?:\n|$))+/gm,b=>'<ol>'+b.trim().split('\n').map(l=>'<li>'+l.replace(/^\d+\.\s+/,'')+'</li>').join('')+'</ol>');
   src=src.split(/\n{2,}/).map(c=>{const t=c.trim();if(!t)return'';if(/^<(h\d|ul|ol|pre)/.test(t)||t.startsWith('\x00CB'))return t;return'<p>'+t.replace(/\n/g,'<br>')+'</p>'}).join('');
