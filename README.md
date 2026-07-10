@@ -1,204 +1,75 @@
 <div align="center">
 
+<br>
+
 # PARS
-### Poly Augmented Reality Systems
+## Poly Augmented Reality Systems
 
-**The world's first multi-layered, phygital reality ecosystem**
+<br>
 
-*Blending physical and digital worlds — for everyone, everywhere, at the same time.*
+> *The world's first multi-layered, shared augmented reality ecosystem.*
+> *Physical and digital — together, for everyone, at the same time.*
 
----
+<br>
 
-[📄 Read the Whitepaper](docs/PARS_Whitepaper.pdf) · [🎮 TLOA Game](#-the-legend-of-acun) · [🪙 PARGT Token](#-pars-game-token-pargt) · [🗺 Roadmap](#-roadmap) · [⚙️ AI Operating System](#%EF%B8%8F-pars-ai-operating-system-this-repo)
+[![Whitepaper](https://img.shields.io/badge/📄_Whitepaper-Read_Now-0a0a0a?style=for-the-badge)](docs/PARS_Whitepaper.pdf)
+[![PARAVERSE](https://img.shields.io/badge/🌐_PARAVERSE-Overview-1a1a2e?style=for-the-badge)](docs/OVERVIEW.md)
+[![AI OS](https://img.shields.io/badge/⚙️_AI_OS-Technical_Docs-0d1117?style=for-the-badge)](docs/PARS_AGENTS_INDEX.md)
 
-</div>
-
----
-
-## What is PARS?
-
-PARS (**Poly Augmented Reality Systems**) is a next-generation technology platform that enables multiple users to experience the same augmented reality environment simultaneously — transforming AR from a personal, isolated experience into a shared, social one.
-
-Where traditional AR shows one person a digital overlay on the real world, **PARS lets thousands of people see, interact with, and build the same digital layer together — in real time.**
-
-This shared layer is called **PARAVERSE**.
+<br>
 
 ---
 
-## 🌐 PARAVERSE
+### What We're Building
 
-PARAVERSE is a living, layered digital universe built on top of the physical world. Unlike the Metaverse — which isolates users in a fully virtual space — PARAVERSE keeps users grounded in physical reality while enriching it with persistent digital content.
+**PARAVERSE** — a living digital universe layered on top of the physical world.
+Not a metaverse you escape into. A reality you share with everyone around you.
 
-**PARAVERSE is not a destination. It's a layer on top of everywhere.**
+| | Traditional AR | VR / Metaverse | **PARAVERSE** |
+|---|---|---|---|
+| Users | Single | Isolated | **Shared, simultaneous** |
+| World | Real only | Virtual only | **Real + Digital together** |
+| Access | Screen | Headset | **Phone · Glasses · Wearables** |
 
-| Traditional AR | Traditional Metaverse | PARAVERSE |
-|---|---|---|
-| Single-user | Fully virtual | Multi-user + physical world |
-| Isolated experience | Isolates from reality | Social + physical together |
-| Screen-bound | VR headset-bound | Phone, glasses, wearables |
-| No persistence | Closed ecosystem | Open, cross-platform |
+<br>
 
-### PARAVERSE Products
+### Core Products
 
-- 🗺 **Digital Land** — Lease, purchase, and build on virtual land overlaid on real locations
-- 🎮 **PARS Gaming** — TLOA and future AR-native games
-- 📱 **PAR Media** — Next-generation social media in mixed reality
-- 🛍 **AR Trading Module** — Buy, sell, and trade in augmented spaces
-- 🎓 **AR Education Module** — Immersive learning environments
-- 🏙 **PARSVille** — Digital investment and real estate
-- 📢 **PARS Advertising** — Spatial advertising on digital billboards
-- 👗 **PAR Fashion** — Wearable AR cosmetics and fashion
-- 🧭 **PARAVERSE GPS** — Navigation enriched with AR overlays
-- ☕ **PAR Cafe / PAR Book** — Social and cultural spaces in AR
-- 🎪 **Global AR Parties & Events** — Shared experiences at scale
-- 🛠 **PARS Game Engine** — Open platform for indie developers
+`TLOA` · AR card game with real-world PvP and exploration  
+`PARGT Token` · Native utility token — your time generates real value  
+`PAR Media` · Next-gen social media in mixed reality  
+`PARS Engine` · Open platform for indie AR developers  
+`PARSVille` · Digital real estate and investment module  
+`AR Trading` · Commerce and services in augmented space  
 
----
+<br>
 
-## 🎮 The Legend of Acun
-
-**TLOA (The Legend of Acun)** is PARS's flagship title — an AR-integrated action-card game for iOS and Android, set in *Old Acun*, a mythological fantasy universe with enough depth for multiple book series and a 3D game adaptation.
-
-Unlike traditional card games, TLOA plays out in the real world:
-
-- **Real-time Strategy (RTS)** card battles — not turn-based
-- **AR integration** — cards, characters, and battles appear in your physical surroundings
-- **PvE story mode** — deep narrative with branching decisions
-- **PvP system** — guild wars, ranked tournaments, group battles
-- **Daily AR mini-games** — collect items by physically exploring the world
-- **Play-to-Earn** — every action generates value in PARGT tokens
-
-> *"Every move strategic. Every battle reflex-driven. Every discovery an opportunity."*
-
----
-
-## 🪙 PARS Game Token (PARGT)
-
-**PARGT** is the native utility token powering the entire PARS ecosystem.
-
-**Core principle:** *Your time has value.*
-
-PARS was designed so that participation — not just payment — generates real, transferable economic value.
-
-### How to Earn PARGT
-
-| Method | Description |
-|---|---|
-| 🎯 Mission rewards | Complete in-game tasks, watch ads, promote content |
-| 🗺 Exploration | Collect rewards scattered across the real-world map |
-| ⚔️ Dungeon farming | Farm dungeons, convert loot to tokens |
-| 🏙 Virtual real estate | Earn passive income from land rentals and billboards |
-| 💼 Freelance in PARAVERSE | Offer services to other users |
-| 📈 Trading | Buy low, sell high in the digital economy |
-| 🧪 Beta rewards | Free PARGT for beta testers |
-
-### Token Distribution
-
-- **Pre-sale & listing**: Gate.io (before beta)
-- **Post-beta**: Binance launchpad + market exchanges
-- **Token burn target**: 10% of total supply (2 billion tokens) by 2027
-
----
-
-## 🗺 Roadmap
-
-| Phase | Target | Milestone |
-|---|---|---|
-| ✅ Phase 1–3 | 2021–2024 | Foundation, team, tech R&D, TLOA prototype |
-| 🔄 Phase 4 | 2025 | Beta launch, Gate.io pre-sale, PARGT distribution |
-| 🔄 Phase 5 | 2026/Q2 | Public launch, mobile release, community growth |
-| 🔜 Phase 6 | 2027/Q2 | CEX listings (Binance, OKX, Bybit), sponsorships, staking |
-| 🔜 Phase 7 | 2027/Q4 | Full PARAVERSE launch — virtual land, DAO, global expansion |
-
-**Hardware roadmap (by 2028):** Smart clothing · Smartwatches · AR glasses · Haptic gloves · Smart lenses
-
----
-
-## ⚙️ PARS AI Operating System *(this repo)*
-
-To build and run PARAVERSE at scale, PARS operates a custom AI infrastructure internally: **Börü** — an orchestrator agent that routes tasks, manages memory, runs voice interaction, and coordinates specialized sub-agents across all PARS business units.
-
-This repository contains the full source of that system.
+### Roadmap
 
 ```
-pars-ai/
-├── boru-panel/          # Real-time command console (voice + text UI)
-│   ├── index.html       # Web interface
-│   └── server/          # Node.js backend
-│       ├── server.js        # Main server, API routing, voice auth
-│       ├── boru-tools.js    # Tool execution engine
-│       ├── boru-brain.js    # Memory + context routing
-│       ├── boru-workflow.js # Multi-step workflow engine
-│       ├── boru-tasks.js    # Autonomous task queue
-│       ├── boru-metrics.js  # Dashboard metrics
-│       └── boru-telegram.js # Telegram remote control
-├── scripts/
-│   ├── xtts_server.py       # XTTS v2 TTS + voice verification (GPU · port 8020)
-│   └── whisper_server.py    # faster-whisper STT large-v3 (GPU · port 8021)
-├── .claude/             # Agent definitions, rules, slash commands
-├── projects/            # Per-division configs: ARES · XR · MEDIA · SECURITY · KNOWLEDGE
-└── docs/
-    └── PARS_Whitepaper.pdf  # Full company whitepaper
+2021 ── Founded          2025 ── Beta + Gate.io listing
+2024 ── Prototype        2026 ── Public launch
+                         2027 ── PARAVERSE + CEX (Binance · OKX)
+                         2028 ── Hardware: AR glasses · haptic gloves · smart lenses
 ```
 
-### Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Frontend | Vanilla HTML/CSS/JS |
-| Backend | Node.js + Express |
-| LLM Routing | Groq — LLaMA 3.3 70B (tools) · LLaMA 3.1 8B (fast chat) |
-| TTS | XTTS v2 (Coqui) with voice cloning |
-| STT | faster-whisper large-v3 |
-| Voice Auth | resemblyzer cosine similarity |
-| Memory | Obsidian vault (MCP) |
-| Remote Control | Playwright + Telegram |
-| Agent Framework | Claude Code (Anthropic) |
-
-### Quick Start
-
-```bash
-# 1. API Keys
-echo "your-groq-key" > boru-panel/server/groq.key
-
-# 2. Backend
-cd boru-panel/server && npm install && node server.js
-
-# 3. Python services (GPU recommended)
-python scripts/xtts_server.py   # TTS + voice auth  (port 8020)
-python scripts/whisper_server.py # STT              (port 8021)
-
-# 4. Open panel
-# Navigate to http://localhost:3737
-```
+<br>
 
 ---
 
-## 📄 Documentation
+### This Repository
 
-| Resource | Link |
-|---|---|
-| 📄 Whitepaper | [docs/PARS_Whitepaper.pdf](docs/PARS_Whitepaper.pdf) |
-| 🤖 Agent Index | [docs/PARS_AGENTS_INDEX.md](docs/PARS_AGENTS_INDEX.md) |
-| 🔊 Voice Interface | [docs/PARS_VOICE_INTERFACE.md](docs/PARS_VOICE_INTERFACE.md) |
-| 🔐 Security | [docs/PARS_SECURITY.md](docs/PARS_SECURITY.md) |
-| 🧠 Memory Architecture | [docs/PARS_MEMORY.md](docs/PARS_MEMORY.md) |
-| 🗺 MCP Map | [docs/PARS_MCP_MAP.md](docs/PARS_MCP_MAP.md) |
+The AI operating system that runs PARS internally — **Börü**, an orchestrator agent
+with voice authentication, real-time command panel, multi-agent routing, and autonomous task execution.
 
----
+→ [View Technical Documentation](docs/PARS_AGENTS_INDEX.md)
+→ [Voice Interface Architecture](docs/PARS_VOICE_INTERFACE.md)
+→ [Full Whitepaper (PDF)](docs/PARS_Whitepaper.pdf)
 
-## 🌍 Founded
-
-November 11, 2021 — by a university team of game developers, architects, and AR engineers united by a single vision:
-
-> *To build a world where physical and digital realities are no longer separate.*
+<br>
 
 ---
 
-<div align="center">
-
-**PARS · Poly Augmented Reality Systems**
-
-*Always trust the process.*
+*Founded November 11, 2021 · Always trust the process.*
 
 </div>
