@@ -1,0 +1,77 @@
+# ── API Keys & Credentials ──────────────────────────
+*.key
+*.env
+.env*
+*.token
+*.secret
+*.pem
+*.p12
+*.pfx
+
+# ── Ses Biyometrisi (kişisel) ───────────────────────
+assets/voice/speaker.wav
+assets/voice/*.wav
+
+# ── Telegram Oturumu ────────────────────────────────
+.boru-telegram-profile/
+*-telegram-profile/
+
+# ── Kişisel Obsidian Vault ──────────────────────────
+bilge-vault/
+boru-ogrenim/
+.obsidian/
+00-index/
+10-projects/
+20-resources/
+30-systems/
+40-learnings/
+50-sessions/
+Obsidian/
+
+# ── Node.js ─────────────────────────────────────────
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# ── Python ──────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# ── Task & Session Data (kişisel içerik) ────────────
+boru-panel/server/tasks.json
+tasks/
+scratch/
+
+# ── Claude Code Geçici / Kişisel ────────────────────
+.claude/projects/
+.claude/todos/
+.playwright-mcp/
+
+# ── Üçüncü parti Claude Code Skills (PARS-dışı) ────
+.agents/
+
+# ── ARES: kendi git geçmişi var, submodule olarak ayrı yönetilecek ──
+projects/ARES/
+
+# ── IDE & OS ────────────────────────────────────────
+.vscode/settings.json
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# ── Büyük model dosyaları ───────────────────────────
+*.bin
+*.pt
+*.pth
+*.onnx
+*.gguf
+*.safetensors

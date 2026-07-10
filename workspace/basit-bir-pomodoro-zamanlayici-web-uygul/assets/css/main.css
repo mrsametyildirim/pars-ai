@@ -1,0 +1,49 @@
+/* design-system.md'de tanımlanan değişkenleri :root'a koy */
+:root {
+  --zemin: #2f2f2f;
+  --birincil-vurgu: #8b9467;
+  --kritik-vurgu: #ff9900;
+  --taban-olcek: 8px;
+}
+
+/* Genel stiller */
+body {
+  background-color: var(--zemin);
+  font-family: Arial, sans-serif;
+}
+
+/* Başlık stilleri */
+.h1, .h2, .h3 {
+  font-weight: 600;
+  color: var(--birincil-vurgu);
+}
+
+/* Gövde stilleri */
+.p {
+  font-weight: 400;
+  color: var(--zemin);
+}
+
+/* Buton stilleri */
+.button {
+  background-color: var(--kritik-vurgu);
+  color: var(--zemin);
+  border: none;
+  padding: var(--taban-olcek) var(--taban-olcek);
+  font-size: var(--taban-olcek);
+  cursor: pointer;
+}
+
+/* Zamanlayıcı stilleri */
+.timer {
+  font-size: var(--taban-olcek);
+  font-weight: 600;
+  color: var(--birincil-vurgu);
+}
+
+/* Tur sayacı stilleri */
+.counter {
+  font-size: var(--taban-olcek);
+  font-weight: 600;
+  color: var(--birincil-vurgu);
+}

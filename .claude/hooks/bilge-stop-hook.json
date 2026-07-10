@@ -1,0 +1,13 @@
+{
+  "Stop": [
+    {
+      "matcher": "true",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python C:\\PARS\\scripts\\bilge_capture.py \"Oturum tamamlandi\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    },
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "filesystem": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\PARS"
+      ]
+    },
+    "ruflo": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "ruflo@latest"
+      ]
+    },
+    "nanobanana": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ycse/nanobanana-mcp"
+      ]
+    },
+    "gdrive": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-gdrive"
+      ]
+    },
+    "instagram": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mcpware/instagram-mcp"
+      ]
+    },
+    "excel-mcp-server": {
+      "type": "stdio",
+      "command": "C:\\Users\\MSI-NB\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\excel-mcp-server.exe",
+      "args": [
+        "stdio"
+      ]
+    },
+    "git": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "mcp-server-git",
+        "--repository",
+        "C:\\PARS\\projects\\ARES"
+      ]
+    }
+  }
+}

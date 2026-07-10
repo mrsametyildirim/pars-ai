@@ -1,0 +1,27 @@
+/* design-system.md'deki değişkenleri :root'a koy, her renk/boşluk değişkenden gelsin. kebab-case sınıf. */
+:root {
+  --zemin: #012345;
+  --birincil-vurgu: #456789;
+  --kritik-vurgu: #678901;
+  --taban-olcegi: 8px;
+}
+
+/* tipografi */
+.heading {
+  font-weight: 600;
+  font-size: 700;
+}
+
+.body {
+  font-weight: 400;
+  color: #ccc;
+}
+
+.data-label {
+  font-family: monospace;
+}
+
+/* spacing */
+.spacing {
+  margin: var(--taban-olcegi);
+}

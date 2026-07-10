@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(python -c \"import win32com.client; print\\('win32com OK'\\)\" 2>&1)",
+      "PowerShell(Start-Sleep -Seconds 8; $body = [System.Text.Encoding]::UTF8.GetBytes\\('{\"text\":\"PARS sistemi tam kapasiteyle calisiyor.\"}'\\); $req = [System.Net.WebRequest]::Create\\(\"http://localhost:3737/tts\"\\); $req.Method = \"POST\"; $req.ContentType = \"application/json; charset=utf-8\"; $req.ContentLength = $body.Length; $req.Timeout = 60000; $s = $req.GetRequestStream\\(\\); $s.Write\\($body,0,$body.Length\\); $s.Close\\(\\); try { $resp = $req.GetResponse\\(\\); $st=$resp.GetResponseStream\\(\\); $ms=New-Object System.IO.MemoryStream; $st.CopyTo\\($ms\\); $b=$ms.ToArray\\(\\); \"ContentType: $\\($resp.ContentType\\) — $\\($b.Length\\) bytes\" } catch [System.Net.WebException] { $r=$_.Exception.Response; if\\($r\\){\"HTTP $\\([int]$r.StatusCode\\)\"}else{$_.Exception.Message} })",
+      "mcp__claude_ai_Google_Drive__list_recent_files",
+      "mcp__context7__resolve-library-id",
+      "mcp__excel-mcp-server__get_workbook_metadata",
+      "mcp__claude_ai_Slack__slack_read_channel",
+      "mcp__obsidian-mcp__obsidian_write_note",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "PowerShell(echo '{}' | powershell -NonInteractive -File \"C:\\\\Users\\\\MSI-NB\\\\.claude\\\\scripts\\\\obsidian-daily-summary.ps1\")",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_take_screenshot"
+    ]
+  }
+}

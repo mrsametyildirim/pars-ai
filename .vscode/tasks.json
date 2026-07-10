@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "BÖRÜ Panel",
+      "type": "shell",
+      "command": "node C:\\PARS\\boru-panel\\server\\server.js",
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "showReuseMessage": false
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": { "regexp": "^$" },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "BÖRÜ Panel",
+          "endsPattern": "BÖRÜ Panel"
+        }
+      }
+    }
+  ]
+}
