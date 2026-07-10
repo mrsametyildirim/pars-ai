@@ -11,16 +11,31 @@ Bilgi üretimi, dağıtımı ve öğrenmeyi AI ile demokratikleştiren sistemler
 
 ## Ürün Portföyü
 
+**Belge Araçları:**
 | Sistem | Açıklama |
 |--------|----------|
-| **PDF Araçları** | PDF'den bilgi çıkarma, özetleme, soru üretme |
-| **Kitap Dönüştürücü** | Kitap → podcast, özet, flashcard, quiz |
-| **Dil Çevirisi** | Bağlam odaklı çeviri, teknik terim desteği |
+| **PDF Araçları** | PDF'den bilgi çıkarma, özetleme, soru üretme, sayfa düzenleme |
+| **PDF Düzenleme** | Sayfa ekle/sil/birleştir/böl, annotasyon, e-imza alanı |
+| **OCR Sistemi** | Taranmış belgeyi düzenlenebilir metin haline getir |
+| **Dil Çevirisi** | Bağlam odaklı çeviri, teknik terim desteği, PDF çeviri |
+
+**Kitap Araçları:**
+| Sistem | Açıklama |
+|--------|----------|
+| **Kitap Dönüştürücü** | Kitap → Kindle/epub/PDF, podcast özeti, flashcard, quiz |
+| **Çok Dilli Yayın** | Türkçe → İngilizce/Arapça/diğer dil otomatik çeviri |
+| **Karakter Yaratıcısı** | Kitap karakteri → AI görsel, biyografi, hikaye genişletme |
+| **Kaya Kitap Sistemi** | Kaya'nın 4 kitabı: dijital dağıtım, abonelik, tanıtım videoları |
+
+**Eğitim Sistemleri:**
+| Sistem | Açıklama |
+|--------|----------|
 | **Eğitim Platformu** | Kurs oluşturma, video ders, interaktif quiz |
-| **Soru-Cevap Topluluğu** | Stack Overflow benzeri, AI asistanlı |
-| **Uzman Görüş** | Sektör uzmanlarına erişim, mentoring |
-| **Kaya Kitap Sistemi** | Kaya'nın yazdığı 4 kitabın dijital dağıtımı |
-| **XR Eğitim** | PARAVERSE içinde interaktif dersler |
+| **AI Öğrenim Asistanı** | Kişisel öğrenme yolu, güçlü/zayıf yön tespiti |
+| **Spaced Repetition** | Bilgi kalıcılığı için AI zamanlama |
+| **Soru-Cevap Topluluğu** | Stack Overflow benzeri, AI asistanlı (CEO-COMMUNITY ile ortak) |
+| **Uzman Görüş** | Sektör uzmanlarına erişim, mentoring, 1-1 seans |
+| **XR Eğitim** | PARAVERSE içinde interaktif dersler (CEO-PARAVERSE ile) |
 
 ## Kaya Bağlantısı
 - 4 kitap yazmış — dijital dağıtım ve tanıtım sistemi

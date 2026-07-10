@@ -21,6 +21,8 @@ Kullanıcının günlük yaşam kalitesini AI ile optimize eden sistemler.
 | **Günlük Yaşam Asistanı** | Rutin yönetimi, uyku, egzersiz, hidrasyon |
 | **Erkek Sağlık Uygulaması** | Testosteron, kas, spor odaklı |
 | **Kadın Sağlık Uygulaması** | Döngü takibi, hormonal sağlık, hamilelik |
+| **Fitness Asistanı** | Kişisel egzersiz programı oluşturma, günlük antrenman planı, performans takibi, ilerleme grafiği |
+| **Stil Asistanı** | Gardırop analizi (fotoğraf → AI), kombin önerisi, mevsim/durum bazlı stil, alışveriş listesi |
 
 ## Veri Katmanları
 - Kullanıcı profili (yaş, cinsiyet, aktivite seviyesi)

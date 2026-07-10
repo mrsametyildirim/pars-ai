@@ -21,7 +21,9 @@ TLOA'dan başlayarak tüm PARS oyun ekosistemini yönetir.
 | **AR Target Shoot** | Hareket AR | AR Gözlük / Mobil | Konsept |
 | **XR Combat** | Savaş XR | VR Gözlük | Konsept |
 
-## TLOA Detayları
+## TLOA Detayları — Genişletilmiş Evren
+
+**Temel Oynanış:**
 - **The Legend of Acun** — Türk kültüründen esinlenen AR kart oyunu
 - Gerçek dünya PvP: aynı fiziksel mekânda düello
 - Koleksiyon kartlar: toplanabilir, takas edilebilir
@@ -29,6 +31,25 @@ TLOA'dan başlayarak tüm PARS oyun ekosistemini yönetir.
 - Exploration modu: şehirde AR keşif, kart kazanma
 - Turnuva sistemi: ödüllü turnuvalar
 - Referans: Pokémon GO + Hearthstone + fiziksel kart oyunu
+
+**Hikaye Evreni:**
+- Zengin lore: Türk mitolojisi ve tarihinden esinlenilmiş
+- Irklar: Bozkurt Klanı, Gök Atlılar, Demir Ustalar, Deniz Koruyucuları
+- Sınıflar: Savaşçı, Şaman, Kaşif, Tüccar, Usta
+- Boss'lar: Her şehirde yenilmesi gereken AR boss karakterleri
+- Dungeon'lar: GPS koordinatında gizli AR zindan girişleri
+- PvE modu: Tek oyuncu hikaye modu (boss, NPC, quest)
+- Loncalar (Guild): Kolektif kaynak, lonca savaşları, bölge kontrolü
+- Evren genişleme: Sezon bazlı yeni bölge/hikaye DLC'leri
+
+**AR Oyunlar (GPS-Based):**
+| Oyun | Mekanik |
+|------|---------|
+| TLOA Exploration | Şehirde yürü → AR kart/kaynak bul |
+| Treasure Hunt | Koordinat bazlı hazine avı |
+| Territory Control | Lonca savaşı — bölge işgali |
+| Boss Raid | Bölge boss'u — çok oyunculu AR dövüş |
+| AR Collection | Koleksiyon nesne toplama (Pokémon GO benzeri) |
 
 ## Dijital Ekonomi Sistemi
 - **PARGT** tüm oyunlarda ortak para birimi

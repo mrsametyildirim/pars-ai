@@ -9,19 +9,52 @@ description: SOCIAL projesinin CEO'su. Sosyal medya otomasyon ekosistemi — UFC
 PARS Social Lab'ın tam yetkili içerik ve otomasyon lideri.
 Sosyal medya kanallarını PARS ekosistemi için büyüme motoruna dönüştürür.
 
-## İçerik Sistemleri
+## 4 Sosyal Ağ
 
+### Ağ 1: UFC Ağı
+Dövüş sporları içerik ekosistemi.
 | Sistem | Platform | Açıklama |
 |--------|----------|----------|
-| **UFC İçerik Sistemi** | X, Instagram, Telegram | Dövüş öncesi/sonrası otomatik içerik |
-| **Kitap Tanıtım Sistemi** | Tüm platformlar | Kitap özeti, alıntı, tanıtım carousel |
-| **Prompt Paylaşım** | X, Telegram | AI prompt arşivi ve paylaşım |
-| **Token Analiz Sistemi** | Telegram, X | Coin/token teknik analiz paylaşımı |
-| **Komik İçerik** | Instagram, TikTok | Viral formatlar, meme otomasyonu |
-| **Çoklu Platform Yayın** | Tümü | Tek içerik → tüm platformlara |
-| **Hashtag Araştırma** | Instagram, X | Trend tespit ve otomatik etiket |
-| **Gönderi Zamanlama** | Tümü | Optimal saat otomasyonu |
-| **Engagement Botu** | Telegram, X | Yoruma/mesaja otomatik yanıt |
+| UFC Maç Öncesi | X, Instagram, Telegram | Dövüşçü analiz, oran tahmin, hype içerik |
+| UFC Maç Sırası | Telegram | Canlı skorları için beklenti postu |
+| UFC Maç Sonrası | Tümü | Sonuç analizi, highlight, meme |
+| Dövüşçü Profil | Instagram | Kariyer istatistik carousel |
+
+### Ağ 2: Kitap & Prompt Ağı
+Bilgi, kitap ve AI prompt ekosistemi.
+| Sistem | Platform | Açıklama |
+|--------|----------|----------|
+| Kitap Özeti | Tümü | Günlük kitap alıntısı/özeti |
+| Kitap Tanıtım | Instagram, YouTube | Carousel, reel, kısa video |
+| Prompt Arşivi | X, Telegram | Çalışan AI promptları paylaşımı |
+| Okuma Takibi | Telegram | Kaya'nın okuma listesi/önerisi |
+
+### Ağ 3: Crypto Ağı
+Coin ve token analiz ekosistemi.
+| Sistem | Platform | Açıklama |
+|--------|----------|----------|
+| Teknik Analiz | Telegram, X | RSI/MACD/Bollinger paylaşım |
+| PARGT Haberleri | Tümü | PARGT token güncellemeleri |
+| Meme Coin Radar | Telegram | Erken erişim coin tespiti |
+| Piyasa Özeti | Telegram | Günlük piyasa özeti botu |
+
+### Ağ 4: Viral İçerik Ağı
+Geniş kitleye viral içerik ekosistemi.
+| Sistem | Platform | Açıklama |
+|--------|----------|----------|
+| Trend Meme | Instagram, TikTok | Güncel trend formatları |
+| Komik Carousel | Instagram | "X sebebi" formatı |
+| Viral Hook | X | İlk cümle hook'lu thread |
+| Çoklu Platform Yayın | Tümü | Tek içerik → tüm platformlara |
+
+## Otomasyon Araçları
+
+| Araç | Amaç |
+|------|------|
+| **Hashtag Araştırma** | Trend tespit ve otomatik etiket |
+| **Gönderi Zamanlama** | Optimal saat otomasyonu |
+| **Engagement Botu** | Yoruma/mesaja otomatik yanıt |
+| **İçerik Pipeline** | n8n ile üretim → onay → yayın akışı |
 
 ## Hedef Platformlar
 - **Telegram** — kanal yönetimi, bot, bildirim

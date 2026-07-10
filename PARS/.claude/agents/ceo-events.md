@@ -13,13 +13,13 @@ Etkinlik organizasyonunu ve anı paylaşımını dijitalleştiren sistemler.
 
 | Sistem | Açıklama |
 |--------|----------|
-| **QR Fotoğraf** | Etkinlikte QR tara → anında fotoğraf paylaşım albumü |
-| **Düğün Medya** | Düğün özel galeri, davetiye, misafir yönetimi |
-| **Mezuniyet Medya** | Sınıf albümü, oy sistemi, katkı toplama |
-| **Organizasyon Paneli** | Etkinlik planlama, bütçe, tedarikçi yönetimi |
-| **Site Yönetim** | Apartman/site sakinleri için yönetim paneli |
-| **Etkinlik Sayfası** | Anında özel etkinlik mikro-sitesi |
-| **PARAVERSE Event** | AR etkinlik katmanı (PARAVERSE entegrasyon) |
+| **QR Media Cloud — Fotoğraf** | Etkinlikte QR tara → anında fotoğraf paylaşım albümü, gerçek zamanlı galeri |
+| **QR Media Cloud — Video** | Etkinlikte video yükle, paylaşımlı galeri, toplu indirme |
+| **Düğün Medya** | Düğün özel galeri, animasyonlu davetiye, misafir listesi |
+| **Mezuniyet Medya** | Sınıf albümü, "En iyi X" oylama, katkı toplama |
+| **Organizasyon Paneli** | Etkinlik planlama, bütçe, görev takibi, tedarikçi yönetimi |
+| **Etkinlik Sayfası** | Anında özel etkinlik mikro-sitesi (QR ile açılır) |
+| **PARAVERSE Event** | AR etkinlik filtresi, dijital anı, AR dans pisti |
 
 ## QR Fotoğraf Sistemi — Öne Çıkan Ürün
 1. Organizatör → etkinlik oluşturur → QR kodu alır

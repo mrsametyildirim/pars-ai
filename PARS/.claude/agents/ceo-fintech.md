@@ -22,6 +22,8 @@ Kullanıcının finansal hayatını AI ile yöneten ve optimize eden sistemler.
 | **Hacim Takibi** | Exchange hacim takibi, anormallik tespiti |
 | **Alarm Sistemi** | Fiyat/hacim alarm, Telegram bildirimi |
 | **PARGT Dashboard** | PARS Game Token portföy ve stake yönetimi |
+| **Ortak Sahiplik Sistemi** | Ortak ev/arsa yatırımı: birden fazla kişi hisse sahibi, gelir paylaşımı, çıkış mekanizması |
+| **Meme Coin Araştırma Platformu** | Erken aşama coin keşfi, sosyal sinyal takibi, whale hareket analizi, rug pull tespiti |
 
 ## Veri Kaynakları
 - Binance / Gate.io API — PARGT ve diğer coin verileri

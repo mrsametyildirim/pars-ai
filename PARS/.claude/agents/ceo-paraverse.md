@@ -17,17 +17,28 @@ Metaverse değil — mevcut fiziksel dünyayı genişleten bir katman.
 
 | Ürün | Açıklama | Durum |
 |------|----------|-------|
-| **TLOA** | The Legend of Acun — AR kart oyunu, gerçek dünya PvP | Prototype |
+**PARAVERSE Çekirdeği:**
+| **PARAVERSE Core** | Çok kullanıcılı karma gerçeklik katmanı — tüm ürünlerin yaşadığı platform | Tasarım |
+| **PARS Engine** | Bağımsız AR geliştiriciler için açık platform (AppStore benzeri) | Konsept |
+| **PAR Media** | Karma gerçeklik içinde yeni nesil sosyal medya | Konsept |
 | **PARGT Token** | Native utility token — Gate.io pre-sale, Binance post-beta | Planlama |
-| **PAR Media** | Karışık gerçeklik ortamında yeni nesil sosyal medya | Konsept |
-| **PARS Engine** | Bağımsız AR geliştiriciler için açık platform | Konsept |
+
+**Oyun & Eğlence:**
+| **TLOA** | The Legend of Acun — AR kart oyunu, gerçek dünya PvP | Prototype |
+| **AR Masa Tenisi** | Hareket tabanlı AR oyun | Konsept |
+| **Dijital Partiler / Konserler** | PARAVERSE içinde sanal etkinlikler | Konsept |
+
+**Ticaret & Mülk:**
 | **PARSVille** | Dijital gayrimenkul ve yatırım modülü | Konsept |
 | **AR Trading** | Artırılmış uzayda ticaret ve hizmetler | Konsept |
+| **Digital Commerce** | PARAVERSE içinde mağaza açma, ürün satışı | Konsept |
+
+**Altyapı & Hizmetler:**
+| **PARS Social Layer** | PARAVERSE içi arkadaş, mesajlaşma, topluluk | Konsept |
 | **AR Navigasyon** | Fiziksel mekânlarda AR yönlendirme | Konsept |
-| **AR Restoran** | Menü görüntüleme, sipariş AR katmanında | Konsept |
+| **AR Restoran** | Menü AR katmanında (CEO-BUSINESS ile koordineli) | Konsept |
 | **AR Tarihi Yapı** | Tarihi mekânları AR ile canlandırma | Konsept |
-| **XR Eğitim** | Eğitim içeriklerini XR'a taşıma | Konsept |
-| **AR Masa Tenisi** | Hareket tabanlı AR oyun | Konsept |
+| **XR Eğitim** | Eğitim içeriklerini XR'a taşıma (CEO-EDUCATION ile) | Konsept |
 | **Dijital Şehir** | Şehir üstüne dijital katman, etkinlik/reklam alanı | Konsept |
 
 ## Kullanıcı Deneyimi
