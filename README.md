@@ -46,12 +46,18 @@ Not a metaverse you escape into. A reality you share with everyone around you.
 
 ### Roadmap
 
-```
-2021 ── Founded          2025 ── Beta + Gate.io listing
-2024 ── Prototype        2026 ── Public launch
-                         2027 ── PARAVERSE + CEX (Binance · OKX)
-                         2028 ── Hardware: AR glasses · haptic gloves · smart lenses
-```
+| Phase | Period | Status | Milestone |
+|---|---|---|---|
+| Foundation | 2021 – 2026 | ✅ Complete | Company founded, team built, R&D started, vision defined |
+| R&D & Architecture | 2026 | 🔄 In Progress | Core technology research, TLOA game design, PARS Engine architecture |
+| Prototype | 2026 – 2027 Q4 | 🔄 In Progress | TLOA playable prototype, PARGT token infrastructure, AI OS (this repo) |
+| Beta Launch | 2027 Q4 – 2028 Q1 | 🔜 Planned | Beta access, Gate.io pre-sale, first PARGT distribution |
+| Public Launch | 2028 Q2 | 🔜 Planned | Mobile release, community growth, AR module rollout |
+| Ecosystem | 2028 Q3 | 🔜 Planned | CEX listings (Binance · OKX · Bybit), staking, liquidity pools |
+| PARAVERSE | 2028 Q4+ | 🔜 Planned | Virtual land, DAO governance, AR glasses · haptic gloves · smart lenses |
+
+> We are currently in the **prototype phase**. No product has been released to market yet.
+> Our target: a working prototype ready by **end of 2027**, public launch in **2028**.
 
 <br>
 
