@@ -18,6 +18,11 @@
 
 <br>
 
+[![Video 1](https://img.shields.io/badge/▶_Video_1-YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=yCiT4aOxJjo)
+[![Video 2](https://img.shields.io/badge/▶_Video_2-YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=cjSdVIyFhaE)
+
+<br>
+
 ---
 
 ### What We're Building
