@@ -1,0 +1,16 @@
+{
+  "name": "boru-panel-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "@anthropic-ai/claude-code": "^2.1.198",
+    "@anthropic-ai/sdk": "^0.109.1",
+    "express": "^4.19.0",
+    "msedge-tts": "^2.0.6",
+    "playwright-core": "^1.61.1"
+  },
+  "allowScripts": {
+    "msedge-tts@2.0.6": true,
+    "@anthropic-ai/claude-code@2.1.198": true
+  }
+}
