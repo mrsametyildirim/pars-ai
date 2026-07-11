@@ -1,6 +1,0 @@
-{
-  "hooks": {},
-  "enabledMcpjsonServers": [],
-  "disabledMcpjsonServers": ["ruflo", "gdrive", "filesystem", "obsidian-mcp", "playwright", "context7", "supabase", "git", "magic", "stitch", "instagram", "excel-mcp-server"],
-  "enabledPlugins": {}
-}

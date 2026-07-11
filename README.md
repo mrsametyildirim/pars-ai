@@ -12,9 +12,9 @@
 
 <br>
 
-[![Whitepaper](https://img.shields.io/badge/📄_Whitepaper-Read_Now-0a0a0a?style=for-the-badge)](docs/PARS_Whitepaper.pdf)
-[![PARAVERSE](https://img.shields.io/badge/🌐_PARAVERSE-Overview-1a1a2e?style=for-the-badge)](docs/OVERVIEW.md)
-[![AI OS](https://img.shields.io/badge/⚙️_AI_OS-Technical_Docs-0d1117?style=for-the-badge)](docs/PARS_AGENTS_INDEX.md)
+[![Whitepaper](https://img.shields.io/badge/📄_Whitepaper-Read_Now-0a0a0a?style=for-the-badge)](PARS/docs/PARS_Whitepaper.pdf)
+[![PARAVERSE](https://img.shields.io/badge/🌐_PARAVERSE-Overview-1a1a2e?style=for-the-badge)](PARS/docs/PARS_CHARTER.md)
+[![AI OS](https://img.shields.io/badge/⚙️_AI_OS-Technical_Docs-0d1117?style=for-the-badge)](PARS/docs/PARS_AGENTS_INDEX.md)
 
 <br>
 
@@ -73,9 +73,9 @@ Not a metaverse you escape into. A reality you share with everyone around you.
 The AI operating system that runs PARS internally — **Börü**, an orchestrator agent
 with voice authentication, real-time command panel, multi-agent routing, and autonomous task execution.
 
-→ [View Technical Documentation](docs/PARS_AGENTS_INDEX.md)
-→ [Voice Interface Architecture](docs/PARS_VOICE_INTERFACE.md)
-→ [Full Whitepaper (PDF)](docs/PARS_Whitepaper.pdf)
+→ [View Technical Documentation](PARS/docs/PARS_AGENTS_INDEX.md)
+→ [Voice Interface Architecture](PARS/docs/PARS_VOICE_INTERFACE.md)
+→ [Full Whitepaper (PDF)](PARS/docs/PARS_Whitepaper.pdf)
 
 <br>
 
