@@ -296,8 +296,14 @@ Her faz için detaylı checklist → `rules/project-lifecycle.md`
 | `context7` | Kütüphane/framework güncel dokümantasyon |
 | `supabase` | Database işlemleri, migration |
 | `git` | Commit geçmişi, diff, güvenlik taraması |
+| `github` | PR, issue, repo yönetimi (GITHUB_TOKEN gerekli) |
+| `memory` | Session arası kalıcı bellek — Bilge tamamlayıcısı |
+| `fetch` | URL içeriği okuma, web scraping |
 | `magic` | Hazır UI bileşen referansı |
 | `instagram` | Sosyal medya otomasyon entegrasyonu |
+
+**Knowledge base:** `C:\PARS\PARS\.claude\knowledge\` — her dosya otomatik bağlam olarak yüklenir.
+- `goose-patterns.md` — Goose'dan alınan teknikler, ne zaman ne kullanılacak
 
 ---
 
