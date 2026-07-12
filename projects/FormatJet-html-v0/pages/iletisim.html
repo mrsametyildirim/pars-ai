@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İletişim — FormatJet</title>
+  <meta name="description" content="FormatJet ile iletişime geçin: araç talebi, teknik destek veya geri bildirim için bize yazın.">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container-wide">
+    <a href="../index.html" class="logo"><img src="../assets/img/logo-icon.png" alt="" class="logo-icon-img" aria-hidden="true"><img src="../assets/img/logo-text.png" alt="FormatJet" class="logo-text-img"></a>
+    <nav class="header-nav"><a href="../pdf.html" class="nav-link">PDF</a><a href="../belge.html" class="nav-link">Belge</a><a href="../gorsel.html" class="nav-link">Görsel</a><a href="../video.html" class="nav-link">Video</a><a href="../ses.html" class="nav-link">Ses</a></nav>
+    <div class="header-right">
+      <a href="hakkimizda.html" class="btn-bizi-tani">Bizi Tanı</a>
+      <button class="btn-login" onclick="location.href='../login.html'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Giriş Yap</button>
+      <button class="btn-hamburger" id="btnHamburger" aria-label="Menüyü aç" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu-inner"><nav class="mobile-nav"><a href="../pdf.html" class="mobile-nav-link">PDF</a><a href="../belge.html" class="mobile-nav-link">Belge</a><a href="../gorsel.html" class="mobile-nav-link">Görsel</a><a href="../video.html" class="mobile-nav-link">Video</a><a href="../ses.html" class="mobile-nav-link">Ses</a></nav></div></div>
+</header>
+
+<main>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <h1 class="page-title">İletişim</h1>
+      <p class="page-sub-light">Sorularınız, önerileriniz veya araç talepleriniz için buradan ulaşabilirsiniz.</p>
+    </div>
+  </div>
+
+  <div class="contact-layout">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Sol: Form -->
+        <div class="contact-form-col">
+          <form class="contact-form" novalidate id="contactForm">
+            <div class="contact-form-row">
+              <div class="form-group">
+                <label class="form-label" for="contactName">Adınız</label>
+                <input type="text" id="contactName" class="form-input" placeholder="Adınız Soyadınız" autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contactEmail">E-posta</label>
+                <input type="email" id="contactEmail" class="form-input" placeholder="ornek@email.com" autocomplete="email">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contactSubject">Konu</label>
+              <select id="contactSubject" class="form-input form-select">
+                <option value="" disabled selected>Konu seçin</option>
+                <option value="teknik">Teknik sorun</option>
+                <option value="arac-talebi">Araç talebi</option>
+                <option value="gizlilik">Gizlilik / KVKK</option>
+                <option value="is-birligi">İş birliği</option>
+                <option value="diger">Diğer</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contactMessage">Mesajınız</label>
+              <textarea id="contactMessage" class="form-input form-textarea" placeholder="Mesajınızı buraya yazın..." rows="5"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary-full">Gönder</button>
+
+            <div class="contact-success" id="contactSuccess" hidden>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              Mesajınız alındı. En geç 48 saat içinde yanıt veririz.
+            </div>
+          </form>
+        </div>
+
+        <!-- Sağ: İletişim bilgileri -->
+        <div class="contact-info-col">
+          <div class="contact-info-card">
+            <div class="contact-info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <p class="contact-info-label">Destek e-postası</p>
+              <a href="mailto:destek@formatjet.com" class="contact-info-value">destek@formatjet.com</a>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="contact-info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <p class="contact-info-label">Yanıt süresi</p>
+              <p class="contact-info-value">48 saat içinde</p>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="contact-info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <p class="contact-info-label">Araç talebi</p>
+              <p class="contact-info-value">Eksik gördüğünüz aracı önerin, değerlendirelim.</p>
+            </div>
+          </div>
+
+          <div class="contact-faq">
+            <p class="contact-faq-title">Sık sorulan sorular</p>
+            <ul class="contact-faq-list">
+              <li><span class="contact-faq-q">Dosyalarım güvende mi?</span><br><span class="contact-faq-a">Evet. İşlem sonrası 1 saat içinde otomatik silinir.</span></li>
+              <li><span class="contact-faq-q">Kayıt olmadan kullanabilir miyim?</span><br><span class="contact-faq-a">Evet. Tüm temel araçlar kayıtsız çalışır.</span></li>
+              <li><span class="contact-faq-q">Dosya boyutu limiti var mı?</span><br><span class="contact-faq-a">Üyesiz kullanımda 50 MB, üyeler için 200 MB.</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-body"><div class="container"><div class="footer-grid">
+    <div class="footer-col footer-col--brand"><a href="../index.html" class="footer-logo"><img src="../assets/img/logo-icon.png" alt="" class="footer-logo-icon" aria-hidden="true"><img src="../assets/img/logo-text.png" alt="FormatJet" class="footer-logo-text-img"></a><p class="footer-tagline">Dosyalarını hızlı, güvenli ve kolayca dönüştür.</p></div>
+    <div class="footer-col"><h4 class="footer-col-title">Araçlar</h4><ul class="footer-links"><li><a href="../pdf.html">PDF</a></li><li><a href="../belge.html">Belge</a></li><li><a href="../gorsel.html">Görsel</a></li><li><a href="../video.html">Video</a></li><li><a href="../ses.html">Ses</a></li></ul></div>
+    <div class="footer-col"><h4 class="footer-col-title">FormatJet</h4><ul class="footer-links"><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+    <div class="footer-col"><h4 class="footer-col-title">Yasal</h4><ul class="footer-links"><li><a href="gizlilik.html">Gizlilik Politikası</a></li><li><a href="kullanim-kosullari.html">Kullanım Koşulları</a></li><li><a href="cerez.html">Çerez Politikası</a></li><li><a href="kvkk.html">KVKK</a></li></ul></div>
+  </div></div></div>
+  <div class="footer-bar"><div class="container"><div class="footer-bar-inner"><p class="footer-copy">© 2026 FormatJet. Tüm hakları saklıdır.</p></div></div></div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('contactSuccess').hidden = false;
+    this.reset();
+  });
+</script>
+</body>
+</html>

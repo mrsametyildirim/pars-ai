@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belge Araçları — FormatJet</title>
+  <meta name="description" content="Word, Excel, PPT dönüştür. Belge formatları arasında geçiş yap. 10+ ücretsiz belge aracı.">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/lang-panel.css">
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container-wide">
+    <a href="index.html" class="logo" aria-label="FormatJet Ana Sayfa">
+      <img src="assets/img/logo-icon.png" alt="" class="logo-icon-img" aria-hidden="true">
+      <img src="assets/img/logo-text.png" alt="FormatJet" class="logo-text-img">
+    </a>
+    <nav class="header-nav" aria-label="Kategori menüsü">
+      <a href="pdf.html" class="nav-link">PDF</a>
+      <a href="belge.html" class="nav-link active">Belge</a>
+      <a href="gorsel.html" class="nav-link">Görsel</a>
+      <a href="video.html" class="nav-link">Video</a>
+      <a href="ses.html" class="nav-link">Ses</a>
+      <a href="tools.html" class="btn-all-tools">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="0" y="0" width="4" height="4" rx="1"/><rect x="6" y="0" width="4" height="4" rx="1"/><rect x="12" y="0" width="4" height="4" rx="1"/><rect x="0" y="6" width="4" height="4" rx="1"/><rect x="6" y="6" width="4" height="4" rx="1"/><rect x="12" y="6" width="4" height="4" rx="1"/><rect x="0" y="12" width="4" height="4" rx="1"/><rect x="6" y="12" width="4" height="4" rx="1"/><rect x="12" y="12" width="4" height="4" rx="1"/></svg>
+        Tüm Araçlar
+      </a>
+    </nav>
+    <div class="header-right">
+      <button class="btn-support"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Destek Ol</button>
+      <a href="pages/hakkimizda.html" class="btn-bizi-tani">Bizi Tanı</a>
+      <div class="lang-wrapper">
+        <button class="btn-lang" id="btnLang" aria-label="Dil seç">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span class="btn-lang-text">TR</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="lang-panel" id="langPanel" hidden>
+          <div class="lang-panel-inner">
+            <div class="lang-primary">
+              <button class="lang-option" data-lang="tr">🇹🇷 Türkçe</button>
+              <button class="lang-option" data-lang="en">🇬🇧 English</button>
+              <button class="lang-option" data-lang="de">🇩🇪 Deutsch</button>
+              <button class="lang-option" data-lang="fr">🇫🇷 Français</button>
+              <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+              <button class="lang-option" data-lang="pt">🇧🇷 Português</button>
+            </div>
+            <button class="lang-more-btn" id="langMoreBtn">Diğer diller →</button>
+            <div class="lang-secondary" id="langSecondary" hidden>
+              <button class="lang-option" data-lang="it">🇮🇹 Italiano</button>
+              <button class="lang-option" data-lang="ru">🇷🇺 Русский</button>
+              <button class="lang-option" data-lang="ja">🇯🇵 日本語</button>
+              <button class="lang-option" data-lang="ko">🇰🇷 한국어</button>
+              <button class="lang-option" data-lang="zh">🇨🇳 中文</button>
+              <button class="lang-option" data-lang="ar">🇸🇦 العربية</button>
+              <button class="lang-option" data-lang="pl">🇵🇱 Polski</button>
+              <button class="lang-option" data-lang="nl">🇳🇱 Nederlands</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn-login" onclick="location.href='login.html'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Giriş Yap</button>
+      <button class="btn-hamburger" id="btnHamburger" aria-label="Menüyü aç" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <nav class="mobile-nav">
+        <a href="pdf.html" class="mobile-nav-link">PDF</a>
+        <a href="belge.html" class="mobile-nav-link">Belge</a>
+        <a href="gorsel.html" class="mobile-nav-link">Görsel</a>
+        <a href="video.html" class="mobile-nav-link">Video</a>
+        <a href="ses.html" class="mobile-nav-link">Ses</a>
+        <a href="tools.html" class="mobile-nav-link">Tüm Araçlar</a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <button class="btn-login w-full" onclick="location.href='login.html'">Giriş Yap</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="cat-page-hero">
+    <div class="container">
+      <h1 class="cat-page-title">Belge Araçları</h1>
+      <p class="cat-page-sub">Word, Excel, PPT ve diğer belge formatlarını dönüştür. Tüm araçlar ücretsiz.</p>
+      <div class="cat-search-wrap">
+        <svg class="search-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="cat-search-input" placeholder="Belge aracı ara..." autocomplete="off">
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="cat-tool-grid">
+
+      <a href="tools/word-pdf.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#2563EB">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m8.5 15 1.5-4 1.5 3 1-2 1.5 3"/></svg>
+        </div>
+        <span class="cat-tool-name">Word'den PDF</span>
+      </a>
+
+      <a href="tools/excel-pdf.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#059669">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h2M8 17h8M14 13h2"/></svg>
+        </div>
+        <span class="cat-tool-name">Excel'den PDF</span>
+      </a>
+
+      <a href="tools/ppt-pdf.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#D97706">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h6"/></svg>
+        </div>
+        <span class="cat-tool-name">PPT'den PDF</span>
+      </a>
+
+      <a href="tools/pdf-word.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#059669">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+        </div>
+        <span class="cat-tool-name">PDF'den Word</span>
+      </a>
+
+      <a href="tools/txt-pdf.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#6B7280">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8"/></svg>
+        </div>
+        <span class="cat-tool-name">TXT'den PDF</span>
+      </a>
+
+      <a href="tools/csv-excel.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#059669">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 10h8M8 14h8M8 18h4"/></svg>
+        </div>
+        <span class="cat-tool-name">CSV'den Excel</span>
+      </a>
+
+      <a href="tools/pdf-excel.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#059669">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 12h2M14 12h2M8 16h8"/></svg>
+        </div>
+        <span class="cat-tool-name">PDF'den Excel</span>
+      </a>
+
+      <a href="tools/belge-birlestir.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#2563EB">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+        </div>
+        <span class="cat-tool-name">Belge Birleştir</span>
+      </a>
+
+      <a href="tools/word-sikistir.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#DC2626">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>
+        </div>
+        <span class="cat-tool-name">Word Sıkıştır</span>
+      </a>
+
+      <a href="tools/odt-pdf.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#D97706">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><circle cx="12" cy="14" r="3"/></svg>
+        </div>
+        <span class="cat-tool-name">ODT'den PDF</span>
+      </a>
+
+      <a href="tools/html-pdf.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#2563EB">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <span class="cat-tool-name">HTML'den PDF</span>
+      </a>
+
+      <a href="tools/rtf-pdf.html" class="cat-tool-card">
+        <div class="cat-tool-icon" style="--icon-color:#6B7280">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 13h3m-3 4h6"/></svg>
+        </div>
+        <span class="cat-tool-name">RTF'den PDF</span>
+      </a>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-body">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--brand">
+          <a href="index.html" class="footer-logo"><img src="assets/img/logo-icon.png" alt="" class="footer-logo-icon" aria-hidden="true"><img src="assets/img/logo-text.png" alt="FormatJet" class="footer-logo-text-img"></a>
+          <p class="footer-tagline">Dosyalarını hızlı, güvenli ve kolayca dönüştür.</p>
+          <div class="footer-trust"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Dosyalar işlemden sonra otomatik silinir.</span></div>
+        </div>
+        <div class="footer-col"><h4 class="footer-col-title">Araçlar</h4><ul class="footer-links"><li><a href="pdf.html">PDF</a></li><li><a href="belge.html">Belge</a></li><li><a href="gorsel.html">Görsel</a></li><li><a href="video.html">Video</a></li><li><a href="ses.html">Ses</a></li><li><a href="tools.html" class="footer-link-accent">Tüm Araçlar</a></li></ul></div>
+        <div class="footer-col"><h4 class="footer-col-title">FormatJet</h4><ul class="footer-links"><li><a href="pages/hakkimizda.html">Hakkımızda</a></li><li><a href="pages/iletisim.html">İletişim</a></li><li><a href="#">Destek Ol</a></li></ul></div>
+        <div class="footer-col"><h4 class="footer-col-title">Yardım</h4><ul class="footer-links"><li><a href="#">Yardım Merkezi</a></li><li><a href="pages/iletisim.html" class="footer-link-accent">Araç Talep Et</a></li></ul></div>
+        <div class="footer-col"><h4 class="footer-col-title">Yasal</h4><ul class="footer-links"><li><a href="pages/gizlilik.html">Gizlilik Politikası</a></li><li><a href="pages/kullanim-kosullari.html">Kullanım Koşulları</a></li><li><a href="pages/kvkk.html">KVKK</a></li></ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <div class="container">
+      <div class="footer-bar-inner">
+        <button class="btn-lang-footer" id="btnLangFooter"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="btn-lang-footer-text">Türkçe</span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+        <p class="footer-copy">© 2026 FormatJet. Tüm hakları saklıdır.</p>
+        <div class="footer-theme-toggle"><button class="theme-btn theme-btn--active" data-theme="light" aria-label="Açık tema"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button><span class="theme-label">Görünüm</span><button class="theme-btn" data-theme="dark" aria-label="Koyu tema"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

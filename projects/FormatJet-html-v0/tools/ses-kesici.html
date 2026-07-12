@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ses Kesici — FormatJet</title>
+  <meta name="description" content="MP3, WAV ve diğer ses dosyalarını online kes ve kırp. Zaman damgası ile hassas kesim.">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../assets/img/logo-icon.png" alt="" style="height:22px" aria-hidden="true">
+        <img src="../assets/img/logo-text.png" alt="FormatJet" style="height:16px">
+      </a>
+      <div class="nav-right">
+        <button class="btn-nav btn-ghost" onclick="location.href='../login.html'">Giriş Yap</button>
+        <button class="btn-nav btn-accent">Pro'ya Geç</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="tool-page">
+  <div class="container">
+    <div class="tool-header">
+      <a href="../ses.html" class="tool-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+        Ses Araçları
+      </a>
+      <div class="tool-page-icon" style="background:rgba(5,150,105,.1);color:#059669">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <h1 class="tool-page-title">Ses Kesici</h1>
+      <p class="tool-page-desc">MP3, WAV, OGG ses dosyalarını başlangıç ve bitiş noktası belirleyerek kes ve kırp.</p>
+    </div>
+
+    <div class="tool-workspace">
+      <div class="limit-bar">
+        <span>Ücretsiz plan: <strong>100 MB</strong> / dosya</span>
+        <a href="#" style="color:var(--accent);font-weight:500;font-size:12px">Pro'ya geç →</a>
+      </div>
+
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" class="upload-zone-input" id="fileInput" accept="audio/mpeg,audio/wav,audio/ogg,audio/aac,.mp3,.wav,.ogg,.aac,.m4a,.flac">
+        <div id="uploadPrompt">
+          <div class="drop-icon" style="margin:0 auto 12px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <p class="drop-title"><strong>Ses dosyasını buraya sürükle</strong> veya tıkla</p>
+          <p class="drop-sub">MP3, WAV, OGG, AAC, FLAC · Maks. 100 MB</p>
+        </div>
+        <div id="fileList" class="file-list" hidden></div>
+      </div>
+
+      <div class="tool-options" id="toolOptions" hidden>
+        <div class="option-row">
+          <label class="option-label">Başlangıç</label>
+          <div class="option-control">
+            <input type="text" class="form-input" id="startTime" placeholder="0:00" style="max-width:120px">
+            <span style="color:var(--text-2);font-size:13px">dk:sn</span>
+          </div>
+        </div>
+        <div class="option-row">
+          <label class="option-label">Bitiş</label>
+          <div class="option-control">
+            <input type="text" class="form-input" id="endTime" placeholder="0:30" style="max-width:120px">
+            <span style="color:var(--text-2);font-size:13px">dk:sn</span>
+          </div>
+        </div>
+        <div class="option-row">
+          <label class="option-label">Çıktı Formatı</label>
+          <div class="option-control">
+            <select class="select-input" id="outputFmt">
+              <option value="mp3" selected>MP3</option>
+              <option value="wav">WAV</option>
+              <option value="aac">AAC</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-actions" id="toolActions" hidden>
+        <button class="btn-tool-primary" id="btnProcess">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m20 4-8.12 8.12M15 4l5 4-5 4M9 14l5 4-5 4"/></svg>
+          Kes ve İndir
+        </button>
+        <button class="btn-tool-ghost" id="btnReset">Yeni Dosya</button>
+      </div>
+    </div>
+
+    <section class="tool-info-section">
+      <h2 class="tool-info-title">Ses Kesme İpuçları</h2>
+      <div class="tool-info-grid">
+        <div class="tool-info-card">
+          <div class="tool-info-num">1</div>
+          <strong>Hassas Zaman Damgası</strong>
+          <p>Dakika:saniye formatında başlangıç ve bitiş noktası belirle.</p>
+        </div>
+        <div class="tool-info-card">
+          <div class="tool-info-num">2</div>
+          <strong>Ringtone Yap</strong>
+          <p>En sevdiğin şarkının bölümünü kes ve telefon zil sesi olarak kullan.</p>
+        </div>
+        <div class="tool-info-card">
+          <div class="tool-info-num">3</div>
+          <strong>Podcast Düzenle</strong>
+          <p>Ses kaydının başındaki ve sonundaki sessizlikleri kaldır.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+  const uploadZone   = document.getElementById('uploadZone');
+  const fileInput    = document.getElementById('fileInput');
+  const uploadPrompt = document.getElementById('uploadPrompt');
+  const fileList     = document.getElementById('fileList');
+  const toolOptions  = document.getElementById('toolOptions');
+  const toolActions  = document.getElementById('toolActions');
+
+  function showFiles(files) {
+    fileList.innerHTML = '';
+    Array.from(files).forEach(f => {
+      const div = document.createElement('div');
+      div.className = 'file-item';
+      div.innerHTML = `<span class="file-item-name">${f.name}</span><span class="file-item-size">${(f.size/1024/1024).toFixed(2)} MB</span>`;
+      fileList.appendChild(div);
+    });
+    uploadPrompt.hidden = true;
+    fileList.hidden = false;
+    toolOptions.hidden = false;
+    toolActions.hidden = false;
+  }
+
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) showFiles(e.dataTransfer.files); });
+  uploadZone.addEventListener('click', e => { if (uploadZone.contains(e.target)) fileInput.click(); });
+  fileInput.addEventListener('change', () => { if (fileInput.files.length) showFiles(fileInput.files); });
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    fileInput.value = '';
+    fileList.hidden = true;
+    uploadPrompt.hidden = false;
+    toolOptions.hidden = true;
+    toolActions.hidden = true;
+  });
+
+  document.getElementById('btnProcess').addEventListener('click', () => {
+    const btn = document.getElementById('btnProcess');
+    btn.textContent = 'Kesiliyor...';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'Kes ve İndir'; btn.disabled = false; alert('Demo mod: Gerçek işlemde ses dosyası burada indirilir.'); }, 1500);
+  });
+</script>
+</body>
+</html>

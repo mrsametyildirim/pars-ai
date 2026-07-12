@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video'dan MP3 Çıkar — FormatJet</title>
+  <meta name="description" content="Video dosyasından MP3 ses dosyası çıkar. YouTube, MP4, MOV, AVI desteklenir.">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../assets/img/logo-icon.png" alt="" style="height:22px" aria-hidden="true">
+        <img src="../assets/img/logo-text.png" alt="FormatJet" style="height:16px">
+      </a>
+      <div class="nav-right">
+        <button class="btn-nav btn-ghost" onclick="location.href='../login.html'">Giriş Yap</button>
+        <button class="btn-nav btn-accent">Pro'ya Geç</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="tool-page">
+  <div class="container">
+    <div class="tool-header">
+      <a href="../video.html" class="tool-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+        Video Araçları
+      </a>
+      <div class="tool-page-icon" style="background:rgba(5,150,105,.1);color:#059669">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <h1 class="tool-page-title">Video'dan MP3 Çıkar</h1>
+      <p class="tool-page-desc">Herhangi bir video dosyasındaki ses parçasını yüksek kaliteli MP3 olarak indir.</p>
+    </div>
+
+    <div class="tool-workspace">
+      <div class="limit-bar">
+        <span>Ücretsiz plan: <strong>500 MB</strong> / dosya</span>
+        <a href="#" style="color:var(--accent);font-weight:500;font-size:12px">Pro'ya geç →</a>
+      </div>
+
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" class="upload-zone-input" id="fileInput" accept="video/mp4,video/quicktime,video/x-msvideo,video/webm,.mp4,.mov,.avi,.webm,.mkv">
+        <div id="uploadPrompt">
+          <div class="drop-icon" style="margin:0 auto 12px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+          </div>
+          <p class="drop-title"><strong>Videoyu buraya sürükle</strong> veya tıkla</p>
+          <p class="drop-sub">MP4, MOV, AVI, WebM, MKV · Maks. 500 MB</p>
+        </div>
+        <div id="fileList" class="file-list" hidden></div>
+      </div>
+
+      <div class="tool-options" id="toolOptions" hidden>
+        <div class="option-row">
+          <label class="option-label">MP3 Kalitesi</label>
+          <div class="option-control">
+            <select class="select-input" id="bitrate">
+              <option value="320">320 kbps — Stüdyo kalitesi</option>
+              <option value="192" selected>192 kbps — Yüksek kalite (önerilen)</option>
+              <option value="128">128 kbps — Standart</option>
+              <option value="64">64 kbps — Küçük dosya</option>
+            </select>
+          </div>
+        </div>
+        <div class="option-row">
+          <label class="option-label">Çıktı Formatı</label>
+          <div class="option-control">
+            <select class="select-input" id="outputFmt">
+              <option value="mp3">MP3</option>
+              <option value="aac">AAC</option>
+              <option value="wav">WAV (kayıpsız)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-actions" id="toolActions" hidden>
+        <button class="btn-tool-primary" id="btnProcess">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          MP3 Çıkar ve İndir
+        </button>
+        <button class="btn-tool-ghost" id="btnReset">Yeni Video</button>
+      </div>
+    </div>
+
+    <section class="tool-info-section">
+      <h2 class="tool-info-title">Video'dan Ses Çıkarma</h2>
+      <div class="tool-info-grid">
+        <div class="tool-info-card">
+          <div class="tool-info-num">1</div>
+          <strong>Tüm Formatlar</strong>
+          <p>MP4, MOV, AVI, WebM, MKV ve daha fazlasından ses çıkar.</p>
+        </div>
+        <div class="tool-info-card">
+          <div class="tool-info-num">2</div>
+          <strong>Kalite Seç</strong>
+          <p>64–320 kbps arasında bitrate seçerek dosya boyutu ve kaliteyi dengele.</p>
+        </div>
+        <div class="tool-info-card">
+          <div class="tool-info-num">3</div>
+          <strong>Anında İndir</strong>
+          <p>İşlem tamamlanır tamamlanmaz MP3 indir. Dosyalar 1 saat sonra silinir.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+  const uploadZone   = document.getElementById('uploadZone');
+  const fileInput    = document.getElementById('fileInput');
+  const uploadPrompt = document.getElementById('uploadPrompt');
+  const fileList     = document.getElementById('fileList');
+  const toolOptions  = document.getElementById('toolOptions');
+  const toolActions  = document.getElementById('toolActions');
+
+  function showFiles(files) {
+    fileList.innerHTML = '';
+    Array.from(files).forEach(f => {
+      const div = document.createElement('div');
+      div.className = 'file-item';
+      div.innerHTML = `<span class="file-item-name">${f.name}</span><span class="file-item-size">${(f.size/1024/1024).toFixed(1)} MB</span>`;
+      fileList.appendChild(div);
+    });
+    uploadPrompt.hidden = true;
+    fileList.hidden = false;
+    toolOptions.hidden = false;
+    toolActions.hidden = false;
+  }
+
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) showFiles(e.dataTransfer.files); });
+  uploadZone.addEventListener('click', e => { if (uploadZone.contains(e.target)) fileInput.click(); });
+  fileInput.addEventListener('change', () => { if (fileInput.files.length) showFiles(fileInput.files); });
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    fileInput.value = '';
+    fileList.hidden = true;
+    uploadPrompt.hidden = false;
+    toolOptions.hidden = true;
+    toolActions.hidden = true;
+  });
+
+  document.getElementById('btnProcess').addEventListener('click', () => {
+    const btn = document.getElementById('btnProcess');
+    btn.textContent = 'Çıkarılıyor...';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'MP3 Çıkar ve İndir'; btn.disabled = false; alert('Demo mod: Gerçek işlemde MP3 burada indirilir.'); }, 1800);
+  });
+</script>
+</body>
+</html>

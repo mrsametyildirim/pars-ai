@@ -296,9 +296,9 @@ Her faz için detaylı checklist → `rules/project-lifecycle.md`
 | `context7` | Kütüphane/framework güncel dokümantasyon |
 | `supabase` | Database işlemleri, migration |
 | `git` | Commit geçmişi, diff, güvenlik taraması |
-| `github` | PR, issue, repo yönetimi (GITHUB_TOKEN gerekli) |
+| `github` | PR, issue, repo yönetimi (GITHUB_TOKEN — minimal scope: repo+issues+pulls) |
 | `memory` | Session arası kalıcı bellek — Bilge tamamlayıcısı |
-| `fetch` | URL içeriği okuma, web scraping |
+| `fetch` | URL içeriği okuma — yalnızca güvenilen URL'ler (prompt injection riski) |
 | `magic` | Hazır UI bileşen referansı |
 | `instagram` | Sosyal medya otomasyon entegrasyonu |
 

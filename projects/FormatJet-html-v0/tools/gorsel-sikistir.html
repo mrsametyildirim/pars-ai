@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Görsel Sıkıştır — FormatJet</title>
+  <meta name="description" content="JPG, PNG ve WebP görsellerini boyut kaybetmeden sıkıştır. Ücretsiz, hızlı, güvenli.">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../assets/img/logo-icon.png" alt="" style="height:22px" aria-hidden="true">
+        <img src="../assets/img/logo-text.png" alt="FormatJet" style="height:16px">
+      </a>
+      <div class="nav-right">
+        <button class="btn-nav btn-ghost" onclick="location.href='../login.html'">Giriş Yap</button>
+        <button class="btn-nav btn-accent">Pro'ya Geç</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="tool-page">
+  <div class="container">
+    <div class="tool-header">
+      <a href="../gorsel.html" class="tool-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+        Görsel Araçları
+      </a>
+      <div class="tool-page-icon" style="background:rgba(220,38,38,.1);color:#DC2626">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+      </div>
+      <h1 class="tool-page-title">Görsel Sıkıştır</h1>
+      <p class="tool-page-desc">JPG, PNG ve WebP dosyalarını boyut kaybetmeden sıkıştır. Kalite kayıpsız veya ayarlı sıkıştırma.</p>
+    </div>
+
+    <div class="tool-workspace">
+      <div class="limit-bar">
+        <span>Ücretsiz plan: en fazla <strong>20 MB</strong> ve <strong>10 dosya</strong></span>
+        <a href="#" style="color:var(--accent);font-weight:500;font-size:12px">Pro'ya geç →</a>
+      </div>
+
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" class="upload-zone-input" id="fileInput" multiple accept="image/jpeg,image/jpg,image/png,image/webp">
+        <div id="uploadPrompt">
+          <div class="drop-icon" style="margin:0 auto 12px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          </div>
+          <p class="drop-title"><strong>Görselleri buraya sürükle</strong> veya tıkla</p>
+          <p class="drop-sub">JPG, PNG, WebP · Maks. 20 MB/dosya</p>
+        </div>
+        <div id="fileList" class="file-list" hidden></div>
+      </div>
+
+      <div class="tool-options" id="toolOptions" hidden>
+        <div class="option-row">
+          <label class="option-label">Kalite</label>
+          <div class="option-control">
+            <input type="range" id="qualitySlider" min="10" max="100" value="80" class="range-input">
+            <span class="range-value" id="qualityValue">80%</span>
+          </div>
+        </div>
+        <div class="option-row">
+          <label class="option-label">Format</label>
+          <div class="option-control">
+            <select class="select-input" id="outputFormat">
+              <option value="same">Aynı format</option>
+              <option value="jpg">JPG</option>
+              <option value="png">PNG</option>
+              <option value="webp">WebP</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-actions" id="toolActions" hidden>
+        <button class="btn-tool-primary" id="btnProcess">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 18v-6M9 15l3 3 3-3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg>
+          Sıkıştır ve İndir
+        </button>
+        <button class="btn-tool-ghost" id="btnReset">Yeni Dosya</button>
+      </div>
+    </div>
+
+    <section class="tool-info-section">
+      <h2 class="tool-info-title">Görsel Sıkıştırma Nasıl Çalışır?</h2>
+      <div class="tool-info-grid">
+        <div class="tool-info-card">
+          <div class="tool-info-num">1</div>
+          <strong>Dosyaları Yükle</strong>
+          <p>JPG, PNG veya WebP görsellerini sürükle veya seç.</p>
+        </div>
+        <div class="tool-info-card">
+          <div class="tool-info-num">2</div>
+          <strong>Kalite Ayarla</strong>
+          <p>Sıkıştırma oranını kaydırıcıyla belirle. %80 çoğu kullanım için idealdir.</p>
+        </div>
+        <div class="tool-info-card">
+          <div class="tool-info-num">3</div>
+          <strong>İndir</strong>
+          <p>Sıkıştırılmış görsel anında indirilir. Dosyalar 1 saat sonra otomatik silinir.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+  const uploadZone   = document.getElementById('uploadZone');
+  const fileInput    = document.getElementById('fileInput');
+  const uploadPrompt = document.getElementById('uploadPrompt');
+  const fileList     = document.getElementById('fileList');
+  const toolOptions  = document.getElementById('toolOptions');
+  const toolActions  = document.getElementById('toolActions');
+  const slider       = document.getElementById('qualitySlider');
+  const qualVal      = document.getElementById('qualityValue');
+
+  slider.addEventListener('input', () => { qualVal.textContent = slider.value + '%'; });
+
+  function showFiles(files) {
+    fileList.innerHTML = '';
+    Array.from(files).forEach(f => {
+      const div = document.createElement('div');
+      div.className = 'file-item';
+      div.innerHTML = `<span class="file-item-name">${f.name}</span><span class="file-item-size">${(f.size/1024/1024).toFixed(2)} MB</span>`;
+      fileList.appendChild(div);
+    });
+    uploadPrompt.hidden = true;
+    fileList.hidden = false;
+    toolOptions.hidden = false;
+    toolActions.hidden = false;
+  }
+
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) { fileInput.files = e.dataTransfer.files; showFiles(e.dataTransfer.files); } });
+  uploadZone.addEventListener('click', e => { if (e.target === uploadZone || uploadZone.contains(e.target)) fileInput.click(); });
+  fileInput.addEventListener('change', () => { if (fileInput.files.length) showFiles(fileInput.files); });
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    fileInput.value = '';
+    fileList.hidden = true;
+    uploadPrompt.hidden = false;
+    toolOptions.hidden = true;
+    toolActions.hidden = true;
+  });
+
+  document.getElementById('btnProcess').addEventListener('click', () => {
+    const btn = document.getElementById('btnProcess');
+    btn.textContent = 'İşleniyor...';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'Sıkıştır ve İndir'; btn.disabled = false; alert('Demo mod: Gerçek işlemde dosyalar burada indirilir.'); }, 1500);
+  });
+</script>
+</body>
+</html>
