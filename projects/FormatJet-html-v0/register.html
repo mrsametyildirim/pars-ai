@@ -57,7 +57,7 @@
       <p class="login-form-sub">Ücretsiz, hızlı, güvenli. Kredi kartı gerekmez.</p>
 
       <!-- Gmail -->
-      <button class="btn-google" type="button">
+      <button class="btn-google" type="button" id="btnGoogle">
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
           <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -100,10 +100,24 @@
           </div>
         </div>
 
-        <button type="submit" class="btn-primary-full">Hesap Oluştur</button>
+        <div class="auth-error" id="authError" hidden></div>
+
+        <button type="submit" class="btn-primary-full" id="registerBtn">Hesap Oluştur</button>
 
         <p class="login-form-hint">E-posta adresinize doğrulama bağlantısı gönderilecektir.</p>
       </form>
+
+      <div id="verifyBox" hidden style="text-align:center;padding:24px 0">
+        <div style="width:56px;height:56px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;background:rgba(37,99,235,0.1);border-radius:50%;color:#2563EB">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h2 style="font-size:18px;font-weight:700;color:#0D1B2E;margin-bottom:8px">E-postanı doğrula</h2>
+        <p style="font-size:14px;color:#6B7280;line-height:1.6">
+          <span id="verifyEmail" style="font-weight:600;color:#111827"></span> adresine doğrulama bağlantısı gönderdik.<br>
+          Bağlantıya tıkladıktan sonra giriş yapabilirsin.
+        </p>
+        <a href="login.html" style="display:inline-block;margin-top:16px;font-size:14px;font-weight:600;color:#2563EB">Giriş sayfasına dön →</a>
+      </div>
 
       <p class="login-register">Zaten hesabın var mı? <a href="login.html">Giriş Yap</a></p>
     </div>
@@ -144,6 +158,21 @@
 }
 </style>
 
+<style>
+  .auth-error {
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #B91C1C;
+    background: rgba(220,38,38,0.07);
+    border: 1px solid rgba(220,38,38,0.25);
+    border-radius: 8px;
+  }
+</style>
+
+<script src="assets/js/vendor/supabase.min.js"></script>
+<script src="assets/js/fj-config.js"></script>
+<script src="assets/js/auth.js"></script>
 <script>
   const toggleBtn = document.getElementById('togglePassword');
   const pwInput  = document.getElementById('password');
@@ -155,6 +184,68 @@
     pwInput.type    = isPassword ? 'text' : 'password';
     eyeShow.style.display = isPassword ? 'none' : '';
     eyeHide.style.display = isPassword ? '' : 'none';
+  });
+
+  const errBox = document.getElementById('authError');
+  function showError(msg) { errBox.textContent = msg; errBox.hidden = false; }
+
+  document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errBox.hidden = true;
+
+    const fullName = document.getElementById('fullName').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const password = pwInput.value;
+
+    if (!fullName) { showError('Ad Soyad gerekli.'); return; }
+    if (!email)    { showError('E-posta adresi gerekli.'); return; }
+    if (password.length < 8) { showError('Şifre en az 8 karakter olmalı.'); return; }
+    if (!document.getElementById('agreeTerms').checked) {
+      showError('Devam etmek için Kullanım Koşulları\'nı kabul etmelisin.');
+      return;
+    }
+
+    const btn = document.getElementById('registerBtn');
+    btn.textContent = 'Hesap oluşturuluyor...'; btn.disabled = true;
+
+    const { data, error } = await window.fjAuth.sb.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { full_name: fullName },
+        emailRedirectTo: location.origin + location.pathname.replace('register.html', 'login.html'),
+      },
+    });
+
+    if (error) {
+      btn.textContent = 'Hesap Oluştur'; btn.disabled = false;
+      if (/already registered/i.test(error.message)) showError('Bu e-posta ile zaten bir hesap var. Giriş yapmayı dene.');
+      else if (/password/i.test(error.message)) showError('Şifre yeterince güçlü değil. En az 8 karakter kullan.');
+      else showError('Kayıt başarısız: ' + error.message);
+      return;
+    }
+
+    /* Doğrulama gerekiyorsa bilgi ekranı; e-posta onayı kapalıysa direkt giriş */
+    if (data.session) {
+      location.href = 'odeme.html';
+      return;
+    }
+    document.getElementById('registerForm').hidden = true;
+    document.getElementById('verifyEmail').textContent = email;
+    document.getElementById('verifyBox').hidden = false;
+  });
+
+  document.getElementById('btnGoogle').addEventListener('click', async () => {
+    errBox.hidden = true;
+    const { error } = await window.fjAuth.sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: location.origin + location.pathname.replace('register.html', 'index.html') },
+    });
+    if (error) {
+      showError(/provider is not enabled/i.test(error.message)
+        ? 'Google kaydı henüz yapılandırılmadı. E-posta ile kayıt olabilirsin.'
+        : 'Google kaydı başarısız: ' + error.message);
+    }
   });
 </script>
 </body>

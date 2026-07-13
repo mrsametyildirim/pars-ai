@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video Sıkıştır — FormatJet</title>
-  <meta name="description" content="MP4, MOV ve WebM videolarını kalite kaybı olmadan sıkıştır. Ücretsiz online araç.">
+  <meta name="description" content="Videoyu H.264 ile yeniden kodlayarak küçült. Ücretsiz, hızlı, tarayıcıda çalışır.">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
       </a>
       <div class="nav-right">
         <button class="btn-nav btn-ghost" onclick="location.href='../login.html'">Giriş Yap</button>
-        <button class="btn-nav btn-accent">Pro'ya Geç</button>
+        <button class="btn-nav btn-accent" onclick="location.href='../odeme.html'">Pro'ya Geç</button>
       </div>
     </div>
   </div>
@@ -34,129 +34,73 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
         Video Araçları
       </a>
-      <div class="tool-page-icon" style="background:rgba(220,38,38,.1);color:#DC2626">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+      <div class="tool-page-icon" style="background:color-mix(in srgb, #DC2626 10%, transparent);color:#DC2626">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
       <h1 class="tool-page-title">Video Sıkıştır</h1>
-      <p class="tool-page-desc">MP4, MOV ve diğer video formatlarını kalite kaybı olmadan sıkıştır. Dosya boyutunu küçült.</p>
+      <p class="tool-page-desc">Videoyu H.264 ile yeniden kodlayarak küçült.</p>
     </div>
 
-    <div class="tool-workspace">
+    <div class="tool-workspace" id="toolWorkspace">
       <div class="limit-bar">
-        <span>Ücretsiz plan: en fazla <strong>500 MB</strong> / video</span>
-        <a href="#" style="color:var(--accent);font-weight:500;font-size:12px">Pro'ya geç → (2 GB limit)</a>
+        <span>Ücretsiz: <strong>50 MB</strong>/dosya · Üyelere <strong>200 MB</strong></span>
+        <a href="../odeme.html" style="color:var(--accent, #2563EB);font-weight:500;font-size:12px">Pro'ya geç →</a>
       </div>
 
       <div class="upload-zone" id="uploadZone">
-        <input type="file" class="upload-zone-input" id="fileInput" accept="video/mp4,video/quicktime,video/x-msvideo,video/webm,.mp4,.mov,.avi,.webm">
+        <input type="file" class="upload-zone-input" id="fileInput" hidden>
         <div id="uploadPrompt">
           <div class="drop-icon" style="margin:0 auto 12px">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           </div>
-          <p class="drop-title"><strong>Videoyu buraya sürükle</strong> veya tıkla</p>
-          <p class="drop-sub">MP4, MOV, AVI, WebM · Maks. 500 MB</p>
+          <p class="drop-title"><strong>Dosyaları buraya sürükle</strong> veya tıkla</p>
+          <p class="drop-sub">VIDEO · İlk kullanımda motor yüklenir (~31 MB)</p>
         </div>
         <div id="fileList" class="file-list" hidden></div>
       </div>
 
-      <div class="tool-options" id="toolOptions" hidden>
-        <div class="option-row">
-          <label class="option-label">Kalite</label>
-          <div class="option-control">
-            <select class="select-input" id="qualityPreset">
-              <option value="high">Yüksek — %30 daha küçük</option>
-              <option value="medium" selected>Orta — %60 daha küçük (önerilen)</option>
-              <option value="low">Düşük — %80 daha küçük</option>
-            </select>
-          </div>
-        </div>
-        <div class="option-row">
-          <label class="option-label">Çözünürlük</label>
-          <div class="option-control">
-            <select class="select-input" id="resolution">
-              <option value="same">Aynı tut</option>
-              <option value="1080p">1080p</option>
-              <option value="720p">720p</option>
-              <option value="480p">480p</option>
-            </select>
-          </div>
-        </div>
-      </div>
+      <div class="tool-options" id="toolOptions" hidden></div>
+
+      <div class="engine-status" id="engineStatus" hidden></div>
+      <div class="progress-wrap" id="progressWrap" hidden><div class="progress-fill" id="progressFill"></div></div>
 
       <div class="tool-actions" id="toolActions" hidden>
         <button class="btn-tool-primary" id="btnProcess">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 18v-6M9 15l3 3 3-3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg>
-          Sıkıştır ve İndir
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Dönüştür
         </button>
-        <button class="btn-tool-ghost" id="btnReset">Yeni Video</button>
+        <button class="btn-tool-ghost" id="btnReset">Yeni Dosya</button>
       </div>
-    </div>
+
+      <div class="result-panel" id="resultPanel" hidden></div></div>
 
     <section class="tool-info-section">
-      <h2 class="tool-info-title">Video Sıkıştırma Hakkında</h2>
+      <h2 class="tool-info-title">Nasıl çalışır?</h2>
       <div class="tool-info-grid">
         <div class="tool-info-card">
           <div class="tool-info-num">1</div>
-          <strong>H.264 / H.265 Kodlama</strong>
-          <p>Modern codec'ler ile orijinal kaliteye yakın, çok daha küçük dosyalar.</p>
+          <strong>Dosyanı Seç</strong>
+          <p>Sürükle-bırak veya tıklayarak dosyanı yükle.</p>
         </div>
         <div class="tool-info-card">
           <div class="tool-info-num">2</div>
-          <strong>Paylaşıma Hazır</strong>
-          <p>Sıkıştırılmış video WhatsApp, Instagram ve e-posta limitlerini geçer.</p>
+          <strong>Tarayıcıda İşlenir</strong>
+          <p>Dosyan sunucuya gitmez; işlem cihazında, tarayıcı içinde yapılır.</p>
         </div>
         <div class="tool-info-card">
           <div class="tool-info-num">3</div>
-          <strong>Gizlilik Önce</strong>
-          <p>Videolar sunucuda işlenir ve 1 saat içinde kalıcı olarak silinir.</p>
+          <strong>Anında İndir</strong>
+          <p>Sonuç dosyan hazır olur olmaz otomatik indirilir.</p>
         </div>
       </div>
     </section>
   </div>
 </main>
 
-<script>
-  const uploadZone   = document.getElementById('uploadZone');
-  const fileInput    = document.getElementById('fileInput');
-  const uploadPrompt = document.getElementById('uploadPrompt');
-  const fileList     = document.getElementById('fileList');
-  const toolOptions  = document.getElementById('toolOptions');
-  const toolActions  = document.getElementById('toolActions');
-
-  function showFiles(files) {
-    fileList.innerHTML = '';
-    Array.from(files).forEach(f => {
-      const div = document.createElement('div');
-      div.className = 'file-item';
-      div.innerHTML = `<span class="file-item-name">${f.name}</span><span class="file-item-size">${(f.size/1024/1024).toFixed(1)} MB</span>`;
-      fileList.appendChild(div);
-    });
-    uploadPrompt.hidden = true;
-    fileList.hidden = false;
-    toolOptions.hidden = false;
-    toolActions.hidden = false;
-  }
-
-  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
-  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
-  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) showFiles(e.dataTransfer.files); });
-  uploadZone.addEventListener('click', e => { if (uploadZone.contains(e.target)) fileInput.click(); });
-  fileInput.addEventListener('change', () => { if (fileInput.files.length) showFiles(fileInput.files); });
-
-  document.getElementById('btnReset').addEventListener('click', () => {
-    fileInput.value = '';
-    fileList.hidden = true;
-    uploadPrompt.hidden = false;
-    toolOptions.hidden = true;
-    toolActions.hidden = true;
-  });
-
-  document.getElementById('btnProcess').addEventListener('click', () => {
-    const btn = document.getElementById('btnProcess');
-    btn.textContent = 'Sıkıştırılıyor...';
-    btn.disabled = true;
-    setTimeout(() => { btn.textContent = 'Sıkıştır ve İndir'; btn.disabled = false; alert('Demo mod: Gerçek işlemde video burada indirilir.'); }, 2000);
-  });
-</script>
+<script src="../assets/js/vendor/supabase.min.js"></script>
+<script src="../assets/js/fj-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/tools-registry.js"></script>
+<script src="../assets/js/tool-engine.js"></script>
 </body>
 </html>

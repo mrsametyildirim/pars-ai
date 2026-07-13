@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PDF'den Word'e — FormatJet</title>
-  <meta name="description" content="PDF belgelerini düzenlenebilir Word (DOCX) formatına dönüştür. Metin ve tablolar korunur.">
+  <title>PDF'den Word — FormatJet</title>
+  <meta name="description" content="PDF metnini düzenlenebilir Word (DOCX) belgesine aktar. Ücretsiz, hızlı, tarayıcıda çalışır.">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
       </a>
       <div class="nav-right">
         <button class="btn-nav btn-ghost" onclick="location.href='../login.html'">Giriş Yap</button>
-        <button class="btn-nav btn-accent">Pro'ya Geç</button>
+        <button class="btn-nav btn-accent" onclick="location.href='../odeme.html'">Pro'ya Geç</button>
       </div>
     </div>
   </div>
@@ -34,128 +34,73 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
         PDF Araçları
       </a>
-      <div class="tool-page-icon" style="background:rgba(5,150,105,.1);color:#059669">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+      <div class="tool-page-icon" style="background:color-mix(in srgb, #059669 10%, transparent);color:#059669">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
-      <h1 class="tool-page-title">PDF'den Word'e</h1>
-      <p class="tool-page-desc">PDF belgelerini düzenlenebilir DOCX formatına dönüştür. Metin, tablo ve liste yapıları korunur.</p>
+      <h1 class="tool-page-title">PDF'den Word</h1>
+      <p class="tool-page-desc">PDF metnini düzenlenebilir Word (DOCX) belgesine aktar.</p>
     </div>
 
-    <div class="tool-workspace">
+    <div class="tool-workspace" id="toolWorkspace">
       <div class="limit-bar">
-        <span>Ücretsiz plan: en fazla <strong>10 MB</strong> / dosya · Pro: 100 MB, OCR desteği</span>
-        <a href="#" style="color:var(--accent);font-weight:500;font-size:12px">Pro'ya geç →</a>
+        <span>Ücretsiz: <strong>50 MB</strong>/dosya · Üyelere <strong>200 MB</strong></span>
+        <a href="../odeme.html" style="color:var(--accent, #2563EB);font-weight:500;font-size:12px">Pro'ya geç →</a>
       </div>
 
       <div class="upload-zone" id="uploadZone">
-        <input type="file" class="upload-zone-input" id="fileInput" multiple accept=".pdf,application/pdf">
+        <input type="file" class="upload-zone-input" id="fileInput" hidden>
         <div id="uploadPrompt">
           <div class="drop-icon" style="margin:0 auto 12px">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h4"/></svg>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           </div>
-          <p class="drop-title"><strong>PDF'yi buraya sürükle</strong> veya tıkla</p>
-          <p class="drop-sub">Yalnızca .pdf · Maks. 10 MB (ücretsiz)</p>
+          <p class="drop-title"><strong>Dosyaları buraya sürükle</strong> veya tıkla</p>
+          <p class="drop-sub">PDF</p>
         </div>
         <div id="fileList" class="file-list" hidden></div>
       </div>
 
-      <div class="tool-options" id="toolOptions" hidden>
-        <div class="option-row">
-          <label class="option-label">Çıktı Formatı</label>
-          <div class="option-control">
-            <select class="select-input" id="outputFmt">
-              <option value="docx" selected>DOCX (Word 2007+)</option>
-              <option value="doc">DOC (eski Word)</option>
-              <option value="rtf">RTF</option>
-            </select>
-          </div>
-        </div>
-        <div class="option-row">
-          <label class="option-label">OCR (Taranmış PDF)</label>
-          <div class="option-control">
-            <select class="select-input" id="ocrMode">
-              <option value="auto">Otomatik algıla</option>
-              <option value="on">OCR zorla (Pro)</option>
-              <option value="off">Hayır, metin içeriyor</option>
-            </select>
-          </div>
-        </div>
-      </div>
+      <div class="tool-options" id="toolOptions" hidden></div>
+
+      <div class="engine-status" id="engineStatus" hidden></div>
+      <div class="progress-wrap" id="progressWrap" hidden><div class="progress-fill" id="progressFill"></div></div>
 
       <div class="tool-actions" id="toolActions" hidden>
         <button class="btn-tool-primary" id="btnProcess">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-          Word'e Dönüştür
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Dönüştür
         </button>
-        <button class="btn-tool-ghost" id="btnReset">Yeni PDF</button>
+        <button class="btn-tool-ghost" id="btnReset">Yeni Dosya</button>
       </div>
-    </div>
+
+      <div class="result-panel" id="resultPanel" hidden></div></div>
 
     <section class="tool-info-section">
-      <h2 class="tool-info-title">PDF'den Word'e Dönüştürme</h2>
+      <h2 class="tool-info-title">Nasıl çalışır?</h2>
       <div class="tool-info-grid">
         <div class="tool-info-card">
           <div class="tool-info-num">1</div>
-          <strong>Düzenlenebilir Metin</strong>
-          <p>PDF'deki tüm metinler Word'de tam olarak düzenlenebilir hale gelir.</p>
+          <strong>Dosyanı Seç</strong>
+          <p>Sürükle-bırak veya tıklayarak dosyanı yükle.</p>
         </div>
         <div class="tool-info-card">
           <div class="tool-info-num">2</div>
-          <strong>Tablo Tanıma</strong>
-          <p>PDF'deki tablolar Word tablosuna dönüştürülür, hücreler düzenlenebilir.</p>
+          <strong>Tarayıcıda İşlenir</strong>
+          <p>Dosyan sunucuya gitmez; işlem cihazında, tarayıcı içinde yapılır.</p>
         </div>
         <div class="tool-info-card">
           <div class="tool-info-num">3</div>
-          <strong>OCR Desteği (Pro)</strong>
-          <p>Taranmış PDF'lerdeki metinler OCR ile tanınır ve düzenlenebilir hale gelir.</p>
+          <strong>Anında İndir</strong>
+          <p>Sonuç dosyan hazır olur olmaz otomatik indirilir.</p>
         </div>
       </div>
     </section>
   </div>
 </main>
 
-<script>
-  const uploadZone   = document.getElementById('uploadZone');
-  const fileInput    = document.getElementById('fileInput');
-  const uploadPrompt = document.getElementById('uploadPrompt');
-  const fileList     = document.getElementById('fileList');
-  const toolOptions  = document.getElementById('toolOptions');
-  const toolActions  = document.getElementById('toolActions');
-
-  function showFiles(files) {
-    fileList.innerHTML = '';
-    Array.from(files).forEach(f => {
-      const div = document.createElement('div');
-      div.className = 'file-item';
-      div.innerHTML = `<span class="file-item-name">${f.name}</span><span class="file-item-size">${(f.size/1024/1024).toFixed(2)} MB</span>`;
-      fileList.appendChild(div);
-    });
-    uploadPrompt.hidden = true;
-    fileList.hidden = false;
-    toolOptions.hidden = false;
-    toolActions.hidden = false;
-  }
-
-  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
-  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
-  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) showFiles(e.dataTransfer.files); });
-  uploadZone.addEventListener('click', e => { if (uploadZone.contains(e.target)) fileInput.click(); });
-  fileInput.addEventListener('change', () => { if (fileInput.files.length) showFiles(fileInput.files); });
-
-  document.getElementById('btnReset').addEventListener('click', () => {
-    fileInput.value = '';
-    fileList.hidden = true;
-    uploadPrompt.hidden = false;
-    toolOptions.hidden = true;
-    toolActions.hidden = true;
-  });
-
-  document.getElementById('btnProcess').addEventListener('click', () => {
-    const btn = document.getElementById('btnProcess');
-    btn.textContent = 'Dönüştürülüyor...';
-    btn.disabled = true;
-    setTimeout(() => { btn.textContent = 'Word\'e Dönüştür'; btn.disabled = false; alert('Demo mod: Gerçek işlemde DOCX burada indirilir.'); }, 1800);
-  });
-</script>
+<script src="../assets/js/vendor/supabase.min.js"></script>
+<script src="../assets/js/fj-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/tools-registry.js"></script>
+<script src="../assets/js/tool-engine.js"></script>
 </body>
 </html>

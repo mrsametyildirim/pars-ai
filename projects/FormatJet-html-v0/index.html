@@ -5,516 +5,510 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FormatJet — PDF, Görsel ve Dosya Araçları</title>
   <meta name="description" content="PDF birleştir, sıkıştır, dönüştür. Arka plan kaldır, görsel boyutlandır. 70+ ücretsiz araç, tek platform.">
-  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/lang-panel.css">
 </head>
 <body>
 
-<!-- ═══ NAVBAR ═══ -->
-<nav class="nav">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="index.html" class="logo">
-        <div class="logo-icon">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M9 1L3 9h5l-1 6 7-9H9l1-5z" fill="#fff" stroke="#fff" stroke-width="0.5" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        Format<span>Jet</span>
+<!-- ═══ HEADER ═══ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container-wide">
+
+    <!-- Logo -->
+    <a href="index.html" class="logo" aria-label="FormatJet Ana Sayfa">
+      <img src="assets/img/logo-icon.png" alt="" class="logo-icon-img" aria-hidden="true">
+      <img src="assets/img/logo-text.png" alt="FormatJet" class="logo-text-img">
+    </a>
+
+    <!-- Nav -->
+    <nav class="header-nav" aria-label="Kategori menüsü">
+      <a href="pdf.html" class="nav-link active" data-cat="pdf" data-i18n="nav-pdf">PDF</a>
+      <a href="belge.html" class="nav-link" data-cat="belge" data-i18n="nav-belge">Belge</a>
+      <a href="gorsel.html" class="nav-link" data-cat="gorsel" data-i18n="nav-gorsel">Görsel</a>
+      <a href="video.html" class="nav-link" data-cat="video" data-i18n="nav-video">Video</a>
+      <a href="ses.html" class="nav-link" data-cat="ses" data-i18n="nav-ses">Ses</a>
+      <a href="tools.html" class="btn-all-tools" id="btnAllTools">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <rect x="0" y="0" width="4" height="4" rx="1"/><rect x="6" y="0" width="4" height="4" rx="1"/><rect x="12" y="0" width="4" height="4" rx="1"/>
+          <rect x="0" y="6" width="4" height="4" rx="1"/><rect x="6" y="6" width="4" height="4" rx="1"/><rect x="12" y="6" width="4" height="4" rx="1"/>
+          <rect x="0" y="12" width="4" height="4" rx="1"/><rect x="6" y="12" width="4" height="4" rx="1"/><rect x="12" y="12" width="4" height="4" rx="1"/>
+        </svg>
+        Tüm Araçlar
       </a>
-      <nav class="nav-links">
-        <a href="#pdf">PDF</a>
-        <a href="#gorsel">Görsel</a>
-        <a href="#video">Video &amp; Ses</a>
-        <a href="#guvenlik">Güvenlik</a>
+    </nav>
+
+    <!-- Sağ -->
+    <div class="header-right">
+      <button class="btn-support">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <span data-i18n="btn-support">Destek Ol</span>
+      </button>
+
+      <a href="pages/hakkimizda.html" class="btn-bizi-tani" data-i18n="btn-about">Bizi Tanı</a>
+
+      <div class="lang-wrapper">
+        <button class="btn-lang" id="btnLang" aria-label="Dil seç">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span class="btn-lang-text">TR</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="lang-panel" id="langPanel" hidden>
+          <div class="lang-panel-inner">
+            <div class="lang-primary">
+              <button class="lang-option" data-lang="tr">🇹🇷 Türkçe</button>
+              <button class="lang-option" data-lang="en">🇬🇧 English</button>
+              <button class="lang-option" data-lang="de">🇩🇪 Deutsch</button>
+              <button class="lang-option" data-lang="fr">🇫🇷 Français</button>
+              <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+              <button class="lang-option" data-lang="pt">🇧🇷 Português</button>
+            </div>
+            <button class="lang-more-btn" id="langMoreBtn" data-i18n="more-langs">Diğer diller →</button>
+            <div class="lang-secondary" id="langSecondary" hidden>
+              <button class="lang-option" data-lang="it">🇮🇹 Italiano</button>
+              <button class="lang-option" data-lang="ru">🇷🇺 Русский</button>
+              <button class="lang-option" data-lang="ja">🇯🇵 日本語</button>
+              <button class="lang-option" data-lang="ko">🇰🇷 한국어</button>
+              <button class="lang-option" data-lang="zh">🇨🇳 中文</button>
+              <button class="lang-option" data-lang="ar">🇸🇦 العربية</button>
+              <button class="lang-option" data-lang="pl">🇵🇱 Polski</button>
+              <button class="lang-option" data-lang="nl">🇳🇱 Nederlands</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-login" onclick="location.href='login.html'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span data-i18n="btn-login">Giriş Yap</span>
+      </button>
+
+      <!-- Mobil hamburger -->
+      <button class="btn-hamburger" id="btnHamburger" aria-label="Menüyü aç" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Mobil menü -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <nav class="mobile-nav">
+        <a href="pdf.html" class="mobile-nav-link">PDF</a>
+        <a href="belge.html" class="mobile-nav-link">Belge</a>
+        <a href="gorsel.html" class="mobile-nav-link">Görsel</a>
+        <a href="video.html" class="mobile-nav-link">Video</a>
+        <a href="ses.html" class="mobile-nav-link">Ses</a>
+        <a href="tools.html" class="mobile-nav-link">Tüm Araçlar</a>
+        <a href="pages/hakkimizda.html" class="mobile-nav-link">Bizi Tanı</a>
       </nav>
-      <div class="nav-right">
-        <button class="btn-nav btn-ghost">Giriş Yap</button>
-        <button class="btn-nav btn-accent">Pro'ya Geç</button>
+      <div class="mobile-menu-footer">
+        <button class="btn-login w-full">Giriş Yap</button>
+        <button class="btn-support w-full">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Destek Ol
+        </button>
       </div>
     </div>
   </div>
-</nav>
+</header>
 
 <!-- ═══ HERO ═══ -->
-<section class="hero">
+<main>
+<section class="hero" id="hero">
   <div class="container">
+    <h1 class="hero-title"><span data-i18n="hero-title">Dosyan hazır.</span><br><span class="hero-title-accent" data-i18n="hero-title-accent">Formatını değiştirelim.</span></h1>
+    <p class="hero-sub" data-i18n="hero-sub">PDF, belge, görsel, video ve ses dosyalarını hızlı, güvenli ve kolayca dönüştür.</p>
 
-    <!-- Collapsible: badge + heading + subtitle -->
-    <div class="hero-extras" id="heroExtras">
-      <div class="hero-badge">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
-        70+ Ücretsiz Araç
-      </div>
-      <h1 class="font-display">
-        Dosyanızla ne<br><em>yapmak istiyorsunuz?</em>
-      </h1>
-      <p class="hero-sub">PDF, görsel, video ve belge araçları — hızlı, güvenli, ücretsiz.</p>
-    </div>
-
-    <!-- Search — always visible -->
-    <div class="search-wrapper">
-      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-      </svg>
-      <input
-        type="text"
-        id="toolSearch"
-        class="search-box"
-        placeholder="Ara: PDF birleştir, arka plan kaldır, HEIC dönüştür..."
-        autocomplete="off"
-        spellcheck="false"
-      >
-      <button class="search-clear" id="searchClear" title="Temizle">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-
-    <!-- Collapsible: dropzone -->
-    <div class="hero-drop" id="heroDrop">
-      <div class="dropzone-area" id="heroDropzone">
-        <input type="file" class="drop-input" id="heroFileInput" multiple accept="*/*">
-        <div class="drop-icon">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="17 8 12 3 7 8"/>
-            <line x1="12" y1="3" x2="12" y2="15"/>
-          </svg>
-        </div>
-        <p class="drop-title"><strong>Dosyayı buraya sürükle</strong> veya tıkla</p>
-        <p class="drop-sub">PDF, Word, Excel, JPG, PNG, MP4 ve daha fazlası — uyumlu araçlar otomatik seçilir</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══ TOOLS SECTION ═══ -->
-<section class="tools-section" id="toolsSection">
-  <div class="container">
-
-    <div class="section-header" id="sectionHeader">
-      <span class="section-title">Araçlar</span>
-      <div class="cat-tabs" id="catTabs">
-        <button class="cat-tab active" data-cat="all">Tümü</button>
-        <button class="cat-tab" data-cat="pdf">PDF</button>
-        <button class="cat-tab" data-cat="gorsel">Görsel</button>
-        <button class="cat-tab" data-cat="video">Video &amp; Ses</button>
-        <button class="cat-tab" data-cat="guvenlik">Güvenlik</button>
-      </div>
-    </div>
-
-    <!-- Search mode header (hidden by default) -->
-    <div class="search-result-header" id="searchResultHeader">
-      <span id="searchResultCount"></span>
-      <button class="search-result-clear" id="searchResultClear">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        Temizle
-      </button>
-    </div>
-
-    <div class="tools-grid" id="toolsGrid">
-
-      <!-- 1. ARKA PLAN KALDIR — ~10M arama/ay -->
-      <a href="tools/arkaplan-kaldir.html" class="tool-card" data-cat="gorsel" data-priority="1"
-         data-keywords="arka plan kaldır background remove bg sil şeffaf png">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <path d="m9 9 6 6M15 9l-6 6" opacity=".4"/>
-            <circle cx="12" cy="12" r="3"/>
-          </svg>
-        </div>
-        <p class="tool-name">Arka Plan Kaldır</p>
-        <p class="tool-desc">Görselden arka planı otomatik kaldır, şeffaf PNG kaydet</p>
-        <span class="tool-badge badge-pro">Pro</span>
-      </a>
-
-      <!-- 2. GÖRSEL → PDF — 6.12M arama/ay -->
-      <a href="tools/gorsel-pdf.html" class="tool-card" data-cat="pdf gorsel" data-priority="2"
-         data-keywords="jpg png görsel resim pdf dönüştür çevir">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <polyline points="21 15 16 10 5 21"/>
-          </svg>
-        </div>
-        <p class="tool-name">Görsel → PDF</p>
-        <p class="tool-desc">JPG, PNG ve WebP görsellerini PDF'e çevir</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 3. PDF → WORD — 5M arama/ay -->
-      <a href="tools/pdf-word.html" class="tool-card" data-cat="pdf" data-priority="3"
-         data-keywords="pdf word dönüştür docx metin düzenle çevir">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <path d="m9 13 2 4 2-6 2 4"/>
-          </svg>
-        </div>
-        <p class="tool-name">PDF → Word</p>
-        <p class="tool-desc">PDF dosyasını düzenlenebilir Word belgesine çevir</p>
-        <span class="tool-badge badge-pro">Pro</span>
-      </a>
-
-      <!-- 4. PDF → GÖRSEL — 4.09M arama/ay -->
-      <a href="tools/pdf-gorsel.html" class="tool-card" data-cat="pdf gorsel" data-priority="4"
-         data-keywords="pdf jpg png görsel resim dönüştür çevir sayfa">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <path d="M5 20h14M8 16l3-4 2 2 3-4 3 6"/>
-          </svg>
-        </div>
-        <p class="tool-name">PDF → Görsel</p>
-        <p class="tool-desc">PDF sayfalarını JPG veya PNG olarak kaydet</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 5. PDF BİRLEŞTİR — 3.35M arama/ay ✅ ÇALIŞIYOR -->
-      <a href="tools/pdf-birlestir.html" class="tool-card" data-cat="pdf" data-priority="5"
-         data-keywords="pdf birleştir merge combine ekle">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
-          </svg>
-        </div>
-        <p class="tool-name">PDF Birleştir</p>
-        <p class="tool-desc">Birden fazla PDF'i tek dosyada birleştir</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-        <span class="tool-live">●</span>
-      </a>
-
-      <!-- 6. GÖRSEL SIKIŞTIRIR — TinyPNG 5.37M ziyaret/ay -->
-      <a href="tools/gorsel-sikistir.html" class="tool-card" data-cat="gorsel" data-priority="6"
-         data-keywords="görsel resim jpg png webp sıkıştır küçült boyut azalt compress">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <circle cx="8.5" cy="8.5" r="1.5"/>
-            <polyline points="21 15 16 10 5 21"/>
-            <polyline points="17 17 21 17 21 21"/>
-          </svg>
-        </div>
-        <p class="tool-name">Görsel Sıkıştır</p>
-        <p class="tool-desc">JPG, PNG, WebP boyutunu kalite kaybı olmadan küçült</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 7. PDF DÜZENLE — 2.74M arama/ay -->
-      <a href="tools/pdf-duzenle.html" class="tool-card" data-cat="pdf" data-priority="7"
-         data-keywords="pdf düzenle edit yaz metin imza ekle değiştir online editor">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-          </svg>
-        </div>
-        <p class="tool-name">PDF Düzenle</p>
-        <p class="tool-desc">Metin, görsel, imza ekle; alanları değiştir</p>
-        <span class="tool-badge badge-pro">Pro</span>
-      </a>
-
-      <!-- 8. PDF SIKIŞTIRIR — temel araç -->
-      <a href="tools/pdf-sikistir.html" class="tool-card" data-cat="pdf" data-priority="8"
-         data-keywords="pdf sıkıştır küçült boyut azalt compress optimize">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <polyline points="8 17 12 21 16 17"/>
-            <line x1="12" y1="12" x2="12" y2="21"/>
-          </svg>
-        </div>
-        <p class="tool-name">PDF Sıkıştır</p>
-        <p class="tool-desc">PDF boyutunu kalite kaybı olmadan küçült</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 9. HEIC → JPG — 246K arama/ay -->
-      <a href="tools/heic-jpg.html" class="tool-card" data-cat="gorsel" data-priority="9"
-         data-keywords="heic jpg png dönüştür iphone apple görsel">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"/>
-            <path d="M3 9h18M9 21V9"/>
-          </svg>
-        </div>
-        <p class="tool-name">HEIC → JPG</p>
-        <p class="tool-desc">iPhone HEIC fotoğraflarını JPG'ye dönüştür</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 10. MP4 → MP3 — 246K arama/ay -->
-      <a href="tools/video-mp3.html" class="tool-card" data-cat="video" data-priority="10"
-         data-keywords="mp4 mp3 ses çıkar dönüştür audio video müzik">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18V5l12-2v13"/>
-            <circle cx="6" cy="18" r="3"/>
-            <circle cx="18" cy="16" r="3"/>
-          </svg>
-        </div>
-        <p class="tool-name">MP4 → MP3</p>
-        <p class="tool-desc">Videodan ses dosyası çıkar, MP3 olarak indir</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 11. WORD → PDF -->
-      <a href="tools/word-pdf.html" class="tool-card" data-cat="pdf" data-priority="11"
-         data-keywords="word pdf dönüştür docx belge çevir">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="18" rx="2"/>
-            <path d="m9 10 2 4 2-6 2 4"/>
-          </svg>
-        </div>
-        <p class="tool-name">Word → PDF</p>
-        <p class="tool-desc">DOC ve DOCX dosyalarını PDF'e dönüştür</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 12. WEBP → PNG/JPG — 275K arama/ay -->
-      <a href="tools/gorsel-donustur.html" class="tool-card" data-cat="gorsel" data-priority="12"
-         data-keywords="jpg png webp heic avif dönüştür format convert görsel">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="17 1 21 5 17 9"/>
-            <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
-            <polyline points="7 23 3 19 7 15"/>
-            <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
-          </svg>
-        </div>
-        <p class="tool-name">Görsel Format Değiştir</p>
-        <p class="tool-desc">JPG ↔ PNG ↔ WebP ↔ HEIC ↔ AVIF</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 13. GÖRSEL BOYUTLANDIR -->
-      <a href="tools/gorsel-boyutlandir.html" class="tool-card" data-cat="gorsel" data-priority="13"
-         data-keywords="görsel resim boyutlandır yeniden boyut piksel ölçü resize sosyal medya">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 3 21 3 21 9"/>
-            <polyline points="9 21 3 21 3 15"/>
-            <line x1="21" y1="3" x2="14" y2="10"/>
-            <line x1="3" y1="21" x2="10" y2="14"/>
-          </svg>
-        </div>
-        <p class="tool-name">Görsel Boyutlandır</p>
-        <p class="tool-desc">Piksel, yüzde veya Instagram/YouTube ölçüleri</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 14. VİDEO SIKIŞTIRIR — 60.5K arama/ay -->
-      <a href="tools/video-sikistir.html" class="tool-card" data-cat="video" data-priority="14"
-         data-keywords="video sıkıştır mp4 boyut küçült compress avi mov">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="23 7 16 12 23 17 23 7"/>
-            <rect x="1" y="5" width="15" height="14" rx="2"/>
-          </svg>
-        </div>
-        <p class="tool-name">Video Sıkıştır</p>
-        <p class="tool-desc">MP4 dosyasını kalite koruyarak küçült</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 15. PDF BÖL -->
-      <a href="tools/pdf-bol.html" class="tool-card" data-cat="pdf" data-priority="15"
-         data-keywords="pdf böl split ayır parçala sayfa aralık">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="8" y1="13" x2="16" y2="13"/>
-          </svg>
-        </div>
-        <p class="tool-name">PDF Böl</p>
-        <p class="tool-desc">PDF'i sayfa aralıklarına göre parçalara ayır</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 16. OCR -->
-      <a href="tools/ocr.html" class="tool-card" data-cat="pdf guvenlik" data-priority="16"
-         data-keywords="ocr taranan pdf aranabilir metin çıkar tanı text recognition">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/>
-            <path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
-            <path d="M9 12h.01"/><path d="M12 12h.01"/><path d="M15 12h.01"/>
-          </svg>
-        </div>
-        <p class="tool-name">OCR — Metin Tanı</p>
-        <p class="tool-desc">Taranan PDF'i aranabilir ve kopyalanabilir yap</p>
-        <span class="tool-badge badge-pro">Pro</span>
-      </a>
-
-      <!-- 17. PDF SAYFALARI -->
-      <a href="tools/pdf-sayfalar.html" class="tool-card" data-cat="pdf" data-priority="17"
-         data-keywords="pdf sayfa sırala sil döndür düzenle yönet organize">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8"/>
-            <path d="M12 22h8a2 2 0 0 0 2-2V9l-7-7h-3v5"/>
-            <path d="M14 2v5h5"/>
-          </svg>
-        </div>
-        <p class="tool-name">PDF Sayfaları Düzenle</p>
-        <p class="tool-desc">Sırala, sil, döndür — hepsi tek görsel ekranda</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 18. PDF PAROLA -->
-      <a href="tools/pdf-parola.html" class="tool-card" data-cat="pdf guvenlik" data-priority="18"
-         data-keywords="pdf parola şifre kilitle koru güvenlik password encrypt">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-        </div>
-        <p class="tool-name">PDF'e Parola Koy</p>
-        <p class="tool-desc">PDF'i şifrele, izinsiz erişimi engelle</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 19. FİLİGRAN -->
-      <a href="tools/pdf-filigran.html" class="tool-card" data-cat="pdf guvenlik" data-priority="19"
-         data-keywords="pdf filigran watermark logo damga metin ekle">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <circle cx="12" cy="14" r="3" opacity="0.4"/>
-          </svg>
-        </div>
-        <p class="tool-name">Filigran Ekle</p>
-        <p class="tool-desc">PDF'e metin veya logo filigranı ekle</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- 20. METADATA SİL -->
-      <a href="tools/metadata-sil.html" class="tool-card" data-cat="gorsel guvenlik" data-priority="20"
-         data-keywords="metadata exif sil temizle gizlilik konum bilgi fotoğraf">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
-          </svg>
-        </div>
-        <p class="tool-name">Metadata Sil</p>
-        <p class="tool-desc">EXIF, konum ve kişisel bilgileri temizle</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- Excel → PDF -->
-      <a href="tools/excel-pdf.html" class="tool-card" data-cat="pdf" data-priority="21"
-         data-keywords="excel xlsx pdf dönüştür tablo çevir">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="8" y1="13" x2="16" y2="13"/>
-            <line x1="8" y1="17" x2="16" y2="17"/>
-            <line x1="10" y1="9" x2="8" y2="9"/>
-          </svg>
-        </div>
-        <p class="tool-name">Excel → PDF</p>
-        <p class="tool-desc">Excel tablolarını PDF formatında dışa aktar</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- Görsel Kırp -->
-      <a href="tools/gorsel-kirp.html" class="tool-card" data-cat="gorsel" data-priority="22"
-         data-keywords="görsel kırp crop kes alan seç çerçeve">
-        <div class="tool-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 2 6 8 2 8"/>
-            <polyline points="18 22 18 16 22 16"/>
-            <path d="M6 8a12 12 0 0 1 12 12"/>
-            <path d="M6 2v20h16"/>
-          </svg>
-        </div>
-        <p class="tool-name">Görsel Kırp</p>
-        <p class="tool-desc">İstediğin alanı seç ve kaydet</p>
-        <span class="tool-badge badge-free">Ücretsiz</span>
-      </a>
-
-      <!-- No results placeholder -->
-      <div class="no-results" id="noResults">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="margin:0 auto 12px;opacity:.4">
+    <!-- Arama -->
+    <div class="search-container" id="searchContainer">
+      <div class="search-wrap" id="searchWrap">
+        <svg class="search-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
-        Araç bulunamadı.<br>
-        <span style="font-size:13px;color:var(--text-3)">Farklı bir kelime deneyin.</span>
+        <input
+          type="text"
+          id="toolSearch"
+          class="search-input"
+          placeholder="Ne yapmak istiyorsun?"
+          data-i18n-placeholder="search-placeholder"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Araç ara"
+          aria-autocomplete="list"
+          aria-controls="searchDropdown"
+        >
+        <button class="search-clear-btn" id="searchClear" title="Temizle" aria-label="Aramayı temizle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
       </div>
+      <!-- Arama sonuçları dropdown -->
+      <div class="search-dropdown" id="searchDropdown" role="listbox" aria-label="Araç önerileri" hidden>
+        <div class="search-results" id="searchResults"></div>
+        <div class="search-empty" id="searchEmpty" hidden>
+          <p>Araç bulunamadı. <a href="pages/iletisim.html?konu=arac-talebi">Araç talep et →</a></p>
+        </div>
+      </div>
+    </div>
 
+    <!-- Popüler Araçlar -->
+    <section class="popular-section" id="popularSection">
+      <h2 class="section-label" data-i18n="popular-label">Popüler Araçlar</h2>
+      <div class="popular-grid">
+
+        <a href="tools/pdf-birlestir.html" class="popular-card" data-cat="pdf" data-keywords="pdf birleştir merge">
+          <div class="popular-card-icon" style="--icon-color:#2563EB">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h4"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="pdfMerge">PDF Birleştir</strong>
+            <span class="popular-card-desc">Birden fazla PDF dosyasını tek dosyada birleştir.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/pdf-sikistir.html" class="popular-card" data-cat="pdf" data-keywords="pdf sıkıştır küçült compress">
+          <div class="popular-card-icon" style="--icon-color:#DC2626">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 13h6m-3-3v6"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="pdfCompress">PDF Sıkıştır</strong>
+            <span class="popular-card-desc">PDF dosyasının boyutunu küçült, kalitesini koru.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/word-pdf.html" class="popular-card" data-cat="belge" data-keywords="word pdf dönüştür belge docx">
+          <div class="popular-card-icon" style="--icon-color:#2563EB">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m8.5 15 1.5-4 1.5 3 1-2 1.5 3"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="wordToPdf">Word'den PDF</strong>
+            <span class="popular-card-desc">Word belgelerini PDF formatına dönüştür.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/gorsel-sikistir.html" class="popular-card" data-cat="gorsel" data-keywords="görsel sıkıştır küçült jpg png webp">
+          <div class="popular-card-icon" style="--icon-color:#DC2626">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m15 9-6 6M9 9h6v6"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="imgCompress">Görsel Sıkıştır</strong>
+            <span class="popular-card-desc">JPG, PNG ve WebP dosyalarını boyut kaybetmeden küçült.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/video-sikistir.html" class="popular-card" data-cat="video" data-keywords="video sıkıştır küçült mp4">
+          <div class="popular-card-icon" style="--icon-color:#DC2626">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2" y="7" width="18" height="14" rx="2"/><path d="M16 3 7 7M22 7 16 3"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="videoCompress">Video Sıkıştır</strong>
+            <span class="popular-card-desc">Video dosyalarını kalite kaybı olmadan küçült.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/arkaplan-kaldir.html" class="popular-card" data-cat="gorsel" data-keywords="arka plan kaldır şeffaf background remove">
+          <div class="popular-card-icon" style="--icon-color:#059669">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6M15 9l-6 6"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="removeBg">Arka Plan Kaldır</strong>
+            <span class="popular-card-desc">Görsel arka planını otomatik olarak kaldır, şeffaf yap.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/pdf-bol.html" class="popular-card" data-cat="pdf" data-keywords="pdf böl ayır split">
+          <div class="popular-card-icon" style="--icon-color:#D97706">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 12h8"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="pdfSplit">PDF Böl</strong>
+            <span class="popular-card-desc">PDF'yi sayfa sayfa veya aralık aralık böl.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/heic-jpg.html" class="popular-card" data-cat="gorsel" data-keywords="heic jpg dönüştür iphone apple">
+          <div class="popular-card-icon" style="--icon-color:#D97706">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m8 12 3 3 5-5"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="heicToJpg">HEIC'den JPG</strong>
+            <span class="popular-card-desc">iPhone fotoğraflarını JPG formatına dönüştür.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/video-mp3.html" class="popular-card" data-cat="ses" data-keywords="video mp3 ses çıkar mp4 audio">
+          <div class="popular-card-icon" style="--icon-color:#2563EB">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="videoToMp3">Video'dan MP3</strong>
+            <span class="popular-card-desc">Video dosyasından ses parçasını MP3 olarak çıkar.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/pdf-word.html" class="popular-card" data-cat="pdf" data-keywords="pdf word dönüştür düzenle">
+          <div class="popular-card-icon" style="--icon-color:#059669">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="pdfToWord">PDF'den Word</strong>
+            <span class="popular-card-desc">PDF dosyalarını düzenlenebilir Word belgelerine çevir.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/ocr.html" class="popular-card" data-cat="pdf" data-keywords="ocr metin çıkar görsel tarama">
+          <div class="popular-card-icon" style="--icon-color:#2563EB">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 12h6M12 9v6"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="ocr">OCR ile Metin Çıkar</strong>
+            <span class="popular-card-desc">PDF ve görsellerden metni otomatik olarak çıkar.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/gorsel-pdf.html" class="popular-card" data-cat="gorsel" data-keywords="jpg png pdf görsel dönüştür">
+          <div class="popular-card-icon" style="--icon-color:#D97706">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="imgToPdf">JPG'den PDF</strong>
+            <span class="popular-card-desc">JPG, PNG ve WebP dosyalarını PDF formatına dönüştür.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/ses-kesici.html" class="popular-card" data-cat="ses" data-keywords="ses kesici kes kırp audio mp3">
+          <div class="popular-card-icon" style="--icon-color:#059669">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="audioCut">Ses Kesici</strong>
+            <span class="popular-card-desc">Ses dosyalarını istediğin yerden kes ve kırp.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/excel-pdf.html" class="popular-card" data-cat="belge" data-keywords="excel pdf dönüştür xlsx xls">
+          <div class="popular-card-icon" style="--icon-color:#059669">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h2M8 17h8M14 13h2"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="excelToPdf">Excel'den PDF</strong>
+            <span class="popular-card-desc">Excel tablolarını PDF formatına dönüştür.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+        <a href="tools/webp-jpg.html" class="popular-card" data-cat="gorsel" data-keywords="webp jpg png dönüştür">
+          <div class="popular-card-icon" style="--icon-color:#059669">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          </div>
+          <div class="popular-card-body">
+            <strong class="popular-card-name" data-i18n-tool="webpToJpg">WebP'den JPG</strong>
+            <span class="popular-card-desc">WebP görsellerini JPG veya PNG formatına dönüştür.</span>
+          </div>
+          <svg class="popular-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Arama sonuç sayısı + temizle -->
+    <div class="search-result-bar" id="searchResultBar" hidden>
+      <span id="searchResultCount"></span>
+      <button id="searchResultClear" class="search-result-clear">Aramayı Temizle</button>
     </div>
   </div>
 </section>
 
+
 <!-- ═══ FEATURES ═══ -->
-<section class="features-section" id="featuresSection">
+<section class="features">
   <div class="container">
     <div class="features-grid">
       <div class="feature-item">
         <div class="feature-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-          </svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         </div>
-        <h3 class="feature-title font-display">Anında işlem</h3>
-        <p class="feature-desc">Basit işlemler saniyeler içinde, ağır dosyalar kuyruk sistemiyle öncelikli işlenir.</p>
+        <h3 class="feature-name">Hızlı Dönüşüm</h3>
+        <p class="feature-desc">Dosyaların en hızlı şekilde dönüştürürüz.</p>
       </div>
       <div class="feature-item">
         <div class="feature-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <h3 class="feature-title font-display">Gizliliğin önce</h3>
-        <p class="feature-desc">Dosyalar işlem sonrası 1 saat içinde otomatik silinir. İçerik asla loglanmaz.</p>
+        <h3 class="feature-name">Güvenli ve Gizli</h3>
+        <p class="feature-desc">Dosyaların güvende. Kimse erişemez, sadece sen görürsün.</p>
       </div>
       <div class="feature-item">
         <div class="feature-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 8v4l3 3"/>
-          </svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
         </div>
-        <h3 class="feature-title font-display">Çoğu ücretsiz</h3>
-        <p class="feature-desc">Temel araçlar filigransız ve tamamen ücretsiz. Pro, büyük dosyalar ve toplu işlem için.</p>
+        <h3 class="feature-name">Bulut Tabanlı</h3>
+        <p class="feature-desc">Yükleme yap, dönüştür ve hemen indir.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <h3 class="feature-name">Tüm Cihazlarda</h3>
+        <p class="feature-desc">İstediğin cihazdan, istediğin zaman kullan.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Araç bulunamadı (arama) -->
+<div class="no-results" id="noResults" hidden>
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M11 16h.01"/></svg>
+  <p>Araç bulunamadı. <a href="pages/iletisim.html?konu=arac-talebi">Araç talep et →</a></p>
+</div>
+
+</main>
+
 <!-- ═══ FOOTER ═══ -->
-<footer class="footer" id="siteFooter">
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-logo">Format<span>Jet</span></div>
-      <nav class="footer-links">
-        <a href="#">Gizlilik</a>
-        <a href="#">Kullanım Koşulları</a>
-        <a href="#">API</a>
-        <a href="#">Hakkımızda</a>
-        <a href="#">İletişim</a>
-      </nav>
-      <p class="footer-copy">© 2026 FormatJet</p>
+<footer class="site-footer">
+
+  <!-- CTA bant -->
+  <div class="footer-cta-band">
+    <div class="container">
+      <div class="footer-cta-grid">
+        <div class="footer-cta-card">
+          <div class="footer-cta-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <div class="footer-cta-body">
+            <strong>İhtiyacın olan araç burada yok mu?</strong>
+            <span>Önerini gönder, geliştirme listemize ekleyelim.</span>
+          </div>
+          <button class="btn-cta-outline">Araç Talep Et</button>
+        </div>
+        <div class="footer-cta-card">
+          <div class="footer-cta-icon footer-cta-icon--blue">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <div class="footer-cta-body">
+            <strong>Ücretsiz araçları birlikte büyütelim</strong>
+            <span>Desteğin, ücretsiz limitleri herkes için yükseltir.</span>
+          </div>
+          <button class="btn-cta-filled">Destek Ol</button>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Footer body -->
+  <div class="footer-body">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-col footer-col--brand">
+          <a href="index.html" class="footer-logo" aria-label="FormatJet">
+            <img src="assets/img/logo-icon.png" alt="" class="footer-logo-icon" aria-hidden="true">
+            <img src="assets/img/logo-text.png" alt="FormatJet" class="footer-logo-text-img">
+          </a>
+          <p class="footer-tagline" data-i18n="footer-tagline">Dosyalarını hızlı, güvenli ve kolayca dönüştür.</p>
+          <div class="footer-trust">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span data-i18n="footer-trust">Dosyalar işlemden sonra otomatik silinir.</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Araçlar</h4>
+          <ul class="footer-links">
+            <li><a href="pdf.html">PDF</a></li>
+            <li><a href="belge.html">Belge</a></li>
+            <li><a href="gorsel.html">Görsel</a></li>
+            <li><a href="video.html">Video</a></li>
+            <li><a href="ses.html">Ses</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">FormatJet</h4>
+          <ul class="footer-links">
+            <li><a href="pages/hakkimizda.html">Hakkımızda</a></li>
+            <li><a href="pages/iletisim.html">İletişim</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Yardım</h4>
+          <ul class="footer-links">
+            <li><a href="pages/iletisim.html">Sık Sorulan Sorular</a></li>
+            <li><a href="pages/iletisim.html" class="footer-link-accent">Araç Talep Et</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Yasal</h4>
+          <ul class="footer-links">
+            <li><a href="pages/gizlilik.html">Gizlilik Politikası</a></li>
+            <li><a href="pages/kullanim-kosullari.html">Kullanım Koşulları</a></li>
+            <li><a href="pages/cerez.html">Çerez Politikası</a></li>
+            <li><a href="pages/kvkk.html">KVKK Aydınlatma Metni</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer alt bar -->
+  <div class="footer-bar">
+    <div class="container">
+      <div class="footer-bar-inner">
+        <button class="btn-lang-footer" id="btnLangFooter">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span class="btn-lang-footer-text">Türkçe</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <p class="footer-copy" data-i18n="footer-copy">© 2026 FormatJet. Tüm hakları saklıdır.</p>
+        <div class="footer-theme-toggle">
+          <button class="theme-btn theme-btn--active" data-theme="light" aria-label="Açık tema">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          </button>
+          <span class="theme-label">Görünüm</span>
+          <button class="theme-btn" data-theme="dark" aria-label="Koyu tema">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </footer>
 
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/vendor/supabase.min.js"></script>
+<script src="assets/js/fj-config.js"></script>
+<script src="assets/js/auth.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

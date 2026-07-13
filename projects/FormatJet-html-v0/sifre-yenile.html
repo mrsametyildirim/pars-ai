@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yeni Şifre Belirle — FormatJet</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    .auth-error {
+      padding: 10px 14px; margin-bottom: 16px; font-size: 13px;
+      color: #B91C1C; background: rgba(220,38,38,0.07);
+      border: 1px solid rgba(220,38,38,0.25); border-radius: 8px;
+    }
+    .auth-ok {
+      padding: 10px 14px; margin-bottom: 16px; font-size: 13px;
+      color: #047857; background: rgba(5,150,105,0.07);
+      border: 1px solid rgba(5,150,105,0.25); border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-page">
+  <div class="login-brand">
+    <div class="login-brand-logo">
+      <img src="assets/img/logo-icon.png" alt="" class="login-brand-logo-icon" aria-hidden="true">
+      <img src="assets/img/logo-text.png" alt="FormatJet" class="login-brand-logo-text">
+    </div>
+    <h2 class="login-brand-title">Yeni şifreni belirle</h2>
+    <ul class="login-brand-list">
+      <li class="login-brand-item">
+        <div class="login-brand-check">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <span>En az 8 karakter kullan</span>
+      </li>
+      <li class="login-brand-item">
+        <div class="login-brand-check">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <span>Harf, rakam ve sembol karışımı öneririz</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="login-form-side">
+    <div class="login-form-box">
+      <h1 class="login-form-title">Yeni şifre</h1>
+      <p class="login-form-sub">Hesabın için yeni bir şifre belirle.</p>
+
+      <form novalidate id="newPwForm">
+        <div class="form-group">
+          <label class="form-label" for="password">Yeni şifre</label>
+          <input type="password" id="password" class="form-input" placeholder="En az 8 karakter" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password2">Yeni şifre (tekrar)</label>
+          <input type="password" id="password2" class="form-input" placeholder="••••••••" autocomplete="new-password">
+        </div>
+
+        <div class="auth-error" id="authError" hidden></div>
+        <div class="auth-ok" id="authOk" hidden></div>
+
+        <button type="submit" class="btn-primary-full" id="saveBtn">Şifreyi Güncelle</button>
+      </form>
+
+      <p class="login-register"><a href="login.html">Giriş sayfasına dön</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/vendor/supabase.min.js"></script>
+<script src="assets/js/fj-config.js"></script>
+<script src="assets/js/auth.js"></script>
+<script>
+  const errBox = document.getElementById('authError');
+  const okBox  = document.getElementById('authOk');
+
+  /* E-postadaki bağlantı buraya recovery token ile gelir;
+     supabase-js hash'i otomatik işleyip oturum açar. */
+
+  document.getElementById('newPwForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errBox.hidden = true; okBox.hidden = true;
+
+    const pw  = document.getElementById('password').value;
+    const pw2 = document.getElementById('password2').value;
+
+    if (pw.length < 8) { errBox.textContent = 'Şifre en az 8 karakter olmalı.'; errBox.hidden = false; return; }
+    if (pw !== pw2)    { errBox.textContent = 'Şifreler eşleşmiyor.'; errBox.hidden = false; return; }
+
+    const btn = document.getElementById('saveBtn');
+    btn.textContent = 'Güncelleniyor...'; btn.disabled = true;
+
+    const { error } = await window.fjAuth.sb.auth.updateUser({ password: pw });
+
+    if (error) {
+      btn.textContent = 'Şifreyi Güncelle'; btn.disabled = false;
+      errBox.textContent = /session/i.test(error.message)
+        ? 'Sıfırlama bağlantısının süresi dolmuş olabilir. Yeni bağlantı iste.'
+        : 'Güncellenemedi: ' + error.message;
+      errBox.hidden = false;
+      return;
+    }
+
+    okBox.textContent = 'Şifren güncellendi. Yönlendiriliyorsun...';
+    okBox.hidden = false;
+    setTimeout(() => { location.href = 'index.html'; }, 1500);
+  });
+</script>
+</body>
+</html>

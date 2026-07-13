@@ -57,7 +57,7 @@
       <p class="login-form-sub">Hoş geldin. Devam etmek için giriş yap.</p>
 
       <!-- Gmail -->
-      <button class="btn-google" type="button">
+      <button class="btn-google" type="button" id="btnGoogle">
         <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
           <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -69,7 +69,7 @@
 
       <div class="login-divider"><span>veya</span></div>
 
-      <form novalidate>
+      <form novalidate id="loginForm">
         <div class="form-group">
           <label class="form-label" for="email">E-posta adresi</label>
           <input type="email" id="email" class="form-input" placeholder="ornek@email.com" autocomplete="email">
@@ -87,10 +87,12 @@
         </div>
 
         <div class="form-row-end">
-          <a href="#" class="link-small">Şifremi Unuttum</a>
+          <a href="sifremi-unuttum.html" class="link-small">Şifremi Unuttum</a>
         </div>
 
-        <button type="submit" class="btn-primary-full">Giriş Yap</button>
+        <div class="auth-error" id="authError" hidden></div>
+
+        <button type="submit" class="btn-primary-full" id="loginBtn">Giriş Yap</button>
       </form>
 
       <p class="login-register">Hesabın yok mu? <a href="register.html">Kayıt Ol</a></p>
@@ -99,6 +101,21 @@
 
 </div>
 
+<style>
+  .auth-error {
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #B91C1C;
+    background: rgba(220,38,38,0.07);
+    border: 1px solid rgba(220,38,38,0.25);
+    border-radius: 8px;
+  }
+</style>
+
+<script src="assets/js/vendor/supabase.min.js"></script>
+<script src="assets/js/fj-config.js"></script>
+<script src="assets/js/auth.js"></script>
 <script>
   const toggleBtn = document.getElementById('togglePassword');
   const pwInput  = document.getElementById('password');
@@ -110,6 +127,53 @@
     pwInput.type    = isPassword ? 'text' : 'password';
     eyeShow.style.display = isPassword ? 'none' : '';
     eyeHide.style.display = isPassword ? '' : 'none';
+  });
+
+  const errBox = document.getElementById('authError');
+  function showError(msg) {
+    errBox.textContent = msg;
+    errBox.hidden = false;
+  }
+
+  const NEXT = new URLSearchParams(location.search).get('next') || 'index.html';
+
+  /* Oturum zaten açıksa yönlendir */
+  window.fjAuth.getSession().then(s => { if (s) location.href = NEXT; });
+
+  /* E-posta + şifre girişi */
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errBox.hidden = true;
+    const email = document.getElementById('email').value.trim();
+    const password = pwInput.value;
+    if (!email || !password) { showError('E-posta ve şifre gerekli.'); return; }
+
+    const btn = document.getElementById('loginBtn');
+    btn.textContent = 'Giriş yapılıyor...'; btn.disabled = true;
+
+    const { error } = await window.fjAuth.sb.auth.signInWithPassword({ email, password });
+    if (error) {
+      btn.textContent = 'Giriş Yap'; btn.disabled = false;
+      if (/Invalid login credentials/i.test(error.message)) showError('E-posta veya şifre hatalı.');
+      else if (/Email not confirmed/i.test(error.message)) showError('E-posta adresin henüz doğrulanmamış. Gelen kutunu kontrol et.');
+      else showError('Giriş başarısız: ' + error.message);
+      return;
+    }
+    location.href = NEXT;
+  });
+
+  /* Gmail ile giriş */
+  document.getElementById('btnGoogle').addEventListener('click', async () => {
+    errBox.hidden = true;
+    const { error } = await window.fjAuth.sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: location.origin + location.pathname.replace('login.html', 'index.html') },
+    });
+    if (error) {
+      showError(/provider is not enabled/i.test(error.message)
+        ? 'Google girişi henüz yapılandırılmadı. E-posta ile giriş yapabilirsin.'
+        : 'Google girişi başarısız: ' + error.message);
+    }
   });
 </script>
 </body>

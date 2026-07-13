@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Dönüştür — FormatJet</title>
+  <meta name="description" content="Videoyu MP4, WebM veya AVI formatına çevir. Ücretsiz, hızlı, tarayıcıda çalışır.">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">
+        <img src="../assets/img/logo-icon.png" alt="" style="height:22px" aria-hidden="true">
+        <img src="../assets/img/logo-text.png" alt="FormatJet" style="height:16px">
+      </a>
+      <div class="nav-right">
+        <button class="btn-nav btn-ghost" onclick="location.href='../login.html'">Giriş Yap</button>
+        <button class="btn-nav btn-accent" onclick="location.href='../odeme.html'">Pro'ya Geç</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="tool-page">
+  <div class="container">
+    <div class="tool-header">
+      <a href="../video.html" class="tool-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+        Video Araçları
+      </a>
+      <div class="tool-page-icon" style="background:color-mix(in srgb, #D97706 10%, transparent);color:#D97706">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h1 class="tool-page-title">Video Dönüştür</h1>
+      <p class="tool-page-desc">Videoyu MP4, WebM veya AVI formatına çevir.</p>
+    </div>
+
+    <div class="tool-workspace" id="toolWorkspace">
+      <div class="limit-bar">
+        <span>Ücretsiz: <strong>50 MB</strong>/dosya · Üyelere <strong>200 MB</strong></span>
+        <a href="../odeme.html" style="color:var(--accent, #2563EB);font-weight:500;font-size:12px">Pro'ya geç →</a>
+      </div>
+
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" class="upload-zone-input" id="fileInput" hidden>
+        <div id="uploadPrompt">
+          <div class="drop-icon" style="margin:0 auto 12px">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <p class="drop-title"><strong>Dosyaları buraya sürükle</strong> veya tıkla</p>
+          <p class="drop-sub">VIDEO, MKV, AVI, MOV, WEBM, MP4 · İlk kullanımda motor yüklenir (~31 MB)</p>
+        </div>
+        <div id="fileList" class="file-list" hidden></div>
+      </div>
+
+      <div class="tool-options" id="toolOptions" hidden></div>
+
+      <div class="engine-status" id="engineStatus" hidden></div>
+      <div class="progress-wrap" id="progressWrap" hidden><div class="progress-fill" id="progressFill"></div></div>
+
+      <div class="tool-actions" id="toolActions" hidden>
+        <button class="btn-tool-primary" id="btnProcess">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Dönüştür
+        </button>
+        <button class="btn-tool-ghost" id="btnReset">Yeni Dosya</button>
+      </div>
+
+      <div class="result-panel" id="resultPanel" hidden></div></div>
+
+    <section class="tool-info-section">
+      <h2 class="tool-info-title">Nasıl çalışır?</h2>
+      <div class="tool-info-grid">
+        <div class="tool-info-card">
+          <div class="tool-info-num">1</div>
+          <strong>Dosyanı Seç</strong>
+          <p>Sürükle-bırak veya tıklayarak dosyanı yükle.</p>
+        </div>
+        <div class="tool-info-card">
+          <div class="tool-info-num">2</div>
+          <strong>Tarayıcıda İşlenir</strong>
+          <p>Dosyan sunucuya gitmez; işlem cihazında, tarayıcı içinde yapılır.</p>
+        </div>
+        <div class="tool-info-card">
+          <div class="tool-info-num">3</div>
+          <strong>Anında İndir</strong>
+          <p>Sonuç dosyan hazır olur olmaz otomatik indirilir.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="../assets/js/vendor/supabase.min.js"></script>
+<script src="../assets/js/fj-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/tools-registry.js"></script>
+<script src="../assets/js/tool-engine.js"></script>
+</body>
+</html>

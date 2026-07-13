@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sık Sorulan Sorular — FormatJet</title>
+  <meta name="description" content="FormatJet hakkında sık sorulan sorular: güvenlik, limitler, planlar ve daha fazlası.">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <style>
+    .faq-wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
+    .faq-group-title {
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--blue);
+      margin: 40px 0 16px;
+    }
+    .faq-group-title:first-of-type { margin-top: 0; }
+    .faq-item {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--r-lg); margin-bottom: 10px; overflow: hidden;
+    }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      width: 100%; padding: 16px 20px;
+      font-size: 15px; font-weight: 600; color: var(--text);
+      background: none; border: none; cursor: pointer;
+      text-align: left; font-family: inherit;
+    }
+    .faq-q svg { flex-shrink: 0; transition: transform 200ms; color: var(--text-3); }
+    .faq-item.open .faq-q svg { transform: rotate(180deg); }
+    .faq-a {
+      display: none;
+      padding: 0 20px 18px;
+      font-size: 14px; color: var(--text-2); line-height: 1.7;
+    }
+    .faq-item.open .faq-a { display: block; }
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container-wide">
+    <a href="../index.html" class="logo" aria-label="FormatJet Ana Sayfa">
+      <img src="../assets/img/logo-icon.png" alt="" class="logo-icon-img" aria-hidden="true">
+      <img src="../assets/img/logo-text.png" alt="FormatJet" class="logo-text-img">
+    </a>
+    <nav class="header-nav" aria-label="Kategori menüsü">
+      <a href="../pdf.html" class="nav-link">PDF</a>
+      <a href="../belge.html" class="nav-link">Belge</a>
+      <a href="../gorsel.html" class="nav-link">Görsel</a>
+      <a href="../video.html" class="nav-link">Video</a>
+      <a href="../ses.html" class="nav-link">Ses</a>
+      <a href="../tools.html" class="btn-all-tools">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <rect x="0" y="0" width="4" height="4" rx="1"/><rect x="6" y="0" width="4" height="4" rx="1"/><rect x="12" y="0" width="4" height="4" rx="1"/>
+          <rect x="0" y="6" width="4" height="4" rx="1"/><rect x="6" y="6" width="4" height="4" rx="1"/><rect x="12" y="6" width="4" height="4" rx="1"/>
+          <rect x="0" y="12" width="4" height="4" rx="1"/><rect x="6" y="12" width="4" height="4" rx="1"/><rect x="12" y="12" width="4" height="4" rx="1"/>
+        </svg>
+        Tüm Araçlar
+      </a>
+    </nav>
+    <div class="header-right">
+      <a href="hakkimizda.html" class="btn-bizi-tani">Bizi Tanı</a>
+      <button class="btn-login" onclick="location.href='../login.html'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Giriş Yap
+      </button>
+      <button class="btn-hamburger" id="btnHamburger" aria-label="Menüyü aç" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <h1 class="page-title">Sık Sorulan Sorular</h1>
+      <p class="page-sub-light" style="color:var(--text-2)">Aradığın cevabı bulamazsan <a href="iletisim.html" style="color:var(--blue)">bize yaz</a>.</p>
+    </div>
+  </div>
+
+  <div class="faq-wrap">
+    <div class="faq-group-title">Güvenlik ve Gizlilik</div>
+
+    <div class="faq-item open">
+      <button class="faq-q">Dosyalarım güvende mi?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Evet. FormatJet araçlarının büyük bölümü dosyanı sunucuya hiç göndermez — dönüştürme işlemi tamamen tarayıcının içinde, kendi cihazında yapılır. Sunucu tarafında işlenen istisnai durumlarda dosyalar 1 saat içinde kalıcı olarak silinir.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Verilerim üçüncü taraflarla paylaşılıyor mu?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Hayır. Dosya içeriklerin hiçbir üçüncü tarafla paylaşılmaz. Detaylar için <a href="gizlilik.html" style="color:var(--blue)">Gizlilik Politikası</a>'na göz atabilirsin.</div>
+    </div>
+
+    <div class="faq-group-title">Kullanım ve Limitler</div>
+
+    <div class="faq-item">
+      <button class="faq-q">Kayıt olmadan kullanabilir miyim?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Evet. Tüm temel araçlar kayıt gerektirmeden çalışır. Üye olursan daha yüksek dosya limitleri ve işlem geçmişine erişim kazanırsın.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Dosya boyutu limiti nedir?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Üyesiz kullanımda 50 MB, ücretsiz üyelikte 200 MB, Pro planında 2 GB, Business planında 10 GB.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Video araçları neden ilk açılışta yavaş?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Video ve ses araçları, tarayıcında çalışan FFmpeg motorunu kullanır. Bu motor ilk kullanımda bir kez indirilir (~31 MB) ve sonraki kullanımlarda önbellekten anında yüklenir.</div>
+    </div>
+
+    <div class="faq-group-title">Planlar ve Ödeme</div>
+
+    <div class="faq-item">
+      <button class="faq-q">Pro planı neler sunuyor?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Sınırsız işlem, 2 GB dosya limiti, öncelikli işlem kuyruğu, toplu dosya işleme ve reklamsız deneyim. Detaylar için <a href="../odeme.html" style="color:var(--blue)">Planlar</a> sayfasına bak.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">İstediğim zaman iptal edebilir miyim?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a">Evet. Aboneliğini dilediğin an iptal edebilirsin; dönem sonuna kadar Pro özelliklerini kullanmaya devam edersin.</div>
+    </div>
+
+    <div class="faq-group-title">Sorun Giderme</div>
+
+    <div class="faq-item">
+      <button class="faq-q">Aradığım araç listede yok, ne yapabilirim?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a"><a href="iletisim.html?konu=arac-talebi" style="color:var(--blue)">Araç Talep Et</a> formundan bize iletebilirsin. Talepler geliştirme listemize eklenir ve en çok istenenler önceliklendirilir.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">Bir hata ile karşılaştım, nasıl bildiririm?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="faq-a"><a href="iletisim.html?konu=hata-bildir" style="color:var(--blue)">Hata Bildir</a> formunu kullanabilirsin. Hangi araçta, hangi dosya türüyle sorun yaşadığını yazarsan daha hızlı çözüm üretebiliriz.</div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-body"><div class="container"><div class="footer-grid">
+    <div class="footer-col footer-col--brand"><a href="../index.html" class="footer-logo"><img src="../assets/img/logo-icon.png" alt="" class="footer-logo-icon" aria-hidden="true"><img src="../assets/img/logo-text.png" alt="FormatJet" class="footer-logo-text-img"></a><p class="footer-tagline">Dosyalarını hızlı, güvenli ve kolayca dönüştür.</p></div>
+    <div class="footer-col"><h4 class="footer-col-title">Araçlar</h4><ul class="footer-links"><li><a href="../pdf.html">PDF</a></li><li><a href="../belge.html">Belge</a></li><li><a href="../gorsel.html">Görsel</a></li><li><a href="../video.html">Video</a></li><li><a href="../ses.html">Ses</a></li></ul></div>
+    <div class="footer-col"><h4 class="footer-col-title">FormatJet</h4><ul class="footer-links"><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+    <div class="footer-col"><h4 class="footer-col-title">Yasal</h4><ul class="footer-links"><li><a href="gizlilik.html">Gizlilik Politikası</a></li><li><a href="kullanim-kosullari.html">Kullanım Koşulları</a></li><li><a href="cerez.html">Çerez Politikası</a></li><li><a href="kvkk.html">KVKK</a></li></ul></div>
+  </div></div></div>
+  <div class="footer-bar"><div class="container"><div class="footer-bar-inner"><p class="footer-copy">© 2026 FormatJet. Tüm hakları saklıdır.</p></div></div></div>
+</footer>
+
+<script src="../assets/js/vendor/supabase.min.js"></script>
+<script src="../assets/js/fj-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/main.js"></script>
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => btn.closest('.faq-item').classList.toggle('open'));
+  });
+</script>
+</body>
+</html>

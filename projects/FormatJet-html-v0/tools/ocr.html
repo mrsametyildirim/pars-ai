@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OCR ile Metin Çıkar — FormatJet</title>
-  <meta name="description" content="Görsel veya PDF'den metin çıkar. OCR teknolojisi ile taranmış belgelerden metin al.">
+  <meta name="description" content="Görsel veya taranmış PDF'den metin tanı (Türkçe dahil 5 dil). Ücretsiz, hızlı, tarayıcıda çalışır.">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
       </a>
       <div class="nav-right">
         <button class="btn-nav btn-ghost" onclick="location.href='../login.html'">Giriş Yap</button>
-        <button class="btn-nav btn-accent">Pro'ya Geç</button>
+        <button class="btn-nav btn-accent" onclick="location.href='../odeme.html'">Pro'ya Geç</button>
       </div>
     </div>
   </div>
@@ -34,157 +34,73 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
         PDF Araçları
       </a>
-      <div class="tool-page-icon" style="background:rgba(37,99,235,.1);color:#2563EB">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 12h6M12 9v6"/></svg>
+      <div class="tool-page-icon" style="background:color-mix(in srgb, #2563EB 10%, transparent);color:#2563EB">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
       <h1 class="tool-page-title">OCR ile Metin Çıkar</h1>
-      <p class="tool-page-desc">Taranmış PDF veya görsellerden metin çıkar. 100+ dil desteği ile yüksek doğruluk.</p>
+      <p class="tool-page-desc">Görsel veya taranmış PDF'den metin tanı (Türkçe dahil 5 dil).</p>
     </div>
 
-    <div class="tool-workspace">
+    <div class="tool-workspace" id="toolWorkspace">
       <div class="limit-bar">
-        <span>Ücretsiz plan: <strong>5 sayfa/gün</strong> · Pro: sınırsız, öncelikli işlem</span>
-        <a href="#" style="color:var(--accent);font-weight:500;font-size:12px">Pro'ya geç →</a>
+        <span>Ücretsiz: <strong>50 MB</strong>/dosya · Üyelere <strong>200 MB</strong></span>
+        <a href="../odeme.html" style="color:var(--accent, #2563EB);font-weight:500;font-size:12px">Pro'ya geç →</a>
       </div>
 
       <div class="upload-zone" id="uploadZone">
-        <input type="file" class="upload-zone-input" id="fileInput" accept=".pdf,application/pdf,image/jpeg,image/jpg,image/png,image/webp,.jpg,.jpeg,.png,.webp,.tiff,.tif">
+        <input type="file" class="upload-zone-input" id="fileInput" hidden>
         <div id="uploadPrompt">
           <div class="drop-icon" style="margin:0 auto 12px">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 12h6M12 9v6"/></svg>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           </div>
-          <p class="drop-title"><strong>PDF veya görsel sürükle</strong> veya tıkla</p>
-          <p class="drop-sub">PDF, JPG, PNG, TIFF · Maks. 25 MB · Taranmış belgeler desteklenir</p>
+          <p class="drop-title"><strong>Dosyaları buraya sürükle</strong> veya tıkla</p>
+          <p class="drop-sub">PDF, JPG, JPEG, PNG, WEBP, BMP</p>
         </div>
         <div id="fileList" class="file-list" hidden></div>
       </div>
 
-      <div class="tool-options" id="toolOptions" hidden>
-        <div class="option-row">
-          <label class="option-label">Dil</label>
-          <div class="option-control">
-            <select class="select-input" id="ocrLang">
-              <option value="tur" selected>Türkçe</option>
-              <option value="eng">İngilizce</option>
-              <option value="deu">Almanca</option>
-              <option value="fra">Fransızca</option>
-              <option value="spa">İspanyolca</option>
-              <option value="ara">Arapça</option>
-              <option value="rus">Rusça</option>
-              <option value="jpn">Japonca</option>
-              <option value="chi">Çince</option>
-            </select>
-          </div>
-        </div>
-        <div class="option-row">
-          <label class="option-label">Çıktı Formatı</label>
-          <div class="option-control">
-            <select class="select-input" id="outputFmt">
-              <option value="txt" selected>Düz metin (.txt)</option>
-              <option value="docx">Word belgesi (.docx)</option>
-              <option value="pdf">Aranabilir PDF</option>
-            </select>
-          </div>
-        </div>
-      </div>
+      <div class="tool-options" id="toolOptions" hidden></div>
+
+      <div class="engine-status" id="engineStatus" hidden></div>
+      <div class="progress-wrap" id="progressWrap" hidden><div class="progress-fill" id="progressFill"></div></div>
 
       <div class="tool-actions" id="toolActions" hidden>
         <button class="btn-tool-primary" id="btnProcess">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
-          Metni Çıkar
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Dönüştür
         </button>
         <button class="btn-tool-ghost" id="btnReset">Yeni Dosya</button>
       </div>
 
-      <div id="ocrResult" hidden style="margin-top:20px">
-        <label class="option-label" style="margin-bottom:8px;display:block">Çıkarılan Metin</label>
-        <textarea class="form-input" rows="10" style="width:100%;resize:vertical;font-family:monospace;font-size:13px" id="ocrText" readonly placeholder="Metin burada görünecek..."></textarea>
-        <button class="btn-tool-ghost" id="btnCopy" style="margin-top:8px">Metni Kopyala</button>
-      </div>
-    </div>
+      <div class="result-panel" id="resultPanel" hidden></div></div>
 
     <section class="tool-info-section">
-      <h2 class="tool-info-title">OCR Teknolojisi</h2>
+      <h2 class="tool-info-title">Nasıl çalışır?</h2>
       <div class="tool-info-grid">
         <div class="tool-info-card">
           <div class="tool-info-num">1</div>
-          <strong>100+ Dil</strong>
-          <p>Türkçe, İngilizce, Arapça, Japonca dahil 100+ dilden metin tanıma.</p>
+          <strong>Dosyanı Seç</strong>
+          <p>Sürükle-bırak veya tıklayarak dosyanı yükle.</p>
         </div>
         <div class="tool-info-card">
           <div class="tool-info-num">2</div>
-          <strong>Taranmış Belgeler</strong>
-          <p>Kağıt fatura, sözleşme ve form fotoğraflarından metin çıkar.</p>
+          <strong>Tarayıcıda İşlenir</strong>
+          <p>Dosyan sunucuya gitmez; işlem cihazında, tarayıcı içinde yapılır.</p>
         </div>
         <div class="tool-info-card">
           <div class="tool-info-num">3</div>
-          <strong>Yüksek Doğruluk</strong>
-          <p>Açık metinlerde %99'a yakın doğruluk. El yazısında %85+.</p>
+          <strong>Anında İndir</strong>
+          <p>Sonuç dosyan hazır olur olmaz otomatik indirilir.</p>
         </div>
       </div>
     </section>
   </div>
 </main>
 
-<script>
-  const uploadZone   = document.getElementById('uploadZone');
-  const fileInput    = document.getElementById('fileInput');
-  const uploadPrompt = document.getElementById('uploadPrompt');
-  const fileList     = document.getElementById('fileList');
-  const toolOptions  = document.getElementById('toolOptions');
-  const toolActions  = document.getElementById('toolActions');
-  const ocrResult    = document.getElementById('ocrResult');
-  const ocrText      = document.getElementById('ocrText');
-
-  function showFiles(files) {
-    fileList.innerHTML = '';
-    Array.from(files).forEach(f => {
-      const div = document.createElement('div');
-      div.className = 'file-item';
-      div.innerHTML = `<span class="file-item-name">${f.name}</span><span class="file-item-size">${(f.size/1024/1024).toFixed(2)} MB</span>`;
-      fileList.appendChild(div);
-    });
-    uploadPrompt.hidden = true;
-    fileList.hidden = false;
-    toolOptions.hidden = false;
-    toolActions.hidden = false;
-  }
-
-  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
-  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
-  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('drag-over'); if (e.dataTransfer.files.length) showFiles(e.dataTransfer.files); });
-  uploadZone.addEventListener('click', e => { if (uploadZone.contains(e.target)) fileInput.click(); });
-  fileInput.addEventListener('change', () => { if (fileInput.files.length) showFiles(fileInput.files); });
-
-  document.getElementById('btnReset').addEventListener('click', () => {
-    fileInput.value = '';
-    fileList.hidden = true;
-    uploadPrompt.hidden = false;
-    toolOptions.hidden = true;
-    toolActions.hidden = true;
-    ocrResult.hidden = true;
-    ocrText.value = '';
-  });
-
-  document.getElementById('btnProcess').addEventListener('click', () => {
-    const btn = document.getElementById('btnProcess');
-    btn.textContent = 'Tanınıyor...';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Metni Çıkar';
-      btn.disabled = false;
-      ocrText.value = 'Demo mod: Bu alanda gerçek OCR işleminin sonucu görünür.\n\nÖrnek çıktı:\nFormatJet dosya dönüştürme platformu...\n123 Atatürk Cad. İstanbul 34000\nFatura No: FJ-2026-001\nTarih: 13.07.2026';
-      ocrResult.hidden = false;
-    }, 2000);
-  });
-
-  document.getElementById('btnCopy').addEventListener('click', () => {
-    navigator.clipboard.writeText(ocrText.value).then(() => {
-      const btn = document.getElementById('btnCopy');
-      btn.textContent = 'Kopyalandı ✓';
-      setTimeout(() => { btn.textContent = 'Metni Kopyala'; }, 2000);
-    });
-  });
-</script>
+<script src="../assets/js/vendor/supabase.min.js"></script>
+<script src="../assets/js/fj-config.js"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/tools-registry.js"></script>
+<script src="../assets/js/tool-engine.js"></script>
 </body>
 </html>

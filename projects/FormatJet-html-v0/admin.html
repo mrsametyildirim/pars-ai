@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yönetici Paneli — FormatJet</title>
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    body { background: var(--bg); }
+    .admin-wrap { max-width: 1180px; margin: 0 auto; padding: 40px 24px 96px; }
+    .admin-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+    .admin-title { font-size: 26px; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
+    .admin-badge {
+      padding: 4px 12px; font-size: 11px; font-weight: 700;
+      color: #fff; background: var(--navy); border-radius: 999px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    .stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 28px; }
+    .stat-card {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--r-lg); padding: 18px 20px;
+    }
+    .stat-value { font-size: 26px; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; line-height: 1.1; }
+    .stat-label { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+    .stat-sub { font-size: 11px; color: #059669; font-weight: 600; margin-top: 2px; }
+
+    .admin-tabs { display: flex; gap: 6px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .admin-tab {
+      padding: 10px 18px; font-size: 14px; font-weight: 600;
+      color: var(--text-2); background: none; border: none;
+      border-bottom: 2px solid transparent; cursor: pointer;
+      font-family: inherit; transition: all 150ms;
+      margin-bottom: -1px;
+    }
+    .admin-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+    .admin-tab:hover:not(.active) { color: var(--text); }
+    .admin-tab-count {
+      margin-left: 6px; padding: 1px 7px; font-size: 11px; font-weight: 700;
+      color: #fff; background: #DC2626; border-radius: 999px;
+    }
+
+    .admin-panel {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--r-xl); overflow: hidden;
+      display: none;
+    }
+    .admin-panel.active { display: block; }
+
+    .admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .admin-table th {
+      text-align: left; padding: 12px 16px; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-3);
+      background: var(--bg); border-bottom: 1px solid var(--border);
+    }
+    .admin-table td { padding: 12px 16px; color: var(--text-2); border-bottom: 1px solid var(--border); vertical-align: top; }
+    .admin-table tr:last-child td { border-bottom: none; }
+    .admin-table tr:hover td { background: #FAFBFF; }
+    .msg-body { max-width: 380px; line-height: 1.5; }
+    .status-select {
+      padding: 5px 10px; font-size: 12px; font-family: inherit;
+      color: var(--text); background: var(--surface);
+      border: 1.5px solid var(--border); border-radius: var(--r-sm); cursor: pointer;
+    }
+    .status-pill {
+      display: inline-block; padding: 2px 10px; font-size: 11px; font-weight: 700;
+      border-radius: 999px;
+    }
+    .status-pill--new { color: #B45309; background: rgba(217,119,6,0.12); }
+    .status-pill--ok  { color: #047857; background: rgba(5,150,105,0.12); }
+    .empty-note { padding: 40px; text-align: center; font-size: 13px; color: var(--text-3); }
+    .top-tools-list { padding: 8px 0; }
+    .top-tool-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 10px 20px; border-bottom: 1px solid var(--border);
+    }
+    .top-tool-row:last-child { border-bottom: none; }
+    .top-tool-rank { width: 24px; font-size: 12px; font-weight: 700; color: var(--text-3); }
+    .top-tool-name { flex: 0 0 200px; font-size: 13px; font-weight: 600; color: var(--text); }
+    .top-tool-bar-wrap { flex: 1; height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+    .top-tool-bar { height: 100%; background: var(--blue); border-radius: 4px; }
+    .top-tool-count { width: 50px; text-align: right; font-size: 12px; color: var(--text-2); font-weight: 600; }
+    @media (max-width: 900px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner container-wide">
+    <a href="index.html" class="logo" aria-label="FormatJet Ana Sayfa">
+      <img src="assets/img/logo-icon.png" alt="" class="logo-icon-img" aria-hidden="true">
+      <img src="assets/img/logo-text.png" alt="FormatJet" class="logo-text-img">
+    </a>
+    <div class="header-right">
+      <button class="btn-login" onclick="location.href='login.html'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Giriş Yap
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="admin-wrap" id="adminWrap" hidden>
+    <div class="admin-head">
+      <h1 class="admin-title">Yönetici Paneli</h1>
+      <span class="admin-badge">Admin</span>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-value" id="stUsers">—</div><div class="stat-label">Toplam kullanıcı</div><div class="stat-sub" id="stPro"></div></div>
+      <div class="stat-card"><div class="stat-value" id="stUsage">—</div><div class="stat-label">Toplam işlem</div><div class="stat-sub" id="stUsage7"></div></div>
+      <div class="stat-card"><div class="stat-value" id="stMsgs">—</div><div class="stat-label">İletişim mesajı</div><div class="stat-sub" id="stMsgsNew"></div></div>
+      <div class="stat-card"><div class="stat-value" id="stReqs">—</div><div class="stat-label">Araç talebi</div></div>
+      <div class="stat-card"><div class="stat-value" id="stRevenue">—</div><div class="stat-label">Toplam gelir</div></div>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="messages">Mesajlar<span class="admin-tab-count" id="tabMsgCount" hidden></span></button>
+      <button class="admin-tab" data-tab="requests">Araç Talepleri</button>
+      <button class="admin-tab" data-tab="users">Kullanıcılar</button>
+      <button class="admin-tab" data-tab="toptools">Popüler Araçlar</button>
+    </div>
+
+    <div class="admin-panel active" data-panel="messages">
+      <table class="admin-table">
+        <thead><tr><th>Gönderen</th><th>Konu</th><th>Mesaj</th><th>Tarih</th><th>Durum</th></tr></thead>
+        <tbody id="msgBody"></tbody>
+      </table>
+      <div class="empty-note" id="msgEmpty" hidden>Henüz mesaj yok.</div>
+    </div>
+
+    <div class="admin-panel" data-panel="requests">
+      <table class="admin-table">
+        <thead><tr><th>Araç</th><th>Detay</th><th>E-posta</th><th>Tarih</th><th>Durum</th></tr></thead>
+        <tbody id="reqBody"></tbody>
+      </table>
+      <div class="empty-note" id="reqEmpty" hidden>Henüz araç talebi yok.</div>
+    </div>
+
+    <div class="admin-panel" data-panel="users">
+      <table class="admin-table">
+        <thead><tr><th>Ad Soyad</th><th>E-posta</th><th>Plan</th><th>Rol</th><th>Kayıt Tarihi</th></tr></thead>
+        <tbody id="userBody"></tbody>
+      </table>
+    </div>
+
+    <div class="admin-panel" data-panel="toptools">
+      <div class="top-tools-list" id="topToolsList"></div>
+      <div class="empty-note" id="topEmpty" hidden>Henüz kullanım verisi yok.</div>
+    </div>
+  </div>
+
+  <div class="empty-note" id="deniedNote" hidden style="padding:120px 24px">
+    <h2 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:8px">Yetkisiz erişim</h2>
+    <p>Bu sayfayı görüntülemek için yönetici hesabıyla giriş yapmalısın.</p>
+    <a href="login.html?next=admin.html" style="display:inline-block;margin-top:16px;color:var(--blue);font-weight:600">Giriş Yap →</a>
+  </div>
+</main>
+
+<script src="assets/js/vendor/supabase.min.js"></script>
+<script src="assets/js/fj-config.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+(async function () {
+  const profile = await window.fjAuth.getProfile();
+  if (!profile || profile.role !== 'admin') {
+    document.getElementById('deniedNote').hidden = false;
+    return;
+  }
+  document.getElementById('adminWrap').hidden = false;
+
+  const sb = window.fjAuth.sb;
+  const fmtDate = (d) => new Date(d).toLocaleString('tr-TR', { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute: '2-digit' });
+
+  /* Tab geçişleri */
+  document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector('[data-panel="' + tab.dataset.tab + '"]').classList.add('active');
+    });
+  });
+
+  /* İstatistikler */
+  const { data: stats, error: statsErr } = await sb.rpc('admin_stats');
+  if (!statsErr && stats) {
+    document.getElementById('stUsers').textContent  = stats.users;
+    document.getElementById('stPro').textContent    = stats.pro_users + ' ücretli üye';
+    document.getElementById('stUsage').textContent  = stats.usage_total;
+    document.getElementById('stUsage7').textContent = 'Son 7 gün: ' + stats.usage_7d;
+    document.getElementById('stMsgs').textContent   = stats.messages_total;
+    document.getElementById('stMsgsNew').textContent = stats.messages_new + ' yeni';
+    document.getElementById('stReqs').textContent   = stats.tool_requests_new;
+    document.getElementById('stRevenue').textContent = '₺' + Number(stats.revenue_total).toLocaleString('tr-TR');
+    if (stats.messages_new > 0) {
+      const c = document.getElementById('tabMsgCount');
+      c.textContent = stats.messages_new;
+      c.hidden = false;
+    }
+
+    /* Popüler araçlar */
+    const list = document.getElementById('topToolsList');
+    const top = stats.top_tools || [];
+    if (top.length === 0) {
+      document.getElementById('topEmpty').hidden = false;
+    } else {
+      const max = top[0].cnt;
+      top.forEach((t, i) => {
+        const row = document.createElement('div');
+        row.className = 'top-tool-row';
+        const rank = document.createElement('span'); rank.className = 'top-tool-rank'; rank.textContent = '#' + (i + 1);
+        const name = document.createElement('span'); name.className = 'top-tool-name'; name.textContent = t.tool_slug;
+        const barWrap = document.createElement('div'); barWrap.className = 'top-tool-bar-wrap';
+        const bar = document.createElement('div'); bar.className = 'top-tool-bar'; bar.style.width = Math.round(t.cnt / max * 100) + '%';
+        barWrap.appendChild(bar);
+        const cnt = document.createElement('span'); cnt.className = 'top-tool-count'; cnt.textContent = t.cnt;
+        row.append(rank, name, barWrap, cnt);
+        list.appendChild(row);
+      });
+    }
+  }
+
+  function statusSelect(current, options, onChange) {
+    const sel = document.createElement('select');
+    sel.className = 'status-select';
+    Object.entries(options).forEach(([val, label]) => {
+      const opt = document.createElement('option');
+      opt.value = val; opt.textContent = label;
+      if (val === current) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', () => onChange(sel.value));
+    return sel;
+  }
+
+  /* Mesajlar */
+  const { data: msgs } = await sb
+    .from('contact_messages')
+    .select('id, name, email, subject, message, status, created_at')
+    .order('created_at', { ascending: false })
+    .limit(50);
+
+  const msgBody = document.getElementById('msgBody');
+  const SUBJECT_TR = { teknik: 'Teknik sorun', 'arac-talebi': 'Araç talebi', gizlilik: 'Gizlilik/KVKK', 'is-birligi': 'İş birliği', diger: 'Diğer', 'hata-bildir': 'Hata bildirimi' };
+  if (msgs && msgs.length) {
+    msgs.forEach(m => {
+      const tr = document.createElement('tr');
+
+      const tdFrom = document.createElement('td');
+      const nameStrong = document.createElement('strong');
+      nameStrong.textContent = m.name;
+      nameStrong.style.color = 'var(--text)';
+      tdFrom.appendChild(nameStrong);
+      tdFrom.appendChild(document.createElement('br'));
+      const emailSmall = document.createElement('small');
+      emailSmall.textContent = m.email;
+      tdFrom.appendChild(emailSmall);
+
+      const tdSubj = document.createElement('td');
+      tdSubj.textContent = SUBJECT_TR[m.subject] || m.subject;
+
+      const tdMsg = document.createElement('td');
+      tdMsg.className = 'msg-body';
+      tdMsg.textContent = m.message;
+
+      const tdDate = document.createElement('td');
+      tdDate.textContent = fmtDate(m.created_at);
+
+      const tdStatus = document.createElement('td');
+      tdStatus.appendChild(statusSelect(m.status,
+        { new: 'Yeni', read: 'Okundu', replied: 'Yanıtlandı' },
+        async (val) => { await sb.from('contact_messages').update({ status: val }).eq('id', m.id); }));
+
+      tr.append(tdFrom, tdSubj, tdMsg, tdDate, tdStatus);
+      msgBody.appendChild(tr);
+    });
+  } else {
+    document.getElementById('msgEmpty').hidden = false;
+  }
+
+  /* Araç talepleri */
+  const { data: reqs } = await sb
+    .from('tool_requests')
+    .select('id, tool_name, details, email, status, created_at')
+    .order('created_at', { ascending: false })
+    .limit(50);
+
+  const reqBody = document.getElementById('reqBody');
+  if (reqs && reqs.length) {
+    reqs.forEach(r => {
+      const tr = document.createElement('tr');
+      const tdTool = document.createElement('td');
+      const strong = document.createElement('strong');
+      strong.textContent = r.tool_name;
+      strong.style.color = 'var(--text)';
+      tdTool.appendChild(strong);
+
+      const tdDet = document.createElement('td');
+      tdDet.className = 'msg-body';
+      tdDet.textContent = r.details || '—';
+
+      const tdMail = document.createElement('td');
+      tdMail.textContent = r.email || '—';
+
+      const tdDate = document.createElement('td');
+      tdDate.textContent = fmtDate(r.created_at);
+
+      const tdStatus = document.createElement('td');
+      tdStatus.appendChild(statusSelect(r.status,
+        { new: 'Yeni', planned: 'Planlandı', done: 'Yapıldı', rejected: 'Reddedildi' },
+        async (val) => { await sb.from('tool_requests').update({ status: val }).eq('id', r.id); }));
+
+      tr.append(tdTool, tdDet, tdMail, tdDate, tdStatus);
+      reqBody.appendChild(tr);
+    });
+  } else {
+    document.getElementById('reqEmpty').hidden = false;
+  }
+
+  /* Kullanıcılar */
+  const { data: users } = await sb
+    .from('profiles')
+    .select('full_name, email, plan, role, created_at')
+    .order('created_at', { ascending: false })
+    .limit(100);
+
+  const userBody = document.getElementById('userBody');
+  (users || []).forEach(u => {
+    const tr = document.createElement('tr');
+
+    const tdName = document.createElement('td');
+    tdName.textContent = u.full_name || '—';
+    tdName.style.fontWeight = '600';
+    tdName.style.color = 'var(--text)';
+
+    const tdMail = document.createElement('td');
+    tdMail.textContent = u.email;
+
+    const tdPlan = document.createElement('td');
+    const pill = document.createElement('span');
+    pill.className = 'status-pill ' + (u.plan === 'free' ? 'status-pill--new' : 'status-pill--ok');
+    pill.textContent = u.plan === 'free' ? 'Ücretsiz' : (u.plan === 'pro' ? 'Pro' : 'Business');
+    tdPlan.appendChild(pill);
+
+    const tdRole = document.createElement('td');
+    tdRole.textContent = u.role === 'admin' ? 'Yönetici' : 'Kullanıcı';
+
+    const tdDate = document.createElement('td');
+    tdDate.textContent = new Date(u.created_at).toLocaleDateString('tr-TR');
+
+    tr.append(tdName, tdMail, tdPlan, tdRole, tdDate);
+    userBody.appendChild(tr);
+  });
+})();
+</script>
+</body>
+</html>
