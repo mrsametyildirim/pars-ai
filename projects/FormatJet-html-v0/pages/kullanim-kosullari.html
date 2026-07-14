@@ -13,18 +13,7 @@
 </head>
 <body>
 
-<header class="site-header" id="siteHeader">
-  <div class="header-inner container-wide">
-    <a href="../index.html" class="logo"><img src="../assets/img/logo-icon.png" alt="" class="logo-icon-img" aria-hidden="true"><img src="../assets/img/logo-text.png" alt="FormatJet" class="logo-text-img"></a>
-    <nav class="header-nav"><a href="../pdf.html" class="nav-link">PDF</a><a href="../belge.html" class="nav-link">Belge</a><a href="../gorsel.html" class="nav-link">Görsel</a><a href="../video.html" class="nav-link">Video</a><a href="../ses.html" class="nav-link">Ses</a></nav>
-    <div class="header-right">
-      <a href="hakkimizda.html" class="btn-bizi-tani">Bizi Tanı</a>
-      <button class="btn-login" onclick="location.href='../login.html'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Giriş Yap</button>
-      <button class="btn-hamburger" id="btnHamburger" aria-label="Menüyü aç" aria-expanded="false"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu-inner"><nav class="mobile-nav"><a href="../pdf.html" class="mobile-nav-link">PDF</a><a href="../belge.html" class="mobile-nav-link">Belge</a><a href="../gorsel.html" class="mobile-nav-link">Görsel</a><a href="../video.html" class="mobile-nav-link">Video</a><a href="../ses.html" class="mobile-nav-link">Ses</a></nav></div></div>
-</header>
+<div data-fj-header></div>
 
 <main>
   <div class="page-hero">
@@ -89,19 +78,13 @@
   </div>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-body"><div class="container"><div class="footer-grid">
-    <div class="footer-col footer-col--brand"><a href="../index.html" class="footer-logo"><img src="../assets/img/logo-icon.png" alt="" class="footer-logo-icon" aria-hidden="true"><img src="../assets/img/logo-text.png" alt="FormatJet" class="footer-logo-text-img"></a><p class="footer-tagline">Dosyalarını hızlı, güvenli ve kolayca dönüştür.</p></div>
-    <div class="footer-col"><h4 class="footer-col-title">Araçlar</h4><ul class="footer-links"><li><a href="../pdf.html">PDF</a></li><li><a href="../belge.html">Belge</a></li><li><a href="../gorsel.html">Görsel</a></li><li><a href="../video.html">Video</a></li><li><a href="../ses.html">Ses</a></li></ul></div>
-    <div class="footer-col"><h4 class="footer-col-title">FormatJet</h4><ul class="footer-links"><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
-    <div class="footer-col"><h4 class="footer-col-title">Yasal</h4><ul class="footer-links"><li><a href="gizlilik.html">Gizlilik Politikası</a></li><li><a href="kullanim-kosullari.html">Kullanım Koşulları</a></li><li><a href="cerez.html">Çerez Politikası</a></li><li><a href="kvkk.html">KVKK</a></li></ul></div>
-  </div></div></div>
-  <div class="footer-bar"><div class="container"><div class="footer-bar-inner"><p class="footer-copy">© 2026 FormatJet. Tüm hakları saklıdır.</p></div></div></div>
-</footer>
+<div data-fj-footer></div>
 
 <script src="../assets/js/vendor/supabase.min.js"></script>
 <script src="../assets/js/fj-config.js"></script>
+<script src="../assets/js/layout.js"></script>
 <script src="../assets/js/auth.js"></script>
+<script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/main.js"></script>
 </body>
 </html>

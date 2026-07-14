@@ -97,7 +97,7 @@ svg { flex-shrink: 0; }
   display: flex;
   align-items: center;
   gap: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .logo {
@@ -568,7 +568,14 @@ svg { flex-shrink: 0; }
   gap: 32px;
 }
 
-.feature-item { text-align: center; }
+.feature-item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.features-grid { align-items: start; }
+.feature-desc { max-width: 230px; margin: 0 auto; }
 .feature-icon {
   display: inline-flex;
   align-items: center;
@@ -658,6 +665,38 @@ body.search-mode .features { display: none; }
 .footer-logo-text { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
 .footer-logo-icon { height: 26px; width: auto; flex-shrink: 0; }
 .footer-logo-text-img { height: 18px; width: auto; flex-shrink: 0; filter: brightness(0) invert(1); }
+.footer-logo-text-img--native { filter: none; height: 20px; }
+
+.footer-grid--4 {
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+@media (max-width: 900px) { .footer-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; } }
+@media (max-width: 520px) { .footer-grid--4 { grid-template-columns: minmax(0, 1fr); } }
+
+/* ── Arama focus modu: sorgu varken sayfa aramaya odaklanır ── */
+body.fj-search-active [data-search-hide] { display: none !important; }
+body.fj-search-active .footer-cta-band { display: none; }
+body.fj-search-active .hero { padding-bottom: 24px; }
+
+.fj-search-results { padding: 8px 0 72px; }
+.fj-search-results .popular-card { text-align: left; }
+.fj-search-results .popular-card-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+.fj-search-results .section-label { margin-bottom: 16px; }
+.fj-search-empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-2);
+  font-size: 14px;
+}
+.fj-search-empty a { color: var(--blue); text-decoration: underline; }
 .footer-tagline { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 14px; max-width: 220px; }
 .footer-trust { display: flex; align-items: center; gap: 7px; font-size: 12px; color: rgba(255,255,255,0.4); }
 
@@ -1295,7 +1334,25 @@ body.search-mode .features { display: none; }
    TOOL PAGES — Araç Sayfaları
    ========================================================= */
 
-.tool-page { padding: 40px 0 96px; min-height: 80vh; }
+.tool-page { padding: 40px 0 96px; min-height: 60vh; }
+
+/* Ortalanmış araç sayfası düzeni */
+.tool-page--centered .container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.tool-page--centered .tool-header {
+  align-items: center;
+  text-align: center;
+  max-width: none;
+}
+.tool-page--centered .tool-back { align-self: flex-start; }
+.tool-page--centered .tool-workspace,
+.tool-page--centered .tool-info-section {
+  max-width: none;
+  width: 100%;
+}
+.tool-page--centered .tool-info-title { text-align: center; }
 
 .tool-header {
   display: flex;

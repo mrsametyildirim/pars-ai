@@ -30,9 +30,13 @@
     if (!session) return null;
     const { data } = await sb
       .from('profiles')
-      .select('id, email, full_name, role, plan, plan_expires_at, created_at')
+      .select('id, email, full_name, role, plan, plan_expires_at, created_at, status')
       .eq('id', session.user.id)
       .single();
+    if (data && data.status === 'deleted') {
+      await sb.auth.signOut();
+      return null;
+    }
     return data;
   }
 
@@ -107,12 +111,19 @@
     panel.querySelector('.user-menu-head strong').textContent = profile.full_name || 'Kullanıcı';
     panel.querySelector('.user-menu-email').textContent = profile.email;
 
+    btn.type = 'button';
     btn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
       panel.hidden = !panel.hidden;
     });
-    document.addEventListener('click', () => { panel.hidden = true; });
-    panel.querySelector('[data-signout]').addEventListener('click', signOut);
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.user-menu-wrap')) panel.hidden = true;
+    });
+    panel.querySelector('[data-signout]').addEventListener('click', (e) => {
+      e.preventDefault();
+      signOut();
+    });
 
     wrap.appendChild(btn);
     wrap.appendChild(panel);

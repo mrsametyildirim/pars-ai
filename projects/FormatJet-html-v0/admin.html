@@ -85,24 +85,43 @@
     .top-tool-bar { height: 100%; background: var(--blue); border-radius: 4px; }
     .top-tool-count { width: 50px; text-align: right; font-size: 12px; color: var(--text-2); font-weight: 600; }
     @media (max-width: 900px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+
+    /* Site düzenleme */
+    .site-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .site-edit-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; }
+    .site-edit-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .site-edit-hint { font-size: 12px; color: var(--text-3); margin-bottom: 16px; }
+    .asset-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-2);
+    }
+    .asset-row:last-child { border-bottom: none; }
+    .asset-row > span { flex: 1; }
+    .asset-preview { height: 28px; max-width: 110px; object-fit: contain; background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 3px; }
+    .asset-preview--dark { background: var(--navy); }
+    .btn-upload { cursor: pointer; }
+    .btn-small {
+      padding: 7px 14px; font-size: 12px; font-weight: 600;
+      color: var(--blue); background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--r-md); cursor: pointer; font-family: inherit;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-small:hover { border-color: var(--blue); }
+    .btn-small--danger { color: #DC2626; }
+    .btn-small--danger:hover { border-color: #DC2626; }
+    .text-edit-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+    .text-edit-row label { font-size: 12px; font-weight: 600; color: var(--text-2); }
+    .nav-edit-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .nav-edit-row .nav-default { width: 70px; font-size: 12px; color: var(--text-3); }
+    .price-edit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+    .site-edit-saved { margin-top: 10px; font-size: 13px; color: #059669; font-weight: 600; }
+    .user-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    @media (max-width: 900px) { .site-edit-grid { grid-template-columns: minmax(0,1fr); } }
   </style>
 </head>
 <body>
 
-<header class="site-header" id="siteHeader">
-  <div class="header-inner container-wide">
-    <a href="index.html" class="logo" aria-label="FormatJet Ana Sayfa">
-      <img src="assets/img/logo-icon.png" alt="" class="logo-icon-img" aria-hidden="true">
-      <img src="assets/img/logo-text.png" alt="FormatJet" class="logo-text-img">
-    </a>
-    <div class="header-right">
-      <button class="btn-login" onclick="location.href='login.html'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Giriş Yap
-      </button>
-    </div>
-  </div>
-</header>
+<div data-fj-header></div>
 
 <main>
   <div class="admin-wrap" id="adminWrap" hidden>
@@ -115,7 +134,7 @@
       <div class="stat-card"><div class="stat-value" id="stUsers">—</div><div class="stat-label">Toplam kullanıcı</div><div class="stat-sub" id="stPro"></div></div>
       <div class="stat-card"><div class="stat-value" id="stUsage">—</div><div class="stat-label">Toplam işlem</div><div class="stat-sub" id="stUsage7"></div></div>
       <div class="stat-card"><div class="stat-value" id="stMsgs">—</div><div class="stat-label">İletişim mesajı</div><div class="stat-sub" id="stMsgsNew"></div></div>
-      <div class="stat-card"><div class="stat-value" id="stReqs">—</div><div class="stat-label">Araç talebi</div></div>
+      <div class="stat-card"><div class="stat-value" id="stReqs">—</div><div class="stat-label">Araç Talebi</div></div>
       <div class="stat-card"><div class="stat-value" id="stRevenue">—</div><div class="stat-label">Toplam gelir</div></div>
     </div>
 
@@ -124,6 +143,7 @@
       <button class="admin-tab" data-tab="requests">Araç Talepleri</button>
       <button class="admin-tab" data-tab="users">Kullanıcılar</button>
       <button class="admin-tab" data-tab="toptools">Popüler Araçlar</button>
+      <button class="admin-tab" data-tab="siteedit">Site Düzenleme</button>
     </div>
 
     <div class="admin-panel active" data-panel="messages">
@@ -144,7 +164,7 @@
 
     <div class="admin-panel" data-panel="users">
       <table class="admin-table">
-        <thead><tr><th>Ad Soyad</th><th>E-posta</th><th>Plan</th><th>Rol</th><th>Kayıt Tarihi</th></tr></thead>
+        <thead><tr><th>Ad Soyad</th><th>E-posta</th><th>Durum</th><th>Plan</th><th>Rol</th><th>Kayıt</th><th>İşlem</th></tr></thead>
         <tbody id="userBody"></tbody>
       </table>
     </div>
@@ -152,6 +172,43 @@
     <div class="admin-panel" data-panel="toptools">
       <div class="top-tools-list" id="topToolsList"></div>
       <div class="empty-note" id="topEmpty" hidden>Henüz kullanım verisi yok.</div>
+    </div>
+
+    <!-- SITE DÜZENLEME -->
+    <div class="admin-panel" data-panel="siteedit" style="padding:24px">
+      <div class="site-edit-grid">
+
+        <div class="site-edit-card">
+          <h3 class="site-edit-title">Marka Görselleri</h3>
+          <p class="site-edit-hint">Yüklediğin görsel anında tüm sitede geçerli olur.</p>
+          <div class="asset-row" data-asset="logo_icon"><span>Logo (açık zemin)</span><img class="asset-preview" alt=""><label class="btn-small btn-upload">Dosya Seç<input type="file" accept="image/png,image/svg+xml,image/jpeg" hidden></label></div>
+          <div class="asset-row" data-asset="logo_text"><span>Logo yazısı (açık)</span><img class="asset-preview" alt=""><label class="btn-small btn-upload">Dosya Seç<input type="file" accept="image/png,image/svg+xml,image/jpeg" hidden></label></div>
+          <div class="asset-row" data-asset="logo_icon_dark"><span>Logo (koyu zemin)</span><img class="asset-preview asset-preview--dark" alt=""><label class="btn-small btn-upload">Dosya Seç<input type="file" accept="image/png,image/svg+xml,image/jpeg" hidden></label></div>
+          <div class="asset-row" data-asset="logo_text_dark"><span>Logo yazısı (koyu)</span><img class="asset-preview asset-preview--dark" alt=""><label class="btn-small btn-upload">Dosya Seç<input type="file" accept="image/png,image/svg+xml,image/jpeg" hidden></label></div>
+          <div class="asset-row" data-asset="favicon_light"><span>Favicon (açık tema)</span><img class="asset-preview" alt=""><label class="btn-small btn-upload">Dosya Seç<input type="file" accept="image/png" hidden></label></div>
+          <div class="asset-row" data-asset="favicon_dark"><span>Favicon (koyu tema)</span><img class="asset-preview asset-preview--dark" alt=""><label class="btn-small btn-upload">Dosya Seç<input type="file" accept="image/png" hidden></label></div>
+        </div>
+
+        <div class="site-edit-card">
+          <h3 class="site-edit-title">Header Menüsü</h3>
+          <p class="site-edit-hint">Menü adlarını değiştir; boş bırakılan varsayılanda kalır.</p>
+          <div id="navEditRows"></div>
+          <h3 class="site-edit-title" style="margin-top:24px">Anasayfa Metinleri</h3>
+          <div class="text-edit-row"><label>Başlık 1</label><input type="text" class="form-input" data-setting="hero_title" placeholder="Dosyan hazır."></div>
+          <div class="text-edit-row"><label>Başlık 2 (mavi)</label><input type="text" class="form-input" data-setting="hero_title_accent" placeholder="Formatını değiştirelim."></div>
+          <div class="text-edit-row"><label>Alt metin</label><input type="text" class="form-input" data-setting="hero_sub" placeholder="PDF, belge, görsel..."></div>
+          <h3 class="site-edit-title" style="margin-top:24px">Plan Fiyatları (₺/ay)</h3>
+          <div class="price-edit-grid">
+            <div class="text-edit-row"><label>Pro aylık</label><input type="number" class="form-input" data-setting="price_pro_monthly" placeholder="79"></div>
+            <div class="text-edit-row"><label>Pro yıllık (aylık karşılığı)</label><input type="number" class="form-input" data-setting="price_pro_yearly" placeholder="59"></div>
+            <div class="text-edit-row"><label>Business aylık</label><input type="number" class="form-input" data-setting="price_business_monthly" placeholder="249"></div>
+            <div class="text-edit-row"><label>Business yıllık (aylık karşılığı)</label><input type="number" class="form-input" data-setting="price_business_yearly" placeholder="189"></div>
+          </div>
+          <button class="btn-primary-full" id="btnSaveSettings" style="margin-top:20px">Değişiklikleri Kaydet</button>
+          <div class="site-edit-saved" id="settingsSaved" hidden>✓ Kaydedildi — site anında güncellendi.</div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -162,9 +219,13 @@
   </div>
 </main>
 
+<div data-fj-footer></div>
+
 <script src="assets/js/vendor/supabase.min.js"></script>
 <script src="assets/js/fj-config.js"></script>
+<script src="assets/js/layout.js"></script>
 <script src="assets/js/auth.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
 (async function () {
@@ -248,7 +309,7 @@
     .limit(50);
 
   const msgBody = document.getElementById('msgBody');
-  const SUBJECT_TR = { teknik: 'Teknik sorun', 'arac-talebi': 'Araç talebi', gizlilik: 'Gizlilik/KVKK', 'is-birligi': 'İş birliği', diger: 'Diğer', 'hata-bildir': 'Hata bildirimi' };
+  const SUBJECT_TR = { teknik: 'Teknik Sorun', 'arac-talebi': 'Araç Talebi', gizlilik: 'Gizlilik/KVKK', 'is-birligi': 'İş Birliği', diger: 'Diğer', 'hata-bildir': 'Hata Bildirimi' };
   if (msgs && msgs.length) {
     msgs.forEach(m => {
       const tr = document.createElement('tr');
@@ -324,39 +385,170 @@
     document.getElementById('reqEmpty').hidden = false;
   }
 
-  /* Kullanıcılar */
-  const { data: users } = await sb
-    .from('profiles')
-    .select('full_name, email, plan, role, created_at')
-    .order('created_at', { ascending: false })
-    .limit(100);
+  /* ── Kullanıcı yönetimi ── */
+  async function loadUsers() {
+    const { data: users } = await sb
+      .from('profiles')
+      .select('id, full_name, email, plan, role, status, created_at')
+      .order('created_at', { ascending: false })
+      .limit(200);
 
-  const userBody = document.getElementById('userBody');
-  (users || []).forEach(u => {
-    const tr = document.createElement('tr');
+    const userBody = document.getElementById('userBody');
+    userBody.innerHTML = '';
 
-    const tdName = document.createElement('td');
-    tdName.textContent = u.full_name || '—';
-    tdName.style.fontWeight = '600';
-    tdName.style.color = 'var(--text)';
+    (users || []).forEach(u => {
+      const tr = document.createElement('tr');
+      const isSelf = u.id === profile.id;
+      const isDeleted = u.status === 'deleted';
+      if (isDeleted) tr.style.opacity = '0.55';
 
-    const tdMail = document.createElement('td');
-    tdMail.textContent = u.email;
+      const tdName = document.createElement('td');
+      tdName.textContent = u.full_name || '—';
+      tdName.style.fontWeight = '600';
+      tdName.style.color = 'var(--text)';
 
-    const tdPlan = document.createElement('td');
-    const pill = document.createElement('span');
-    pill.className = 'status-pill ' + (u.plan === 'free' ? 'status-pill--new' : 'status-pill--ok');
-    pill.textContent = u.plan === 'free' ? 'Ücretsiz' : (u.plan === 'pro' ? 'Pro' : 'Business');
-    tdPlan.appendChild(pill);
+      const tdMail = document.createElement('td');
+      tdMail.textContent = u.email;
 
-    const tdRole = document.createElement('td');
-    tdRole.textContent = u.role === 'admin' ? 'Yönetici' : 'Kullanıcı';
+      const tdStatus = document.createElement('td');
+      const stPill = document.createElement('span');
+      stPill.className = 'status-pill ' + (isDeleted ? 'status-pill--new' : 'status-pill--ok');
+      stPill.textContent = isDeleted ? 'Silinen Hesap' : 'Aktif Hesap';
+      tdStatus.appendChild(stPill);
 
-    const tdDate = document.createElement('td');
-    tdDate.textContent = new Date(u.created_at).toLocaleDateString('tr-TR');
+      const tdPlan = document.createElement('td');
+      tdPlan.appendChild(statusSelect(u.plan,
+        { free: 'Ücretsiz', pro: 'Pro', business: 'Business' },
+        async (val) => {
+          const { error } = await sb.rpc('admin_set_plan', { p_user: u.id, p_plan: val });
+          if (error) alert('Plan değiştirilemedi: ' + error.message);
+        }));
 
-    tr.append(tdName, tdMail, tdPlan, tdRole, tdDate);
-    userBody.appendChild(tr);
+      const tdRole = document.createElement('td');
+      if (isSelf) {
+        tdRole.textContent = 'Yönetici (sen)';
+      } else {
+        tdRole.appendChild(statusSelect(u.role,
+          { user: 'Kullanıcı', admin: 'Yönetici' },
+          async (val) => {
+            const { error } = await sb.rpc('admin_set_role', { p_user: u.id, p_role: val });
+            if (error) alert('Rol değiştirilemedi: ' + error.message);
+          }));
+      }
+
+      const tdDate = document.createElement('td');
+      tdDate.textContent = new Date(u.created_at).toLocaleDateString('tr-TR');
+
+      const tdAction = document.createElement('td');
+      tdAction.className = 'user-actions';
+      if (!isSelf) {
+        const btn = document.createElement('button');
+        btn.className = 'btn-small' + (isDeleted ? '' : ' btn-small--danger');
+        btn.textContent = isDeleted ? 'Geri Getir' : 'Sil';
+        btn.addEventListener('click', async () => {
+          if (!isDeleted && !confirm(u.email + ' hesabını silmek istediğine emin misin?')) return;
+          const rpc = isDeleted ? 'admin_restore_user' : 'admin_delete_user';
+          const { error } = await sb.rpc(rpc, { p_user: u.id });
+          if (error) { alert('İşlem başarısız: ' + error.message); return; }
+          loadUsers();
+        });
+        tdAction.appendChild(btn);
+      }
+
+      tr.append(tdName, tdMail, tdStatus, tdPlan, tdRole, tdDate, tdAction);
+      userBody.appendChild(tr);
+    });
+  }
+  await loadUsers();
+
+  /* ── Site Düzenleme ── */
+  const SETTINGS = window.FJ_SITE || {};
+
+  async function saveSetting(key, value) {
+    const { error } = await sb.from('site_settings').upsert({ key, value, updated_at: new Date().toISOString() });
+    if (error) throw error;
+  }
+
+  /* Görsel yükleme */
+  const ASSET_DEFAULTS = {
+    logo_icon: 'assets/img/logo-icon.png',
+    logo_text: 'assets/img/logo-text.png',
+    logo_icon_dark: 'assets/img/logo-icon-dark.png',
+    logo_text_dark: 'assets/img/logo-text-dark.png',
+    favicon_light: 'assets/img/favicon-light.png',
+    favicon_dark: 'assets/img/favicon-dark.png',
+  };
+
+  document.querySelectorAll('.asset-row').forEach(row => {
+    const key = row.dataset.asset;
+    const img = row.querySelector('.asset-preview');
+    img.src = SETTINGS[key] || ASSET_DEFAULTS[key];
+
+    const input = row.querySelector('input[type="file"]');
+    input.addEventListener('change', async () => {
+      const file = input.files[0];
+      if (!file) return;
+      const label = row.querySelector('.btn-upload');
+      const orig = label.firstChild.textContent;
+      label.firstChild.textContent = 'Yükleniyor...';
+      try {
+        const path = key + '-' + Date.now() + '.' + file.name.split('.').pop();
+        const { error: upErr } = await sb.storage.from('site-assets').upload(path, file, { upsert: true });
+        if (upErr) throw upErr;
+        const { data: pub } = sb.storage.from('site-assets').getPublicUrl(path);
+        await saveSetting(key, pub.publicUrl);
+        img.src = pub.publicUrl;
+        window.fjApplySiteSettings({ [key]: pub.publicUrl });
+      } catch (err) {
+        alert('Yüklenemedi: ' + err.message);
+      } finally {
+        label.firstChild.textContent = orig;
+      }
+    });
+  });
+
+  /* Menü adları */
+  const NAV_DEFAULTS = ['PDF', 'Belge', 'Görsel', 'Video', 'Ses'];
+  const navLabels = SETTINGS.nav_labels ? JSON.parse(SETTINGS.nav_labels) : [];
+  const navWrap = document.getElementById('navEditRows');
+  NAV_DEFAULTS.forEach((def, i) => {
+    const row = document.createElement('div');
+    row.className = 'nav-edit-row';
+    const lbl = document.createElement('span');
+    lbl.className = 'nav-default';
+    lbl.textContent = def;
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'form-input';
+    inp.placeholder = def;
+    inp.value = navLabels[i] || '';
+    inp.dataset.navIndex = i;
+    row.append(lbl, inp);
+    navWrap.appendChild(row);
+  });
+
+  /* Metin + fiyat alanlarını doldur */
+  document.querySelectorAll('[data-setting]').forEach(inp => {
+    if (SETTINGS[inp.dataset.setting]) inp.value = SETTINGS[inp.dataset.setting];
+  });
+
+  /* Kaydet */
+  document.getElementById('btnSaveSettings').addEventListener('click', async () => {
+    const btn = document.getElementById('btnSaveSettings');
+    btn.textContent = 'Kaydediliyor...'; btn.disabled = true;
+    try {
+      const labels = Array.from(document.querySelectorAll('[data-nav-index]')).map(i => i.value.trim());
+      await saveSetting('nav_labels', JSON.stringify(labels));
+      for (const inp of document.querySelectorAll('[data-setting]')) {
+        if (inp.value.trim() !== '') await saveSetting(inp.dataset.setting, inp.value.trim());
+      }
+      document.getElementById('settingsSaved').hidden = false;
+      setTimeout(() => { document.getElementById('settingsSaved').hidden = true; }, 4000);
+    } catch (err) {
+      alert('Kaydedilemedi: ' + err.message);
+    } finally {
+      btn.textContent = 'Değişiklikleri Kaydet'; btn.disabled = false;
+    }
   });
 })();
 </script>

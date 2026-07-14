@@ -15,120 +15,16 @@
 <body>
 
 <!-- ═══ HEADER ═══ -->
-<header class="site-header" id="siteHeader">
-  <div class="header-inner container-wide">
-
-    <!-- Logo -->
-    <a href="index.html" class="logo" aria-label="FormatJet Ana Sayfa">
-      <img src="assets/img/logo-icon.png" alt="" class="logo-icon-img" aria-hidden="true">
-      <img src="assets/img/logo-text.png" alt="FormatJet" class="logo-text-img">
-    </a>
-
-    <!-- Nav -->
-    <nav class="header-nav" aria-label="Kategori menüsü">
-      <a href="pdf.html" class="nav-link active" data-cat="pdf" data-i18n="nav-pdf">PDF</a>
-      <a href="belge.html" class="nav-link" data-cat="belge" data-i18n="nav-belge">Belge</a>
-      <a href="gorsel.html" class="nav-link" data-cat="gorsel" data-i18n="nav-gorsel">Görsel</a>
-      <a href="video.html" class="nav-link" data-cat="video" data-i18n="nav-video">Video</a>
-      <a href="ses.html" class="nav-link" data-cat="ses" data-i18n="nav-ses">Ses</a>
-      <a href="tools.html" class="btn-all-tools" id="btnAllTools">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-          <rect x="0" y="0" width="4" height="4" rx="1"/><rect x="6" y="0" width="4" height="4" rx="1"/><rect x="12" y="0" width="4" height="4" rx="1"/>
-          <rect x="0" y="6" width="4" height="4" rx="1"/><rect x="6" y="6" width="4" height="4" rx="1"/><rect x="12" y="6" width="4" height="4" rx="1"/>
-          <rect x="0" y="12" width="4" height="4" rx="1"/><rect x="6" y="12" width="4" height="4" rx="1"/><rect x="12" y="12" width="4" height="4" rx="1"/>
-        </svg>
-        Tüm Araçlar
-      </a>
-    </nav>
-
-    <!-- Sağ -->
-    <div class="header-right">
-      <button class="btn-support">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
-        <span data-i18n="btn-support">Destek Ol</span>
-      </button>
-
-      <a href="pages/hakkimizda.html" class="btn-bizi-tani" data-i18n="btn-about">Bizi Tanı</a>
-
-      <div class="lang-wrapper">
-        <button class="btn-lang" id="btnLang" aria-label="Dil seç">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-          </svg>
-          <span class="btn-lang-text">TR</span>
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
-        <div class="lang-panel" id="langPanel" hidden>
-          <div class="lang-panel-inner">
-            <div class="lang-primary">
-              <button class="lang-option" data-lang="tr">🇹🇷 Türkçe</button>
-              <button class="lang-option" data-lang="en">🇬🇧 English</button>
-              <button class="lang-option" data-lang="de">🇩🇪 Deutsch</button>
-              <button class="lang-option" data-lang="fr">🇫🇷 Français</button>
-              <button class="lang-option" data-lang="es">🇪🇸 Español</button>
-              <button class="lang-option" data-lang="pt">🇧🇷 Português</button>
-            </div>
-            <button class="lang-more-btn" id="langMoreBtn" data-i18n="more-langs">Diğer diller →</button>
-            <div class="lang-secondary" id="langSecondary" hidden>
-              <button class="lang-option" data-lang="it">🇮🇹 Italiano</button>
-              <button class="lang-option" data-lang="ru">🇷🇺 Русский</button>
-              <button class="lang-option" data-lang="ja">🇯🇵 日本語</button>
-              <button class="lang-option" data-lang="ko">🇰🇷 한국어</button>
-              <button class="lang-option" data-lang="zh">🇨🇳 中文</button>
-              <button class="lang-option" data-lang="ar">🇸🇦 العربية</button>
-              <button class="lang-option" data-lang="pl">🇵🇱 Polski</button>
-              <button class="lang-option" data-lang="nl">🇳🇱 Nederlands</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <button class="btn-login" onclick="location.href='login.html'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-        </svg>
-        <span data-i18n="btn-login">Giriş Yap</span>
-      </button>
-
-      <!-- Mobil hamburger -->
-      <button class="btn-hamburger" id="btnHamburger" aria-label="Menüyü aç" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-  </div>
-
-  <!-- Mobil menü -->
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="mobile-menu-inner">
-      <nav class="mobile-nav">
-        <a href="pdf.html" class="mobile-nav-link">PDF</a>
-        <a href="belge.html" class="mobile-nav-link">Belge</a>
-        <a href="gorsel.html" class="mobile-nav-link">Görsel</a>
-        <a href="video.html" class="mobile-nav-link">Video</a>
-        <a href="ses.html" class="mobile-nav-link">Ses</a>
-        <a href="tools.html" class="mobile-nav-link">Tüm Araçlar</a>
-        <a href="pages/hakkimizda.html" class="mobile-nav-link">Bizi Tanı</a>
-      </nav>
-      <div class="mobile-menu-footer">
-        <button class="btn-login w-full">Giriş Yap</button>
-        <button class="btn-support w-full">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          Destek Ol
-        </button>
-      </div>
-    </div>
-  </div>
-</header>
+<div data-fj-header></div>
 
 <!-- ═══ HERO ═══ -->
 <main>
 <section class="hero" id="hero">
   <div class="container">
-    <h1 class="hero-title"><span data-i18n="hero-title">Dosyan hazır.</span><br><span class="hero-title-accent" data-i18n="hero-title-accent">Formatını değiştirelim.</span></h1>
-    <p class="hero-sub" data-i18n="hero-sub">PDF, belge, görsel, video ve ses dosyalarını hızlı, güvenli ve kolayca dönüştür.</p>
+    <div data-search-hide>
+      <h1 class="hero-title"><span data-i18n="hero-title">Dosyan hazır.</span><br><span class="hero-title-accent" data-i18n="hero-title-accent">Formatını değiştirelim.</span></h1>
+      <p class="hero-sub" data-i18n="hero-sub">PDF, belge, görsel, video ve ses dosyalarını hızlı, güvenli ve kolayca dönüştür.</p>
+    </div>
 
     <!-- Arama -->
     <div class="search-container" id="searchContainer">
@@ -145,24 +41,20 @@
           autocomplete="off"
           spellcheck="false"
           aria-label="Araç ara"
-          aria-autocomplete="list"
-          aria-controls="searchDropdown"
         >
-        <button class="search-clear-btn" id="searchClear" title="Temizle" aria-label="Aramayı temizle">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-      </div>
-      <!-- Arama sonuçları dropdown -->
-      <div class="search-dropdown" id="searchDropdown" role="listbox" aria-label="Araç önerileri" hidden>
-        <div class="search-results" id="searchResults"></div>
-        <div class="search-empty" id="searchEmpty" hidden>
-          <p>Araç bulunamadı. <a href="pages/iletisim.html?konu=arac-talebi">Araç talep et →</a></p>
-        </div>
       </div>
     </div>
 
+    <!-- Arama sonuçları (focus modu) -->
+    <section class="fj-search-results" id="fjSearchResults" hidden>
+      <div class="popular-grid" id="fjSearchGrid"></div>
+      <div class="fj-search-empty" id="fjSearchEmpty" hidden>
+        Araç bulunamadı. <a href="pages/iletisim.html?konu=arac-talebi">Yeni Araç Talep Et →</a>
+      </div>
+    </section>
+
     <!-- Popüler Araçlar -->
-    <section class="popular-section" id="popularSection">
+    <section class="popular-section" id="popularSection" data-search-hide>
       <h2 class="section-label" data-i18n="popular-label">Popüler Araçlar</h2>
       <div class="popular-grid">
 
@@ -334,17 +226,12 @@
       </div>
     </section>
 
-    <!-- Arama sonuç sayısı + temizle -->
-    <div class="search-result-bar" id="searchResultBar" hidden>
-      <span id="searchResultCount"></span>
-      <button id="searchResultClear" class="search-result-clear">Aramayı Temizle</button>
-    </div>
   </div>
 </section>
 
 
 <!-- ═══ FEATURES ═══ -->
-<section class="features">
+<section class="features" data-search-hide>
   <div class="container">
     <div class="features-grid">
       <div class="feature-item">
@@ -379,136 +266,18 @@
   </div>
 </section>
 
-<!-- Araç bulunamadı (arama) -->
-<div class="no-results" id="noResults" hidden>
-  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M11 16h.01"/></svg>
-  <p>Araç bulunamadı. <a href="pages/iletisim.html?konu=arac-talebi">Araç talep et →</a></p>
-</div>
-
 </main>
 
 <!-- ═══ FOOTER ═══ -->
-<footer class="site-footer">
+<div data-fj-footer></div>
 
-  <!-- CTA bant -->
-  <div class="footer-cta-band">
-    <div class="container">
-      <div class="footer-cta-grid">
-        <div class="footer-cta-card">
-          <div class="footer-cta-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
-          </div>
-          <div class="footer-cta-body">
-            <strong>İhtiyacın olan araç burada yok mu?</strong>
-            <span>Önerini gönder, geliştirme listemize ekleyelim.</span>
-          </div>
-          <button class="btn-cta-outline">Araç Talep Et</button>
-        </div>
-        <div class="footer-cta-card">
-          <div class="footer-cta-icon footer-cta-icon--blue">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
-          </div>
-          <div class="footer-cta-body">
-            <strong>Ücretsiz araçları birlikte büyütelim</strong>
-            <span>Desteğin, ücretsiz limitleri herkes için yükseltir.</span>
-          </div>
-          <button class="btn-cta-filled">Destek Ol</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer body -->
-  <div class="footer-body">
-    <div class="container">
-      <div class="footer-grid">
-
-        <div class="footer-col footer-col--brand">
-          <a href="index.html" class="footer-logo" aria-label="FormatJet">
-            <img src="assets/img/logo-icon.png" alt="" class="footer-logo-icon" aria-hidden="true">
-            <img src="assets/img/logo-text.png" alt="FormatJet" class="footer-logo-text-img">
-          </a>
-          <p class="footer-tagline" data-i18n="footer-tagline">Dosyalarını hızlı, güvenli ve kolayca dönüştür.</p>
-          <div class="footer-trust">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span data-i18n="footer-trust">Dosyalar işlemden sonra otomatik silinir.</span>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-col-title">Araçlar</h4>
-          <ul class="footer-links">
-            <li><a href="pdf.html">PDF</a></li>
-            <li><a href="belge.html">Belge</a></li>
-            <li><a href="gorsel.html">Görsel</a></li>
-            <li><a href="video.html">Video</a></li>
-            <li><a href="ses.html">Ses</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-col-title">FormatJet</h4>
-          <ul class="footer-links">
-            <li><a href="pages/hakkimizda.html">Hakkımızda</a></li>
-            <li><a href="pages/iletisim.html">İletişim</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-col-title">Yardım</h4>
-          <ul class="footer-links">
-            <li><a href="pages/iletisim.html">Sık Sorulan Sorular</a></li>
-            <li><a href="pages/iletisim.html" class="footer-link-accent">Araç Talep Et</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-col-title">Yasal</h4>
-          <ul class="footer-links">
-            <li><a href="pages/gizlilik.html">Gizlilik Politikası</a></li>
-            <li><a href="pages/kullanim-kosullari.html">Kullanım Koşulları</a></li>
-            <li><a href="pages/cerez.html">Çerez Politikası</a></li>
-            <li><a href="pages/kvkk.html">KVKK Aydınlatma Metni</a></li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer alt bar -->
-  <div class="footer-bar">
-    <div class="container">
-      <div class="footer-bar-inner">
-        <button class="btn-lang-footer" id="btnLangFooter">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          <span class="btn-lang-footer-text">Türkçe</span>
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
-        <p class="footer-copy" data-i18n="footer-copy">© 2026 FormatJet. Tüm hakları saklıdır.</p>
-        <div class="footer-theme-toggle">
-          <button class="theme-btn theme-btn--active" data-theme="light" aria-label="Açık tema">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-          </button>
-          <span class="theme-label">Görünüm</span>
-          <button class="theme-btn" data-theme="dark" aria-label="Koyu tema">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</footer>
-
-<script src="assets/js/i18n.js"></script>
 <script src="assets/js/vendor/supabase.min.js"></script>
 <script src="assets/js/fj-config.js"></script>
+<script src="assets/js/layout.js"></script>
 <script src="assets/js/auth.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/tools-registry.js"></script>
+<script src="assets/js/fj-search.js"></script>
 </body>
 </html>

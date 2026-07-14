@@ -5,29 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video Sıkıştır — FormatJet</title>
   <meta name="description" content="Videoyu H.264 ile yeniden kodlayarak küçült. Ücretsiz, hızlı, tarayıcıda çalışır.">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/lang-panel.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-<nav class="nav">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="../index.html" class="logo">
-        <img src="../assets/img/logo-icon.png" alt="" style="height:22px" aria-hidden="true">
-        <img src="../assets/img/logo-text.png" alt="FormatJet" style="height:16px">
-      </a>
-      <div class="nav-right">
-        <button class="btn-nav btn-ghost" onclick="location.href='../login.html'">Giriş Yap</button>
-        <button class="btn-nav btn-accent" onclick="location.href='../odeme.html'">Pro'ya Geç</button>
-      </div>
-    </div>
-  </div>
-</nav>
 
-<main class="tool-page">
+<div data-fj-header></div>
+
+<main class="tool-page tool-page--centered">
   <div class="container">
     <div class="tool-header">
       <a href="../video.html" class="tool-back">
@@ -97,9 +85,14 @@
   </div>
 </main>
 
+<div data-fj-footer></div>
+
 <script src="../assets/js/vendor/supabase.min.js"></script>
 <script src="../assets/js/fj-config.js"></script>
+<script src="../assets/js/layout.js"></script>
 <script src="../assets/js/auth.js"></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/main.js"></script>
 <script src="../assets/js/tools-registry.js"></script>
 <script src="../assets/js/tool-engine.js"></script>
 </body>

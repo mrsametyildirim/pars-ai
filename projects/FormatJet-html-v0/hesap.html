@@ -54,39 +54,7 @@
 </head>
 <body>
 
-<header class="site-header" id="siteHeader">
-  <div class="header-inner container-wide">
-    <a href="index.html" class="logo" aria-label="FormatJet Ana Sayfa">
-      <img src="assets/img/logo-icon.png" alt="" class="logo-icon-img" aria-hidden="true">
-      <img src="assets/img/logo-text.png" alt="FormatJet" class="logo-text-img">
-    </a>
-    <nav class="header-nav" aria-label="Kategori menüsü">
-      <a href="pdf.html" class="nav-link">PDF</a>
-      <a href="belge.html" class="nav-link">Belge</a>
-      <a href="gorsel.html" class="nav-link">Görsel</a>
-      <a href="video.html" class="nav-link">Video</a>
-      <a href="ses.html" class="nav-link">Ses</a>
-      <a href="tools.html" class="btn-all-tools">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-          <rect x="0" y="0" width="4" height="4" rx="1"/><rect x="6" y="0" width="4" height="4" rx="1"/><rect x="12" y="0" width="4" height="4" rx="1"/>
-          <rect x="0" y="6" width="4" height="4" rx="1"/><rect x="6" y="6" width="4" height="4" rx="1"/><rect x="12" y="6" width="4" height="4" rx="1"/>
-          <rect x="0" y="12" width="4" height="4" rx="1"/><rect x="6" y="12" width="4" height="4" rx="1"/><rect x="12" y="12" width="4" height="4" rx="1"/>
-        </svg>
-        Tüm Araçlar
-      </a>
-    </nav>
-    <div class="header-right">
-      <a href="pages/hakkimizda.html" class="btn-bizi-tani">Bizi Tanı</a>
-      <button class="btn-login" onclick="location.href='login.html'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Giriş Yap
-      </button>
-      <button class="btn-hamburger" id="btnHamburger" aria-label="Menüyü aç" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</header>
+<div data-fj-header></div>
 
 <main>
   <div class="account-wrap">
@@ -99,6 +67,10 @@
           <span class="account-field-label">Ad Soyad</span>
           <span class="account-field-value" id="accName">—</span>
         </div>
+        <div class="account-field" id="editNameRow" hidden>
+          <input type="text" id="editNameInput" class="form-input" placeholder="Yeni ad soyad" style="max-width:220px">
+          <button class="btn-small" id="btnSaveName" style="color:#fff;background:var(--blue);border-color:var(--blue)">Kaydet</button>
+        </div>
         <div class="account-field">
           <span class="account-field-label">E-posta</span>
           <span class="account-field-value" id="accEmail">—</span>
@@ -107,9 +79,11 @@
           <span class="account-field-label">Üyelik tarihi</span>
           <span class="account-field-value" id="accCreated">—</span>
         </div>
-        <div style="margin-top:16px;display:flex;gap:10px">
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn-small" id="btnEditName">Bilgileri Düzenle</button>
           <a href="sifremi-unuttum.html" class="btn-small">Şifre Değiştir</a>
           <button class="btn-small btn-small--danger" id="btnSignOut">Çıkış Yap</button>
+          <button class="btn-small btn-small--danger" id="btnDeleteAccount">Hesabı Sil</button>
         </div>
       </div>
 
@@ -153,13 +127,13 @@
   </div>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-bar"><div class="container"><div class="footer-bar-inner"><p class="footer-copy">© 2026 FormatJet. Tüm hakları saklıdır.</p></div></div></div>
-</footer>
+<div data-fj-footer></div>
 
 <script src="assets/js/vendor/supabase.min.js"></script>
 <script src="assets/js/fj-config.js"></script>
+<script src="assets/js/layout.js"></script>
 <script src="assets/js/auth.js"></script>
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/main.js"></script>
 <script>
 (async function () {
@@ -191,6 +165,36 @@
   planEl.appendChild(chip);
 
   document.getElementById('btnSignOut').addEventListener('click', window.fjAuth.signOut);
+
+  /* Bilgileri düzenle */
+  document.getElementById('btnEditName').addEventListener('click', () => {
+    const row = document.getElementById('editNameRow');
+    row.hidden = !row.hidden;
+    if (!row.hidden) {
+      document.getElementById('editNameInput').value = profile.full_name || '';
+      document.getElementById('editNameInput').focus();
+    }
+  });
+  document.getElementById('btnSaveName').addEventListener('click', async () => {
+    const name = document.getElementById('editNameInput').value.trim();
+    if (!name) return;
+    const { error } = await window.fjAuth.sb
+      .from('profiles')
+      .update({ full_name: name })
+      .eq('id', profile.id);
+    if (error) { alert('Kaydedilemedi: ' + error.message); return; }
+    document.getElementById('accName').textContent = name;
+    document.getElementById('editNameRow').hidden = true;
+  });
+
+  /* Hesabı sil */
+  document.getElementById('btnDeleteAccount').addEventListener('click', async () => {
+    if (!confirm('Hesabını silmek istediğine emin misin? Bu işlem geri alınamaz ve tekrar giriş yapamazsın.')) return;
+    const { error } = await window.fjAuth.sb.rpc('delete_own_account');
+    if (error) { alert('Silinemedi: ' + error.message); return; }
+    await window.fjAuth.sb.auth.signOut();
+    location.href = 'index.html';
+  });
 
   /* Kullanım geçmişi */
   const { data: usage } = await window.fjAuth.sb
