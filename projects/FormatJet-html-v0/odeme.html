@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/lang-panel.css">
+  <link rel="stylesheet" href="assets/css/main.css?v=7">
+  <link rel="stylesheet" href="assets/css/lang-panel.css?v=7">
   <style>
     .pricing-hero { text-align: center; padding: 56px 0 40px; }
     .pricing-title { font-size: 34px; font-weight: 800; color: var(--navy); letter-spacing: -0.03em; margin-bottom: 10px; }
@@ -129,7 +129,7 @@
       <div class="plan-name">Ücretsiz</div>
       <div class="plan-price">₺0<small>/ay</small></div>
       <p class="plan-desc">Günlük kullanım için temel araçlar.</p>
-      <div class="plan-features">
+      <div class="plan-features" data-plan-feats>
         <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>70+ araca erişim</div>
         <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>50 MB dosya limiti</div>
         <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Günde 10 işlem</div>
@@ -143,7 +143,7 @@
       <div class="plan-name">Pro</div>
       <div class="plan-price" data-price-monthly="₺79" data-price-yearly="₺59">₺79<small>/ay</small></div>
       <p class="plan-desc">Sık kullananlar için sınırsız güç.</p>
-      <div class="plan-features">
+      <div class="plan-features" data-plan-feats>
         <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Sınırsız işlem</div>
         <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>2 GB dosya limiti</div>
         <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Öncelikli işlem kuyruğu</div>
@@ -157,7 +157,7 @@
       <div class="plan-name">Business</div>
       <div class="plan-price" data-price-monthly="₺249" data-price-yearly="₺189">₺249<small>/ay</small></div>
       <p class="plan-desc">Ekipler ve yoğun kullanım için.</p>
-      <div class="plan-features">
+      <div class="plan-features" data-plan-feats>
         <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Pro'daki her şey</div>
         <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>5 kullanıcı</div>
         <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>10 GB dosya limiti</div>
@@ -244,11 +244,11 @@
 <div data-fj-footer></div>
 
 <script src="assets/js/vendor/supabase.min.js"></script>
-<script src="assets/js/fj-config.js"></script>
-<script src="assets/js/layout.js"></script>
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/fj-config.js?v=7"></script>
+<script src="assets/js/layout.js?v=7"></script>
+<script src="assets/js/auth.js?v=7"></script>
+<script src="assets/js/i18n.js?v=7"></script>
+<script src="assets/js/main.js?v=7"></script>
 <script>
 (function () {
   const PLANS = { pro: 'Pro', business: 'Business' };
@@ -361,9 +361,26 @@
     }
   });
 
-  /* Admin panelinden fiyat güncellemesi */
+  /* Admin panelinden fiyat + yetki güncellemesi */
   document.addEventListener('fj:settings', (e) => {
     const s = e.detail || {};
+
+    /* Plan özellik listeleri (satır satır) */
+    const featLists = document.querySelectorAll('[data-plan-feats]');
+    [['plan_free_feats', 0], ['plan_pro_feats', 1], ['plan_business_feats', 2]].forEach(([key, idx]) => {
+      if (!s[key] || !featLists[idx]) return;
+      const wrap = featLists[idx];
+      wrap.innerHTML = '';
+      s[key].split(/\r?\n/).map(l => l.trim()).filter(Boolean).forEach(line => {
+        const div = document.createElement('div');
+        div.className = 'plan-feat';
+        div.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>';
+        const span = document.createElement('span');
+        span.textContent = line;
+        div.appendChild(span);
+        wrap.appendChild(div);
+      });
+    });
     const priceMap = [
       ['pro', s.price_pro_monthly, s.price_pro_yearly],
       ['business', s.price_business_monthly, s.price_business_yearly],

@@ -4,42 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hesabım — FormatJet</title>
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="assets/css/main.css?v=7">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css">
   <style>
     .account-wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 96px; }
-    .account-title { font-size: 28px; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; margin-bottom: 32px; }
-    .account-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .account-title { font-size: 28px; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; margin-bottom: 24px; }
+
+    .acc-tabs { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .acc-tab {
+      padding: 10px 16px; font-size: 13px; font-weight: 600;
+      color: var(--text-2); background: none; border: none;
+      border-bottom: 2px solid transparent; cursor: pointer;
+      font-family: inherit; margin-bottom: -1px; transition: all 150ms;
+    }
+    .acc-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+    .acc-tab-badge { margin-left: 5px; padding: 1px 7px; font-size: 10px; font-weight: 700; color: #fff; background: #D97706; border-radius: 999px; }
+
+    .acc-panel { display: none; }
+    .acc-panel.active { display: block; }
+
     .account-card {
       background: var(--surface); border: 1.5px solid var(--border);
-      border-radius: var(--r-xl); padding: 24px;
+      border-radius: var(--r-xl); padding: 24px; margin-bottom: 20px;
     }
-    .account-card-title {
-      font-size: 12px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.06em; color: var(--text-3); margin-bottom: 16px;
-    }
-    .account-field { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .account-card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-3); margin-bottom: 16px; }
+    .account-field { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; gap: 12px; }
     .account-field:last-child { border-bottom: none; }
     .account-field-label { color: var(--text-2); }
-    .account-field-value { color: var(--text); font-weight: 600; }
-    .plan-chip {
-      display: inline-flex; padding: 3px 12px; font-size: 12px; font-weight: 700;
-      border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em;
-    }
+    .account-field-value { color: var(--text); font-weight: 600; text-align: right; }
+
+    .plan-chip { display: inline-flex; padding: 3px 12px; font-size: 12px; font-weight: 700; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.04em; }
     .plan-chip--free { color: var(--text-2); background: var(--bg); border: 1px solid var(--border); }
     .plan-chip--paid { color: #fff; background: var(--blue); }
+
     .usage-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .usage-table th {
-      text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-3);
-      border-bottom: 1px solid var(--border);
-    }
+    .usage-table th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-3); border-bottom: 1px solid var(--border); }
     .usage-table td { padding: 10px 12px; color: var(--text-2); border-bottom: 1px solid var(--border); }
     .usage-table tr:last-child td { border-bottom: none; }
     .empty-note { font-size: 13px; color: var(--text-3); padding: 16px 0; text-align: center; }
+
     .btn-small {
       padding: 8px 16px; font-size: 13px; font-weight: 600;
       color: var(--blue); background: none; border: 1.5px solid var(--border);
@@ -49,7 +54,39 @@
     .btn-small:hover { border-color: var(--blue); }
     .btn-small--danger { color: #DC2626; }
     .btn-small--danger:hover { border-color: #DC2626; }
-    @media (max-width: 720px) { .account-grid { grid-template-columns: minmax(0,1fr); } }
+    .btn-small--primary { color: #fff; background: var(--blue); border-color: var(--blue); }
+
+    /* Taleplerim */
+    .ticket {
+      border: 1.5px solid var(--border); border-radius: var(--r-lg);
+      padding: 16px 18px; margin-bottom: 12px; background: var(--surface);
+    }
+    .ticket-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+    .ticket-subject { font-size: 13px; font-weight: 700; color: var(--text); }
+    .ticket-date { font-size: 11px; color: var(--text-3); }
+    .ticket-status { padding: 2px 10px; font-size: 11px; font-weight: 700; border-radius: 999px; }
+    .ticket-status--waiting { color: #B45309; background: rgba(217,119,6,0.12); }
+    .ticket-status--replied { color: #047857; background: rgba(5,150,105,0.12); }
+    .ticket-msg { font-size: 13px; color: var(--text-2); line-height: 1.6; padding: 10px 12px; background: var(--bg); border-radius: var(--r-md); }
+    .ticket-reply {
+      margin-top: 10px; padding: 10px 12px; font-size: 13px; line-height: 1.6;
+      color: var(--text); background: rgba(37,99,235,0.06);
+      border-left: 3px solid var(--blue); border-radius: 0 var(--r-md) var(--r-md) 0;
+    }
+    .ticket-reply-label { display: block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--blue); margin-bottom: 4px; }
+    .ticket-closed-note { margin-top: 8px; font-size: 11px; color: var(--text-3); }
+
+    /* Hesap durumu */
+    .quota-bar { height: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin: 10px 0 6px; }
+    .quota-fill { height: 100%; background: var(--blue); border-radius: 6px; transition: width 300ms; }
+    .coffee-cta {
+      display: flex; align-items: center; gap: 16px; padding: 18px 20px;
+      background: var(--navy); border-radius: var(--r-lg); margin-top: 16px;
+    }
+    .coffee-cta-body { flex: 1; }
+    .coffee-cta-body strong { display: block; font-size: 15px; color: #fff; margin-bottom: 3px; }
+    .coffee-cta-body span { font-size: 12px; color: rgba(255,255,255,0.6); }
+    @media (max-width: 640px) { .account-field { flex-direction: column; align-items: flex-start; gap: 4px; } .account-field-value { text-align: left; } }
   </style>
 </head>
 <body>
@@ -60,25 +97,25 @@
   <div class="account-wrap">
     <h1 class="account-title">Hesabım</h1>
 
-    <div class="account-grid">
+    <div class="acc-tabs">
+      <button class="acc-tab active" data-acc="bilgi">Hesap Bilgilerim</button>
+      <button class="acc-tab" data-acc="odeme">Ödeme Bilgilerim</button>
+      <button class="acc-tab" data-acc="kullanim">Kullanım Geçmişim</button>
+      <button class="acc-tab" data-acc="talep">Taleplerim<span class="acc-tab-badge" id="ticketBadge" hidden></span></button>
+      <button class="acc-tab" data-acc="durum">Hesap Durumu</button>
+    </div>
+
+    <!-- HESAP BİLGİLERİM -->
+    <div class="acc-panel active" data-accpanel="bilgi">
       <div class="account-card">
         <div class="account-card-title">Profil</div>
-        <div class="account-field">
-          <span class="account-field-label">Ad Soyad</span>
-          <span class="account-field-value" id="accName">—</span>
-        </div>
+        <div class="account-field"><span class="account-field-label">Ad Soyad</span><span class="account-field-value" id="accName">—</span></div>
         <div class="account-field" id="editNameRow" hidden>
-          <input type="text" id="editNameInput" class="form-input" placeholder="Yeni ad soyad" style="max-width:220px">
-          <button class="btn-small" id="btnSaveName" style="color:#fff;background:var(--blue);border-color:var(--blue)">Kaydet</button>
+          <input type="text" id="editNameInput" class="form-input" placeholder="Yeni ad soyad" style="max-width:240px">
+          <button class="btn-small btn-small--primary" id="btnSaveName">Kaydet</button>
         </div>
-        <div class="account-field">
-          <span class="account-field-label">E-posta</span>
-          <span class="account-field-value" id="accEmail">—</span>
-        </div>
-        <div class="account-field">
-          <span class="account-field-label">Üyelik tarihi</span>
-          <span class="account-field-value" id="accCreated">—</span>
-        </div>
+        <div class="account-field"><span class="account-field-label">E-posta</span><span class="account-field-value" id="accEmail">—</span></div>
+        <div class="account-field"><span class="account-field-label">Üyelik tarihi</span><span class="account-field-value" id="accCreated">—</span></div>
         <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
           <button class="btn-small" id="btnEditName">Bilgileri Düzenle</button>
           <a href="sifremi-unuttum.html" class="btn-small">Şifre Değiştir</a>
@@ -86,43 +123,73 @@
           <button class="btn-small btn-small--danger" id="btnDeleteAccount">Hesabı Sil</button>
         </div>
       </div>
+    </div>
 
+    <!-- ÖDEME BİLGİLERİM -->
+    <div class="acc-panel" data-accpanel="odeme">
       <div class="account-card">
-        <div class="account-card-title">Plan</div>
-        <div class="account-field">
-          <span class="account-field-label">Mevcut plan</span>
-          <span id="accPlan"><span class="plan-chip plan-chip--free">Ücretsiz</span></span>
+        <div class="account-card-title">Mevcut Plan</div>
+        <div class="account-field"><span class="account-field-label">Plan</span><span id="payPlan">—</span></div>
+        <div class="account-field" id="payRenewRow" hidden><span class="account-field-label">Bir sonraki yenileme</span><span class="account-field-value" id="payRenew">—</span></div>
+        <div class="account-field" id="payMethodRow" hidden><span class="account-field-label">Kayıtlı ödeme yöntemi</span><span class="account-field-value" id="payMethod">—</span></div>
+        <div style="margin-top:16px" id="payUpgradeWrap" hidden>
+          <a href="odeme.html" class="btn-small btn-small--primary">Pro'ya Geç →</a>
         </div>
-        <div class="account-field" id="accExpiryRow" hidden>
-          <span class="account-field-label">Yenileme tarihi</span>
-          <span class="account-field-value" id="accExpiry">—</span>
-        </div>
-        <div class="account-field">
-          <span class="account-field-label">Dosya limiti</span>
-          <span class="account-field-value" id="accLimit">50 MB</span>
-        </div>
-        <div style="margin-top:16px" id="upgradeWrap">
-          <a href="odeme.html" class="btn-small" style="color:#fff;background:var(--blue);border-color:var(--blue)">Pro'ya Geç →</a>
-        </div>
+      </div>
+      <div class="account-card">
+        <div class="account-card-title">Ödeme Geçmişi ve Faturalar</div>
+        <table class="usage-table" id="payTable">
+          <thead><tr><th>Tarih</th><th>Tutar</th><th>Yöntem</th><th>Durum</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="empty-note" id="payEmpty" hidden>Ödeme kaydın bulunmuyor.</div>
       </div>
     </div>
 
-    <div class="account-card" style="margin-bottom:20px">
-      <div class="account-card-title">Son Kullanım Geçmişi</div>
-      <table class="usage-table" id="usageTable">
-        <thead><tr><th>Araç</th><th>Tarih</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="empty-note" id="usageEmpty" hidden>Henüz araç kullanımın yok. <a href="tools.html" style="color:var(--blue)">Araçları keşfet →</a></div>
+    <!-- KULLANIM GEÇMİŞİM -->
+    <div class="acc-panel" data-accpanel="kullanim">
+      <div class="account-card">
+        <div class="account-card-title">Son 5 İşlem</div>
+        <table class="usage-table" id="usageTable">
+          <thead><tr><th>Araç</th><th>Tarih</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="empty-note" id="usageEmpty" hidden>Henüz araç kullanımın yok. <a href="tools.html" style="color:var(--blue)">Araçları keşfet →</a></div>
+      </div>
     </div>
 
-    <div class="account-card">
-      <div class="account-card-title">Ödeme Geçmişi</div>
-      <table class="usage-table" id="payTable">
-        <thead><tr><th>Tutar</th><th>Yöntem</th><th>Durum</th><th>Tarih</th></tr></thead>
-        <tbody></tbody>
-      </table>
-      <div class="empty-note" id="payEmpty" hidden>Ödeme kaydın bulunmuyor.</div>
+    <!-- TALEPLERİM -->
+    <div class="acc-panel" data-accpanel="talep">
+      <div class="account-card">
+        <div class="account-card-title">Taleplerim</div>
+        <p style="font-size:12px;color:var(--text-3);margin-bottom:16px">
+          Her talep tek yanıtla kapanır. Sorunun devam ediyorsa <a href="pages/iletisim.html" style="color:var(--blue)">yeni talep oluştur</a>.
+        </p>
+        <div id="ticketList"></div>
+        <div class="empty-note" id="ticketEmpty" hidden>Henüz talebin yok. <a href="pages/iletisim.html" style="color:var(--blue)">İletişim formundan yaz →</a></div>
+      </div>
+    </div>
+
+    <!-- HESAP DURUMU -->
+    <div class="acc-panel" data-accpanel="durum">
+      <div class="account-card">
+        <div class="account-card-title">Hesap Durumu</div>
+        <div class="account-field"><span class="account-field-label">Plan</span><span id="stPlan">—</span></div>
+        <div class="account-field"><span class="account-field-label">Dosya limiti</span><span class="account-field-value" id="stLimit">—</span></div>
+        <div class="account-field" style="border-bottom:none;flex-direction:column;align-items:stretch">
+          <span class="account-field-label">Bugünkü işlem kullanımı</span>
+          <div class="quota-bar"><div class="quota-fill" id="quotaFill" style="width:0%"></div></div>
+          <span style="font-size:12px;color:var(--text-2)" id="quotaText">—</span>
+        </div>
+        <div class="coffee-cta" id="coffeeCta" hidden>
+          <div style="font-size:28px">☕</div>
+          <div class="coffee-cta-body">
+            <strong>Dosyaların beklemesin</strong>
+            <span>1 kahve parasına 1 ay Pro: sınırsız işlem, 2 GB dosya limiti, öncelikli kuyruk.</span>
+          </div>
+          <button class="btn-small btn-small--primary" onclick="location.href='odeme.html?plan=pro'">Pro'ya Geç</button>
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -130,43 +197,44 @@
 <div data-fj-footer></div>
 
 <script src="assets/js/vendor/supabase.min.js"></script>
-<script src="assets/js/fj-config.js"></script>
-<script src="assets/js/layout.js"></script>
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/fj-config.js?v=7"></script>
+<script src="assets/js/layout.js?v=7"></script>
+<script src="assets/js/auth.js?v=7"></script>
+<script src="assets/js/i18n.js?v=7"></script>
+<script src="assets/js/main.js?v=7"></script>
 <script>
 (async function () {
   const profile = await window.fjAuth.getProfile();
   if (!profile) { location.href = 'login.html?next=hesap.html'; return; }
+  const sb = window.fjAuth.sb;
 
   const fmt = (d) => new Date(d).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+  const PLAN_TR = { free: 'Ücretsiz', pro: 'Pro', business: 'Business' };
+  const LIMITS = { free: (window.FJ_SITE && window.FJ_SITE.plan_free_limit) || '50 MB', pro: (window.FJ_SITE && window.FJ_SITE.plan_pro_limit) || '2 GB', business: (window.FJ_SITE && window.FJ_SITE.plan_business_limit) || '10 GB' };
+  const DAILY_FREE = Number((window.FJ_SITE && window.FJ_SITE.plan_free_daily) || 10);
 
+  function planChip(plan) {
+    const chip = document.createElement('span');
+    chip.className = 'plan-chip ' + (plan === 'free' ? 'plan-chip--free' : 'plan-chip--paid');
+    chip.textContent = PLAN_TR[plan];
+    return chip;
+  }
+
+  /* Sekmeler */
+  document.querySelectorAll('.acc-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.acc-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector('[data-accpanel="' + tab.dataset.acc + '"]').classList.add('active');
+    });
+  });
+
+  /* ── Hesap Bilgilerim ── */
   document.getElementById('accName').textContent    = profile.full_name || '—';
   document.getElementById('accEmail').textContent   = profile.email;
   document.getElementById('accCreated').textContent = fmt(profile.created_at);
 
-  const planEl = document.getElementById('accPlan');
-  planEl.innerHTML = '';
-  const chip = document.createElement('span');
-  if (profile.plan === 'free') {
-    chip.className = 'plan-chip plan-chip--free';
-    chip.textContent = 'Ücretsiz';
-  } else {
-    chip.className = 'plan-chip plan-chip--paid';
-    chip.textContent = profile.plan === 'pro' ? 'Pro' : 'Business';
-    document.getElementById('accLimit').textContent = profile.plan === 'pro' ? '2 GB' : '10 GB';
-    document.getElementById('upgradeWrap').hidden = true;
-    if (profile.plan_expires_at) {
-      document.getElementById('accExpiryRow').hidden = false;
-      document.getElementById('accExpiry').textContent = fmt(profile.plan_expires_at);
-    }
-  }
-  planEl.appendChild(chip);
-
-  document.getElementById('btnSignOut').addEventListener('click', window.fjAuth.signOut);
-
-  /* Bilgileri düzenle */
   document.getElementById('btnEditName').addEventListener('click', () => {
     const row = document.getElementById('editNameRow');
     row.hidden = !row.hidden;
@@ -178,78 +246,206 @@
   document.getElementById('btnSaveName').addEventListener('click', async () => {
     const name = document.getElementById('editNameInput').value.trim();
     if (!name) return;
-    const { error } = await window.fjAuth.sb
-      .from('profiles')
-      .update({ full_name: name })
-      .eq('id', profile.id);
+    const { error } = await sb.from('profiles').update({ full_name: name }).eq('id', profile.id);
     if (error) { alert('Kaydedilemedi: ' + error.message); return; }
     document.getElementById('accName').textContent = name;
     document.getElementById('editNameRow').hidden = true;
   });
-
-  /* Hesabı sil */
+  document.getElementById('btnSignOut').addEventListener('click', window.fjAuth.signOut);
   document.getElementById('btnDeleteAccount').addEventListener('click', async () => {
     if (!confirm('Hesabını silmek istediğine emin misin? Bu işlem geri alınamaz ve tekrar giriş yapamazsın.')) return;
-    const { error } = await window.fjAuth.sb.rpc('delete_own_account');
+    const { error } = await sb.rpc('delete_own_account');
     if (error) { alert('Silinemedi: ' + error.message); return; }
-    await window.fjAuth.sb.auth.signOut();
+    await sb.auth.signOut();
     location.href = 'index.html';
   });
 
-  /* Kullanım geçmişi */
-  const { data: usage } = await window.fjAuth.sb
+  /* ── Ödeme Bilgilerim ── */
+  document.getElementById('payPlan').appendChild(planChip(profile.plan));
+  if (profile.plan === 'free') {
+    document.getElementById('payUpgradeWrap').hidden = false;
+  } else if (profile.plan_expires_at) {
+    document.getElementById('payRenewRow').hidden = false;
+    document.getElementById('payRenew').textContent = fmt(profile.plan_expires_at);
+  }
+
+  const { data: pays } = await sb
+    .from('payments')
+    .select('id, amount, method, status, card_last4, created_at')
+    .eq('user_id', profile.id)
+    .order('created_at', { ascending: false })
+    .limit(24);
+
+  const METHOD_TR = { card: 'Kart', transfer: 'Havale/EFT' };
+  const PSTATUS_TR = { succeeded: 'Başarılı', pending: 'Beklemede', failed: 'Başarısız' };
+
+  if (pays && pays.length) {
+    const last = pays.find(p => p.method === 'card' && p.card_last4);
+    if (last) {
+      document.getElementById('payMethodRow').hidden = false;
+      document.getElementById('payMethod').textContent = 'Kart •••• ' + last.card_last4;
+    }
+    const body = document.querySelector('#payTable tbody');
+    pays.forEach(p => {
+      const tr = document.createElement('tr');
+      [new Date(p.created_at).toLocaleDateString('tr-TR'),
+       '₺' + Number(p.amount).toLocaleString('tr-TR', { minimumFractionDigits: 2 }),
+       METHOD_TR[p.method] || p.method,
+       PSTATUS_TR[p.status] || p.status].forEach(txt => {
+        const td = document.createElement('td');
+        td.textContent = txt;
+        tr.appendChild(td);
+      });
+      const tdInv = document.createElement('td');
+      const btn = document.createElement('button');
+      btn.className = 'btn-small';
+      btn.textContent = 'Fatura';
+      btn.addEventListener('click', () => openInvoice(p));
+      tdInv.appendChild(btn);
+      tr.appendChild(tdInv);
+      body.appendChild(tr);
+    });
+  } else {
+    document.getElementById('payTable').hidden = true;
+    document.getElementById('payEmpty').hidden = false;
+  }
+
+  function openInvoice(p) {
+    const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const html = '<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><title>Fatura FJ-' + p.id + '</title>' +
+      '<style>body{font-family:Arial;max-width:560px;margin:40px auto;color:#111827}h1{color:#0D1B2E;font-size:20px}' +
+      'table{width:100%;border-collapse:collapse;margin-top:20px}td,th{padding:10px;border-bottom:1px solid #E5E7EB;text-align:left;font-size:14px}' +
+      '.tot{font-weight:700;font-size:16px}.muted{color:#6B7280;font-size:12px}</style></head><body>' +
+      '<h1>Format<span style="color:#2563EB">Jet</span> — Fatura</h1>' +
+      '<p class="muted">Fatura No: FJ-' + p.id + ' · Tarih: ' + new Date(p.created_at).toLocaleDateString('tr-TR') + '</p>' +
+      '<p class="muted">Müşteri: ' + esc(profile.full_name || profile.email) + ' (' + esc(profile.email) + ')</p>' +
+      '<table><tr><th>Açıklama</th><th>Tutar</th></tr>' +
+      '<tr><td>FormatJet ' + PLAN_TR[profile.plan] + ' abonelik</td><td>₺' + Number(p.amount).toLocaleString('tr-TR', { minimumFractionDigits: 2 }) + '</td></tr>' +
+      '<tr><td class="tot">Toplam (KDV dahil)</td><td class="tot">₺' + Number(p.amount).toLocaleString('tr-TR', { minimumFractionDigits: 2 }) + '</td></tr></table>' +
+      '<p class="muted">Ödeme yöntemi: ' + (METHOD_TR[p.method] || p.method) + (p.card_last4 ? ' •••• ' + p.card_last4 : '') + '</p>' +
+      '<p class="muted">Bu belge bilgilendirme amaçlıdır (sandbox).</p>' +
+      '<script>window.print()<\/script></body></html>';
+    const url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+    window.open(url, '_blank');
+  }
+
+  /* ── Kullanım Geçmişim (son 5) ── */
+  const { data: usage } = await sb
     .from('tool_usage')
     .select('tool_slug, created_at')
     .eq('user_id', profile.id)
     .order('created_at', { ascending: false })
-    .limit(10);
+    .limit(5);
 
-  const usageBody = document.querySelector('#usageTable tbody');
   if (usage && usage.length) {
+    const body = document.querySelector('#usageTable tbody');
     usage.forEach(u => {
       const tr = document.createElement('tr');
       const td1 = document.createElement('td');
       td1.textContent = u.tool_slug;
-      td1.style.fontWeight = '600';
-      td1.style.color = 'var(--text)';
+      td1.style.fontWeight = '600'; td1.style.color = 'var(--text)';
       const td2 = document.createElement('td');
       td2.textContent = new Date(u.created_at).toLocaleString('tr-TR');
-      tr.appendChild(td1); tr.appendChild(td2);
-      usageBody.appendChild(tr);
+      tr.append(td1, td2);
+      body.appendChild(tr);
     });
   } else {
     document.getElementById('usageTable').hidden = true;
     document.getElementById('usageEmpty').hidden = false;
   }
 
-  /* Ödeme geçmişi */
-  const { data: pays } = await window.fjAuth.sb
-    .from('payments')
-    .select('amount, method, status, created_at')
-    .eq('user_id', profile.id)
-    .order('created_at', { ascending: false })
-    .limit(10);
+  /* ── Taleplerim ── */
+  const SUBJECT_TR = { teknik: 'Teknik Sorun', 'arac-talebi': 'Yeni Araç Talebi', gizlilik: 'Gizlilik/KVKK', 'is-birligi': 'İş Birliği', diger: 'Diğer', 'hata-bildir': 'Hata Bildirimi' };
+  const [{ data: msgs }, { data: reqs }] = await Promise.all([
+    sb.from('contact_messages').select('id, subject, message, status, admin_reply, replied_at, created_at').eq('user_id', profile.id).order('created_at', { ascending: false }),
+    sb.from('tool_requests').select('id, tool_name, details, status, admin_reply, replied_at, created_at').eq('user_id', profile.id).order('created_at', { ascending: false }),
+  ]);
 
-  const payBody = document.querySelector('#payTable tbody');
-  const STATUS_TR = { succeeded: 'Başarılı', pending: 'Beklemede', failed: 'Başarısız' };
-  const METHOD_TR = { card: 'Kart', transfer: 'Havale/EFT' };
-  if (pays && pays.length) {
-    pays.forEach(p => {
-      const tr = document.createElement('tr');
-      [['₺' + Number(p.amount).toLocaleString('tr-TR', {minimumFractionDigits: 2}), '600'],
-       [METHOD_TR[p.method] || p.method, ''],
-       [STATUS_TR[p.status] || p.status, ''],
-       [new Date(p.created_at).toLocaleDateString('tr-TR'), '']].forEach(([txt, w]) => {
-        const td = document.createElement('td');
-        td.textContent = txt;
-        if (w) { td.style.fontWeight = w; td.style.color = 'var(--text)'; }
-        tr.appendChild(td);
-      });
-      payBody.appendChild(tr);
-    });
+  const tickets = [
+    ...(msgs || []).map(m => ({ subject: SUBJECT_TR[m.subject] || m.subject, msg: m.message, reply: m.admin_reply, created: m.created_at })),
+    ...(reqs || []).map(r => ({ subject: 'Yeni Araç Talebi', msg: r.details || r.tool_name, reply: r.admin_reply, created: r.created_at })),
+  ].sort((a, b) => new Date(b.created) - new Date(a.created));
+
+  const list = document.getElementById('ticketList');
+  if (!tickets.length) {
+    document.getElementById('ticketEmpty').hidden = false;
   } else {
-    document.getElementById('payTable').hidden = true;
-    document.getElementById('payEmpty').hidden = false;
+    const waiting = tickets.filter(t => !t.reply).length;
+    if (waiting) {
+      const b = document.getElementById('ticketBadge');
+      b.textContent = waiting; b.hidden = false;
+    }
+    tickets.forEach(t => {
+      const div = document.createElement('div');
+      div.className = 'ticket';
+
+      const head = document.createElement('div');
+      head.className = 'ticket-head';
+      const subj = document.createElement('span');
+      subj.className = 'ticket-subject';
+      subj.textContent = t.subject;
+      const date = document.createElement('span');
+      date.className = 'ticket-date';
+      date.textContent = new Date(t.created).toLocaleDateString('tr-TR');
+      const status = document.createElement('span');
+      status.className = 'ticket-status ' + (t.reply ? 'ticket-status--replied' : 'ticket-status--waiting');
+      status.textContent = t.reply ? 'Cevaplandı' : 'Yanıt bekliyor';
+      head.append(subj, date, status);
+
+      const msg = document.createElement('div');
+      msg.className = 'ticket-msg';
+      msg.textContent = t.msg;
+
+      div.append(head, msg);
+
+      if (t.reply) {
+        const rep = document.createElement('div');
+        rep.className = 'ticket-reply';
+        const lbl = document.createElement('span');
+        lbl.className = 'ticket-reply-label';
+        lbl.textContent = 'FormatJet Destek';
+        const txt = document.createElement('span');
+        txt.textContent = t.reply;
+        rep.append(lbl, txt);
+        div.appendChild(rep);
+        const note = document.createElement('div');
+        note.className = 'ticket-closed-note';
+        note.textContent = 'Bu konu kapandı. Sorunun devam ediyorsa yeni bir talep oluşturabilirsin.';
+        div.appendChild(note);
+      }
+      list.appendChild(div);
+    });
+  }
+
+  /* ── Hesap Durumu ── */
+  document.getElementById('stPlan').appendChild(planChip(profile.plan));
+  document.getElementById('stLimit').textContent = LIMITS[profile.plan];
+
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const { count: todayCount } = await sb
+    .from('tool_usage')
+    .select('id', { count: 'exact', head: true })
+    .eq('user_id', profile.id)
+    .gte('created_at', today.toISOString());
+
+  const used = todayCount || 0;
+  if (profile.plan === 'free') {
+    const pct = Math.min(100, Math.round(used / DAILY_FREE * 100));
+    document.getElementById('quotaFill').style.width = pct + '%';
+    if (pct >= 80) document.getElementById('quotaFill').style.background = '#DC2626';
+    document.getElementById('quotaText').textContent = used + ' / ' + DAILY_FREE + ' işlem kullanıldı · ' + Math.max(0, DAILY_FREE - used) + ' işlem kaldı';
+    document.getElementById('coffeeCta').hidden = false;
+  } else {
+    document.getElementById('quotaFill').style.width = '100%';
+    document.getElementById('quotaFill').style.background = '#059669';
+    document.getElementById('quotaText').textContent = 'Bugün ' + used + ' işlem · ' + PLAN_TR[profile.plan] + ' planında işlem limiti yok';
+  }
+
+  /* URL'den sekme (#talep gibi) */
+  const hash = location.hash.replace('#', '');
+  if (hash) {
+    const tab = document.querySelector('[data-acc="' + hash + '"]');
+    if (tab) tab.click();
   }
 })();
 </script>

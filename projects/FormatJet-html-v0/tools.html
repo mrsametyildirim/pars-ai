@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/lang-panel.css">
+  <link rel="stylesheet" href="assets/css/main.css?v=7">
+  <link rel="stylesheet" href="assets/css/lang-panel.css?v=7">
   <style>
     .tools-hero {
       background: var(--bg, #F8F9FA);
@@ -183,8 +183,8 @@
 <main>
   <section class="tools-hero">
     <div class="container">
-      <h1 class="tools-hero-title">Tüm Araçlar</h1>
-      <p class="tools-hero-sub">70+ ücretsiz dosya aracı. Kayıt gerekmez.</p>
+      <h1 class="tools-hero-title" data-i18n="tools-title">Tüm Araçlar</h1>
+      <p class="tools-hero-sub" data-i18n="tools-sub">70+ ücretsiz dosya aracı. Kayıt gerekmez.</p>
       <div class="tools-search-wrap">
         <svg class="tools-search-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <input type="text" class="tools-search-input" id="allToolSearch" placeholder="Araç ara: PDF, görsel, video..." autocomplete="off">
@@ -216,63 +216,63 @@
       <div class="all-tool-grid">
         <a href="tools/pdf-birlestir.html" class="all-tool-card" data-cat="pdf" data-name="PDF Birleştir">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h4"/></svg></div>
-          <span class="all-tool-card-name">PDF Birleştir</span>
+          <span class="all-tool-card-name" data-tool-name>PDF Birleştir</span>
         </a>
         <a href="tools/pdf-sikistir.html" class="all-tool-card" data-cat="pdf" data-name="PDF Sıkıştır">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg></div>
-          <span class="all-tool-card-name">PDF Sıkıştır</span>
+          <span class="all-tool-card-name" data-tool-name>PDF Sıkıştır</span>
         </a>
         <a href="tools/pdf-bol.html" class="all-tool-card" data-cat="pdf" data-name="PDF Böl">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 12h8"/></svg></div>
-          <span class="all-tool-card-name">PDF Böl</span>
+          <span class="all-tool-card-name" data-tool-name>PDF Böl</span>
         </a>
         <a href="tools/pdf-word.html" class="all-tool-card" data-cat="pdf" data-name="PDF'den Word">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
-          <span class="all-tool-card-name">PDF'den Word</span>
+          <span class="all-tool-card-name" data-tool-name>PDF'den Word</span>
         </a>
         <a href="tools/pdf-gorsel.html" class="all-tool-card" data-cat="pdf" data-name="PDF'den Görsel">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><rect x="6" y="12" width="12" height="8" rx="1"/><path d="m8 17 2-2 2 2 2-2 2 2"/></svg></div>
-          <span class="all-tool-card-name">PDF'den Görsel</span>
+          <span class="all-tool-card-name" data-tool-name>PDF'den Görsel</span>
         </a>
         <a href="tools/pdf-duzenle.html" class="all-tool-card" data-cat="pdf" data-name="PDF Düzenle">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-          <span class="all-tool-card-name">Sayfaları Düzenle</span>
+          <span class="all-tool-card-name" data-tool-name>Sayfaları Düzenle</span>
         </a>
         <a href="tools/pdf-kilitle.html" class="all-tool-card" data-cat="pdf" data-name="PDF Kilitle">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          <span class="all-tool-card-name">PDF Kilitle</span>
+          <span class="all-tool-card-name" data-tool-name>PDF Kilitle</span>
         </a>
         <a href="tools/pdf-koruma-kaldir.html" class="all-tool-card" data-cat="pdf" data-name="PDF Koruma Kaldır">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div>
-          <span class="all-tool-card-name">PDF Koruma Kaldır</span>
+          <span class="all-tool-card-name" data-tool-name>PDF Koruma Kaldır</span>
         </a>
         <a href="tools/ocr.html" class="all-tool-card" data-cat="pdf" data-name="OCR Metin Çıkar">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 12h6M12 9v6"/></svg></div>
-          <span class="all-tool-card-name">OCR ile Metin Çıkar</span>
+          <span class="all-tool-card-name" data-tool-name>OCR ile Metin Çıkar</span>
         </a>
         <a href="tools/word-pdf.html" class="all-tool-card" data-cat="pdf" data-name="Word'den PDF">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m8.5 15 1.5-4 1.5 3 1-2 1.5 3"/></svg></div>
-          <span class="all-tool-card-name">Word'den PDF</span>
+          <span class="all-tool-card-name" data-tool-name>Word'den PDF</span>
         </a>
         <a href="tools/excel-pdf.html" class="all-tool-card" data-cat="pdf" data-name="Excel'den PDF">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h2M8 17h8M14 13h2"/></svg></div>
-          <span class="all-tool-card-name">Excel'den PDF</span>
+          <span class="all-tool-card-name" data-tool-name>Excel'den PDF</span>
         </a>
         <a href="tools/ppt-pdf.html" class="all-tool-card" data-cat="pdf" data-name="PPT'den PDF">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8h10M7 12h6"/></svg></div>
-          <span class="all-tool-card-name">PPT'den PDF</span>
+          <span class="all-tool-card-name" data-tool-name>PPT'den PDF</span>
         </a>
         <a href="tools/gorsel-pdf.html" class="all-tool-card" data-cat="pdf" data-name="JPG'den PDF">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
-          <span class="all-tool-card-name">JPG'den PDF</span>
+          <span class="all-tool-card-name" data-tool-name>JPG'den PDF</span>
         </a>
         <a href="tools/pdf-don.html" class="all-tool-card" data-cat="pdf" data-name="PDF Döndür">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 15a3 3 0 1 0 6 0"/></svg></div>
-          <span class="all-tool-card-name">PDF Döndür</span>
+          <span class="all-tool-card-name" data-tool-name>PDF Döndür</span>
         </a>
         <a href="tools/pdf-filigran.html" class="all-tool-card" data-cat="pdf" data-name="PDF Filigran">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 16l2-2 2 2 2-2"/></svg></div>
-          <span class="all-tool-card-name">PDF Filigran</span>
+          <span class="all-tool-card-name" data-tool-name>PDF Filigran</span>
         </a>
       </div>
     </div>
@@ -286,51 +286,51 @@
       <div class="all-tool-grid">
         <a href="tools/word-pdf.html" class="all-tool-card" data-cat="belge" data-name="Word'den PDF">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m8.5 15 1.5-4 1.5 3 1-2 1.5 3"/></svg></div>
-          <span class="all-tool-card-name">Word'den PDF</span>
+          <span class="all-tool-card-name" data-tool-name>Word'den PDF</span>
         </a>
         <a href="tools/excel-pdf.html" class="all-tool-card" data-cat="belge" data-name="Excel'den PDF">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h2M8 17h8M14 13h2"/></svg></div>
-          <span class="all-tool-card-name">Excel'den PDF</span>
+          <span class="all-tool-card-name" data-tool-name>Excel'den PDF</span>
         </a>
         <a href="tools/ppt-pdf.html" class="all-tool-card" data-cat="belge" data-name="PPT'den PDF">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8h10M7 12h6"/></svg></div>
-          <span class="all-tool-card-name">PPT'den PDF</span>
+          <span class="all-tool-card-name" data-tool-name>PPT'den PDF</span>
         </a>
         <a href="tools/pdf-word.html" class="all-tool-card" data-cat="belge" data-name="PDF'den Word">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
-          <span class="all-tool-card-name">PDF'den Word</span>
+          <span class="all-tool-card-name" data-tool-name>PDF'den Word</span>
         </a>
         <a href="tools/ocr.html" class="all-tool-card" data-cat="belge" data-name="OCR Metin Çıkar">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 12h6M12 9v6"/></svg></div>
-          <span class="all-tool-card-name">OCR ile Metin Çıkar</span>
+          <span class="all-tool-card-name" data-tool-name>OCR ile Metin Çıkar</span>
         </a>
         <a href="tools/html-pdf.html" class="all-tool-card" data-cat="belge" data-name="HTML'den PDF">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></div>
-          <span class="all-tool-card-name">HTML'den PDF</span>
+          <span class="all-tool-card-name" data-tool-name>HTML'den PDF</span>
         </a>
         <a href="tools/csv-excel.html" class="all-tool-card" data-cat="belge" data-name="CSV'den Excel">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M4 14h16M4 18h16M4 10h4"/></svg></div>
-          <span class="all-tool-card-name">CSV'den Excel</span>
+          <span class="all-tool-card-name" data-tool-name>CSV'den Excel</span>
         </a>
         <a href="tools/word-txt.html" class="all-tool-card" data-cat="belge" data-name="Word'den TXT">
           <div class="all-tool-card-icon" style="--icon-color:#6B7280"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
-          <span class="all-tool-card-name">Word'den TXT</span>
+          <span class="all-tool-card-name" data-tool-name>Word'den TXT</span>
         </a>
         <a href="tools/txt-word.html" class="all-tool-card" data-cat="belge" data-name="TXT'den Word">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M10 9h1M8 13h8M8 17h5"/></svg></div>
-          <span class="all-tool-card-name">TXT'den Word</span>
+          <span class="all-tool-card-name" data-tool-name>TXT'den Word</span>
         </a>
         <a href="tools/excel-csv.html" class="all-tool-card" data-cat="belge" data-name="Excel'den CSV">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg></div>
-          <span class="all-tool-card-name">Excel'den CSV</span>
+          <span class="all-tool-card-name" data-tool-name>Excel'den CSV</span>
         </a>
         <a href="tools/markdown-html.html" class="all-tool-card" data-cat="belge" data-name="Markdown'dan HTML">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M8 11v5M8 11l4 4 4-4M16 11v5"/></svg></div>
-          <span class="all-tool-card-name">Markdown'dan HTML</span>
+          <span class="all-tool-card-name" data-tool-name>Markdown'dan HTML</span>
         </a>
         <a href="tools/belge-birlestir.html" class="all-tool-card" data-cat="belge" data-name="Belge Birleştir">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3M21 3l-9 9M16 3h5v5"/></svg></div>
-          <span class="all-tool-card-name">Belge Birleştir</span>
+          <span class="all-tool-card-name" data-tool-name>Belge Birleştir</span>
         </a>
       </div>
     </div>
@@ -344,63 +344,63 @@
       <div class="all-tool-grid">
         <a href="tools/gorsel-sikistir.html" class="all-tool-card" data-cat="gorsel" data-name="Görsel Sıkıştır">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
-          <span class="all-tool-card-name">Görsel Sıkıştır</span>
+          <span class="all-tool-card-name" data-tool-name>Görsel Sıkıştır</span>
         </a>
         <a href="tools/arkaplan-kaldir.html" class="all-tool-card" data-cat="gorsel" data-name="Arka Plan Kaldır">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-          <span class="all-tool-card-name">Arka Plan Kaldır</span>
+          <span class="all-tool-card-name" data-tool-name>Arka Plan Kaldır</span>
         </a>
         <a href="tools/heic-jpg.html" class="all-tool-card" data-cat="gorsel" data-name="HEIC'ten JPG">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 11-2 4 2 4M15 7h-2v4h2M13 9h2"/></svg></div>
-          <span class="all-tool-card-name">HEIC'ten JPG'ye</span>
+          <span class="all-tool-card-name" data-tool-name>HEIC'ten JPG'ye</span>
         </a>
         <a href="tools/gorsel-pdf.html" class="all-tool-card" data-cat="gorsel" data-name="Görselden PDF">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><rect x="6" y="12" width="12" height="8" rx="1"/></svg></div>
-          <span class="all-tool-card-name">Görselden PDF</span>
+          <span class="all-tool-card-name" data-tool-name>Görselden PDF</span>
         </a>
         <a href="tools/gorsel-boyutlandir.html" class="all-tool-card" data-cat="gorsel" data-name="Görsel Boyutlandır">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 21H3M21 3H3M3 3v18M21 3v18M8 12h8M12 8v8"/></svg></div>
-          <span class="all-tool-card-name">Görsel Boyutlandır</span>
+          <span class="all-tool-card-name" data-tool-name>Görsel Boyutlandır</span>
         </a>
         <a href="tools/jpg-png.html" class="all-tool-card" data-cat="gorsel" data-name="JPG'den PNG">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
-          <span class="all-tool-card-name">JPG'den PNG</span>
+          <span class="all-tool-card-name" data-tool-name>JPG'den PNG</span>
         </a>
         <a href="tools/png-jpg.html" class="all-tool-card" data-cat="gorsel" data-name="PNG'den JPG">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
-          <span class="all-tool-card-name">PNG'den JPG</span>
+          <span class="all-tool-card-name" data-tool-name>PNG'den JPG</span>
         </a>
         <a href="tools/webp-jpg.html" class="all-tool-card" data-cat="gorsel" data-name="WebP'den JPG">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
-          <span class="all-tool-card-name">WebP'den JPG</span>
+          <span class="all-tool-card-name" data-tool-name>WebP'den JPG</span>
         </a>
         <a href="tools/gorsel-krop.html" class="all-tool-card" data-cat="gorsel" data-name="Görsel Kırp">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 2v14h14M2 6h14v14"/></svg></div>
-          <span class="all-tool-card-name">Görsel Kırp</span>
+          <span class="all-tool-card-name" data-tool-name>Görsel Kırp</span>
         </a>
         <a href="tools/gorsel-don.html" class="all-tool-card" data-cat="gorsel" data-name="Görsel Döndür">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div>
-          <span class="all-tool-card-name">Görsel Döndür</span>
+          <span class="all-tool-card-name" data-tool-name>Görsel Döndür</span>
         </a>
         <a href="tools/svg-png.html" class="all-tool-card" data-cat="gorsel" data-name="SVG'den PNG">
           <div class="all-tool-card-icon" style="--icon-color:#6B7280"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-          <span class="all-tool-card-name">SVG'den PNG</span>
+          <span class="all-tool-card-name" data-tool-name>SVG'den PNG</span>
         </a>
         <a href="tools/avif-jpg.html" class="all-tool-card" data-cat="gorsel" data-name="AVIF'ten JPG">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></div>
-          <span class="all-tool-card-name">AVIF'ten JPG</span>
+          <span class="all-tool-card-name" data-tool-name>AVIF'ten JPG</span>
         </a>
         <a href="tools/gorsel-filigran.html" class="all-tool-card" data-cat="gorsel" data-name="Görsel Filigran">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 15 2-2 2 2 2-2"/><circle cx="8.5" cy="8.5" r="1.5"/></svg></div>
-          <span class="all-tool-card-name">Görsel Filigran</span>
+          <span class="all-tool-card-name" data-tool-name>Görsel Filigran</span>
         </a>
         <a href="tools/gorsel-renk.html" class="all-tool-card" data-cat="gorsel" data-name="Renk Ayarla">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
-          <span class="all-tool-card-name">Renk Ayarla</span>
+          <span class="all-tool-card-name" data-tool-name>Renk Ayarla</span>
         </a>
         <a href="tools/gorsel-yuzey-kaldir.html" class="all-tool-card" data-cat="gorsel" data-name="Nesne Kaldır">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m2 2 20 20M10.5 10.677A2 2 0 0 0 8 12.5V18h3m-2-6h6m2 0h1M5 12H4m4-4.5V5a2 2 0 0 1 2-2h2"/></svg></div>
-          <span class="all-tool-card-name">Nesne Kaldır (AI)</span>
+          <span class="all-tool-card-name" data-tool-name>Nesne Kaldır (AI)</span>
         </a>
       </div>
     </div>
@@ -414,43 +414,43 @@
       <div class="all-tool-grid">
         <a href="tools/video-sikistir.html" class="all-tool-card" data-cat="video" data-name="Video Sıkıştır">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div>
-          <span class="all-tool-card-name">Video Sıkıştır</span>
+          <span class="all-tool-card-name" data-tool-name>Video Sıkıştır</span>
         </a>
         <a href="tools/video-mp3.html" class="all-tool-card" data-cat="video" data-name="Video'dan MP3">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-          <span class="all-tool-card-name">Video'dan MP3</span>
+          <span class="all-tool-card-name" data-tool-name>Video'dan MP3</span>
         </a>
         <a href="tools/mp4-gif.html" class="all-tool-card" data-cat="video" data-name="MP4'ten GIF">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m10 8 6 4-6 4V8z"/></svg></div>
-          <span class="all-tool-card-name">MP4'ten GIF</span>
+          <span class="all-tool-card-name" data-tool-name>MP4'ten GIF</span>
         </a>
         <a href="tools/video-kes.html" class="all-tool-card" data-cat="video" data-name="Video Kes">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="m20 4-8.12 8.12M15 4l5 4-5 4M9 14l5 4-5 4"/></svg></div>
-          <span class="all-tool-card-name">Video Kes</span>
+          <span class="all-tool-card-name" data-tool-name>Video Kes</span>
         </a>
         <a href="tools/video-birlestir.html" class="all-tool-card" data-cat="video" data-name="Video Birleştir">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M9 12H5"/></svg></div>
-          <span class="all-tool-card-name">Video Birleştir</span>
+          <span class="all-tool-card-name" data-tool-name>Video Birleştir</span>
         </a>
         <a href="tools/video-donustur.html" class="all-tool-card" data-cat="video" data-name="Video Dönüştür">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5M13 12l4 2-4 2v-4z"/></svg></div>
-          <span class="all-tool-card-name">Video Dönüştür</span>
+          <span class="all-tool-card-name" data-tool-name>Video Dönüştür</span>
         </a>
         <a href="tools/video-altyazi.html" class="all-tool-card" data-cat="video" data-name="Altyazı Ekle">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 16h4M12 16h4M6 12h12"/></svg></div>
-          <span class="all-tool-card-name">Altyazı Ekle</span>
+          <span class="all-tool-card-name" data-tool-name>Altyazı Ekle</span>
         </a>
         <a href="tools/video-hiz.html" class="all-tool-card" data-cat="video" data-name="Video Hızlandır">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-          <span class="all-tool-card-name">Hızlandır / Yavaşlat</span>
+          <span class="all-tool-card-name" data-tool-name>Hızlandır / Yavaşlat</span>
         </a>
         <a href="tools/video-karelere-bol.html" class="all-tool-card" data-cat="video" data-name="Karelere Böl">
           <div class="all-tool-card-icon" style="--icon-color:#6B7280"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="2" width="9" height="9" rx="1"/><rect x="13" y="2" width="9" height="9" rx="1"/><rect x="2" y="13" width="9" height="9" rx="1"/><rect x="13" y="13" width="9" height="9" rx="1"/></svg></div>
-          <span class="all-tool-card-name">Karelere Böl</span>
+          <span class="all-tool-card-name" data-tool-name>Karelere Böl</span>
         </a>
         <a href="tools/webm-mp4.html" class="all-tool-card" data-cat="video" data-name="WebM'den MP4">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div>
-          <span class="all-tool-card-name">WebM'den MP4</span>
+          <span class="all-tool-card-name" data-tool-name>WebM'den MP4</span>
         </a>
       </div>
     </div>
@@ -464,43 +464,43 @@
       <div class="all-tool-grid">
         <a href="tools/ses-kesici.html" class="all-tool-card" data-cat="ses" data-name="Ses Kesici">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-          <span class="all-tool-card-name">Ses Kesici</span>
+          <span class="all-tool-card-name" data-tool-name>Ses Kesici</span>
         </a>
         <a href="tools/mp3-donustur.html" class="all-tool-card" data-cat="ses" data-name="MP3 Dönüştür">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 12v3M12 12l2-2M12 12l-2-2"/></svg></div>
-          <span class="all-tool-card-name">MP3 Dönüştür</span>
+          <span class="all-tool-card-name" data-tool-name>MP3 Dönüştür</span>
         </a>
         <a href="tools/ses-birlestir.html" class="all-tool-card" data-cat="ses" data-name="Ses Birleştir">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><path d="M6 15v-3M18 13v-3"/></svg></div>
-          <span class="all-tool-card-name">Ses Birleştir</span>
+          <span class="all-tool-card-name" data-tool-name>Ses Birleştir</span>
         </a>
         <a href="tools/ses-sikistir.html" class="all-tool-card" data-cat="ses" data-name="Ses Sıkıştır">
           <div class="all-tool-card-icon" style="--icon-color:#DC2626"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/><path d="M12 15v-4"/></svg></div>
-          <span class="all-tool-card-name">Ses Sıkıştır</span>
+          <span class="all-tool-card-name" data-tool-name>Ses Sıkıştır</span>
         </a>
         <a href="tools/ses-guclendirici.html" class="all-tool-card" data-cat="ses" data-name="Ses Güçlendir">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></div>
-          <span class="all-tool-card-name">Ses Güçlendir</span>
+          <span class="all-tool-card-name" data-tool-name>Ses Güçlendir</span>
         </a>
         <a href="tools/ses-gürültü-kaldir.html" class="all-tool-card" data-cat="ses" data-name="Gürültü Kaldır">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></div>
-          <span class="all-tool-card-name">Gürültü Kaldır</span>
+          <span class="all-tool-card-name" data-tool-name>Gürültü Kaldır</span>
         </a>
         <a href="tools/wav-mp3.html" class="all-tool-card" data-cat="ses" data-name="WAV'dan MP3">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 12h1.5M4.5 8v8M7 5v14M9.5 9v6M12 3v18M14.5 9v6M17 5v14M19.5 8v8M21 12h1"/></svg></div>
-          <span class="all-tool-card-name">WAV'dan MP3</span>
+          <span class="all-tool-card-name" data-tool-name>WAV'dan MP3</span>
         </a>
         <a href="tools/aac-mp3.html" class="all-tool-card" data-cat="ses" data-name="AAC'dan MP3">
           <div class="all-tool-card-icon" style="--icon-color:#059669"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
-          <span class="all-tool-card-name">AAC'dan MP3</span>
+          <span class="all-tool-card-name" data-tool-name>AAC'dan MP3</span>
         </a>
         <a href="tools/ses-metin.html" class="all-tool-card" data-cat="ses" data-name="Sesten Metne">
           <div class="all-tool-card-icon" style="--icon-color:#2563EB"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8"/></svg></div>
-          <span class="all-tool-card-name">Sesten Metne (STT)</span>
+          <span class="all-tool-card-name" data-tool-name>Sesten Metne (STT)</span>
         </a>
         <a href="tools/metin-ses.html" class="all-tool-card" data-cat="ses" data-name="Metinden Sese">
           <div class="all-tool-card-icon" style="--icon-color:#D97706"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>
-          <span class="all-tool-card-name">Metinden Sese (TTS)</span>
+          <span class="all-tool-card-name" data-tool-name>Metinden Sese (TTS)</span>
         </a>
       </div>
     </div>
@@ -510,11 +510,11 @@
 <div data-fj-footer></div>
 
 <script src="assets/js/vendor/supabase.min.js"></script>
-<script src="assets/js/fj-config.js"></script>
-<script src="assets/js/layout.js"></script>
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/fj-config.js?v=7"></script>
+<script src="assets/js/layout.js?v=7"></script>
+<script src="assets/js/auth.js?v=7"></script>
+<script src="assets/js/i18n.js?v=7"></script>
+<script src="assets/js/main.js?v=7"></script>
 <script>
   const tabs = document.querySelectorAll('.tools-tab');
   const sections = document.querySelectorAll('.tools-section');

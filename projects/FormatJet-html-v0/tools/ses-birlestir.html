@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ses Birleştir — FormatJet</title>
   <meta name="description" content="Birden fazla ses dosyasını arka arkaya ekle. Ücretsiz, hızlı, tarayıcıda çalışır.">
-  <link rel="stylesheet" href="../assets/css/main.css">
-  <link rel="stylesheet" href="../assets/css/lang-panel.css">
+  <link rel="stylesheet" href="../assets/css/main.css?v=7">
+  <link rel="stylesheet" href="../assets/css/lang-panel.css?v=7">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -25,14 +25,14 @@
       <div class="tool-page-icon" style="background:color-mix(in srgb, #D97706 10%, transparent);color:#D97706">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
       </div>
-      <h1 class="tool-page-title">Ses Birleştir</h1>
+      <h1 class="tool-page-title" data-tool-name>Ses Birleştir</h1>
       <p class="tool-page-desc">Birden fazla ses dosyasını arka arkaya ekle.</p>
     </div>
 
     <div class="tool-workspace" id="toolWorkspace">
       <div class="limit-bar">
         <span>Ücretsiz: <strong>50 MB</strong>/dosya · Üyelere <strong>200 MB</strong></span>
-        <a href="../odeme.html" style="color:var(--accent, #2563EB);font-weight:500;font-size:12px">Pro'ya geç →</a>
+        <a href="../odeme.html" style="color:var(--accent, #2563EB);font-weight:500;font-size:12px" data-i18n="tool-pro">Pro'ya geç →</a>
       </div>
 
       <div class="upload-zone" id="uploadZone">
@@ -41,7 +41,7 @@
           <div class="drop-icon" style="margin:0 auto 12px">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           </div>
-          <p class="drop-title"><strong>Dosyaları buraya sürükle</strong> veya tıkla</p>
+          <p class="drop-title"><strong data-i18n="tool-drop-title">Dosyaları buraya sürükle veya tıkla</strong></p>
           <p class="drop-sub">SES · Çoklu seçim · İlk kullanımda motor yüklenir (~31 MB)</p>
         </div>
         <div id="fileList" class="file-list" hidden></div>
@@ -55,30 +55,30 @@
       <div class="tool-actions" id="toolActions" hidden>
         <button class="btn-tool-primary" id="btnProcess">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          Dönüştür
+          <span data-i18n="tool-btn-process">Dönüştür</span>
         </button>
-        <button class="btn-tool-ghost" id="btnReset">Yeni Dosya</button>
+        <button class="btn-tool-ghost" id="btnReset"><span data-i18n="tool-btn-reset">Yeni Dosya</span></button>
       </div>
 
       <div class="result-panel" id="resultPanel" hidden></div></div>
 
     <section class="tool-info-section">
-      <h2 class="tool-info-title">Nasıl çalışır?</h2>
+      <h2 class="tool-info-title" data-i18n="tool-how">Nasıl çalışır?</h2>
       <div class="tool-info-grid">
         <div class="tool-info-card">
           <div class="tool-info-num">1</div>
-          <strong>Dosyanı Seç</strong>
-          <p>Sürükle-bırak veya tıklayarak dosyanı yükle.</p>
+          <strong data-i18n="tool-s1">Dosyanı Seç</strong>
+          <p data-i18n="tool-s1d">Sürükle-bırak veya tıklayarak dosyanı yükle.</p>
         </div>
         <div class="tool-info-card">
           <div class="tool-info-num">2</div>
-          <strong>Tarayıcıda İşlenir</strong>
-          <p>Dosyan sunucuya gitmez; işlem cihazında, tarayıcı içinde yapılır.</p>
+          <strong data-i18n="tool-s2">Tarayıcıda İşlenir</strong>
+          <p data-i18n="tool-s2d">Dosyan sunucuya gitmez; işlem cihazında, tarayıcı içinde yapılır.</p>
         </div>
         <div class="tool-info-card">
           <div class="tool-info-num">3</div>
-          <strong>Anında İndir</strong>
-          <p>Sonuç dosyan hazır olur olmaz otomatik indirilir.</p>
+          <strong data-i18n="tool-s3">Anında İndir</strong>
+          <p data-i18n="tool-s3d">Sonuç dosyan hazır olur olmaz otomatik indirilir.</p>
         </div>
       </div>
     </section>
@@ -88,12 +88,12 @@
 <div data-fj-footer></div>
 
 <script src="../assets/js/vendor/supabase.min.js"></script>
-<script src="../assets/js/fj-config.js"></script>
-<script src="../assets/js/layout.js"></script>
-<script src="../assets/js/auth.js"></script>
-<script src="../assets/js/i18n.js"></script>
-<script src="../assets/js/main.js"></script>
-<script src="../assets/js/tools-registry.js"></script>
-<script src="../assets/js/tool-engine.js"></script>
+<script src="../assets/js/fj-config.js?v=7"></script>
+<script src="../assets/js/layout.js?v=7"></script>
+<script src="../assets/js/auth.js?v=7"></script>
+<script src="../assets/js/i18n.js?v=7"></script>
+<script src="../assets/js/main.js?v=7"></script>
+<script src="../assets/js/tools-registry.js?v=7"></script>
+<script src="../assets/js/tool-engine.js?v=7"></script>
 </body>
 </html>

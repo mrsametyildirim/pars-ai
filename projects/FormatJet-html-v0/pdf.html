@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/lang-panel.css">
+  <link rel="stylesheet" href="assets/css/main.css?v=7">
+  <link rel="stylesheet" href="assets/css/lang-panel.css?v=7">
 </head>
 <body>
 
@@ -19,11 +19,11 @@
 <main>
   <section class="cat-page-hero">
     <div class="container">
-      <h1 class="cat-page-title">PDF Araçları</h1>
+      <h1 class="cat-page-title" data-i18n="cat-pdf-title">PDF Araçları</h1>
       <p class="cat-page-sub">PDF dosyalarını birleştir, böl, sıkıştır, dönüştür. Tüm araçlar ücretsiz.</p>
       <div class="cat-search-wrap">
         <svg class="search-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" class="cat-search-input" placeholder="PDF aracı ara..." autocomplete="off">
+        <input type="text" class="cat-search-input" data-i18n-placeholder="cat-search-placeholder" placeholder="Araç ara..." autocomplete="off">
       </div>
     </div>
   </section>
@@ -35,105 +35,105 @@
         <div class="cat-tool-icon" style="--icon-color:#2563EB">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h4"/></svg>
         </div>
-        <span class="cat-tool-name">PDF Birleştir</span>
+        <span class="cat-tool-name" data-tool-name>PDF Birleştir</span>
       </a>
 
       <a href="tools/pdf-sikistir.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#DC2626">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>
         </div>
-        <span class="cat-tool-name">PDF Sıkıştır</span>
+        <span class="cat-tool-name" data-tool-name>PDF Sıkıştır</span>
       </a>
 
       <a href="tools/pdf-bol.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#D97706">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 12h8"/></svg>
         </div>
-        <span class="cat-tool-name">PDF Böl</span>
+        <span class="cat-tool-name" data-tool-name>PDF Böl</span>
       </a>
 
       <a href="tools/pdf-word.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#059669">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
         </div>
-        <span class="cat-tool-name">PDF'den Word</span>
+        <span class="cat-tool-name" data-tool-name>PDF'den Word</span>
       </a>
 
       <a href="tools/pdf-gorsel.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#D97706">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><rect x="6" y="12" width="12" height="8" rx="1"/><path d="m8 17 2-2 2 2 2-2 2 2"/></svg>
         </div>
-        <span class="cat-tool-name">PDF'den Görsel</span>
+        <span class="cat-tool-name" data-tool-name>PDF'den Görsel</span>
       </a>
 
       <a href="tools/pdf-duzenle.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#2563EB">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         </div>
-        <span class="cat-tool-name">Sayfaları Düzenle</span>
+        <span class="cat-tool-name" data-tool-name>Sayfaları Düzenle</span>
       </a>
 
       <a href="tools/pdf-kilitle.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#DC2626">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </div>
-        <span class="cat-tool-name">PDF Kilitle</span>
+        <span class="cat-tool-name" data-tool-name>PDF Kilitle</span>
       </a>
 
       <a href="tools/word-pdf.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#2563EB">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="m8.5 15 1.5-4 1.5 3 1-2 1.5 3"/></svg>
         </div>
-        <span class="cat-tool-name">Word'den PDF</span>
+        <span class="cat-tool-name" data-tool-name>Word'den PDF</span>
       </a>
 
       <a href="tools/excel-pdf.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#059669">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M8 13h2M8 17h8M14 13h2"/></svg>
         </div>
-        <span class="cat-tool-name">Excel'den PDF</span>
+        <span class="cat-tool-name" data-tool-name>Excel'den PDF</span>
       </a>
 
       <a href="tools/ppt-pdf.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#D97706">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h6"/></svg>
         </div>
-        <span class="cat-tool-name">PPT'den PDF</span>
+        <span class="cat-tool-name" data-tool-name>PPT'den PDF</span>
       </a>
 
       <a href="tools/gorsel-pdf.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#D97706">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
         </div>
-        <span class="cat-tool-name">JPG'den PDF</span>
+        <span class="cat-tool-name" data-tool-name>JPG'den PDF</span>
       </a>
 
       <a href="tools/ocr.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#2563EB">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3"/><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 12h6M12 9v6"/></svg>
         </div>
-        <span class="cat-tool-name">OCR ile Metin Çıkar</span>
+        <span class="cat-tool-name" data-tool-name>OCR ile Metin Çıkar</span>
       </a>
 
       <a href="tools/pdf-koruma-kaldir.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#059669">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
         </div>
-        <span class="cat-tool-name">PDF Koruma Kaldır</span>
+        <span class="cat-tool-name" data-tool-name>PDF Koruma Kaldır</span>
       </a>
 
       <a href="tools/pdf-don.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#D97706">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 15a3 3 0 1 0 6 0"/></svg>
         </div>
-        <span class="cat-tool-name">PDF Döndür</span>
+        <span class="cat-tool-name" data-tool-name>PDF Döndür</span>
       </a>
 
       <a href="tools/pdf-filigran.html" class="cat-tool-card">
         <div class="cat-tool-icon" style="--icon-color:#DC2626">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 16l2-2 2 2 2-2"/></svg>
         </div>
-        <span class="cat-tool-name">PDF Filigran</span>
+        <span class="cat-tool-name" data-tool-name>PDF Filigran</span>
       </a>
 
     </div>
@@ -143,11 +143,11 @@
 <div data-fj-footer></div>
 
 <script src="assets/js/vendor/supabase.min.js"></script>
-<script src="assets/js/fj-config.js"></script>
-<script src="assets/js/layout.js"></script>
-<script src="assets/js/auth.js"></script>
-<script src="assets/js/i18n.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/fj-search.js"></script>
+<script src="assets/js/fj-config.js?v=7"></script>
+<script src="assets/js/layout.js?v=7"></script>
+<script src="assets/js/auth.js?v=7"></script>
+<script src="assets/js/i18n.js?v=7"></script>
+<script src="assets/js/main.js?v=7"></script>
+<script src="assets/js/fj-search.js?v=7"></script>
 </body>
 </html>

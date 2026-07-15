@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/main.css?v=7">
 </head>
 <body>
 
@@ -18,8 +18,8 @@
   <!-- Sol: Branding -->
   <div class="login-brand">
     <div class="login-brand-logo">
-      <img src="assets/img/logo-icon.png" alt="" class="login-brand-logo-icon" aria-hidden="true">
-      <img src="assets/img/logo-text.png" alt="FormatJet" class="login-brand-logo-text">
+      <img src="assets/img/logo-icon-dark.png" alt="" class="login-brand-logo-icon" aria-hidden="true">
+      <img src="assets/img/logo-text-dark.png" alt="FormatJet" class="login-brand-logo-text login-brand-logo-text--native">
     </div>
     <h2 class="login-brand-title">Dosyalarını güvenle yönet</h2>
     <ul class="login-brand-list">
@@ -114,8 +114,8 @@
 </style>
 
 <script src="assets/js/vendor/supabase.min.js"></script>
-<script src="assets/js/fj-config.js"></script>
-<script src="assets/js/auth.js"></script>
+<script src="assets/js/fj-config.js?v=7"></script>
+<script src="assets/js/auth.js?v=7"></script>
 <script>
   const toggleBtn = document.getElementById('togglePassword');
   const pwInput  = document.getElementById('password');
@@ -162,18 +162,28 @@
     location.href = NEXT;
   });
 
-  /* Gmail ile giriş */
+  /* Gmail ile giriş — önce provider açık mı kontrol et (ham 400 JSON sayfasına düşmemek için) */
+  async function googleEnabled() {
+    try {
+      const res = await fetch(window.FJ_CONFIG.SUPABASE_URL + '/auth/v1/settings', {
+        headers: { apikey: window.FJ_CONFIG.SUPABASE_ANON_KEY },
+      });
+      const s = await res.json();
+      return !!(s.external && s.external.google);
+    } catch (_) { return true; }
+  }
+
   document.getElementById('btnGoogle').addEventListener('click', async () => {
     errBox.hidden = true;
+    if (!(await googleEnabled())) {
+      showError('Google girişi şu an aktif değil. E-posta ve şifrenle giriş yapabilirsin.');
+      return;
+    }
     const { error } = await window.fjAuth.sb.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: location.origin + location.pathname.replace('login.html', 'index.html') },
     });
-    if (error) {
-      showError(/provider is not enabled/i.test(error.message)
-        ? 'Google girişi henüz yapılandırılmadı. E-posta ile giriş yapabilirsin.'
-        : 'Google girişi başarısız: ' + error.message);
-    }
+    if (error) showError('Google girişi başarısız: ' + error.message);
   });
 </script>
 </body>

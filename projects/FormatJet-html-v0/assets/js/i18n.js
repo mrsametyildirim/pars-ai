@@ -174,6 +174,137 @@
     },
   };
 
+  /* ── Sayfa içi ek anahtarlar (kategori + araç sayfası UI) ── */
+  const EXTRA = {
+    tr: {
+      'cat-pdf-title': 'PDF Araçları', 'cat-belge-title': 'Belge Araçları', 'cat-gorsel-title': 'Görsel Araçları',
+      'cat-video-title': 'Video Araçları', 'cat-ses-title': 'Ses Araçları', 'tools-title': 'Tüm Araçlar',
+      'tools-sub': '70+ ücretsiz dosya aracı. Kayıt gerekmez.',
+      'tool-drop-title': 'Dosyaları buraya sürükle veya tıkla',
+      'tool-btn-process': 'Dönüştür', 'tool-btn-reset': 'Yeni Dosya',
+      'tool-how': 'Nasıl çalışır?',
+      'tool-s1': 'Dosyanı Seç', 'tool-s1d': 'Sürükle-bırak veya tıklayarak dosyanı yükle.',
+      'tool-s2': 'Tarayıcıda İşlenir', 'tool-s2d': 'Dosyan sunucuya gitmez; işlem cihazında, tarayıcı içinde yapılır.',
+      'tool-s3': 'Anında İndir', 'tool-s3d': 'Sonuç dosyan hazır olur olmaz otomatik indirilir.',
+      'tool-pro': "Pro'ya geç →",
+    },
+    en: {
+      'cat-pdf-title': 'PDF Tools', 'cat-belge-title': 'Document Tools', 'cat-gorsel-title': 'Image Tools',
+      'cat-video-title': 'Video Tools', 'cat-ses-title': 'Audio Tools', 'tools-title': 'All Tools',
+      'tools-sub': '70+ free file tools. No sign-up required.',
+      'tool-drop-title': 'Drag files here or click',
+      'tool-btn-process': 'Convert', 'tool-btn-reset': 'New File',
+      'tool-how': 'How it works',
+      'tool-s1': 'Pick Your File', 'tool-s1d': 'Drag & drop or click to upload your file.',
+      'tool-s2': 'Processed in Browser', 'tool-s2d': 'Your file never leaves your device; everything runs in the browser.',
+      'tool-s3': 'Instant Download', 'tool-s3d': 'The result downloads automatically as soon as it is ready.',
+      'tool-pro': 'Go Pro →',
+    },
+    es: {
+      'cat-pdf-title': 'Herramientas PDF', 'cat-belge-title': 'Herramientas de Documentos', 'cat-gorsel-title': 'Herramientas de Imagen',
+      'cat-video-title': 'Herramientas de Vídeo', 'cat-ses-title': 'Herramientas de Audio', 'tools-title': 'Todas las Herramientas',
+      'tools-sub': 'Más de 70 herramientas gratuitas. Sin registro.',
+      'tool-drop-title': 'Arrastra archivos aquí o haz clic',
+      'tool-btn-process': 'Convertir', 'tool-btn-reset': 'Nuevo Archivo',
+      'tool-how': '¿Cómo funciona?',
+      'tool-s1': 'Elige tu Archivo', 'tool-s1d': 'Arrastra y suelta o haz clic para subir tu archivo.',
+      'tool-s2': 'Procesado en el Navegador', 'tool-s2d': 'Tu archivo no sale de tu dispositivo; todo ocurre en el navegador.',
+      'tool-s3': 'Descarga Instantánea', 'tool-s3d': 'El resultado se descarga automáticamente en cuanto está listo.',
+      'tool-pro': 'Hazte Pro →',
+    },
+    de: {
+      'cat-pdf-title': 'PDF-Tools', 'cat-belge-title': 'Dokument-Tools', 'cat-gorsel-title': 'Bild-Tools',
+      'cat-video-title': 'Video-Tools', 'cat-ses-title': 'Audio-Tools', 'tools-title': 'Alle Tools',
+      'tools-sub': 'Über 70 kostenlose Datei-Tools. Keine Anmeldung nötig.',
+      'tool-drop-title': 'Dateien hierher ziehen oder klicken',
+      'tool-btn-process': 'Konvertieren', 'tool-btn-reset': 'Neue Datei',
+      'tool-how': 'So funktioniert es',
+      'tool-s1': 'Datei Auswählen', 'tool-s1d': 'Ziehe deine Datei hierher oder klicke zum Hochladen.',
+      'tool-s2': 'Im Browser Verarbeitet', 'tool-s2d': 'Deine Datei verlässt dein Gerät nicht; alles läuft im Browser.',
+      'tool-s3': 'Sofort-Download', 'tool-s3d': 'Das Ergebnis wird automatisch heruntergeladen, sobald es fertig ist.',
+      'tool-pro': 'Pro Werden →',
+    },
+    fr: {
+      'cat-pdf-title': 'Outils PDF', 'cat-belge-title': 'Outils Documents', 'cat-gorsel-title': "Outils d'Image",
+      'cat-video-title': 'Outils Vidéo', 'cat-ses-title': 'Outils Audio', 'tools-title': 'Tous les Outils',
+      'tools-sub': 'Plus de 70 outils gratuits. Sans inscription.',
+      'tool-drop-title': 'Glissez vos fichiers ici ou cliquez',
+      'tool-btn-process': 'Convertir', 'tool-btn-reset': 'Nouveau Fichier',
+      'tool-how': 'Comment ça marche ?',
+      'tool-s1': 'Choisissez le Fichier', 'tool-s1d': 'Glissez-déposez ou cliquez pour téléverser votre fichier.',
+      'tool-s2': 'Traité dans le Navigateur', 'tool-s2d': 'Votre fichier ne quitte pas votre appareil ; tout se passe dans le navigateur.',
+      'tool-s3': 'Téléchargement Immédiat', 'tool-s3d': 'Le résultat se télécharge automatiquement dès qu\'il est prêt.',
+      'tool-pro': 'Passer Pro →',
+    },
+  };
+  Object.entries(EXTRA).forEach(([l, d]) => Object.assign(T[l], d));
+
+  /* ── Araç adı çevirici (kelime + kalıp tabanlı) ──
+     TR araç adlarını EN/ES/DE/FR'ye çevirir. data-tool-name işaretli
+     öğelerde kullanılır; eşleşme yoksa TR ad korunur. */
+  const W = { /* kelime: [en, es, de, fr] */
+    'PDF': ['PDF','PDF','PDF','PDF'], 'Görsel': ['Image','Imagen','Bild','Image'],
+    'Video': ['Video','Vídeo','Video','Vidéo'], 'Ses': ['Audio','Audio','Audio','Audio'],
+    'Belge': ['Document','Documento','Dokument','Document'], 'Word': ['Word','Word','Word','Word'],
+    'Excel': ['Excel','Excel','Excel','Excel'],
+  };
+  const V = { /* eylem: [en, es, de, fr] — fiil önce (DE: sonda) */
+    'Birleştir': ['Merge','Unir','Zusammenfügen','Fusionner'],
+    'Sıkıştır': ['Compress','Comprimir','Komprimieren','Compresser'],
+    'Böl': ['Split','Dividir','Teilen','Diviser'],
+    'Döndür': ['Rotate','Rotar','Drehen','Pivoter'],
+    'Kes': ['Trim','Recortar','Schneiden','Couper'],
+    'Kırp': ['Crop','Recortar','Zuschneiden','Rogner'],
+    'Boyutlandır': ['Resize','Redimensionar','Skalieren','Redimensionner'],
+    'Kilitle': ['Protect','Proteger','Schützen','Protéger'],
+    'Filigran': ['Watermark','Marca de Agua','Wasserzeichen','Filigrane'],
+    'Dönüştür': ['Convert','Convertir','Konvertieren','Convertir'],
+    'Keskinleştir': ['Sharpen','Enfocar','Schärfen','Accentuer'],
+    'Güçlendir': ['Boost','Amplificar','Verstärken','Amplifier'],
+    'Normalize': ['Normalize','Normalizar','Normalisieren','Normaliser'],
+    'Kesici': ['Cutter','Cortador','Schneider','Découpeur'],
+  };
+  const PHRASES = { /* düzensiz tam adlar */
+    'Sayfaları Düzenle': ['Organize Pages','Organizar Páginas','Seiten Ordnen','Organiser les Pages'],
+    'PDF Koruma Kaldır': ['Unlock PDF','Desbloquear PDF','PDF Entsperren','Déverrouiller PDF'],
+    'OCR ile Metin Çıkar': ['OCR Text Extract','OCR Extraer Texto','OCR Texterkennung','OCR Extraire Texte'],
+    'Arka Plan Kaldır': ['Remove Background','Quitar Fondo','Hintergrund Entfernen','Supprimer le Fond'],
+    'Renk Ayarla': ['Adjust Colors','Ajustar Colores','Farben Anpassen','Régler les Couleurs'],
+    'Görselden PDF': ['Image to PDF','Imagen a PDF','Bild zu PDF','Image en PDF'],
+    'Hızlandır / Yavaşlat': ['Speed Up / Slow Down','Acelerar / Ralentizar','Beschleunigen / Verlangsamen','Accélérer / Ralentir'],
+    'Karelere Böl': ['Extract Frames','Extraer Fotogramas','Frames Extrahieren','Extraire les Images'],
+    'Videodan Sesi Kaldır': ['Remove Audio from Video','Quitar Audio del Vídeo','Ton aus Video Entfernen','Supprimer l\'Audio'],
+    'Altyazı Ekle': ['Add Subtitles','Añadir Subtítulos','Untertitel Hinzufügen','Ajouter des Sous-titres'],
+    'Gürültü Kaldır': ['Remove Noise','Quitar Ruido','Rauschen Entfernen','Supprimer le Bruit'],
+    'Ses Hızı Değiştir': ['Change Audio Speed','Cambiar Velocidad','Audio-Tempo Ändern','Changer la Vitesse'],
+    'Metinden Sese (TTS)': ['Text to Speech (TTS)','Texto a Voz (TTS)','Text zu Sprache (TTS)','Texte en Parole (TTS)'],
+    'Sesten Metne (STT)': ['Speech to Text (STT)','Voz a Texto (STT)','Sprache zu Text (STT)','Parole en Texte (STT)'],
+    'Filigran Ekle': ['Add Watermark','Añadir Marca de Agua','Wasserzeichen Hinzufügen','Ajouter un Filigrane'],
+  };
+  const LI = { en: 0, es: 1, de: 2, fr: 3 };
+  const CONV = { /* "A'dan B'ye" kalıbı */
+    en: (a, b) => a + ' to ' + b, es: (a, b) => a + ' a ' + b,
+    de: (a, b) => a + ' zu ' + b, fr: (a, b) => a + ' en ' + b,
+  };
+
+  function fjToolName(tr, lang) {
+    if (lang === 'tr' || LI[lang] === undefined) return tr;
+    const i = LI[lang];
+    if (PHRASES[tr]) return PHRASES[tr][i];
+    /* Dönüşüm kalıbı: X'den Y / X'ten Y'ye / X'dan Y */
+    const m = tr.match(/^(.+?)'[dt][ae]n\s+(.+?)(?:'[yn]?[ae])?$/);
+    if (m) return CONV[lang](m[1], m[2]);
+    /* [nesne] [eylem] kalıbı */
+    const parts = tr.split(' ');
+    if (parts.length === 2 && V[parts[1]]) {
+      const noun = W[parts[0]] ? W[parts[0]][i] : parts[0];
+      const verb = V[parts[1]][i];
+      return lang === 'de' ? noun + ' ' + verb : verb + ' ' + noun;
+    }
+    return tr;
+  }
+  window.fjToolName = fjToolName;
+
   const LANG_NAMES = { tr: 'Türkçe', en: 'English', es: 'Español', de: 'Deutsch', fr: 'Français' };
 
   function applyLanguage(lang) {
@@ -193,6 +324,12 @@
     document.querySelectorAll('[data-i18n-tool]').forEach(el => {
       const v = dict._tools && dict._tools[el.dataset.i18nTool];
       if (v) el.textContent = v;
+    });
+
+    /* Araç adları: orijinal TR adı data-tr'de sakla, oradan çevir */
+    document.querySelectorAll('[data-tool-name]').forEach(el => {
+      if (!el.dataset.tr) el.dataset.tr = el.textContent.trim();
+      el.textContent = fjToolName(el.dataset.tr, lang);
     });
 
     document.querySelectorAll('.btn-lang-text').forEach(el => { el.textContent = lang.toUpperCase(); });

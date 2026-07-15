@@ -234,18 +234,50 @@
       document.querySelectorAll('[data-i18n="nav-' + ['pdf','belge','gorsel','video','ses'][i] + '"]').forEach(el => { el.textContent = label; });
     });
 
-    /* Anasayfa metinleri */
+    /* Metin geçersiz kılmaları (admin panelinden) */
     const textMap = {
       hero_title: '[data-i18n="hero-title"]',
       hero_title_accent: '[data-i18n="hero-title-accent"]',
       hero_sub: '[data-i18n="hero-sub"]',
+      btn_support_label: '[data-i18n="btn-support"]',
+      btn_about_label: '[data-i18n="btn-about"]',
+      footer_tagline: '[data-i18n="footer-tagline"]',
+      footer_trust: '[data-i18n="footer-trust"]',
+      cta_request_title: '[data-i18n="cta-request-title"]',
+      cta_request_sub: '[data-i18n="cta-request-sub"]',
+      cta_support_title: '[data-i18n="cta-support-title"]',
+      cta_support_sub: '[data-i18n="cta-support-sub"]',
     };
     Object.entries(textMap).forEach(([key, sel]) => {
       if (settings[key]) {
-        const el = document.querySelector(sel);
-        if (el) { el.textContent = settings[key]; el.removeAttribute('data-i18n'); }
+        document.querySelectorAll(sel).forEach(el => {
+          el.textContent = settings[key];
+          el.removeAttribute('data-i18n');
+        });
       }
     });
+
+    /* İletişim bilgileri — [data-fj-contact] işaretli öğeler */
+    document.querySelectorAll('[data-fj-contact]').forEach(el => {
+      const key = 'contact_' + el.dataset.fjContact;
+      if (!settings[key]) return;
+      el.textContent = settings[key];
+      if (el.dataset.fjContact === 'email' && el.tagName === 'A') el.href = 'mailto:' + settings[key];
+    });
+
+    /* Dil sıralaması */
+    if (settings.lang_order) {
+      try {
+        const order = JSON.parse(settings.lang_order);
+        const list = document.querySelector('.lang-list');
+        if (list && Array.isArray(order)) {
+          order.forEach(code => {
+            const btn = list.querySelector('[data-lang="' + code + '"]');
+            if (btn) list.appendChild(btn);
+          });
+        }
+      } catch (_) {}
+    }
   };
 
   document.addEventListener('DOMContentLoaded', async () => {
