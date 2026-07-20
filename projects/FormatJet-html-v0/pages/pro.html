@@ -505,35 +505,35 @@
   const urlJetCredit = urlParams.get('jetCredit');
   const urlDonation  = urlParams.get('donation');
 
-  if (urlPeriod === 'yearly') {
-    const yearlyBtn = document.querySelector('.billing-opt[data-period="yearly"]');
-    if (yearlyBtn) {
-      yearlyBtn.click();
-      const section = document.getElementById('billingSection');
-      const rect = section.getBoundingClientRect();
-      const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    }
-  }
-
-  if (urlJetCredit) {
-    showJetOrDonationCheckout('jetCredit', Number(urlJetCredit));
-  } else if (urlDonation) {
-    showJetOrDonationCheckout('donation', Number(urlDonation));
-  } else if (urlPlan) {
-    const planBtn = document.getElementById(urlPlan + 'PlanBtn');
-    if (planBtn) {
-      const section = document.getElementById('plansSection');
-      if (section) {
+  // Scroll işlemlerini macro-task queue'ye defer et (DOM render sonrası)
+  setTimeout(() => {
+    if (urlPeriod === 'yearly') {
+      const yearlyBtn = document.querySelector('.billing-opt[data-period="yearly"]');
+      if (yearlyBtn) {
+        yearlyBtn.click();
+        const section = document.getElementById('billingSection');
         const rect = section.getBoundingClientRect();
         const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
-        console.log('Scrolling to center:', { targetScroll, scrollY: window.scrollY, rectTop: rect.top, rectHeight: rect.height, viewportHeight: window.innerHeight });
         window.scrollTo({ top: targetScroll, behavior: 'smooth' });
       }
-    } else {
-      console.log('Plan button not found:', urlPlan + 'PlanBtn');
     }
-  }
+
+    if (urlJetCredit) {
+      showJetOrDonationCheckout('jetCredit', Number(urlJetCredit));
+    } else if (urlDonation) {
+      showJetOrDonationCheckout('donation', Number(urlDonation));
+    } else if (urlPlan) {
+      const planBtn = document.getElementById(urlPlan + 'PlanBtn');
+      if (planBtn) {
+        const section = document.getElementById('plansSection');
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
+          window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        }
+      }
+    }
+  }, 0);
 })();
 </script>
 <script src="../assets/js/tools-registry.js?v=8"></script>
