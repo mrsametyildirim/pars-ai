@@ -507,35 +507,44 @@
   const urlJetCredit = urlParams.get('jetCredit');
   const urlDonation  = urlParams.get('donation');
 
-  // Scroll işlemlerini macro-task queue'ye defer et (DOM render sonrası)
+  // Scroll işlemlerini DOM render sonrası defer et
   setTimeout(() => {
     if (urlPeriod === 'yearly') {
       const yearlyBtn = document.querySelector('.billing-opt[data-period="yearly"]');
       if (yearlyBtn) {
         yearlyBtn.click();
-        const section = document.getElementById('billingSection');
-        const rect = section.getBoundingClientRect();
-        const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
-        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        setTimeout(() => {
+          const section = document.getElementById('billingSection');
+          if (section && section.offsetHeight > 0) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 100);
       }
     }
 
     if (urlJetCredit) {
       showJetOrDonationCheckout('jetCredit', Number(urlJetCredit));
+      setTimeout(() => {
+        const section = document.getElementById('checkoutSection');
+        if (section && section.offsetHeight > 0) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
     } else if (urlDonation) {
       showJetOrDonationCheckout('donation', Number(urlDonation));
-    } else if (urlPlan) {
-      const planBtn = document.getElementById(urlPlan + 'PlanBtn');
-      if (planBtn) {
-        const section = document.getElementById('plansSection');
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
-          window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      setTimeout(() => {
+        const section = document.getElementById('checkoutSection');
+        if (section && section.offsetHeight > 0) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+      }, 100);
+    } else if (urlPlan) {
+      const section = document.getElementById('plansSection');
+      if (section && section.offsetHeight > 0) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
-  }, 0);
+  }, 200);
 })();
 </script>
 </body>
