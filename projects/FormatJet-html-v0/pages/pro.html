@@ -555,7 +555,7 @@
     }
   });
 
-  // Modal seçim butonları
+  // Modal seçim butonları (3, 4, 5, 6+)
   document.querySelectorAll('.addon-user-option').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const users = Number(e.target.dataset.users);
@@ -563,16 +563,27 @@
       if (modal) {
         modal.setAttribute('hidden', '');
       }
-      // Business + ek kullanıcı toplam fiyat hesapla
-      const pricing = window.etapConfig.pricing;
-      const period = document.querySelector('.billing-opt.active').dataset.period;
-      const businessPrice = pricing.business[period];
-      const addonPrice = (users - 5) * pricing.addonUser[period];
-      const totalPrice = businessPrice + addonPrice;
-      // Checkout'a geç
-      location.href = 'pro.html?plan=business&users=' + users + '&period=' + period;
+      location.href = 'pro.html?plan=business&users=' + users + '&period=' + (document.querySelector('.billing-opt.active')?.dataset.period || 'monthly');
     });
   });
+
+  // Custom kullanıcı sayısı input
+  const customUserInput = document.getElementById('addonUserCustomInput');
+  const confirmCustomBtn = document.getElementById('confirmCustomUser');
+  if (confirmCustomBtn) {
+    confirmCustomBtn.addEventListener('click', () => {
+      const users = Number(customUserInput.value);
+      if (users >= 3 && users <= 100) {
+        const modal = document.getElementById('addonUserModal');
+        if (modal) {
+          modal.setAttribute('hidden', '');
+        }
+        location.href = 'pro.html?plan=business&users=' + users + '&period=' + (document.querySelector('.billing-opt.active')?.dataset.period || 'monthly');
+      } else {
+        alert('Lütfen 3-100 arası sayı girin');
+      }
+    });
+  }
 
   // Modal backdrop click'i kapat
   document.querySelector('.addon-user-backdrop')?.addEventListener('click', () => {
@@ -589,10 +600,18 @@
   <div class="addon-user-backdrop"></div>
   <div class="addon-user-content">
     <h3 style="margin-bottom:20px;font-size:18px;font-weight:700">Kaç kullanıcı istiyorsunuz?</h3>
-    <div class="addon-user-options" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+    <div class="addon-user-options" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px">
       <button class="addon-user-option" data-users="3" style="padding:12px;border:1px solid var(--fj-line);border-radius:8px;background:transparent;cursor:pointer;font-weight:600">3 Kullanıcı</button>
-      <button class="addon-user-option" data-users="4" style="padding:12px;border:1px solid var(--fj-line);border-radius:8px;background:transparent;cursor:pointer;font-weight:600">4 Kullanıcı</button>
-      <button class="addon-user-option" data-users="5" style="padding:12px;border:1px solid var(--fj-line);border-radius:8px;background:transparent;cursor:pointer;font-weight:600">5 Kullanıcı</button>
+      <button class="addon-user-option" data-users="4" style="padding:12px;border:1px solid var(--fj-line);border-radius:8px;background:transparent;cursor:pointer;font-weight:600">4 Kullanıcı (%10)</button>
+      <button class="addon-user-option" data-users="5" style="padding:12px;border:1px solid var(--fj-line);border-radius:8px;background:transparent;cursor:pointer;font-weight:600">5 Kullanıcı (%20)</button>
+      <button class="addon-user-option" data-users="6" style="padding:12px;border:1px solid var(--fj-line);border-radius:8px;background:transparent;cursor:pointer;font-weight:600">6+ Kullanıcı (%30)</button>
+    </div>
+    <div style="border-top:1px solid var(--fj-line);padding-top:16px">
+      <p style="font-size:12px;color:var(--fj-muted);margin-bottom:8px">Veya özel sayı girin (3-100):</p>
+      <div style="display:flex;gap:8px">
+        <input type="number" id="addonUserCustomInput" min="3" max="100" placeholder="Kullanıcı sayısı" style="flex:1;padding:8px;border:1px solid var(--fj-line);border-radius:6px;background:transparent;color:inherit">
+        <button id="confirmCustomUser" style="padding:8px 16px;background:var(--fj-brand);color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;white-space:nowrap">Onayla</button>
+      </div>
     </div>
   </div>
 </div>
