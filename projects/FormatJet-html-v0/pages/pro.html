@@ -387,7 +387,7 @@
       document.getElementById('sumVat').textContent    = fmt(selected.amount * 0.2 / 1.2);
       document.getElementById('sumTotal').textContent  = fmt(selected.amount);
       checkoutSection.classList.add('visible');
-      checkoutSection.scrollIntoView({ behavior: 'smooth' });
+      checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   });
 
@@ -405,7 +405,7 @@
     document.getElementById('sumVat').textContent   = fmt(amount * 0.2 / 1.2);
     document.getElementById('sumTotal').textContent = fmt(amount);
     checkoutSection.classList.add('visible');
-    checkoutSection.scrollIntoView({ behavior: 'smooth' });
+    checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
   document.querySelectorAll('.pay-method').forEach(btn => {
@@ -503,7 +503,10 @@
 
   if (urlPeriod === 'yearly') {
     const yearlyBtn = document.querySelector('.billing-opt[data-period="yearly"]');
-    if (yearlyBtn) yearlyBtn.click();
+    if (yearlyBtn) {
+      yearlyBtn.click();
+      document.getElementById('billingSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   if (urlJetCredit) {
