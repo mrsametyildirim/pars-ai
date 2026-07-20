@@ -524,9 +524,14 @@
     const planBtn = document.getElementById(urlPlan + 'PlanBtn');
     if (planBtn) {
       const section = document.getElementById('plansSection');
-      const rect = section.getBoundingClientRect();
-      const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
+        console.log('Scrolling to center:', { targetScroll, scrollY: window.scrollY, rectTop: rect.top, rectHeight: rect.height, viewportHeight: window.innerHeight });
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      }
+    } else {
+      console.log('Plan button not found:', urlPlan + 'PlanBtn');
     }
   }
 })();
