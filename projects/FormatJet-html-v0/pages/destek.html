@@ -222,6 +222,13 @@
     .btn-primary-full[data-state] { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
     .btn-primary-full[data-state="loading"] { opacity: .85; cursor: wait; }
     .btn-spinner { width: 16px; height: 16px; animation: fj-spin .7s linear infinite; }
+
+    .etap-usage-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 40px; }
+    .etap-usage-table th, .etap-usage-table td { padding: 12px 16px; text-align: left; border: 1px solid var(--fj-line); }
+    .etap-usage-table th { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; background: var(--fj-soft); }
+    .etap-usage-table th:first-child, .etap-usage-table td:first-child { font-weight: 600; background: var(--fj-soft); }
+    .etap-usage-table th.etap-col.active { background: rgba(37,99,235,.12); color: var(--fj-brand); border-color: var(--fj-brand); }
+    .etap-usage-table td { background: transparent; }
   </style>
   <link rel="stylesheet" href="../assets/css/components.css?v=14">
 </head>
@@ -342,6 +349,55 @@
       </table>
     </div>
 
+    <table class="etap-usage-table" id="etapUsageTable">
+      <thead>
+        <tr>
+          <th data-i18n="destek.usageEffect">Kullanıcı etkisi</th>
+          <th class="etap-col" data-etap="1" data-i18n="destek.usageEtap1">1. Etap</th>
+          <th class="etap-col" data-etap="2" data-i18n="destek.usageEtap2">2. Etap</th>
+          <th class="etap-col" data-etap="3" data-i18n="destek.usageEtap3">3. Etap</th>
+          <th class="etap-col" data-etap="4" data-i18n="destek.usageEtap4">4. Etap</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-i18n="destek.usageFeature">Kullanıcı etkisi</td>
+          <td data-i18n="destek.usage1Effect">Temel araçlar çalışır</td>
+          <td data-i18n="destek.usage2Effect">Daha büyük dosya ve OCR</td>
+          <td data-i18n="destek.usage3Effect">Daha fazla aylık hak ve AI</td>
+          <td data-i18n="destek.usage4Effect">Global standarda uygun hak</td>
+        </tr>
+        <tr>
+          <td data-i18n="destek.usagePro">Pro kullanıcı</td>
+          <td>1.000 işlem / 1.000 Jet</td>
+          <td>2.000 işlem / 2.000 Jet</td>
+          <td>5.000 işlem / 5.000 Jet</td>
+          <td>10.000 işlem / 10.000 Jet</td>
+        </tr>
+        <tr>
+          <td data-i18n="destek.usageBusiness">Business</td>
+          <td>5.000 ortak işlem</td>
+          <td>10.000 ortak işlem</td>
+          <td>25.000 ortak işlem</td>
+          <td>50.000 ortak işlem</td>
+        </tr>
+        <tr>
+          <td data-i18n="destek.usageResource">Kaynak</td>
+          <td data-i18n="destek.usage1Resource">Tek CPU havuzu + serverless GPU</td>
+          <td data-i18n="destek.usage2Resource">Çoklu worker/API</td>
+          <td data-i18n="destek.usage3Resource">Dağıtık worker ve GPU kümesi</td>
+          <td data-i18n="destek.usage4Resource">Çok bölgeli yüksek erişilebilirlik</td>
+        </tr>
+        <tr>
+          <td data-i18n="destek.usageScope">Araç açılımı</td>
+          <td data-i18n="destek.usage1Scope">Çekirdek araçlar</td>
+          <td data-i18n="destek.usage2Scope">Gelişmiş OCR ve daha uzun medya</td>
+          <td data-i18n="destek.usage3Scope">Yoğun AI, toplu akış ve API</td>
+          <td data-i18n="destek.usage4Scope">Kurumsal/global işleme kapasitesi</td>
+        </tr>
+      </tbody>
+    </table>
+
     <div class="etap-info-section">
       <div class="section-sub-label">Etap açıklamaları</div>
       <div class="etap-info-grid" id="etapInfoGrid">
@@ -460,6 +516,11 @@
         '<td class="col-pro">' + pro + '</td>' +
         '<td>' + business + '</td>';
       body.appendChild(tr);
+    });
+
+    // Tablo header highlight et
+    document.querySelectorAll('.etap-usage-table .etap-col').forEach(th => {
+      th.classList.toggle('active', Number(th.dataset.etap) === etap);
     });
   }
   const activeEtap = window.fjPricing.getCurrentEtap();
