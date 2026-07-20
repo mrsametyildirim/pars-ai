@@ -161,6 +161,11 @@
     }
     location.href = 'pro.html?plan=pro';
   });
+
+  // Page load'ında ufak scroll (150px)
+  setTimeout(() => {
+    window.scrollBy({ top: 150, behavior: 'smooth' });
+  }, 500);
 })();
 </script>
 <script src="../assets/js/tools-registry.js?v=7"></script>
