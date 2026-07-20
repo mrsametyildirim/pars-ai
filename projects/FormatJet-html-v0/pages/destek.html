@@ -79,6 +79,39 @@
       .amount-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
+    .etap-info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 32px;
+      margin-bottom: 48px;
+    }
+    .etap-info-card {
+      background: var(--fj-panel-solid);
+      border: 1.5px solid var(--fj-line);
+      border-radius: var(--fj-radius-sm);
+      padding: 16px 12px;
+      text-align: center;
+    }
+    .etap-info-card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--fj-ink);
+      margin-bottom: 8px;
+    }
+    .etap-info-card p {
+      font-size: 12px;
+      color: var(--fj-muted);
+      line-height: 1.5;
+    }
+    .etap-info-card:hover {
+      background: var(--fj-soft);
+      border-color: var(--fj-brand);
+    }
+    @media (max-width: 720px) {
+      .etap-info-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     .fj-tooltip-anchor { position: relative; }
     .fj-tooltip {
       position: absolute; bottom: calc(100% + 10px); left: 50%;
@@ -104,15 +137,60 @@
     }
 
     .donor-section { margin-top: 40px; }
-    .donor-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
-    .donor-row { display: grid; grid-template-columns: 36px 1fr auto auto; align-items: center; gap: 12px; padding: 10px 14px; }
+    .donor-carousel { position: relative; }
+    .donor-list {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 12px;
+      margin-top: 16px;
+      padding-right: 12px;
+      padding-bottom: 8px;
+      scroll-behavior: smooth;
+    }
+    .donor-list::-webkit-scrollbar { height: 4px; }
+    .donor-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 2px; }
+    .donor-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      padding: 12px 14px;
+      flex-shrink: 0;
+      width: 260px;
+    }
+    .donor-row-top { display: flex; align-items: center; gap: 8px; }
     .donor-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
     .donor-name { font-size: 13px; font-weight: 600; }
     .donor-amount { font-size: 13px; font-weight: 700; }
     .donor-time { font-size: 11px; color: var(--fj-muted); white-space: nowrap; }
+    .donor-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(calc(-50% + 8px));
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid var(--fj-line);
+      background: var(--fj-panel-solid);
+      color: var(--fj-text);
+      font-size: 18px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .donor-nav--prev { left: -14px; }
+    .donor-nav--next { right: -14px; }
+    .donor-nav:hover { background: var(--fj-brand); color: #fff; border-color: var(--fj-brand); }
+    @media (max-width: 720px) {
+      .donor-list { width: 100%; }
+    }
     @media (max-width: 560px) {
-      .donor-row { grid-template-columns: 32px 1fr auto; }
-      .donor-time { display: none; }
+      .donor-nav { display: none; }
     }
 
     .btn-primary-full[data-state] { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
@@ -238,6 +316,25 @@
       </table>
     </div>
 
+    <div class="etap-info-grid">
+      <div class="etap-info-card" data-etap="1">
+        <h3 data-i18n="destek.etapInfo1Title">Etap 1 — Kararlı Başlangıç</h3>
+        <p data-i18n="destek.etapInfo1Desc">Temel altyapı sürdürülebilir hâle gelir</p>
+      </div>
+      <div class="etap-info-card" data-etap="2">
+        <h3 data-i18n="destek.etapInfo2Title">Etap 2 — Büyüme Aşaması</h3>
+        <p data-i18n="destek.etapInfo2Desc">Sunucu kapasitesi ve işlem kotaları genişler</p>
+      </div>
+      <div class="etap-info-card" data-etap="3">
+        <h3 data-i18n="destek.etapInfo3Title">Etap 3 — Gelişmiş Yetenekler</h3>
+        <p data-i18n="destek.etapInfo3Desc">Yapay zeka ve OCR işlemleri hızlanır</p>
+      </div>
+      <div class="etap-info-card" data-etap="4">
+        <h3 data-i18n="destek.etapInfo4Title">Etap 4 — Tam Ölçek</h3>
+        <p data-i18n="destek.etapInfo4Desc">Kurumsal düzeyde limit ve öncelik herkese açılır</p>
+      </div>
+    </div>
+
     <h2 class="section-title" data-i18n="destek.fundTitle">Fon kullanımı</h2>
     <p class="section-sub" data-i18n="destek.fundSub">Toplanan her kaynak şeffaf bir şekilde altyapı ve geliştirmeye ayrılır.</p>
     <div class="fund-bars">
@@ -289,14 +386,23 @@
     </div>
 
     <div class="destek-warning" role="alert">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color:#92600a;flex-shrink:0">
+        <circle cx="12" cy="12" r="10" fill="rgba(217,119,6,0.08)"/>
+        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M11 7h2v7h-2z" fill="currentColor"/>
+        <circle cx="12" cy="17" r="1.15" fill="currentColor"/>
+      </svg>
       <span data-i18n="destek.warning">Sürdürülebilir etap geçişi: bir sonraki etap yalnızca aylık gelir hedefi düzenli olarak karşılandığında kalıcı hale gelir; tek seferlik bağışlar hızlandırır ama tek başına etap geçişini garanti etmez.</span>
     </div>
 
     <div class="donor-section">
       <h2 class="section-title" data-i18n="destek.donorTitle">Son 10 Bağışçı</h2>
       <p class="section-sub" data-i18n="destek.donorSub">Topluluk desteğine katkı sağlayan son bağışçılar.</p>
-      <div class="donor-list" id="donorList" aria-live="polite"></div>
+      <div class="donor-carousel">
+        <button class="donor-nav donor-nav--prev" id="donorNavPrev" type="button" aria-label="Önceki bağışçılar">‹</button>
+        <div class="donor-list" id="donorList" aria-live="polite"></div>
+        <button class="donor-nav donor-nav--next" id="donorNavNext" type="button" aria-label="Sonraki bağışçılar">›</button>
+      </div>
     </div>
   </div>
 </main>
@@ -402,14 +508,22 @@
       const initial = donor.name === 'Anonim' ? '?' : donor.name.charAt(0).toUpperCase();
       const hue = nameHue(donor.name);
       row.innerHTML =
+        '<span class="donor-row-top">' +
         '<span class="donor-avatar" style="background:hsl(' + hue + ',55%,45%)">' + initial + '</span>' +
         '<span class="donor-name">' + donor.name + '</span>' +
+        '</span>' +
         '<span class="donor-amount">₺' + donor.amount.toLocaleString('tr-TR') + '</span>' +
         '<span class="donor-time">' + formatDonorTime(donor.minutesAgo) + '</span>';
       list.appendChild(row);
     });
   }
   renderDonorList(false);
+
+  const donorList = document.getElementById('donorList');
+  const donorNavPrev = document.getElementById('donorNavPrev');
+  const donorNavNext = document.getElementById('donorNavNext');
+  donorNavPrev.addEventListener('click', () => donorList.scrollBy({ left: -260, behavior: 'smooth' }));
+  donorNavNext.addEventListener('click', () => donorList.scrollBy({ left: 260, behavior: 'smooth' }));
 
   function addDonor(name, amount) {
     donors.unshift({ name, amount, minutesAgo: 0 });

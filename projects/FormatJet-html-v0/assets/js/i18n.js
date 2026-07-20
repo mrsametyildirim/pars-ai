@@ -79,7 +79,7 @@
       'pro.proDesc': 'Herkesin ilk seçimi. Ücretsiz limitleri kaldır.',
       'pro.businessName': 'Business',
       'pro.businessDesc': 'Takım ve kurumsal kullanım için.',
-      'pro.supportMiniTitle': 'FormatJet'in büyümesine destek ol',
+      'pro.supportMiniTitle': "FormatJet'in büyümesine destek ol",
       'pro.supportMiniDesc': 'Bağışınla topluluk hedeflerine daha hızlı ulaşalım, limitler herkes için büyüsün.',
       'pro.supportMiniBtn': 'Destek Ol',
       'pro.jetMiniTitle': 'Jet kredisiyle yapabileceklerini genişlet',

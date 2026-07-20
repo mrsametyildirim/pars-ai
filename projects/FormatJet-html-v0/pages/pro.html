@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css?v=7">
   <style>
+    html { scroll-behavior: smooth; }
     .pro-wrap { max-width: 1000px; margin: 0 auto; padding: 40px 24px 96px; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
@@ -107,7 +108,7 @@
   </div>
 
   <div class="pro-wrap" id="planSelectionSection">
-    <div class="pro-plans-grid" id="proPlansGrid" role="radiogroup" aria-label="Plan seç">
+    <div class="pro-plans-grid" id="plansSection" role="radiogroup" aria-label="Plan seç">
       <div class="plan-card">
         <div class="plan-name" data-i18n="pro.freeName">Ücretsiz</div>
         <div class="plan-price">₺0<small>/ay</small></div>
@@ -117,7 +118,7 @@
           <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span id="freeFileSizeFeat" data-i18n="pro.freeFeat2">50 MB dosya limiti</span></div>
           <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span id="freeDailyFeat" data-i18n="pro.freeFeat3">Günde 10 işlem</span></div>
         </div>
-        <button class="plan-btn plan-btn--ghost" onclick="location.href='../tools.html'" data-i18n="pro.freeBtn">Ücretsiz Kullan</button>
+        <button class="plan-btn plan-btn--ghost" id="freePlanBtn" onclick="location.href='../tools.html'" data-i18n="pro.freeBtn">Ücretsiz Kullan</button>
       </div>
 
       <div class="plan-card plan-card--featured">
@@ -132,7 +133,7 @@
           <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.proFeat4">Toplu dosya işleme</span></div>
           <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.proFeat5">Reklamsız deneyim</span></div>
         </div>
-        <button class="plan-btn plan-btn--primary" data-plan="pro" role="radio" aria-checked="false" aria-label="Pro planını seç" data-i18n="pro.proBtn">Pro'ya Geç</button>
+        <button class="plan-btn plan-btn--primary" id="proPlanBtn" data-plan="pro" role="radio" aria-checked="false" aria-label="Pro planını seç" data-i18n="pro.proBtn">Pro'ya Geç</button>
       </div>
 
       <div class="plan-card">
@@ -146,7 +147,7 @@
           <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.businessFeat4">API erişimi</span></div>
           <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.businessFeat5">Öncelikli destek</span></div>
         </div>
-        <button class="plan-btn plan-btn--ghost" data-plan="business" role="radio" aria-checked="false" aria-label="Business planını seç" data-i18n="pro.businessBtn">Business'a Geç</button>
+        <button class="plan-btn plan-btn--ghost" id="businessPlanBtn" data-plan="business" role="radio" aria-checked="false" aria-label="Business planını seç" data-i18n="pro.businessBtn">Business'a Geç</button>
       </div>
     </div>
 
@@ -504,11 +505,14 @@
     showJetOrDonationCheckout('jetCredit', Number(urlJetCredit));
   } else if (urlDonation) {
     showJetOrDonationCheckout('donation', Number(urlDonation));
-  } else if (urlPlan && PLANS[urlPlan]) {
-    setTimeout(() => {
-      const btn = document.querySelector('[data-plan="' + urlPlan + '"]');
-      if (btn) btn.click();
-    }, 400);
+  } else if (urlPlan) {
+    const planBtn = document.getElementById(urlPlan + 'PlanBtn');
+    if (planBtn) {
+      document.getElementById('plansSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (PLANS[urlPlan]) {
+        setTimeout(() => planBtn.click(), 400);
+      }
+    }
   }
 })();
 </script>
