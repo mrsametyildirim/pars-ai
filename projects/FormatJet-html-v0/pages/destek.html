@@ -58,7 +58,7 @@
     .compare-table th:not(:first-child), .compare-table td:not(:first-child) { text-align: center; }
     .compare-table tr:last-child td { border-bottom: none; }
 
-    .fund-bars { display: flex; flex-direction: column; gap: 14px; margin-top: 0; margin-bottom: 48px; padding-top: 24px; padding-bottom: 24px; border-top: 1px solid var(--fj-line); }
+    .fund-bars { display: flex; flex-direction: column; gap: 14px; margin-top: 0; margin-bottom: 48px; padding-top: 16px; padding-bottom: 24px; border-top: 1px solid var(--fj-line); }
     .fund-bar-row { display: grid; grid-template-columns: 160px 1fr 48px; align-items: center; gap: 14px; }
     .fund-bar-label { font-size: 13px; font-weight: 500; }
     .fund-bar-track { height: 10px; border-radius: 999px; background: var(--fj-soft); overflow: hidden; }
@@ -234,7 +234,7 @@
     .btn-primary-full[data-state="loading"] { opacity: .85; cursor: wait; }
     .btn-spinner { width: 16px; height: 16px; animation: fj-spin .7s linear infinite; }
 
-    .etap-usage-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 40px; margin-bottom: 72px; }
+    .etap-usage-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 40px; margin-bottom: 48px; }
     .etap-usage-table th, .etap-usage-table td { padding: 12px 16px; text-align: left; border: 1px solid var(--fj-line); }
     .etap-usage-table th { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; background: var(--fj-soft); }
     @media (max-width: 720px) {
@@ -431,6 +431,8 @@
       </tbody>
     </table>
 
+    <h2 class="section-title" data-i18n="destek.fundTitle">Fon kullanımı</h2>
+    <p class="section-sub" data-i18n="destek.fundSub">Toplanan her kaynak şeffaf bir şekilde altyapı ve geliştirmeye ayrılır.</p>
     <div class="fund-bars">
       <div class="fund-bar-row">
         <div class="fund-bar-label" data-i18n="destek.fundServer">Sunucu ve altyapı</div>
