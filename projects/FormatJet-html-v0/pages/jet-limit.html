@@ -161,6 +161,14 @@
     }
     location.href = 'pro.html?plan=pro';
   });
+
+  // Page load'ında satın alma bölümünü ortalansın
+  setTimeout(() => {
+    const purchaseBox = document.querySelector('.jet-purchase-box');
+    if (purchaseBox && purchaseBox.offsetHeight > 0) {
+      purchaseBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 300);
 })();
 </script>
 <script src="../assets/js/tools-registry.js?v=7"></script>
