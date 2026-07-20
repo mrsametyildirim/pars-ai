@@ -162,11 +162,11 @@
     location.href = 'pro.html?plan=pro';
   });
 
-  // Page load'ında header kadar scroll
+  // Page load'ında header + hero başlığı kadar scroll
   setTimeout(() => {
     const header = document.querySelector('[data-fj-header]');
     const headerHeight = header ? header.offsetHeight : 64;
-    window.scrollBy({ top: headerHeight, behavior: 'smooth' });
+    window.scrollBy({ top: headerHeight + 100, behavior: 'smooth' });
   }, 500);
 })();
 </script>
