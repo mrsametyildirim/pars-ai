@@ -627,12 +627,13 @@
   // Modal seçim butonları (3, 4, 5, 6+)
   document.querySelectorAll('.addon-user-option').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      const users = Number(e.target.dataset.users);
+      const users = Number(btn.dataset.users);
       const modal = document.getElementById('addonUserModal');
       if (modal) {
         modal.setAttribute('hidden', '');
       }
-      location.href = 'pro.html?plan=business&users=' + users + '&period=' + (document.querySelector('.billing-opt.active')?.dataset.period || 'monthly');
+      const period = document.querySelector('.billing-opt.active')?.dataset.period || 'monthly';
+      location.href = 'pro.html?plan=business&users=' + users + '&period=' + period;
     });
   });
 
