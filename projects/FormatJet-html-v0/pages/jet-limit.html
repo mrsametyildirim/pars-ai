@@ -162,11 +162,11 @@
     location.href = 'pro.html?plan=pro';
   });
 
-  // Page load'ında header + 50px kadar scroll
+  // Page load'ında header + 30px kadar scroll
   setTimeout(() => {
     const header = document.querySelector('[data-fj-header]');
     const headerHeight = header ? header.offsetHeight : 64;
-    window.scrollBy({ top: headerHeight + 50, behavior: 'smooth' });
+    window.scrollBy({ top: headerHeight + 30, behavior: 'smooth' });
   }, 500);
 })();
 </script>
