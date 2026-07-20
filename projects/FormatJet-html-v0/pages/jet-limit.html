@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jet Limitini Artır — FormatJet</title>
+  <meta name="description" content="Jet kredisi satın al: OCR sayfa hakkı, video/ses dakika hakkı ve AI kredisi kazan. ₺100 - ₺1.000 arası paketler.">
+  <meta name="keywords" content="jet kredisi, formatjet kredi, ocr kredisi, ai kredisi, video ses dakika hakkı">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css?v=7">
+  <style>
+    .jet-wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 96px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    .jet-credit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 40px; }
+    .jet-credit-card { padding: 22px 16px; text-align: center; font-family: inherit; }
+    .jet-credit-amount { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+    .jet-credit-note { font-size: 12px; margin-top: 4px; color: var(--fj-muted); }
+
+    .jet-feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+    .jet-feat-card { display: flex; flex-direction: column; gap: 10px; padding: 20px; }
+    .jet-feat-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+    .jet-feat-title { font-size: 14px; font-weight: 700; }
+    .jet-feat-desc { font-size: 12px; line-height: 1.6; color: var(--fj-muted); }
+
+    .jet-purchase-box { padding: 28px 24px; }
+    .jet-purchase-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .jet-custom-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+    .jet-custom-row .form-group { flex: 1; min-width: 200px; margin-bottom: 0; }
+
+    .jet-footnote { font-size: 12px; line-height: 1.7; margin-top: 20px; text-align: center; color: var(--fj-muted); }
+
+    @media (max-width: 720px) {
+      .jet-credit-grid { grid-template-columns: repeat(2, 1fr); }
+      .jet-feats { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .jet-credit-grid { grid-template-columns: 1fr; }
+    }
+
+    #jetCustomAmount:focus {
+      border-color: var(--fj-brand) !important;
+      box-shadow: var(--fj-ring) !important;
+      outline: none;
+    }
+  </style>
+  <link rel="stylesheet" href="../assets/css/components.css?v=13">
+</head>
+<body>
+
+<div data-fj-header></div>
+
+<main>
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <h1 class="page-title" data-i18n="jetLimit.title">Jet Limitini Artır</h1>
+      <p class="page-sub-light" style="color:var(--text-2)" data-i18n="jetLimit.sub">İhtiyacın kadar kredi al; OCR, video/ses ve AI araçlarında anında kullan.</p>
+    </div>
+  </div>
+
+  <div class="jet-wrap">
+    <span id="jetCreditGridLabel" class="sr-only">Jet kredisi tutarı seç</span>
+    <div class="jet-credit-grid" id="jetCreditGrid" role="radiogroup" aria-labelledby="jetCreditGridLabel"></div>
+
+    <div class="jet-feats">
+      <div class="jet-feat-card" data-cat="ocr">
+        <div class="jet-feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h5"/></svg>
+        </div>
+        <div class="jet-feat-title" data-i18n="jetLimit.featOcrTitle">OCR sayfa hakkı</div>
+        <div class="jet-feat-desc" data-i18n="jetLimit.featOcrDesc">Taranmış belge ve görsellerden metin çıkarımı için ek sayfa kredisi.</div>
+      </div>
+      <div class="jet-feat-card" data-cat="media">
+        <div class="jet-feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <div class="jet-feat-title" data-i18n="jetLimit.featMediaTitle">Video/ses dakika hakkı</div>
+        <div class="jet-feat-desc" data-i18n="jetLimit.featMediaDesc">Dönüştürme, altyazı ve transkript işlemleri için ek dakika kredisi.</div>
+      </div>
+      <div class="jet-feat-card" data-cat="ai">
+        <div class="jet-feat-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>
+        </div>
+        <div class="jet-feat-title" data-i18n="jetLimit.featAiTitle">AI kredi</div>
+        <div class="jet-feat-desc" data-i18n="jetLimit.featAiDesc">Akıllı özetleme, yeniden yazma ve otomasyon araçlarında kullanılır.</div>
+      </div>
+    </div>
+
+    <div class="jet-purchase-box">
+      <h2 class="jet-purchase-title" data-i18n="jetLimit.purchaseTitle">Diğer tutar</h2>
+      <div class="jet-custom-row">
+        <div class="form-group">
+          <label class="form-label" for="jetCustomAmount" data-i18n="jetLimit.customLabel">Özel tutar (₺)</label>
+          <input type="number" id="jetCustomAmount" class="form-input" placeholder="Örn. 350" min="50" step="10">
+        </div>
+        <button class="btn-primary-full" id="jetBuyBtn" style="max-width:260px" data-i18n="jetLimit.cta">Jet Kredisi Satın Al</button>
+      </div>
+      <p class="jet-footnote" data-i18n="jetLimit.footnote">Jet kredisi bir ürün satın alımıdır; abonelik değildir, süresi dolmaz ve iade edilemez.</p>
+    </div>
+  </div>
+</main>
+
+<div data-fj-footer></div>
+
+<script src="../assets/js/vendor/supabase.min.js"></script>
+<script src="../assets/js/fj-config.js?v=7"></script>
+<script src="../assets/js/fj-pricing-config.js?v=1"></script>
+<script src="../assets/js/layout.js?v=13"></script>
+<script src="../assets/js/auth.js?v=7"></script>
+<script src="../assets/js/i18n.js?v=13"></script>
+<script src="../assets/js/main.js?v=13"></script>
+<script>
+(function () {
+  const packages = window.jetCreditConfig.packages;
+  const grid = document.getElementById('jetCreditGrid');
+  let selectedAmount = (packages.find(p => p.popular) || packages[0]).amount;
+
+  packages.forEach(pkg => {
+    const btn = document.createElement('button');
+    btn.className = 'jet-credit-card' + (pkg.amount === selectedAmount ? ' active' : '');
+    btn.dataset.amount = String(pkg.amount);
+    btn.setAttribute('role', 'radio');
+    btn.setAttribute('aria-checked', pkg.amount === selectedAmount ? 'true' : 'false');
+    btn.setAttribute('aria-label', '₺' + pkg.amount.toLocaleString('tr-TR') + ' ' + pkg.note);
+    btn.innerHTML =
+      '<div class="jet-credit-amount">₺' + pkg.amount.toLocaleString('tr-TR') + '</div>' +
+      '<div class="jet-credit-note" data-i18n="' + pkg.i18n + '">' + pkg.note + '</div>';
+    grid.appendChild(btn);
+  });
+
+  const cards = document.querySelectorAll('.jet-credit-card');
+  const customInput = document.getElementById('jetCustomAmount');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      cards.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-checked', 'false'); });
+      card.classList.add('active');
+      card.setAttribute('aria-checked', 'true');
+      selectedAmount = Number(card.dataset.amount);
+      customInput.value = '';
+    });
+  });
+
+  customInput.addEventListener('input', () => {
+    if (customInput.value) {
+      cards.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-checked', 'false'); });
+      selectedAmount = Number(customInput.value);
+    }
+  });
+
+  document.getElementById('jetBuyBtn').addEventListener('click', async () => {
+    const session = await window.fjAuth.getSession();
+    if (!session) {
+      location.href = '../login.html?next=' + encodeURIComponent('pages/jet-limit.html');
+      return;
+    }
+    location.href = 'pro.html?jetCredit=' + selectedAmount;
+  });
+})();
+</script>
+<script src="../assets/js/tools-registry.js?v=7"></script>
+<script src="../assets/js/premium-components.js?v=13"></script>
+</body>
+</html>

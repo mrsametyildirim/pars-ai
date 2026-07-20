@@ -41,10 +41,19 @@
       body.className = 'popular-card-body';
       const name = document.createElement('strong');
       name.className = 'popular-card-name';
-      name.textContent = tool.name;
+      name.dataset.toolName = '';
+      name.dataset.tr = tool.name;
+      const lang = localStorage.getItem('fj-lang') || 'tr';
+      name.textContent = window.fjToolName ? window.fjToolName(tool.name, lang) : tool.name;
       const desc = document.createElement('span');
       desc.className = 'popular-card-desc';
-      desc.textContent = tool.desc || '';
+      const templates = {
+        en: `Use ${name.textContent} quickly and securely in your browser.`,
+        es: `Usa ${name.textContent} de forma rápida y segura en tu navegador.`,
+        de: `${name.textContent} schnell und sicher im Browser nutzen.`,
+        fr: `Utilisez ${name.textContent} rapidement et en toute sécurité dans votre navigateur.`
+      };
+      desc.textContent = lang === 'tr' ? (tool.desc || '') : templates[lang];
       body.appendChild(name);
       body.appendChild(desc);
 

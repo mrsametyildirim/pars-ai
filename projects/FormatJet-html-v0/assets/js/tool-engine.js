@@ -9,6 +9,7 @@
 (function () {
   const VENDOR = '../assets/js/vendor/';
   const ASSETS = '../assets/vendor/';
+  const t = (key, fallback, values) => window.fjTF ? window.fjTF(key, fallback, values) : (window.fjT ? window.fjT(key, fallback) : fallback);
 
   /* ── Script yükleyici ── */
   const loaded = {};
@@ -941,18 +942,35 @@
     return o;
   }
 
-  function renderResults(results, slug) {
+  function renderResults(results, slug, sourceFiles) {
     const panel = $('resultPanel');
     panel.innerHTML = '';
     panel.hidden = false;
 
+    const scene = document.createElement('div');
+    scene.className = 'fj-success-scene';
+    const confetti = document.createElement('div');
+    confetti.className = 'fj-success-confetti';
+    confetti.setAttribute('aria-hidden', 'true');
+    for (let i = 0; i < 24; i += 1) {
+      const bit = document.createElement('i');
+      bit.style.setProperty('--i', i);
+      bit.style.setProperty('--x', (8 + ((i * 37) % 86)) + '%');
+      bit.style.setProperty('--delay', ((i % 8) * .045) + 's');
+      confetti.appendChild(bit);
+    }
+    scene.appendChild(confetti);
+
     const head = document.createElement('div');
-    head.className = 'result-head';
-    head.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>';
+    head.className = 'fj-success-head';
+    head.innerHTML = '<span class="fj-success-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></span>';
+    const copy = document.createElement('span');
     const strong = document.createElement('strong');
-    strong.textContent = results.length === 1 ? 'Dosyan hazır!' : results.length + ' dosya hazır!';
-    head.appendChild(strong);
-    panel.appendChild(head);
+    strong.textContent = results.length === 1 ? t('ui.success.one', 'Dosyan hazır!') : t('ui.success.many', results.length + ' dosya hazır!', { count: results.length });
+    const sub = document.createElement('span');
+    sub.textContent = t('ui.success.note', 'Dönüştürme başarıyla tamamlandı. Dosyanı şimdi indirebilirsin.');
+    copy.appendChild(strong); copy.appendChild(sub); head.appendChild(copy);
+    scene.appendChild(head);
 
     const list = document.createElement('div');
     list.className = 'result-list';
@@ -964,29 +982,49 @@
       name.textContent = r.name + ' (' + (r.blob.size / 1024 / 1024).toFixed(2) + ' MB)';
       const btn = document.createElement('button');
       btn.className = 'btn-tool-primary btn-result-dl';
-      btn.textContent = 'İndir';
+      btn.textContent = t('ui.success.download', 'İndir');
       btn.addEventListener('click', () => downloadBlob(r.blob, r.name));
       row.appendChild(name); row.appendChild(btn);
       list.appendChild(row);
     });
-    panel.appendChild(list);
+    scene.appendChild(list);
 
     if (results.length > 1) {
       const zipBtn = document.createElement('button');
       zipBtn.className = 'btn-tool-primary';
       zipBtn.style.marginTop = '12px';
-      zipBtn.textContent = 'Tümünü ZIP Olarak İndir';
+      zipBtn.textContent = t('ui.success.downloadAll', 'Tümünü ZIP Olarak İndir');
       zipBtn.addEventListener('click', async () => {
-        zipBtn.textContent = 'Hazırlanıyor...';
+        zipBtn.textContent = t('ui.success.preparing', 'Hazırlanıyor...');
         const z = await zipResults(results, slug + '.zip');
         downloadBlob(z.blob, z.name);
-        zipBtn.textContent = 'Tümünü ZIP Olarak İndir';
+        zipBtn.textContent = t('ui.success.downloadAll', 'Tümünü ZIP Olarak İndir');
       });
-      panel.appendChild(zipBtn);
+      scene.appendChild(zipBtn);
+    }
+
+    panel.appendChild(scene);
+
+    /* Görsel araçlarında gerçek önce/sonra karşılaştırması */
+    const source = sourceFiles && sourceFiles[0];
+    const output = results[0];
+    if (source && output && source.type.startsWith('image/') && output.blob.type.startsWith('image/')) {
+      const compare = document.createElement('div');
+      compare.className = 'fj-comparison';
+      const beforeUrl = URL.createObjectURL(source);
+      const afterUrl = URL.createObjectURL(output.blob);
+      compare.innerHTML =
+        '<img alt="İşlem öncesi" src="' + beforeUrl + '">' +
+        '<img class="fj-comparison-after" alt="İşlem sonrası" src="' + afterUrl + '">' +
+        '<span class="fj-comparison-label before">ÖNCE</span><span class="fj-comparison-label after">SONRA</span>' +
+        '<span class="fj-comparison-line"></span><input type="range" min="0" max="100" value="50" aria-label="Önce ve sonra karşılaştırması">';
+      compare.querySelector('input').addEventListener('input', (e) => compare.style.setProperty('--compare', e.target.value + '%'));
+      panel.appendChild(compare);
     }
 
     /* İlk dosyayı otomatik indir */
     if (results.length === 1) downloadBlob(results[0].blob, results[0].name);
+    if (window.fjNotify) window.fjNotify(t('ui.success.toast', 'Dosyan indirilmeye hazır.'), 'success', t('ui.success.toastTitle', 'Dönüştürme tamamlandı'));
   }
 
   /* ── TTS / STT özel arayüzleri ── */
@@ -1048,7 +1086,7 @@
   /* ══════════════════ BAŞLATICI ══════════════════ */
 
   function init() {
-    const slug = location.pathname.split('/').pop().replace('.html', '');
+    const slug = decodeURIComponent(location.pathname.split('/').pop()).replace('.html', '');
     let tool = window.FJ_TOOLS[slug];
     if (tool && tool.alias) tool = window.FJ_TOOLS[tool.alias];
     if (!tool) return;
@@ -1067,22 +1105,191 @@
     const progressWrap = $('progressWrap');
     const progressFill = $('progressFill');
 
+    /* Premium 40: Conversion Stepper + Processing Orb + Unsupported State */
+    const stepper = document.createElement('div');
+    stepper.className = 'fj-tool-stepper';
+    stepper.setAttribute('aria-label', t('ui.steps.aria', 'Dönüştürme adımları'));
+    [t('ui.step.file', 'Dosya seç'), t('ui.step.settings', 'Ayarla'), t('ui.step.convert', 'Dönüştür'), t('ui.step.download', 'İndir')].forEach((label, i) => {
+      const item = document.createElement('div');
+      item.className = 'fj-step' + (i === 0 ? ' is-active' : '');
+      item.innerHTML = '<span class="fj-step-num">' + (i + 1) + '</span><span>' + label + '</span>';
+      stepper.appendChild(item);
+    });
+    uploadZone.before(stepper);
+
+    const processingScene = document.createElement('div');
+    processingScene.className = 'fj-processing-scene';
+    processingScene.hidden = true;
+    processingScene.innerHTML =
+      '<div class="fj-aurora-loader" aria-hidden="true"><i></i><i></i><i></i></div>' +
+      '<div class="fj-processing-orb"><span class="fj-processing-percent">0%</span></div>' +
+      '<strong class="fj-processing-stage">' + t('ui.processing.start', 'Dosya hazırlanıyor') + '</strong><p>' + t('ui.processing.note', 'İşlem cihazında güvenli biçimde çalışıyor. Bu pencereyi kapatma.') + '</p>' +
+      '<div class="fj-processing-stages" aria-label="' + t('ui.processing.aria', 'Dönüştürme aşamaları') + '"><span class="is-active">' + t('ui.stage.analysis', 'Analiz') + '</span><span>' + t('ui.stage.conversion', 'Dönüştürme') + '</span><span>' + t('ui.stage.optimization', 'Optimizasyon') + '</span><span>' + t('ui.stage.completion', 'Tamamlama') + '</span></div>';
+    progressWrap.after(processingScene);
+
+    const errorScene = document.createElement('div');
+    errorScene.className = 'fj-tool-error';
+    errorScene.hidden = true;
+    errorScene.innerHTML =
+      '<span class="fj-error-icon"><svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 8v5M12 17h.01"/><path d="M10.3 3.6 2.7 17a2 2 0 0 0 1.8 3h15a2 2 0 0 0 1.8-3L13.7 3.6a2 2 0 0 0-3.4 0Z"/></svg></span>' +
+      '<div><strong>' + t('ui.error.heading', 'Bu dosya kullanılamıyor') + '</strong><p></p></div><button type="button" class="fj-error-dismiss">' + t('ui.error.dismiss', 'Tamam') + '</button>';
+    processingScene.after(errorScene);
+
+    const acceptTokens = (tool.accept || '').split(',').map(v => v.trim().toLowerCase()).filter(Boolean);
+    const formatLabels = acceptTokens.map(v => v.replace(/^\./, '').replace(/\/.*/, '')).filter((v, i, a) => v && v !== '*' && a.indexOf(v) === i).slice(0, 7);
+    if (uploadPrompt && formatLabels.length) {
+      const chips = document.createElement('div');
+      chips.className = 'fj-drop-formats';
+      formatLabels.forEach(label => { const chip = document.createElement('span'); chip.className = 'fj-format-chip'; chip.textContent = label; chips.appendChild(chip); });
+      uploadPrompt.appendChild(chips);
+    }
+
+    const dropTitle = uploadPrompt && (uploadPrompt.querySelector('.drop-title strong') || uploadPrompt.querySelector('.drop-title'));
+    const dropSub = uploadPrompt && uploadPrompt.querySelector('.drop-sub');
+    const defaultDropTitle = dropTitle ? dropTitle.textContent : '';
+    const defaultDropSub = dropSub ? dropSub.textContent : '';
+    const queueHead = document.createElement('div');
+    queueHead.className = 'fj-queue-head';
+    queueHead.hidden = true;
+    queueHead.innerHTML = '<span><strong>' + t('ui.queue.title', 'Yükleme kuyruğu') + '</strong><small class="fj-queue-count"></small></span><em>' + t('ui.queue.hint', 'Dosyaları sürükleyerek sıralayabilirsin') + '</em>';
+    uploadZone.insertBefore(queueHead, fileList);
+
     fileInput.accept = tool.accept || '';
     fileInput.multiple = !!tool.multiple;
 
     let selectedFiles = [];
+    let draggedIndex = -1;
+    let maxSizeMB = 50;
+    if (window.fjAuth && window.fjAuth.getProfile) {
+      window.fjAuth.getProfile().then(profile => { if (profile) maxSizeMB = 200; }).catch(() => {});
+    }
+
+    function setStep(active) {
+      stepper.querySelectorAll('.fj-step').forEach((el, i) => {
+        el.classList.toggle('is-done', i < active);
+        el.classList.toggle('is-active', i === active);
+      });
+    }
+
+    function setDragState(active) {
+      uploadZone.classList.toggle('drag-over', active);
+      if (!uploadPrompt || uploadPrompt.hidden) return;
+      if (dropTitle) dropTitle.textContent = active ? t('ui.drop.active', 'Dosyayı buraya bırak') : defaultDropTitle;
+      if (dropSub) dropSub.textContent = active ? t('ui.drop.check', 'Bıraktığında tür ve boyut otomatik kontrol edilir') : defaultDropSub;
+    }
+
+    function setProcessingStage(progress) {
+      const names = [t('ui.stage.analyzing', 'Dosya analiz ediliyor'), t('ui.stage.converting', 'Format dönüştürülüyor'), t('ui.stage.optimizing', 'Çıktı optimize ediliyor'), t('ui.stage.downloading', 'İndirme hazırlanıyor')];
+      const active = progress < 24 ? 0 : progress < 68 ? 1 : progress < 92 ? 2 : 3;
+      const label = processingScene.querySelector('.fj-processing-stage');
+      if (label) label.textContent = names[active];
+      processingScene.querySelectorAll('.fj-processing-stages span').forEach((el, i) => {
+        el.classList.toggle('is-active', i === active);
+        el.classList.toggle('is-done', i < active);
+      });
+    }
+
+    function humanFormats() {
+      if (!acceptTokens.length) return 'bu araç tarafından desteklenen';
+      return acceptTokens.map(v => v.startsWith('.') ? v.slice(1).toUpperCase() : (v.endsWith('/*') ? v.split('/')[0].toUpperCase() : v.split('/').pop().toUpperCase())).join(', ');
+    }
+
+    function fileAllowed(file) {
+      if (!acceptTokens.length) return true;
+      const type = (file.type || '').toLowerCase();
+      const name = file.name.toLowerCase();
+      return acceptTokens.some(token => {
+        if (token.startsWith('.')) return name.endsWith(token);
+        if (token.endsWith('/*')) return type.startsWith(token.slice(0, -1));
+        return type === token;
+      });
+    }
+
+    function showError(title, message) {
+      errorScene.querySelector('strong').textContent = title;
+      errorScene.querySelector('p').textContent = message;
+      errorScene.hidden = false;
+      errorScene.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (window.fjNotify) window.fjNotify(message, 'error', title);
+    }
+
+    errorScene.querySelector('.fj-error-dismiss').addEventListener('click', () => { errorScene.hidden = true; });
+
+    function validateFiles(files) {
+      const incoming = Array.from(files);
+      const wrong = incoming.find(file => !fileAllowed(file));
+      if (wrong) {
+        showError(t('ui.error.unsupported', 'Dosya türü desteklenmiyor'), t('ui.error.unsupportedMessage', '“{name}” bu araçla kullanılamaz. Kabul edilen türler: {formats}.', { name: wrong.name, formats: humanFormats() }));
+        return [];
+      }
+      const tooLarge = incoming.find(file => file.size > maxSizeMB * 1024 * 1024);
+      if (tooLarge) {
+        showError(t('ui.error.size', 'Dosya boyutu sınırı aşıldı'), t('ui.error.sizeMessage', '“{name}” {limit} MB sınırından büyük. Daha küçük bir dosya seç.', { name: tooLarge.name, limit: maxSizeMB }));
+        return [];
+      }
+      errorScene.hidden = true;
+      if (!tool.multiple && incoming.length > 1) {
+        showError(t('ui.error.single', 'Tek dosya seçmelisin'), t('ui.error.singleMessage', 'Bu araç her işlemde yalnızca bir dosya kabul ediyor. İlk dosya seçildi.'));
+        return incoming.slice(0, 1);
+      }
+      return incoming;
+    }
+
+    function fileIcon(file) {
+      const isImage = file.type.startsWith('image/');
+      const isVideo = file.type.startsWith('video/');
+      const isAudio = file.type.startsWith('audio/');
+      if (isImage) return '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m4 17 4-4 3 3 3-3 6 6"/></svg>';
+      if (isVideo) return '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="14" height="14" rx="3"/><path d="m17 10 4-2v8l-4-2z"/></svg>';
+      if (isAudio) return '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>';
+      return '<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5M9 13h6M9 17h6"/></svg>';
+    }
 
     function showFiles(files) {
-      selectedFiles = Array.from(files);
+      const valid = validateFiles(files);
+      if (!valid.length) return;
+      selectedFiles = valid;
       fileList.innerHTML = '';
-      selectedFiles.forEach(f => {
+      queueHead.hidden = false;
+      queueHead.querySelector('.fj-queue-count').textContent = selectedFiles.length === 1 ? t('ui.queue.one', '1 dosya hazır') : t('ui.queue.many', '{count} dosya sırada', { count: selectedFiles.length });
+      selectedFiles.forEach((f, index) => {
         const div = document.createElement('div');
         div.className = 'file-item';
-        const n = document.createElement('span');
-        n.className = 'file-item-name'; n.textContent = f.name;
-        const s = document.createElement('span');
-        s.className = 'file-item-size'; s.textContent = (f.size / 1024 / 1024).toFixed(2) + ' MB';
-        div.appendChild(n); div.appendChild(s);
+        div.draggable = selectedFiles.length > 1;
+        div.dataset.index = index;
+        const icon = document.createElement('span'); icon.className = 'fj-file-icon'; icon.innerHTML = fileIcon(f);
+        const copy = document.createElement('span'); copy.className = 'fj-file-copy';
+        const n = document.createElement('span'); n.className = 'file-item-name'; n.textContent = f.name;
+        const s = document.createElement('span'); s.className = 'file-item-size'; s.textContent = (f.size / 1024 / 1024).toFixed(2) + ' MB · ' + t('ui.file.ready', 'Hazır');
+        copy.appendChild(n); copy.appendChild(s);
+        const state = document.createElement('span'); state.className = 'fj-file-status'; state.textContent = t('ui.file.uploaded', 'Yüklendi');
+        const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'file-remove'; remove.setAttribute('aria-label', t('ui.file.remove', '{name} dosyasını kaldır', { name: f.name }));
+        remove.innerHTML = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v6M14 11v6"/></svg>';
+        remove.addEventListener('click', (e) => {
+          e.stopPropagation();
+          div.classList.add('is-deleting');
+          remove.disabled = true;
+          setTimeout(() => {
+            selectedFiles.splice(index, 1);
+            if (selectedFiles.length) showFiles(selectedFiles);
+            else resetWorkspace();
+            if (window.fjNotify) window.fjNotify(t('ui.file.removed', '{name} kuyruktan çıkarıldı.', { name: f.name }), 'info', t('ui.file.removedTitle', 'Dosya kaldırıldı'));
+          }, 260);
+        });
+        div.appendChild(icon); div.appendChild(copy); div.appendChild(state); div.appendChild(remove);
+        div.addEventListener('dragstart', () => { draggedIndex = index; div.classList.add('is-dragging'); });
+        div.addEventListener('dragend', () => { draggedIndex = -1; div.classList.remove('is-dragging'); });
+        div.addEventListener('dragover', e => e.preventDefault());
+        div.addEventListener('drop', e => {
+          e.preventDefault(); e.stopPropagation();
+          const to = +div.dataset.index;
+          if (draggedIndex >= 0 && draggedIndex !== to) {
+            const next = selectedFiles.slice();
+            next.splice(to, 0, next.splice(draggedIndex, 1)[0]);
+            draggedIndex = -1;
+            showFiles(next);
+          }
+        });
         fileList.appendChild(div);
       });
       uploadPrompt.hidden = true;
@@ -1090,55 +1297,92 @@
       renderOpts(tool);
       actions.hidden = false;
       $('resultPanel').hidden = true;
+      setStep(tool.opts && tool.opts.length ? 1 : 2);
     }
 
-    uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
-    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+    uploadZone.addEventListener('dragover', e => { e.preventDefault(); setDragState(true); });
+    uploadZone.addEventListener('dragleave', e => { if (!uploadZone.contains(e.relatedTarget)) setDragState(false); });
     uploadZone.addEventListener('drop', e => {
       e.preventDefault();
-      uploadZone.classList.remove('drag-over');
+      setDragState(false);
       if (e.dataTransfer.files.length) showFiles(e.dataTransfer.files);
     });
-    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('click', (e) => { if (!e.target.closest('.file-remove')) fileInput.click(); });
     fileInput.addEventListener('change', () => { if (fileInput.files.length) showFiles(fileInput.files); });
 
-    $('btnReset').addEventListener('click', () => {
+    function resetWorkspace() {
       selectedFiles = [];
       fileInput.value = '';
       fileList.hidden = true;
+      queueHead.hidden = true;
       uploadPrompt.hidden = false;
+      setDragState(false);
       $('toolOptions').hidden = true;
       actions.hidden = true;
       $('resultPanel').hidden = true;
+      processingScene.hidden = true;
+      errorScene.hidden = true;
       const tr = $('engineTextResult');
       if (tr) tr.hidden = true;
       setStatus('');
-    });
+      setStep(0);
+    }
+    $('btnReset').addEventListener('click', resetWorkspace);
 
     processBtn.addEventListener('click', async () => {
       if (!selectedFiles.length) return;
-      const orig = processBtn.textContent;
-      processBtn.textContent = 'İşleniyor...';
+      const orig = processBtn.innerHTML;
+      processBtn.innerHTML = '<span>' + t('ui.status.processing', 'İşleniyor...') + '</span>';
       processBtn.disabled = true;
       progressWrap.hidden = !tool.heavy;
       progressFill.style.width = '0%';
-      setStatus(tool.heavy ? 'Hazırlanıyor...' : 'İşleniyor...');
+      processingScene.hidden = false;
+      errorScene.hidden = true;
+      $('resultPanel').hidden = true;
+      setStep(2);
+      setStatus(tool.heavy ? t('ui.status.preparing', 'Hazırlanıyor...') : t('ui.status.processing', 'İşleniyor...'));
+
+      let visualProgress = 4;
+      const percentEl = processingScene.querySelector('.fj-processing-percent');
+      percentEl.textContent = visualProgress + '%';
+      setProcessingStage(visualProgress);
+      const visualTimer = setInterval(() => {
+        visualProgress = Math.min(92, visualProgress + Math.max(1, Math.round((94 - visualProgress) / 11)));
+        percentEl.textContent = visualProgress + '%';
+        setProcessingStage(visualProgress);
+        if (!tool.heavy) progressFill.style.width = visualProgress + '%';
+      }, 260);
 
       try {
         const results = await OPS[tool.op](
           selectedFiles,
           collectOpts(tool),
           tool,
-          (p) => { progressFill.style.width = Math.round(p * 100) + '%'; }
+          (p) => {
+            const value = Math.max(visualProgress, Math.round(p * 100));
+            visualProgress = Math.min(98, value);
+            progressFill.style.width = visualProgress + '%';
+            percentEl.textContent = visualProgress + '%';
+            setProcessingStage(visualProgress);
+          }
         );
+        clearInterval(visualTimer);
+        progressFill.style.width = '100%';
+        percentEl.textContent = '100%';
+        setProcessingStage(100);
         setStatus('');
-        renderResults(results, slug);
+        processingScene.hidden = true;
+        setStep(3);
+        renderResults(results, slug, selectedFiles);
         if (window.fjAuth) window.fjAuth.logToolUsage(slug);
       } catch (err) {
+        clearInterval(visualTimer);
         setStatus('');
-        alert('Hata: ' + (err.message || err));
+        processingScene.hidden = true;
+        setStep(1);
+        showError('Dönüştürme tamamlanamadı', err.message || String(err));
       } finally {
-        processBtn.textContent = orig;
+        processBtn.innerHTML = orig;
         processBtn.disabled = false;
         progressWrap.hidden = true;
       }

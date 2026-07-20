@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro'ya Geç — FormatJet</title>
+  <meta name="description" content="FormatJet Pro ve Business planlarını karşılaştır, sana uygun paketi seç. Etap bazlı güncel limitler ve TL fiyatlandırma.">
+  <meta name="keywords" content="formatjet pro, formatjet fiyat, formatjet business, dosya dönüştürme abonelik, jet kredisi limit">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css?v=7">
+  <style>
+    .pro-wrap { max-width: 1000px; margin: 0 auto; padding: 40px 24px 96px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    .billing-toggle { display: inline-flex; align-items: center; gap: 4px; margin: 8px 0 32px; padding: 4px; }
+    .billing-opt { padding: 8px 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; border: none; background: none; }
+    .billing-save { font-size: 11px; margin-left: 4px; }
+
+    .pro-plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 56px; }
+    .plan-card { padding: 28px 24px; display: flex; flex-direction: column; }
+    .plan-card--featured { box-shadow: 0 8px 32px rgba(37,99,235,.12); }
+    .plan-card:not(.plan-card--featured) { opacity: .92; }
+    .plan-card:not(.plan-card--featured):hover { opacity: 1; }
+    .plan-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .plan-price { font-size: 34px; font-weight: 800; letter-spacing: -.03em; }
+    .plan-price small { font-size: 14px; font-weight: 500; }
+    .plan-desc { font-size: 13px; margin: 8px 0 20px; }
+    .plan-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; flex: 1; }
+    .plan-feat { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; }
+    .plan-feat svg { flex-shrink: 0; margin-top: 2px; }
+    .plan-btn:disabled { opacity: .5; cursor: default; pointer-events: none; }
+
+    .compare-title { font-size: 20px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 16px; }
+    .compare-table-wrap { overflow-x: auto; margin-bottom: 32px; }
+    .compare-table { width: 100%; border-collapse: collapse; min-width: 560px; font-size: 13px; }
+    .compare-table th, .compare-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--fj-line); }
+    .compare-table th { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; background: var(--fj-soft); }
+    .compare-table th:not(:first-child), .compare-table td:not(:first-child) { text-align: center; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tbody tr { transition: background var(--dur-fast) var(--ease-premium); }
+    .compare-table tbody tr:hover { background: rgba(37,99,235,.04); }
+
+    .pro-warning, .destek-warning {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 16px 18px; border-radius: var(--fj-radius-md); margin-bottom: 40px;
+      color: #92600a; background: rgba(217,119,6,.08);
+      border: 1px solid rgba(217,119,6,.25); font-size: 13px; line-height: 1.7;
+    }
+    .pro-warning svg { flex-shrink: 0; margin-top: 2px; }
+
+    /* Checkout */
+    .checkout-section { max-width: 880px; margin: 0 auto; display: none; }
+    .checkout-section.visible { display: block; }
+    .checkout-grid { display: grid; grid-template-columns: 1fr 340px; gap: 32px; }
+    .checkout-box { padding: 28px; }
+    .checkout-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+    .pay-methods { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .pay-method { display: flex; align-items: center; gap: 8px; padding: 10px 16px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .order-summary { align-self: start; position: sticky; top: 90px; }
+    .order-line { display: flex; justify-content: space-between; font-size: 14px; padding: 10px 0; border-bottom: 1px solid var(--fj-line); }
+    .order-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; padding: 14px 0 0; }
+    .sandbox-note {
+      margin-top: 16px; padding: 10px 14px; font-size: 12px;
+      color: #92600a; background: rgba(217,119,6,.08);
+      border: 1px solid rgba(217,119,6,.25); border-radius: var(--fj-radius-md);
+    }
+    .checkout-success { text-align: center; padding: 48px 24px; display: none; }
+    .checkout-success.visible { display: block; }
+    .success-icon { width: 64px; height: 64px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; background: rgba(5,150,105,.1); border-radius: 50%; color: var(--fj-success); }
+
+    @media (max-width: 900px) {
+      .pro-plans-grid { grid-template-columns: minmax(0,1fr); max-width: 420px; margin-left: auto; margin-right: auto; }
+      .checkout-grid { grid-template-columns: minmax(0,1fr); }
+      .order-summary { position: static; }
+    }
+    @media (max-width: 720px) {
+      .pro-wrap { padding: 32px 16px 72px; }
+      .plan-price { font-size: 28px; }
+      .compare-table { min-width: 480px; }
+    }
+
+    .mini-cards-col { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+    .mini-cards-col .mini-card { padding: 16px 18px; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .mini-card-name { font-weight: 800; }
+  </style>
+  <link rel="stylesheet" href="../assets/css/components.css?v=13">
+</head>
+<body>
+
+<div data-fj-header></div>
+
+<main>
+  <div class="page-hero" style="text-align:center" id="proHero">
+    <div class="page-hero-inner">
+      <h1 class="page-title" data-i18n="pro.title">Planını Seç</h1>
+      <p class="page-sub-light" style="color:var(--text-2)" data-i18n="pro.sub">Tüm temel araçlar sonsuza dek ücretsiz. Pro ile limitleri kaldır.</p>
+      <div class="billing-toggle" id="billingToggle" role="radiogroup" aria-labelledby="billingToggleLabel">
+        <span id="billingToggleLabel" class="sr-only">Fatura dönemi seç</span>
+        <button class="billing-opt active" data-period="monthly" role="radio" aria-checked="true" aria-label="Aylık faturalama" data-i18n="pro.billingMonthly">Aylık</button>
+        <button class="billing-opt" data-period="yearly" role="radio" aria-checked="false" aria-label="Yıllık faturalama, %27 indirim"><span data-i18n="pro.billingYearly">Yıllık</span> <span class="billing-save" data-i18n="pro.billingSave">%27 indirim</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pro-wrap" id="planSelectionSection">
+    <div class="pro-plans-grid" id="proPlansGrid" role="radiogroup" aria-label="Plan seç">
+      <div class="plan-card">
+        <div class="plan-name" data-i18n="pro.freeName">Ücretsiz</div>
+        <div class="plan-price">₺0<small>/ay</small></div>
+        <p class="plan-desc" data-i18n="pro.freeDesc">Günlük kullanım için temel araçlar.</p>
+        <div class="plan-features">
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.freeFeat1">70+ araca erişim</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span id="freeFileSizeFeat" data-i18n="pro.freeFeat2">50 MB dosya limiti</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span id="freeDailyFeat" data-i18n="pro.freeFeat3">Günde 10 işlem</span></div>
+        </div>
+        <button class="plan-btn plan-btn--ghost" onclick="location.href='../tools.html'" data-i18n="pro.freeBtn">Ücretsiz Kullan</button>
+      </div>
+
+      <div class="plan-card plan-card--featured">
+        <div class="plan-pop-badge" data-i18n="pro.popular">En Popüler</div>
+        <div class="plan-name" data-i18n="pro.proName">Pro</div>
+        <div class="plan-price" id="proPrice" data-plan-key="pro">₺279<small>/ay</small></div>
+        <p class="plan-desc" data-i18n="pro.proDesc">Sık kullananlar için sınırsız güç.</p>
+        <div class="plan-features">
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.proFeat1">Sınırsız işlem</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span id="proFileSizeFeat" data-i18n="pro.proFeat2">2 GB dosya limiti</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.proFeat3">Öncelikli işlem kuyruğu</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.proFeat4">Toplu dosya işleme</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.proFeat5">Reklamsız deneyim</span></div>
+        </div>
+        <button class="plan-btn plan-btn--primary" data-plan="pro" role="radio" aria-checked="false" aria-label="Pro planını seç" data-i18n="pro.proBtn">Pro'ya Geç</button>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-name" data-i18n="pro.businessName">Business</div>
+        <div class="plan-price" id="businessPrice" data-plan-key="business">₺1.049<small>/ay</small></div>
+        <p class="plan-desc" data-i18n="pro.businessDesc">Ekipler ve yoğun kullanım için.</p>
+        <div class="plan-features">
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.businessFeat1">Pro'daki her şey</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.businessFeat2">5 kullanıcı</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span id="businessFileSizeFeat" data-i18n="pro.businessFeat3">10 GB dosya limiti</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.businessFeat4">API erişimi</span></div>
+          <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.businessFeat5">Öncelikli destek</span></div>
+        </div>
+        <button class="plan-btn plan-btn--ghost" data-plan="business" role="radio" aria-checked="false" aria-label="Business planını seç" data-i18n="pro.businessBtn">Business'a Geç</button>
+      </div>
+    </div>
+
+    <h2 class="compare-title" data-i18n="pro.compareTitle">Limit karşılaştırması</h2>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="pro.colLimit">Limit</th>
+            <th scope="col" data-i18n="pro.colFree">Ücretsiz</th>
+            <th scope="col" class="col-pro" data-i18n="pro.colPro">Pro</th>
+            <th scope="col" data-i18n="pro.colBusiness">Business</th>
+          </tr>
+        </thead>
+        <tbody id="proCompareBody"></tbody>
+      </table>
+    </div>
+
+    <div class="pro-warning" role="alert">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+      <span id="proWarningText" data-i18n="pro.warning">Etap geçişi abonelik fiyatını otomatik değiştirmez; topluluk hedeflerine ulaştıkça limitler artar, mevcut abonelerin fiyatı sabit kalır.</span>
+    </div>
+
+    <div class="mini-cards-col">
+      <a href="destek.html" class="mini-card">
+        <div>
+          <div class="mini-card-name" data-i18n="pro.supportMiniTitle">FormatJet'in büyümesine destek ol</div>
+          <div class="mini-card-price" data-i18n="pro.supportMiniDesc">Bağışınla topluluk hedeflerine daha hızlı ulaşalım, limitler herkes için büyüsün.</div>
+        </div>
+        <svg class="mini-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+
+      <a href="jet-limit.html" class="mini-card">
+        <div>
+          <div class="mini-card-name" data-i18n="pro.jetMiniTitle">Jet kredisiyle yapabileceklerini genişlet</div>
+          <div class="mini-card-price" data-i18n="pro.jetMiniDesc">Bir kerelik satın alım, süresi dolmaz, iade edilmez. Hesabında saklanır, ihtiyacın kadar kullan.</div>
+        </div>
+        <svg class="mini-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <section class="checkout-section" id="checkoutSection">
+    <div class="checkout-grid">
+      <div class="checkout-box">
+        <h2 class="checkout-title">Ödeme Bilgileri</h2>
+
+        <div class="pay-methods" id="payMethods">
+          <button class="pay-method active" data-method="card">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+            Kredi / Banka Kartı
+          </button>
+          <button class="pay-method" data-method="transfer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+            Havale / EFT
+          </button>
+        </div>
+
+        <form id="cardForm" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="cardName">Kart Üzerindeki İsim</label>
+            <input type="text" id="cardName" class="form-input" placeholder="AD SOYAD" autocomplete="cc-name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cardNumber">Kart Numarası</label>
+            <input type="text" id="cardNumber" class="form-input" placeholder="4242 4242 4242 4242" inputmode="numeric" autocomplete="cc-number" maxlength="19">
+          </div>
+          <div class="card-row">
+            <div class="form-group">
+              <label class="form-label" for="cardExpiry">Son Kullanma</label>
+              <input type="text" id="cardExpiry" class="form-input" placeholder="AA/YY" inputmode="numeric" autocomplete="cc-exp" maxlength="5">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cardCvc">CVC</label>
+              <input type="text" id="cardCvc" class="form-input" placeholder="123" inputmode="numeric" autocomplete="cc-csc" maxlength="4">
+            </div>
+          </div>
+          <button type="submit" class="btn-primary-full" id="payBtn">Ödemeyi Tamamla</button>
+          <div class="sandbox-note">
+            <strong>Test modu:</strong> Bu ödeme ekranı sandbox modundadır; karttan gerçek tahsilat yapılmaz. Test kartı: 4242 4242 4242 4242
+          </div>
+        </form>
+
+        <div id="transferInfo" hidden style="padding:8px 0">
+          <p style="font-size:14px;color:var(--text-2);line-height:1.7">
+            <strong style="color:var(--text)">FormatJet Teknoloji A.Ş.</strong><br>
+            IBAN: TR12 0006 4000 0011 2345 6789 01<br>
+            Açıklama alanına e-posta adresinizi yazın. Ödemeniz onaylandığında planınız aktive edilir.
+          </p>
+          <button class="btn-primary-full" id="transferBtn">Havale Bildirimi Gönder</button>
+        </div>
+      </div>
+
+      <div class="checkout-box order-summary">
+        <h2 class="checkout-title" id="orderSummaryTitle">Sipariş Özeti</h2>
+        <div class="order-line"><span id="sumPlanLabel">Plan</span><strong id="sumPlan">Pro</strong></div>
+        <div class="order-line"><span id="sumPeriodLabel">Dönem</span><strong id="sumPeriod">Aylık</strong></div>
+        <div class="order-line"><span>KDV (%20)</span><strong id="sumVat">₺13,17</strong></div>
+        <div class="order-total"><span>Toplam</span><span id="sumTotal">₺79,00</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="checkout-success container" id="checkoutSuccess">
+    <div class="success-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <h2 style="font-size:24px;font-weight:800;color:var(--navy);margin-bottom:8px">Ödeme başarılı!</h2>
+    <p style="font-size:14px;color:var(--text-2);margin-bottom:24px" id="successMsg">Pro planın aktive edildi. İyi kullanımlar!</p>
+    <a href="hesap.html" class="btn-primary-full" style="max-width:240px;margin:0 auto;text-decoration:none">Hesabıma Git</a>
+  </section>
+</main>
+
+<div data-fj-footer></div>
+
+<script src="../assets/js/vendor/supabase.min.js"></script>
+<script src="../assets/js/fj-config.js?v=7"></script>
+<script src="../assets/js/fj-pricing-config.js?v=1"></script>
+<script src="../assets/js/layout.js?v=13"></script>
+<script src="../assets/js/auth.js?v=7"></script>
+<script src="../assets/js/i18n.js?v=13"></script>
+<script src="../assets/js/main.js?v=13"></script>
+<script>
+(function () {
+  function formatTl(n) {
+    return '₺' + n.toLocaleString('tr-TR');
+  }
+
+  const etap = window.fjPricing.getCurrentEtap();
+  const rows = window.etapConfig.etaps[etap];
+  const pricing = window.etapConfig.pricing;
+
+  document.querySelectorAll('.plan-price[data-plan-key]').forEach(p => {
+    const plan = pricing[p.dataset.planKey];
+    p.dataset.priceMonthly = formatTl(plan.monthly);
+    p.dataset.priceYearly = formatTl(plan.yearly);
+    p.innerHTML = formatTl(plan.monthly) + '<small>/ay</small>';
+  });
+
+  const rowByKey = {};
+  rows.forEach(r => { rowByKey[r[0]] = r; });
+
+  const fileSizeRow = rowByKey['destek.rowFileSize'];
+  if (fileSizeRow) {
+    const freeFeat = document.getElementById('freeFileSizeFeat');
+    const proFeat = document.getElementById('proFileSizeFeat');
+    const businessFeat = document.getElementById('businessFileSizeFeat');
+    if (freeFeat) freeFeat.textContent = fileSizeRow[2] + ' dosya limiti';
+    if (proFeat) proFeat.textContent = fileSizeRow[3] + ' dosya limiti';
+    if (businessFeat) businessFeat.textContent = fileSizeRow[4] + ' dosya limiti';
+  }
+  const dailyRow = rowByKey['destek.rowDaily'];
+  if (dailyRow) {
+    const freeDaily = document.getElementById('freeDailyFeat');
+    if (freeDaily) freeDaily.textContent = 'Günde ' + dailyRow[2] + ' işlem';
+  }
+
+  const compareBody = document.getElementById('proCompareBody');
+  const i18nMap = {
+    'destek.rowFileSize': 'pro.rowFileSize', 'destek.rowDaily': 'pro.rowDaily',
+    'destek.rowOcr': 'pro.rowOcr', 'destek.rowMedia': 'pro.rowMedia',
+    'destek.rowAiCredit': 'pro.rowAiCredit', 'destek.rowBatch': 'pro.rowBatch',
+    'destek.rowQueue': 'pro.rowQueue', 'destek.rowAds': 'pro.rowAds',
+    'destek.rowApi': 'pro.rowApi', 'destek.rowSupport': 'pro.rowSupport',
+  };
+  rows.forEach(([i18nKey, label, free, pro, business]) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td data-i18n="' + (i18nMap[i18nKey] || i18nKey) + '">' + label + '</td>' +
+      '<td>' + free + '</td>' +
+      '<td class="col-pro">' + pro + '</td>' +
+      '<td>' + business + '</td>';
+    compareBody.appendChild(tr);
+  });
+
+  const warningText = document.getElementById('proWarningText');
+  if (warningText) {
+    warningText.textContent = 'Etap geçişi abonelik fiyatını otomatik değiştirmez. Pro ' + formatTl(pricing.pro.monthly) + '/ay, Business ' + formatTl(pricing.business.monthly) + '/ay başlangıç fiyatlarıdır; topluluk hedeflerine ulaştıkça limitler artar, mevcut abonelerin fiyatı sabit kalır.';
+  }
+
+  document.querySelectorAll('[data-plan]').forEach(btn => {
+    const plan = pricing[btn.dataset.plan];
+    if (!plan) return;
+    btn.dataset.amountMonthly = String(plan.monthly);
+    btn.dataset.amountYearly  = String(plan.yearly * 12);
+  });
+
+  document.querySelectorAll('.billing-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.billing-opt').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-checked', 'false'); });
+      btn.classList.add('active', 'just-selected');
+      setTimeout(() => btn.classList.remove('just-selected'), 150);
+      btn.setAttribute('aria-checked', 'true');
+      const period = btn.dataset.period;
+      selected.period = period;
+      document.querySelectorAll('.plan-price[data-price-monthly]').forEach(p => {
+        const price = period === 'yearly' ? p.dataset.priceYearly : p.dataset.priceMonthly;
+        p.innerHTML = price + '<small>/ay</small>';
+      });
+    });
+  });
+
+  const PLANS = { pro: 'Pro', business: 'Business' };
+  let selected = { type: 'plan', plan: 'pro', period: 'monthly', amount: pricing.pro.monthly };
+
+  const checkoutSection      = document.getElementById('checkoutSection');
+  const successSection       = document.getElementById('checkoutSuccess');
+  const planSelectionSection = document.getElementById('planSelectionSection');
+  const proHero              = document.getElementById('proHero');
+
+  function fmt(n) { return '₺' + n.toLocaleString('tr-TR', { minimumFractionDigits: 2 }); }
+
+  document.querySelectorAll('[data-plan]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      document.querySelectorAll('[data-plan]').forEach(b => b.setAttribute('aria-checked', 'false'));
+      btn.setAttribute('aria-checked', 'true');
+      const session = await window.fjAuth.getSession();
+      const period = document.querySelector('.billing-opt.active').dataset.period;
+      if (!session) {
+        location.href = '../login.html?next=' + encodeURIComponent('pro.html?plan=' + btn.dataset.plan + '&period=' + period);
+        return;
+      }
+      selected.type   = 'plan';
+      selected.plan   = btn.dataset.plan;
+      selected.period = period;
+      selected.amount = Number(period === 'yearly' ? btn.dataset.amountYearly : btn.dataset.amountMonthly);
+      document.getElementById('orderSummaryTitle').textContent = 'Sipariş Özeti';
+      document.getElementById('sumPlanLabel').textContent   = 'Plan';
+      document.getElementById('sumPeriodLabel').textContent = 'Dönem';
+      document.getElementById('sumPlan').textContent   = PLANS[selected.plan];
+      document.getElementById('sumPeriod').textContent = selected.period === 'yearly' ? 'Yıllık' : 'Aylık';
+      document.getElementById('sumVat').textContent    = fmt(selected.amount * 0.2 / 1.2);
+      document.getElementById('sumTotal').textContent  = fmt(selected.amount);
+      checkoutSection.classList.add('visible');
+      checkoutSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  function showJetOrDonationCheckout(type, amount) {
+    selected.type   = type;
+    selected.amount = amount;
+    planSelectionSection.style.display = 'none';
+    proHero.style.display = 'none';
+    document.getElementById('orderSummaryTitle').textContent =
+      type === 'jetCredit' ? 'Jet Kredisi Satın Al' : 'Destek Ol';
+    document.getElementById('sumPlanLabel').textContent = type === 'jetCredit' ? 'Ürün' : 'Bağış';
+    document.getElementById('sumPlan').textContent = type === 'jetCredit' ? 'Jet Kredisi' : 'Topluluk Altyapı Fonu';
+    document.getElementById('sumPeriodLabel').textContent = 'Tutar';
+    document.getElementById('sumPeriod').textContent = fmt(amount);
+    document.getElementById('sumVat').textContent   = fmt(amount * 0.2 / 1.2);
+    document.getElementById('sumTotal').textContent = fmt(amount);
+    checkoutSection.classList.add('visible');
+    checkoutSection.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.pay-method').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.pay-method').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const isCard = btn.dataset.method === 'card';
+      document.getElementById('cardForm').hidden     = !isCard;
+      document.getElementById('transferInfo').hidden = isCard;
+    });
+  });
+
+  const cardNumber = document.getElementById('cardNumber');
+  cardNumber.addEventListener('input', () => {
+    cardNumber.value = cardNumber.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+  });
+  const cardExpiry = document.getElementById('cardExpiry');
+  cardExpiry.addEventListener('input', () => {
+    let v = cardExpiry.value.replace(/\D/g, '').slice(0, 4);
+    if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
+    cardExpiry.value = v;
+  });
+
+  async function completePurchase(method, last4) {
+    if (selected.type === 'plan') {
+      const { error } = await window.fjAuth.sb.rpc('activate_plan', {
+        p_plan: selected.plan,
+        p_period: selected.period,
+        p_method: method,
+        p_last4: last4,
+        p_amount: selected.amount,
+      });
+      if (error) throw error;
+    } else if (selected.type === 'jetCredit') {
+      const { error } = await window.fjAuth.sb.rpc('add_jet_credit', {
+        p_amount: selected.amount,
+        p_method: method,
+        p_last4: last4,
+      });
+      if (error) throw error;
+    } else {
+      const { error } = await window.fjAuth.sb.rpc('add_donation', {
+        p_amount: selected.amount,
+        p_method: method,
+        p_last4: last4,
+      });
+      if (error) throw error;
+    }
+    planSelectionSection.style.display = 'none';
+    proHero.style.display = 'none';
+    checkoutSection.classList.remove('visible');
+    document.getElementById('successMsg').textContent =
+      selected.type === 'plan'
+        ? PLANS[selected.plan] + ' planın aktive edildi. İyi kullanımlar!'
+        : selected.type === 'jetCredit'
+          ? fmt(selected.amount) + ' tutarında jet kredisi hesabına tanımlandı.'
+          : 'Desteğin için teşekkürler! ' + fmt(selected.amount) + ' Topluluk Altyapı Fonu\'na eklendi.';
+    successSection.classList.add('visible');
+  }
+
+  document.getElementById('cardForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const num = cardNumber.value.replace(/\s/g, '');
+    if (num.length < 16 || !document.getElementById('cardName').value.trim() ||
+        cardExpiry.value.length < 5 || document.getElementById('cardCvc').value.length < 3) {
+      window.fjNotify('Lütfen tüm kart bilgilerini eksiksiz doldurun.', 'error', 'Ödeme bilgileri eksik');
+      return;
+    }
+    const btn = document.getElementById('payBtn');
+    btn.textContent = 'İşleniyor...'; btn.disabled = true; btn.classList.add('is-busy');
+    try {
+      await completePurchase('card', num.slice(-4));
+    } catch (err) {
+      window.fjNotify('Ödeme sırasında hata oluştu: ' + err.message, 'error', 'Ödeme tamamlanamadı');
+      btn.textContent = 'Ödemeyi Tamamla'; btn.disabled = false; btn.classList.remove('is-busy');
+    }
+  });
+
+  document.getElementById('transferBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('transferBtn');
+    btn.textContent = 'Gönderiliyor...'; btn.disabled = true; btn.classList.add('is-busy');
+    try {
+      await completePurchase('transfer', null);
+    } catch (err) {
+      window.fjNotify('Bildirim sırasında hata oluştu: ' + err.message, 'error', 'Bildirim gönderilemedi');
+      btn.textContent = 'Havale Bildirimi Gönder'; btn.disabled = false; btn.classList.remove('is-busy');
+    }
+  });
+
+  const urlParams    = new URLSearchParams(location.search);
+  const urlPlan      = urlParams.get('plan');
+  const urlPeriod    = urlParams.get('period');
+  const urlJetCredit = urlParams.get('jetCredit');
+  const urlDonation  = urlParams.get('donation');
+
+  if (urlPeriod === 'yearly') {
+    const yearlyBtn = document.querySelector('.billing-opt[data-period="yearly"]');
+    if (yearlyBtn) yearlyBtn.click();
+  }
+
+  if (urlJetCredit) {
+    showJetOrDonationCheckout('jetCredit', Number(urlJetCredit));
+  } else if (urlDonation) {
+    showJetOrDonationCheckout('donation', Number(urlDonation));
+  } else if (urlPlan && PLANS[urlPlan]) {
+    setTimeout(() => {
+      const btn = document.querySelector('[data-plan="' + urlPlan + '"]');
+      if (btn) btn.click();
+    }, 400);
+  }
+})();
+</script>
+<script src="../assets/js/tools-registry.js?v=7"></script>
+<script src="../assets/js/premium-components.js?v=13"></script>
+</body>
+</html>

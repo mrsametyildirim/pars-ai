@@ -663,9 +663,9 @@ body.search-mode .features { display: none; }
 
 .footer-logo { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
 .footer-logo-text { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
-.footer-logo-icon { height: 28px; width: auto; flex-shrink: 0; }
-.footer-logo-text-img { height: 20px; width: auto; flex-shrink: 0; filter: brightness(0) invert(1); }
-.footer-logo-text-img--native { filter: none; height: 20px; }
+.footer-logo-icon { height: 42px; width: auto; flex-shrink: 0; }
+.footer-logo-text-img { height: 30px; width: auto; flex-shrink: 0; filter: brightness(0) invert(1); }
+.footer-logo-text-img--native { filter: none; height: 30px; }
 .login-brand-logo-text--native { filter: none !important; }
 
 .footer-grid--4 {
@@ -955,9 +955,9 @@ body.fj-search-active .hero { padding-bottom: 24px; }
   justify-content: center;
   gap: 0;
 }
-.login-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 48px; }
-.login-brand-logo-icon { height: 32px; width: auto; }
-.login-brand-logo-text { height: 22px; width: auto; filter: brightness(0) invert(1); }
+.login-brand-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 48px; }
+.login-brand-logo-icon { height: 52px; width: auto; }
+.login-brand-logo-text { height: 34px; width: auto; filter: brightness(0) invert(1); }
 .login-brand-title { font-size: 28px; font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 32px; }
 .login-brand-list { display: flex; flex-direction: column; gap: 16px; }
 .login-brand-item { display: flex; align-items: flex-start; gap: 12px; }

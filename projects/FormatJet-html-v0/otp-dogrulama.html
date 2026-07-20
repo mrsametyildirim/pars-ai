@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doğrulama Kodu — FormatJet</title>
+  <meta name="description" content="FormatJet hesabınızı 6 haneli e-posta koduyla güvenle doğrulayın.">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css?v=7">
+  <link rel="stylesheet" href="assets/css/components.css?v=13">
+</head>
+<body class="otp-page">
+  <div class="login-page">
+    <div class="login-brand">
+      <div class="login-brand-logo">
+        <img src="assets/img/logo-icon-dark.png" alt="" class="login-brand-logo-icon" aria-hidden="true">
+        <img src="assets/img/logo-text-dark.png" alt="FormatJet" class="login-brand-logo-text login-brand-logo-text--native">
+      </div>
+      <h2 class="login-brand-title">Hesabın için son güvenlik adımı</h2>
+      <ul class="login-brand-list">
+        <li class="login-brand-item"><div class="login-brand-check">✓</div><span>6 haneli, tek kullanımlık güvenlik kodu</span></li>
+        <li class="login-brand-item"><div class="login-brand-check">✓</div><span>Kod yalnızca e-posta adresine gönderilir</span></li>
+        <li class="login-brand-item"><div class="login-brand-check">✓</div><span>Güvenli ve hızlı hesap doğrulaması</span></li>
+        <li class="login-brand-item"><div class="login-brand-check">✓</div><span>Doğrulama sonrası doğrudan hesabına geçiş</span></li>
+      </ul>
+    </div>
+
+    <div class="login-form-side">
+      <div class="login-form-box">
+        <a href="register.html" class="tool-back" style="display:inline-flex;margin-bottom:20px">← Kayıt sayfasına dön</a>
+        <h1 class="login-form-title">Doğrulama kodunu gir</h1>
+        <p class="login-form-sub"><strong id="otpEmailLabel"></strong> adresine gönderilen 6 haneli kodu yaz.</p>
+
+        <form id="otpForm" novalidate>
+          <input type="hidden" id="otpToken">
+          <div class="fj-otp-group" role="group" aria-label="6 haneli doğrulama kodu">
+            <input class="fj-otp-input" inputmode="numeric" autocomplete="one-time-code" maxlength="1" aria-label="1. hane">
+            <input class="fj-otp-input" inputmode="numeric" maxlength="1" aria-label="2. hane">
+            <input class="fj-otp-input" inputmode="numeric" maxlength="1" aria-label="3. hane">
+            <input class="fj-otp-input" inputmode="numeric" maxlength="1" aria-label="4. hane">
+            <input class="fj-otp-input" inputmode="numeric" maxlength="1" aria-label="5. hane">
+            <input class="fj-otp-input" inputmode="numeric" maxlength="1" aria-label="6. hane">
+          </div>
+
+          <div class="fj-otp-timer">
+            <span>Kod gelmedi mi?</span>
+            <button type="button" class="link-small" id="resendBtn" style="border:0;background:none;cursor:pointer" disabled>Tekrar gönder (<strong id="otpTimer">60</strong> sn)</button>
+          </div>
+
+          <div class="auth-error" id="authError" hidden></div>
+          <div class="auth-ok" id="authOk" hidden>Hesabın doğrulandı. Yönlendiriliyorsun…</div>
+          <button type="submit" class="btn-primary-full" id="otpSubmit">Kodu Doğrula</button>
+        </form>
+
+        <p class="login-register">Farklı bir adres mi kullandın? <a href="register.html">Yeniden kayıt ol</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/vendor/supabase.min.js"></script>
+  <script src="assets/js/fj-config.js?v=7"></script>
+  <script src="assets/js/auth.js?v=7"></script>
+  <script src="assets/js/i18n.js?v=13"></script>
+  <script src="assets/js/premium-components.js?v=13"></script>
+  <script>
+  (function () {
+    const params = new URLSearchParams(location.search);
+    const email = params.get('email') || sessionStorage.getItem('fj-pending-email') || '';
+    const emailLabel = document.getElementById('otpEmailLabel');
+    const err = document.getElementById('authError');
+    const ok = document.getElementById('authOk');
+    const submit = document.getElementById('otpSubmit');
+    const resend = document.getElementById('resendBtn');
+    const timerLabel = document.getElementById('otpTimer');
+    emailLabel.textContent = email || 'E-posta';
+
+    function showError(message) { err.textContent = message; err.hidden = false; ok.hidden = true; }
+    function startTimer() {
+      let seconds = 60;
+      resend.disabled = true;
+      resend.innerHTML = 'Tekrar gönder (<strong id="otpTimer">60</strong> sn)';
+      const timer = setInterval(() => {
+        seconds -= 1;
+        const label = document.getElementById('otpTimer');
+        if (label) label.textContent = seconds;
+        if (seconds <= 0) { clearInterval(timer); resend.disabled = false; resend.textContent = 'Kodu tekrar gönder'; }
+      }, 1000);
+    }
+
+    window.fjAuth.getSession().then(session => {
+      if (session) { ok.hidden = false; submit.hidden = true; setTimeout(() => { location.href = 'hesap.html'; }, 900); }
+    });
+
+    document.getElementById('otpForm').addEventListener('submit', async (event) => {
+      event.preventDefault(); err.hidden = true;
+      const token = document.getElementById('otpToken').value;
+      if (!email) { showError('E-posta adresi bulunamadı. Kayıt sayfasından yeniden dene.'); return; }
+      if (!/^\d{6}$/.test(token)) { showError('Lütfen 6 haneli doğrulama kodunu eksiksiz gir.'); return; }
+      const original = submit.textContent;
+      submit.textContent = 'Doğrulanıyor…'; submit.disabled = true;
+      const { error } = await window.fjAuth.sb.auth.verifyOtp({ email, token, type: 'signup' });
+      if (error) {
+        submit.textContent = original; submit.disabled = false;
+        showError(/expired/i.test(error.message) ? 'Kodun süresi dolmuş. Yeni kod iste.' : 'Kod geçersiz veya kullanılmış. Kontrol edip yeniden dene.');
+        return;
+      }
+      sessionStorage.removeItem('fj-pending-email');
+      ok.hidden = false; submit.hidden = true;
+      setTimeout(() => { location.href = 'hesap.html'; }, 900);
+    });
+
+    resend.addEventListener('click', async () => {
+      err.hidden = true;
+      if (!email) { showError('E-posta adresi bulunamadı.'); return; }
+      resend.disabled = true; resend.textContent = 'Gönderiliyor…';
+      const { error } = await window.fjAuth.sb.auth.resend({ type: 'signup', email });
+      if (error) { resend.disabled = false; resend.textContent = 'Kodu tekrar gönder'; showError('Kod gönderilemedi: ' + error.message); return; }
+      if (window.fjNotify) window.fjNotify('Yeni doğrulama kodu e-posta adresine gönderildi.', 'success');
+      startTimer();
+    });
+
+    document.querySelector('.fj-otp-group').addEventListener('fj:otp-complete', () => submit.focus());
+    startTimer();
+  })();
+  </script>
+</body>
+</html>

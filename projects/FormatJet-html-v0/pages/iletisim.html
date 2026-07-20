@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/main.css?v=7">
+  <link rel="stylesheet" href="../assets/css/components.css?v=13">
 </head>
 <body>
 
@@ -19,8 +20,8 @@
 
   <div class="page-hero">
     <div class="page-hero-inner">
-      <h1 class="page-title">İletişim</h1>
-      <p class="page-sub-light">Sorularınız, önerileriniz veya araç talepleriniz için buradan ulaşabilirsiniz.</p>
+      <h1 class="page-title" data-i18n="contact-title">İletişim</h1>
+      <p class="page-sub-light" data-i18n="contact-sub">Sorularınız, önerileriniz veya araç talepleriniz için buradan ulaşabilirsiniz.</p>
     </div>
   </div>
 
@@ -33,39 +34,39 @@
           <form class="contact-form" novalidate id="contactForm">
             <div class="contact-form-row">
               <div class="form-group">
-                <label class="form-label" for="contactName">Adınız</label>
-                <input type="text" id="contactName" class="form-input" placeholder="Adınız Soyadınız" autocomplete="name">
+                <label class="form-label" for="contactName" data-i18n="contact-name">Adınız</label>
+                <input type="text" id="contactName" class="form-input" placeholder="Adınız Soyadınız" data-i18n-placeholder="contact-name-ph" autocomplete="name">
               </div>
               <div class="form-group">
-                <label class="form-label" for="contactEmail">E-posta</label>
+                <label class="form-label" for="contactEmail" data-i18n="contact-email">E-posta</label>
                 <input type="email" id="contactEmail" class="form-input" placeholder="ornek@email.com" autocomplete="email">
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="contactSubject">Konu</label>
+              <label class="form-label" for="contactSubject" data-i18n="contact-subject">Konu</label>
               <select id="contactSubject" class="form-input form-select">
-                <option value="" disabled selected>Konu seçin</option>
-                <option value="teknik">Teknik Sorun</option>
-                <option value="arac-talebi">Yeni Araç Talebi</option>
-                <option value="gizlilik">Gizlilik / KVKK</option>
-                <option value="is-birligi">İş Birliği</option>
-                <option value="diger">Diğer</option>
+                <option value="" disabled selected data-i18n="contact-subject-ph">Konu seçin</option>
+                <option value="teknik" data-i18n="contact-subject-1">Teknik Sorun</option>
+                <option value="arac-talebi" data-i18n="contact-subject-2">Yeni Araç Talebi</option>
+                <option value="gizlilik" data-i18n="contact-subject-3">Gizlilik / KVKK</option>
+                <option value="is-birligi" data-i18n="contact-subject-4">İş Birliği</option>
+                <option value="diger" data-i18n="contact-subject-5">Diğer</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="contactMessage">Mesajınız</label>
-              <textarea id="contactMessage" class="form-input form-textarea" placeholder="Mesajınızı buraya yazın..." rows="5"></textarea>
+              <label class="form-label" for="contactMessage" data-i18n="contact-message">Mesajınız</label>
+              <textarea id="contactMessage" class="form-input form-textarea" placeholder="Mesajınızı buraya yazın..." data-i18n-placeholder="contact-message-ph" rows="5"></textarea>
             </div>
 
-            <button type="submit" class="btn-primary-full" id="contactSubmit">Gönder</button>
+            <button type="submit" class="btn-primary-full" id="contactSubmit" data-i18n="contact-send">Gönder</button>
 
             <div class="auth-error" id="contactError" hidden style="padding:10px 14px;margin-top:8px;font-size:13px;color:#B91C1C;background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.25);border-radius:8px"></div>
 
             <div class="contact-success" id="contactSuccess" hidden>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-              Mesajınız alındı. En geç 24 saat içinde yanıt veririz.
+              <span data-i18n="contact-success">Mesajınız alındı. En geç 24 saat içinde yanıt veririz.</span>
             </div>
           </form>
         </div>
@@ -77,7 +78,7 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
             <div>
-              <p class="contact-info-label">Destek e-postası</p>
+              <p class="contact-info-label" data-i18n="contact-info-email">Destek e-postası</p>
               <a href="mailto:destek@formatjet.com" class="contact-info-value" data-fj-contact="email">destek@formatjet.com</a>
             </div>
           </div>
@@ -87,7 +88,7 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div>
-              <p class="contact-info-label">Yanıt süresi</p>
+              <p class="contact-info-label" data-i18n="contact-info-response">Yanıt süresi</p>
               <p class="contact-info-value" data-fj-contact="response">24 saat içinde</p>
             </div>
           </div>
@@ -97,17 +98,27 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
             <div>
-              <p class="contact-info-label">Yeni Araç Talebi</p>
-              <p class="contact-info-value">Eksik gördüğünüz aracı önerin, değerlendirelim.</p>
+              <p class="contact-info-label" data-i18n="contact-info-request">Yeni Araç Talebi</p>
+              <p class="contact-info-value" data-i18n="contact-info-request-desc">Eksik gördüğünüz aracı önerin, değerlendirelim.</p>
+            </div>
+          </div>
+
+                    <div class="contact-info-card" data-fj-contact-wrap="address" hidden>
+            <div class="contact-info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <p class="contact-info-label" data-i18n="contact-info-address">Adres</p>
+              <p class="contact-info-value" data-fj-contact="address"></p>
             </div>
           </div>
 
           <div class="contact-faq">
-            <p class="contact-faq-title">Sık sorulan sorular</p>
+            <p class="contact-faq-title" data-i18n="contact-faq-title">Sık sorulan sorular</p>
             <ul class="contact-faq-list">
-              <li><span class="contact-faq-q">Dosyalarım güvende mi?</span><br><span class="contact-faq-a">Evet. İşlem sonrası 1 saat içinde otomatik silinir.</span></li>
-              <li><span class="contact-faq-q">Kayıt olmadan kullanabilir miyim?</span><br><span class="contact-faq-a">Evet. Tüm temel araçlar kayıtsız çalışır.</span></li>
-              <li><span class="contact-faq-q">Dosya boyutu limiti var mı?</span><br><span class="contact-faq-a">Üyesiz kullanımda 50 MB, üyeler için 200 MB.</span></li>
+              <li><span class="contact-faq-q" data-i18n="contact-faq-q1">Dosyalarım güvende mi?</span><br><span class="contact-faq-a" data-i18n="contact-faq-a1">Evet. İşlem sonrası 1 saat içinde otomatik silinir.</span></li>
+              <li><span class="contact-faq-q" data-i18n="contact-faq-q2">Kayıt olmadan kullanabilir miyim?</span><br><span class="contact-faq-a" data-i18n="contact-faq-a2">Evet. Tüm temel araçlar kayıtsız çalışır.</span></li>
+              <li><span class="contact-faq-q" data-i18n="contact-faq-q3">Dosya boyutu limiti var mı?</span><br><span class="contact-faq-a" data-i18n="contact-faq-a3">Üyesiz kullanımda 50 MB, üyeler için 200 MB.</span></li>
             </ul>
           </div>
         </div>
@@ -122,10 +133,10 @@
 
 <script src="../assets/js/vendor/supabase.min.js"></script>
 <script src="../assets/js/fj-config.js?v=7"></script>
-<script src="../assets/js/layout.js?v=7"></script>
+<script src="../assets/js/layout.js?v=13"></script>
 <script src="../assets/js/auth.js?v=7"></script>
-<script src="../assets/js/i18n.js?v=7"></script>
-<script src="../assets/js/main.js?v=7"></script>
+<script src="../assets/js/i18n.js?v=13"></script>
+<script src="../assets/js/main.js?v=13"></script>
 <script>
   /* URL parametresinden konu ön-seçimi (?konu=arac-talebi | hata-bildir) */
   const urlKonu = new URLSearchParams(location.search).get('konu');
@@ -152,13 +163,13 @@
     const message = document.getElementById('contactMessage').value.trim();
 
     if (!name || !email || !subject || !message) {
-      errBox.textContent = 'Lütfen tüm alanları doldurun.';
+      errBox.textContent = window.fjT('ui.contact.required', 'Lütfen tüm alanları doldurun.');
       errBox.hidden = false;
       return;
     }
 
     const btn = document.getElementById('contactSubmit');
-    btn.textContent = 'Gönderiliyor...'; btn.disabled = true;
+    btn.textContent = window.fjT('ui.contact.sending', 'Gönderiliyor...'); btn.disabled = true;
 
     const session = await window.fjAuth.getSession();
 
@@ -178,10 +189,10 @@
     }
 
     const { error } = await insertPromise;
-    btn.textContent = 'Gönder'; btn.disabled = false;
+    btn.textContent = window.fjT('ui.contact.send', 'Gönder'); btn.disabled = false;
 
     if (error) {
-      errBox.textContent = 'Gönderilemedi: ' + error.message;
+      errBox.textContent = window.fjTF('ui.contact.failed', 'Gönderilemedi: {message}', { message: error.message });
       errBox.hidden = false;
       return;
     }
@@ -190,5 +201,7 @@
     this.reset();
   });
 </script>
+<script src="../assets/js/tools-registry.js?v=7"></script>
+<script src="../assets/js/premium-components.js?v=13"></script>
 </body>
 </html>

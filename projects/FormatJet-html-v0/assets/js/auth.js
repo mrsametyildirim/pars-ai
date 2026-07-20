@@ -101,7 +101,7 @@
       '<div class="user-menu-head"><strong></strong><span class="user-menu-email"></span>' + planBadge + '</div>' +
       '<a href="' + BASE + 'hesap.html" class="user-menu-item">Hesabım</a>' +
       (profile.plan === 'free'
-        ? '<a href="' + BASE + 'odeme.html" class="user-menu-item user-menu-item--accent">Pro\'ya Geç</a>'
+        ? '<a href="' + BASE + 'pages/pro.html" class="user-menu-item user-menu-item--accent">Pro\'ya Geç</a>'
         : '') +
       (profile.role === 'admin'
         ? '<a href="' + BASE + 'admin.html" class="user-menu-item">Yönetici Paneli</a>'
@@ -158,10 +158,10 @@
   /* Destek Ol / Pro'ya Geç butonlarını ödeme sayfasına bağla */
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.btn-support, .btn-cta-filled').forEach((el) => {
-      if (!el.closest('form')) el.addEventListener('click', () => { location.href = BASE + 'odeme.html?kaynak=destek'; });
+      if (!el.closest('form')) el.addEventListener('click', () => { location.href = BASE + 'pages/destek.html'; });
     });
     document.querySelectorAll('.btn-nav.btn-accent').forEach((el) => {
-      if (el.textContent.trim() === "Pro'ya Geç") el.addEventListener('click', () => { location.href = BASE + 'odeme.html'; });
+      if (el.textContent.trim() === "Pro'ya Geç") el.addEventListener('click', () => { location.href = BASE + 'pages/pro.html'; });
     });
     document.querySelectorAll('.btn-cta-outline').forEach((el) => {
       el.addEventListener('click', () => { location.href = BASE + 'pages/iletisim.html?konu=arac-talebi'; });

@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/main.css?v=7">
+  <link rel="stylesheet" href="assets/css/components.css?v=13">
 </head>
 <body>
 
@@ -221,17 +222,19 @@
       btn.textContent = 'Hesap Oluştur'; btn.disabled = false;
       if (/already registered/i.test(error.message)) showError('Bu e-posta ile zaten bir hesap var. Giriş yapmayı dene.');
       else if (/password/i.test(error.message)) showError('Şifre yeterince güçlü değil. En az 8 karakter kullan.');
+      else if (/sending confirmation email/i.test(error.message)) showError('Hesap oluşturuldu ancak doğrulama e-postası gönderilemedi (SMTP ayarı hatalı). Yönetici SMTP bilgilerini düzelttikten sonra tekrar dene.');
       else showError('Kayıt başarısız: ' + error.message);
       return;
     }
 
     /* Doğrulama gerekiyorsa bilgi ekranı; e-posta onayı kapalıysa direkt giriş */
     if (data.session) {
-      location.href = 'odeme.html';
+      location.href = 'pages/pro.html?plan=pro';
       return;
     }
     document.getElementById('registerForm').hidden = true;
     document.getElementById('verifyEmail').textContent = email;
+    sessionStorage.setItem('fj-pending-email', email);
     document.getElementById('verifyBox').hidden = false;
   });
 
@@ -258,5 +261,7 @@
     if (error) showError('Google kaydı başarısız: ' + error.message);
   });
 </script>
+<script src="assets/js/i18n.js?v=13"></script>
+<script src="assets/js/premium-components.js?v=13"></script>
 </body>
 </html>

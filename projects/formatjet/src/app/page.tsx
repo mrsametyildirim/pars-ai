@@ -216,25 +216,25 @@ export default function HomePage() {
     <div className="min-h-screen">
 
       {/* ═══════════════ HERO ═══════════════ */}
-      <section className="pt-16 pb-10">
+      <section className="pt-16 pb-14">
         <div className="container">
-          <div className="max-w-3xl mx-auto">
+          <div style={{ maxWidth: "720px", margin: "0 auto" }}>
 
             {/* Başlık bloğu */}
             {!searchMode && (
-              <div className="hero-title-block text-center mb-10">
+              <div className="hero-title-block mb-10" style={{ textAlign: "center" }}>
                 <h1 style={{
-                  fontSize: "clamp(2rem,5vw,3rem)",
+                  fontSize: "clamp(2rem,4.5vw,2.8rem)",
                   fontWeight: 800,
                   color: "var(--color-text)",
                   lineHeight: 1.15,
                   letterSpacing: "-0.5px",
                   marginBottom: "12px",
+                  textAlign: "center",
                 }}>
-                  Dosyan hazır.{" "}
-                  <span style={{ color: "var(--color-accent)" }}>Formatını değiştirelim.</span>
+                  Dosyan hazır. <span style={{ color: "var(--color-accent)" }}>Formatını değiştirelim.</span>
                 </h1>
-                <p style={{ fontSize: "16px", color: "var(--color-text-2)", maxWidth: "480px", margin: "0 auto" }}>
+                <p style={{ fontSize: "16px", color: "var(--color-text-2)", maxWidth: "520px", margin: "0 auto", textAlign: "center", lineHeight: 1.6 }}>
                   PDF, belge, görsel, video ve ses dosyalarını hızlıca dönüştür.
                 </p>
               </div>

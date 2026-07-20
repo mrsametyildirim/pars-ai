@@ -10,6 +10,9 @@
 (function () {
   const BASE = /\/(pages|tools)\//.test(location.pathname) ? '../' : '';
   const PAGE = location.pathname.split('/').pop() || 'index.html';
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const initialTheme = localStorage.getItem('fj-theme') || (systemDark.matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', initialTheme);
 
   /* ── Dil paneli stili her sayfada yüklü olsun ── */
   if (!document.querySelector('link[href*="lang-panel.css"]')) {
@@ -19,19 +22,27 @@
     document.head.appendChild(css);
   }
 
-  /* ── Tema duyarlı favicon ── */
+  /* ── Tema duyarlı favicon (Chrome media query desteklemez → JS ile) ── */
   document.querySelectorAll('link[rel="icon"]').forEach(l => l.remove());
-  const icons = [
-    { href: BASE + 'assets/img/favicon-light.png', media: '(prefers-color-scheme: light)' },
-    { href: BASE + 'assets/img/favicon-dark.png',  media: '(prefers-color-scheme: dark)' },
-    { href: BASE + 'assets/img/favicon-light.png', media: '' },
-  ];
-  icons.reverse().forEach(ic => {
-    const l = document.createElement('link');
-    l.rel = 'icon'; l.type = 'image/png'; l.href = ic.href;
-    if (ic.media) l.media = ic.media;
-    document.head.prepend(l);
+  const favLink = document.createElement('link');
+  favLink.rel = 'icon'; favLink.type = 'image/png';
+  document.head.prepend(favLink);
+  function applyFavicon() {
+    const s = window.FJ_SITE || {};
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    favLink.href = dark
+      ? (s.favicon_dark || BASE + 'assets/img/favicon-dark.png')
+      : (s.favicon_light || BASE + 'assets/img/favicon-light.png');
+  }
+  applyFavicon();
+  systemDark.addEventListener('change', e => {
+    if (!localStorage.getItem('fj-theme')) {
+      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      applyFavicon();
+    }
   });
+  window.addEventListener('fj:themechange', applyFavicon);
+  window.fjApplyFavicon = applyFavicon;
 
   /* ── Header ── */
   const NAV = [
@@ -61,10 +72,10 @@
 '      </a>' +
 '    </nav>' +
 '    <div class="header-right">' +
-'      <button class="btn-support">' +
+'      <a href="' + BASE + 'pages/destek.html" class="btn-support">' +
 '        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
 '        <span data-i18n="btn-support">Destek Ol</span>' +
-'      </button>' +
+'      </a>' +
 '      <a href="' + BASE + 'pages/hakkimizda.html" class="btn-bizi-tani" data-i18n="btn-about">Bizi Tanı</a>' +
 '      <div class="lang-wrapper">' +
 '        <button class="btn-lang" id="btnLang" aria-label="Dil seç">' +
@@ -89,22 +100,41 @@
 '        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' +
 '        <span data-i18n="btn-login">Giriş Yap</span>' +
 '      </button>' +
+'      <button class="fj-header-theme" type="button" data-theme-toggle aria-label="Koyu temaya geç" aria-pressed="false">' +
+'        <span class="fj-theme-sun"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span>' +
+'        <span class="fj-theme-moon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>' +
+'        <span class="fj-theme-thumb" aria-hidden="true"></span>' +
+'      </button>' +
 '      <button class="btn-hamburger" id="btnHamburger" aria-label="Menüyü aç" aria-expanded="false"><span></span><span></span><span></span></button>' +
 '    </div>' +
 '  </div>' +
+'</header>' +
 '  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">' +
 '    <div class="mobile-menu-inner">' +
+'      <div class="mobile-menu-top">' +
+'        <div><span class="mobile-menu-eyebrow">FORMATJET</span><strong data-i18n="nav-all-tools">Tüm Araçlar</strong></div>' +
+'        <button class="fj-mobile-theme-toggle" type="button" data-theme-toggle aria-label="Koyu temaya geç" aria-pressed="false">' +
+'          <span class="fj-theme-sun"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></span>' +
+'          <span class="fj-theme-moon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>' +
+'          <span class="fj-mobile-theme-thumb" aria-hidden="true"></span>' +
+'        </button>' +
+'      </div>' +
 '      <nav class="mobile-nav">' +
          NAV.map(([href, key, label]) => '<a href="' + BASE + href + '" class="mobile-nav-link" data-i18n="' + key + '">' + label + '</a>').join('') +
 '        <a href="' + BASE + 'tools.html" class="mobile-nav-link" data-i18n="nav-all-tools">Tüm Araçlar</a>' +
 '        <a href="' + BASE + 'pages/hakkimizda.html" class="mobile-nav-link" data-i18n="btn-about">Bizi Tanı</a>' +
+'        <a href="' + BASE + 'pages/iletisim.html" class="mobile-nav-link" data-i18n="footer-contact">İletişim</a>' +
+'        <a href="' + BASE + 'pages/destek.html" class="mobile-nav-link" data-i18n="btn-support">Destek Ol</a>' +
 '      </nav>' +
 '      <div class="mobile-menu-footer">' +
+'        <div class="mobile-language-row" aria-label="Dil seç">' +
+'          <button class="lang-option" data-lang="tr">TR</button><button class="lang-option" data-lang="en">EN</button><button class="lang-option" data-lang="es">ES</button><button class="lang-option" data-lang="de">DE</button><button class="lang-option" data-lang="fr">FR</button>' +
+'        </div>' +
 '        <button class="btn-login w-full" onclick="location.href=\'' + BASE + 'login.html\'"><span data-i18n="btn-login">Giriş Yap</span></button>' +
+'        <button class="btn-login btn-login--secondary w-full" onclick="location.href=\'' + BASE + 'hesap.html\'"><span data-i18n="acc-title">Hesabım</span></button>' +
 '      </div>' +
 '    </div>' +
-'  </div>' +
-'</header>';
+'  </div>';
 
   /* ── Footer ── */
   const footerHtml =
@@ -166,7 +196,7 @@
 '            <li><a href="' + BASE + 'pages/hakkimizda.html" data-i18n="footer-about">Hakkımızda</a></li>' +
 '            <li><a href="' + BASE + 'pages/iletisim.html" data-i18n="footer-contact">İletişim</a></li>' +
 '            <li><a href="' + BASE + 'pages/iletisim.html?konu=arac-talebi" data-i18n="btn-request-tool">Yeni Araç Talep Et</a></li>' +
-'            <li><a href="' + BASE + 'odeme.html?kaynak=destek" data-i18n="btn-support">Destek Ol</a></li>' +
+'            <li><a href="' + BASE + 'pages/destek.html" data-i18n="btn-support">Destek Ol</a></li>' +
 '          </ul>' +
 '        </div>' +
 '        <div class="footer-col">' +
@@ -219,12 +249,7 @@
       const key = el.dataset.fjSet;
       if (settings[key]) el.src = settings[key];
     });
-    if (settings.favicon_light || settings.favicon_dark) {
-      document.querySelectorAll('link[rel="icon"]').forEach(l => {
-        if (l.media === '(prefers-color-scheme: dark)') { if (settings.favicon_dark) l.href = settings.favicon_dark; }
-        else if (settings.favicon_light) l.href = settings.favicon_light;
-      });
-    }
+    if (window.fjApplyFavicon) window.fjApplyFavicon();
     let navLabels = settings.nav_labels || [];
     if (typeof navLabels === 'string') {
       try { navLabels = JSON.parse(navLabels); } catch (_) { navLabels = []; }
@@ -277,6 +302,49 @@
           });
         }
       } catch (_) {}
+    }
+
+    /* Header nav sıralaması (admin sürükle-bırak) */
+    if (settings.nav_order) {
+      try {
+        const order = JSON.parse(settings.nav_order); // örn ["gorsel","pdf",...]
+        const nav = document.querySelector('.header-nav');
+        const mobileNav = document.querySelector('.mobile-nav');
+        if (nav && Array.isArray(order)) {
+          const allBtn = nav.querySelector('.btn-all-tools');
+          order.forEach(key => {
+            const link = nav.querySelector('[data-i18n="nav-' + key + '"]');
+            if (link) nav.insertBefore(link, allBtn);
+            const mLink = mobileNav && mobileNav.querySelector('[data-i18n="nav-' + key + '"]');
+            const mAll = mobileNav && mobileNav.querySelector('[data-i18n="nav-all-tools"]');
+            if (mLink && mAll) mobileNav.insertBefore(mLink, mAll);
+          });
+        }
+      } catch (_) {}
+    }
+
+    /* Footer sütun sıralaması */
+    if (settings.footer_order) {
+      try {
+        const order = JSON.parse(settings.footer_order); // örn ["legal","tools","formatjet"]
+        const grid = document.querySelector('.footer-grid');
+        if (grid && Array.isArray(order)) {
+          const colMap = {
+            tools: grid.querySelector('[data-i18n="footer-tools"]'),
+            formatjet: [...grid.querySelectorAll('.footer-col-title')].find(t => t.textContent.trim() === 'FormatJet'),
+            legal: grid.querySelector('[data-i18n="footer-legal"]'),
+          };
+          order.forEach(key => {
+            const title = colMap[key];
+            if (title) grid.appendChild(title.closest('.footer-col'));
+          });
+        }
+      } catch (_) {}
+    }
+
+    /* Adres kartı (iletişim sayfası) — adres girildiyse göster */
+    if (settings.contact_address) {
+      document.querySelectorAll('[data-fj-contact-wrap]').forEach(el => { el.hidden = false; });
     }
   };
 

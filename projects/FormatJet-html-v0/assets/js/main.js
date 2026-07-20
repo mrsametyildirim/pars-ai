@@ -22,39 +22,75 @@ const btnHamburger = document.getElementById('btnHamburger');
 const mobileMenu   = document.getElementById('mobileMenu');
 
 if (btnHamburger && mobileMenu) {
+  const closeMobileMenu = (restoreFocus) => {
+    btnHamburger.setAttribute('aria-expanded', 'false');
+    btnHamburger.setAttribute('aria-label', window.fjT ? window.fjT('Menüyü aç', 'Menüyü aç') : 'Menüyü aç');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileMenu.style.removeProperty('opacity');
+    mobileMenu.style.removeProperty('visibility');
+    mobileMenu.style.removeProperty('transform');
+    mobileMenu.style.removeProperty('transition');
+    document.body.classList.remove('fj-menu-open');
+    document.body.style.overflow = '';
+    if (restoreFocus) btnHamburger.focus();
+  };
   btnHamburger.addEventListener('click', () => {
     const open = btnHamburger.getAttribute('aria-expanded') === 'true';
-    btnHamburger.setAttribute('aria-expanded', String(!open));
-    mobileMenu.setAttribute('aria-hidden', String(open));
-    document.body.style.overflow = open ? '' : 'hidden';
+    if (open) { closeMobileMenu(false); return; }
+    btnHamburger.setAttribute('aria-expanded', 'true');
+    btnHamburger.setAttribute('aria-label', 'Menüyü kapat');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    /* Keep the panel deterministically visible even when an older cached
+       transition rule is still present in the browser. */
+    mobileMenu.style.setProperty('transition', 'none', 'important');
+    mobileMenu.style.setProperty('opacity', '1', 'important');
+    mobileMenu.style.setProperty('visibility', 'visible', 'important');
+    mobileMenu.style.setProperty('transform', 'none', 'important');
+    document.body.classList.add('fj-menu-open');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => mobileMenu.querySelector('a,button')?.focus({ preventScroll: true }));
   });
 
   mobileMenu.addEventListener('click', e => {
     if (e.target === mobileMenu) {
-      btnHamburger.setAttribute('aria-expanded', 'false');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      closeMobileMenu(false);
     }
   });
+  mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => closeMobileMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && btnHamburger.getAttribute('aria-expanded') === 'true') closeMobileMenu(true); });
+  addEventListener('resize', () => { if (innerWidth > 1180 && btnHamburger.getAttribute('aria-expanded') === 'true') closeMobileMenu(false); }, { passive: true });
 }
 
 /* ══════════════════════════════════════════
    Tema toggle (footer)
 ══════════════════════════════════════════ */
 const themeBtns = document.querySelectorAll('[data-theme]');
+const themeToggles = document.querySelectorAll('[data-theme-toggle]');
 
-function applyTheme(t) {
+function applyTheme(t, source) {
+  const previous = document.documentElement.getAttribute('data-theme');
   document.documentElement.setAttribute('data-theme', t);
   localStorage.setItem('fj-theme', t);
   themeBtns.forEach(b => b.classList.toggle('theme-btn--active', b.dataset.theme === t));
+  themeToggles.forEach(b => {
+    b.setAttribute('aria-pressed', String(t === 'dark'));
+    b.setAttribute('aria-label', t === 'dark' ? 'Açık temaya geç' : 'Koyu temaya geç');
+  });
+  if (previous !== t) {
+    window.dispatchEvent(new CustomEvent('fj:themechange', { detail: { theme: t, previous, source: source || null } }));
+  }
 }
 
-if (themeBtns.length) {
-  const savedTheme = localStorage.getItem('fj-theme') || 'light';
-  applyTheme(savedTheme);
+if (themeBtns.length || themeToggles.length) {
+  const savedTheme = localStorage.getItem('fj-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(savedTheme, null);
   themeBtns.forEach(btn => {
-    btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
+    btn.addEventListener('click', () => applyTheme(btn.dataset.theme, btn));
   });
+  themeToggles.forEach(btn => btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next, btn);
+  }));
 }
 
 /* ══════════════════════════════════════════
@@ -89,11 +125,17 @@ function handleFileDrop(files) {
 }
 
 if (heroDropzone) {
-  heroDropzone.addEventListener('dragover', e => { e.preventDefault(); heroDropzone.classList.add('drag-over'); });
-  heroDropzone.addEventListener('dragleave', () => heroDropzone.classList.remove('drag-over'));
+  const defaultDropTitle = heroDropzone.querySelector('.drop-title')?.textContent || '';
+  const setHeroDrag = active => {
+    heroDropzone.classList.toggle('drag-over', active);
+    const title = heroDropzone.querySelector('.drop-title');
+    if (title) title.textContent = active ? 'Dosyayı buraya bırak' : defaultDropTitle;
+  };
+  heroDropzone.addEventListener('dragover', e => { e.preventDefault(); setHeroDrag(true); });
+  heroDropzone.addEventListener('dragleave', e => { if (!heroDropzone.contains(e.relatedTarget)) setHeroDrag(false); });
   heroDropzone.addEventListener('drop', e => {
     e.preventDefault();
-    heroDropzone.classList.remove('drag-over');
+    setHeroDrag(false);
     handleFileDrop(e.dataTransfer.files);
   });
 }

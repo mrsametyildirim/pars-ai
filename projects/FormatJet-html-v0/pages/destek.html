@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destek Ol — FormatJet</title>
+  <meta name="description" content="FormatJet Topluluk Altyapı Fonu'na destek ol; etap hedeflerine ulaştıkça herkes için limitler büyüsün.">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css?v=7">
+  <style>
+    .destek-wrap { max-width: 1000px; margin: 0 auto; padding: 40px 24px 96px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    .destek-top-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; margin-bottom: 48px; }
+    @media (max-width: 860px) { .destek-top-grid { grid-template-columns: 1fr; } }
+
+    .stat-card { padding: 26px 24px; }
+    .stat-card-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--fj-brand); margin-bottom: 6px; }
+    .stat-card-title { font-size: 18px; font-weight: 800; margin-bottom: 18px; }
+
+    .stat-progress-track { width: 100%; height: 10px; border-radius: 999px; background: var(--fj-soft); overflow: hidden; margin-bottom: 8px; }
+    .stat-progress-fill { height: 100%; border-radius: 999px; width: 62%; }
+    .stat-progress-labels { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 22px; }
+
+    .stat-data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+    .stat-data-item { display: flex; flex-direction: column; gap: 4px; }
+    .stat-data-value { font-size: 20px; font-weight: 800; letter-spacing: -.02em; }
+    .stat-data-label { font-size: 11px; }
+
+    .stat-detail-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--fj-brand); background: none; border: none; cursor: pointer; padding: 0; font-family: inherit; }
+    .stat-detail-btn:hover { text-decoration: underline; }
+
+    .mini-cards-col { display: flex; flex-direction: column; gap: 12px; }
+    .mini-card-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+    .mini-card-price { font-size: 12px; }
+    .mini-card-arrow { flex-shrink: 0; }
+    .mini-card--active { border-color: var(--fj-brand) !important; background: var(--fj-soft) !important; }
+
+    .section-title { font-size: 20px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 6px; }
+    .section-sub { font-size: 13px; margin-bottom: 20px; }
+
+    .etap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+    .etap-card { padding: 18px 16px; text-align: left; font-family: inherit; }
+    .etap-card-num { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+    .etap-card-goal { font-size: 16px; font-weight: 800; letter-spacing: -.02em; }
+    .etap-card-monthly { font-size: 12px; margin-top: 2px; }
+    .etap-card-users { display: flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 11px; color: var(--fj-muted); }
+    .etap-card-users svg { flex-shrink: 0; }
+
+    .compare-table-wrap { overflow-x: auto; margin-bottom: 48px; }
+    .compare-table { width: 100%; border-collapse: collapse; min-width: 560px; font-size: 13px; }
+    .compare-table th, .compare-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--fj-line); }
+    .compare-table th { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; background: var(--fj-soft); }
+    .compare-table th:not(:first-child), .compare-table td:not(:first-child) { text-align: center; }
+    .compare-table tr:last-child td { border-bottom: none; }
+
+    .fund-bars { display: flex; flex-direction: column; gap: 14px; margin-bottom: 48px; }
+    .fund-bar-row { display: grid; grid-template-columns: 160px 1fr 48px; align-items: center; gap: 14px; }
+    .fund-bar-label { font-size: 13px; font-weight: 500; }
+    .fund-bar-track { height: 10px; border-radius: 999px; background: var(--fj-soft); overflow: hidden; }
+    .fund-bar-fill { height: 100%; border-radius: 999px; }
+    .fund-bar-pct { font-size: 13px; font-weight: 700; text-align: right; }
+    @media (max-width: 560px) {
+      .fund-bar-row { grid-template-columns: 100px 1fr 40px; gap: 8px; }
+      .fund-bar-label { font-size: 12px; }
+    }
+
+    .amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+    .amount-card { padding: 18px 12px; text-align: center; font-family: inherit; font-size: 16px; font-weight: 800; }
+
+    .donate-custom-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 32px; }
+    .donate-custom-row .form-group { flex: 1; min-width: 200px; margin-bottom: 0; }
+
+    @media (max-width: 720px) {
+      .etap-grid { grid-template-columns: repeat(2, 1fr); }
+      .amount-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .fj-tooltip-anchor { position: relative; }
+    .fj-tooltip {
+      position: absolute; bottom: calc(100% + 10px); left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      min-width: 220px; max-width: 260px; padding: 10px 12px;
+      background: var(--fj-ink); color: var(--fj-canvas); font-size: 12px; line-height: 1.5;
+      border-radius: var(--fj-radius-md); box-shadow: var(--fj-shadow-md);
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity var(--dur-fast) ease, transform var(--dur-fast) ease;
+      z-index: 40;
+    }
+    .fj-tooltip::after {
+      content: ''; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%); border: 6px solid transparent;
+      border-top-color: var(--fj-ink);
+    }
+    .fj-tooltip-anchor:hover .fj-tooltip,
+    .fj-tooltip-anchor:focus-within .fj-tooltip {
+      opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+    }
+    @media (max-width: 720px) {
+      .fj-tooltip { display: none; }
+    }
+
+    .donor-section { margin-top: 40px; }
+    .donor-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .donor-row { display: grid; grid-template-columns: 36px 1fr auto auto; align-items: center; gap: 12px; padding: 10px 14px; }
+    .donor-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .donor-name { font-size: 13px; font-weight: 600; }
+    .donor-amount { font-size: 13px; font-weight: 700; }
+    .donor-time { font-size: 11px; color: var(--fj-muted); white-space: nowrap; }
+    @media (max-width: 560px) {
+      .donor-row { grid-template-columns: 32px 1fr auto; }
+      .donor-time { display: none; }
+    }
+
+    .btn-primary-full[data-state] { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-primary-full[data-state="loading"] { opacity: .85; cursor: wait; }
+    .btn-spinner { width: 16px; height: 16px; animation: fj-spin .7s linear infinite; }
+  </style>
+  <link rel="stylesheet" href="../assets/css/components.css?v=13">
+</head>
+<body>
+
+<div data-fj-header></div>
+
+<main>
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <h1 class="page-title" data-i18n="destek.title">FormatJet'i birlikte daha hızlı büyütelim</h1>
+      <p class="page-sub-light" style="color:var(--text-2)" data-i18n="destek.sub">Topluluk Altyapı Fonu, üyelik gelirleri ve bağışlarla büyür; her etap hedefine ulaştığında tüm kullanıcılar için limitler yükselir.</p>
+    </div>
+  </div>
+
+  <div class="destek-wrap">
+    <div class="destek-top-grid">
+      <div class="stat-card">
+        <div class="stat-card-label" data-i18n="destek.statLabel">Etap Durumu</div>
+        <div class="stat-card-title" data-i18n="destek.statTitle">Etap 2 — Büyüme Aşaması</div>
+        <div class="stat-progress-track"><div class="stat-progress-fill"></div></div>
+        <div class="stat-progress-labels">
+          <span data-i18n="destek.progressCurrent">₺406.500 toplandı</span>
+          <span data-i18n="destek.progressGoal">Hedef: ₺655.600</span>
+        </div>
+        <div class="stat-data-grid">
+          <div class="stat-data-item">
+            <div class="stat-data-value">₺298K</div>
+            <div class="stat-data-label" data-i18n="destek.dataMembership">Üyelik geliri</div>
+          </div>
+          <div class="stat-data-item">
+            <div class="stat-data-value">₺64K</div>
+            <div class="stat-data-label" data-i18n="destek.dataCredit">Jet kredileri</div>
+          </div>
+          <div class="stat-data-item">
+            <div class="stat-data-value">₺44,5K</div>
+            <div class="stat-data-label" data-i18n="destek.dataDonation">Topluluk desteği</div>
+          </div>
+        </div>
+        <button class="stat-detail-btn" id="statDetailBtn" data-i18n="destek.detailBtn">Hedef detayları →</button>
+      </div>
+
+      <div class="mini-cards-col">
+        <span class="fj-tooltip-anchor">
+          <a href="pro.html?plan=pro" class="mini-card" aria-describedby="tooltipPro">
+            <div>
+              <div class="mini-card-name" data-i18n="destek.miniPro">Pro'ya Geç</div>
+              <div class="mini-card-price">₺279/ay</div>
+            </div>
+            <svg class="mini-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+          <span class="fj-tooltip" id="tooltipPro" role="tooltip">Tüm bireysel araçlar, öncelikli kuyruk ve aylık 1.000 Jet Kredisi</span>
+        </span>
+        <span class="fj-tooltip-anchor">
+          <a href="jet-limit.html" class="mini-card" aria-describedby="tooltipJet">
+            <div>
+              <div class="mini-card-name" data-i18n="destek.miniJet">Jet Limitini Artır</div>
+              <div class="mini-card-price">₺100'den başlar</div>
+            </div>
+            <svg class="mini-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+          <span class="fj-tooltip" id="tooltipJet" role="tooltip">OCR, video, ses ve yapay zeka işlemleri için ek tüketim hakkı</span>
+        </span>
+        <span class="fj-tooltip-anchor">
+          <a href="pro.html?kaynak=destek" class="mini-card mini-card--active" aria-describedby="tooltipDestek">
+            <div>
+              <div class="mini-card-name" data-i18n="destek.miniDonate">Destek Ol</div>
+              <div class="mini-card-price" data-i18n="destek.miniDonateFrom">₺100'den başlar</div>
+            </div>
+            <svg class="mini-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+          <span class="fj-tooltip" id="tooltipDestek" role="tooltip">Karşılıksız topluluk katkısı; ayrı ve şeffaf altyapı fonu</span>
+        </span>
+      </div>
+    </div>
+
+    <h2 class="section-title" data-i18n="destek.etapTitle">Etap hedefleri</h2>
+    <p class="section-sub" data-i18n="destek.etapSub">Sağlanan destekle her yeni etap seviyesine ulaşıldığında sistem özellikleri otomatik olarak güncellenir.</p>
+    <div class="etap-grid" id="etapGrid" role="radiogroup" aria-labelledby="etapGridLabel">
+      <span id="etapGridLabel" class="sr-only">Etap seç</span>
+      <button class="etap-card" data-etap="1" role="radio" aria-checked="false" aria-label="Etap 1, hedef ₺56.650">
+        <span class="etap-card-badge">Tamamlandı</span>
+        <div class="etap-card-num" data-i18n="destek.etap1">Etap 1</div>
+        <div class="etap-card-goal">₺56.650</div>
+        <div class="etap-card-users"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>412 destekçi</span></div>
+      </button>
+      <button class="etap-card active" data-etap="2" role="radio" aria-checked="true" aria-label="Etap 2, hedef ₺655.600">
+        <span class="etap-card-badge etap-card-badge--active">Aktif</span>
+        <div class="etap-card-num" data-i18n="destek.etap2">Etap 2</div>
+        <div class="etap-card-goal">₺655.600</div>
+        <div class="etap-card-users"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>1.284 destekçi</span></div>
+      </button>
+      <button class="etap-card locked" data-etap="3" role="radio" aria-checked="false" aria-disabled="true" aria-label="Etap 3, hedef ₺2.535.500, kilitli">
+        <span class="etap-card-badge etap-card-badge--locked">Kilitli</span>
+        <div class="etap-card-num" data-i18n="destek.etap3">Etap 3</div>
+        <div class="etap-card-goal">₺2.535.500</div>
+        <div class="etap-card-users"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>0 destekçi</span></div>
+      </button>
+      <button class="etap-card locked" data-etap="4" role="radio" aria-checked="false" aria-disabled="true" aria-label="Etap 4, hedef ₺8.220.850, kilitli">
+        <span class="etap-card-badge etap-card-badge--soon">Yakında</span>
+        <div class="etap-card-num" data-i18n="destek.etap4">Etap 4</div>
+        <div class="etap-card-goal">₺8.220.850</div>
+        <div class="etap-card-users"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>0 destekçi</span></div>
+      </button>
+    </div>
+
+    <div class="compare-table-wrap">
+      <table class="compare-table" id="etapLimitTable">
+        <thead>
+          <tr>
+            <th scope="col" data-i18n="destek.colLimit">Limit</th>
+            <th scope="col" data-i18n="destek.colFree">Ücretsiz</th>
+            <th scope="col" class="col-pro" data-i18n="destek.colPro">Pro</th>
+            <th scope="col" data-i18n="destek.colBusiness">Business</th>
+          </tr>
+        </thead>
+        <tbody id="etapLimitBody"></tbody>
+      </table>
+    </div>
+
+    <h2 class="section-title" data-i18n="destek.fundTitle">Fon kullanımı</h2>
+    <p class="section-sub" data-i18n="destek.fundSub">Toplanan her kaynak şeffaf bir şekilde altyapı ve geliştirmeye ayrılır.</p>
+    <div class="fund-bars">
+      <div class="fund-bar-row">
+        <div class="fund-bar-label" data-i18n="destek.fundServer">Sunucu ve altyapı</div>
+        <div class="fund-bar-track"><div class="fund-bar-fill" style="width:38%"></div></div>
+        <div class="fund-bar-pct">38%</div>
+      </div>
+      <div class="fund-bar-row">
+        <div class="fund-bar-label" data-i18n="destek.fundDev">Geliştirme</div>
+        <div class="fund-bar-track"><div class="fund-bar-fill" style="width:27%"></div></div>
+        <div class="fund-bar-pct">27%</div>
+      </div>
+      <div class="fund-bar-row">
+        <div class="fund-bar-label" data-i18n="destek.fundAi">AI/OCR işlem maliyeti</div>
+        <div class="fund-bar-track"><div class="fund-bar-fill" style="width:20%"></div></div>
+        <div class="fund-bar-pct">20%</div>
+      </div>
+      <div class="fund-bar-row">
+        <div class="fund-bar-label" data-i18n="destek.fundSupport">Destek ekibi</div>
+        <div class="fund-bar-track"><div class="fund-bar-fill" style="width:9%"></div></div>
+        <div class="fund-bar-pct">9%</div>
+      </div>
+      <div class="fund-bar-row">
+        <div class="fund-bar-label" data-i18n="destek.fundOther">Diğer</div>
+        <div class="fund-bar-track"><div class="fund-bar-fill" style="width:6%"></div></div>
+        <div class="fund-bar-pct">6%</div>
+      </div>
+    </div>
+
+    <h2 class="section-title" id="destekTutar" data-i18n="destek.donateTitle">Destek miktarı seç</h2>
+    <p class="section-sub" data-i18n="destek.donateSub">Bağışın doğrudan Topluluk Altyapı Fonu'na eklenir.</p>
+    <div class="amount-grid" id="donateAmountGrid" role="radiogroup" aria-labelledby="donateAmountGridLabel">
+      <span id="donateAmountGridLabel" class="sr-only">Destek tutarı seç</span>
+      <button class="amount-card" data-amount="100" role="radio" aria-checked="false" aria-label="₺100 destek">₺100</button>
+      <button class="amount-card active" data-amount="250" role="radio" aria-checked="true" aria-label="₺250 destek">₺250</button>
+      <button class="amount-card" data-amount="500" role="radio" aria-checked="false" aria-label="₺500 destek">₺500</button>
+      <button class="amount-card" data-amount="1000" role="radio" aria-checked="false" aria-label="₺1.000 destek">₺1.000</button>
+    </div>
+    <div class="donate-custom-row">
+      <div class="form-group">
+        <label class="form-label" for="donateCustomAmount" data-i18n="destek.customLabel">Özel tutar (₺)</label>
+        <input type="number" id="donateCustomAmount" class="form-input" placeholder="Örn. 750" min="10" step="10">
+      </div>
+      <button class="btn-primary-full" id="donateBtn" data-state="idle" style="max-width:260px" data-i18n="destek.cta">
+        <span class="btn-label">Güvenli Ödemeye Geç</span>
+      </button>
+      <span id="donateBtnStatus" class="sr-only" role="status" aria-live="polite"></span>
+    </div>
+
+    <div class="destek-warning" role="alert">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/></svg>
+      <span data-i18n="destek.warning">Sürdürülebilir etap geçişi: bir sonraki etap yalnızca aylık gelir hedefi düzenli olarak karşılandığında kalıcı hale gelir; tek seferlik bağışlar hızlandırır ama tek başına etap geçişini garanti etmez.</span>
+    </div>
+
+    <div class="donor-section">
+      <h2 class="section-title" data-i18n="destek.donorTitle">Son 10 Bağışçı</h2>
+      <p class="section-sub" data-i18n="destek.donorSub">Topluluk desteğine katkı sağlayan son bağışçılar.</p>
+      <div class="donor-list" id="donorList" aria-live="polite"></div>
+    </div>
+  </div>
+</main>
+
+<div data-fj-footer></div>
+
+<script src="../assets/js/vendor/supabase.min.js"></script>
+<script src="../assets/js/fj-config.js?v=7"></script>
+<script src="../assets/js/fj-pricing-config.js?v=1"></script>
+<script src="../assets/js/layout.js?v=13"></script>
+<script src="../assets/js/auth.js?v=7"></script>
+<script src="../assets/js/i18n.js?v=13"></script>
+<script src="../assets/js/main.js?v=13"></script>
+<script>
+(function () {
+  const ETAP_LIMITS = window.etapConfig.etaps;
+
+  function renderEtapTable(etap) {
+    const body = document.getElementById('etapLimitBody');
+    body.innerHTML = '';
+    ETAP_LIMITS[etap].forEach(([i18nKey, label, free, pro, business]) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td data-i18n="' + i18nKey + '">' + label + '</td>' +
+        '<td>' + free + '</td>' +
+        '<td class="col-pro">' + pro + '</td>' +
+        '<td>' + business + '</td>';
+      body.appendChild(tr);
+    });
+  }
+  const activeEtap = window.fjPricing.getCurrentEtap();
+  document.querySelectorAll('.etap-card').forEach(c => {
+    const isActive = Number(c.dataset.etap) === activeEtap && !c.classList.contains('locked');
+    c.classList.toggle('active', isActive);
+    c.setAttribute('aria-checked', String(isActive));
+  });
+  renderEtapTable(activeEtap);
+
+  document.querySelectorAll('.etap-card').forEach(card => {
+    card.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (card.classList.contains('locked')) {
+        renderEtapTable(card.dataset.etap);
+        return;
+      }
+      document.querySelectorAll('.etap-card').forEach(c => { c.classList.remove('active'); c.setAttribute('aria-checked', 'false'); });
+      card.classList.add('active');
+      card.setAttribute('aria-checked', 'true');
+      window.fjPricing.setCurrentEtap(card.dataset.etap);
+      renderEtapTable(card.dataset.etap);
+    });
+  });
+
+  document.getElementById('statDetailBtn').addEventListener('click', () => {
+    document.getElementById('etapLimitTable').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  let donateAmount = 250;
+  const amountCards = document.querySelectorAll('.amount-card');
+  const donateCustom = document.getElementById('donateCustomAmount');
+
+  amountCards.forEach(card => {
+    card.addEventListener('click', () => {
+      amountCards.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-checked', 'false'); });
+      card.classList.add('active');
+      card.setAttribute('aria-checked', 'true');
+      donateAmount = Number(card.dataset.amount);
+      donateCustom.value = '';
+    });
+  });
+
+  donateCustom.addEventListener('input', () => {
+    if (donateCustom.value) {
+      amountCards.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-checked', 'false'); });
+      donateAmount = Number(donateCustom.value);
+    }
+  });
+
+  const DONOR_NAMES = ['Elif Y.', 'Anonim', 'Mert K.', 'Ayşe D.', 'Anonim', 'Burak T.', 'Zeynep A.', 'Anonim', 'Cem S.', 'Deniz P.'];
+  const DONOR_AMOUNTS = [100, 250, 500, 1000, 250, 100, 500, 250, 1000, 100];
+  const DONOR_MINUTES = [3, 12, 25, 41, 58, 74, 96, 130, 165, 210];
+  let donors = DONOR_NAMES.map((name, i) => ({
+    name, amount: DONOR_AMOUNTS[i], minutesAgo: DONOR_MINUTES[i],
+  }));
+
+  function formatDonorTime(minutesAgo) {
+    if (minutesAgo < 60) return minutesAgo + 'dk önce';
+    return Math.round(minutesAgo / 60) + 'h önce';
+  }
+
+  function nameHue(name) {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    return Math.abs(hash) % 360;
+  }
+
+  function renderDonorList(highlightFirst) {
+    const list = document.getElementById('donorList');
+    list.innerHTML = '';
+    donors.slice(0, 10).forEach((donor, index) => {
+      const row = document.createElement('div');
+      row.className = 'donor-row' + (highlightFirst && index === 0 ? ' donor-row--new' : '');
+      const initial = donor.name === 'Anonim' ? '?' : donor.name.charAt(0).toUpperCase();
+      const hue = nameHue(donor.name);
+      row.innerHTML =
+        '<span class="donor-avatar" style="background:hsl(' + hue + ',55%,45%)">' + initial + '</span>' +
+        '<span class="donor-name">' + donor.name + '</span>' +
+        '<span class="donor-amount">₺' + donor.amount.toLocaleString('tr-TR') + '</span>' +
+        '<span class="donor-time">' + formatDonorTime(donor.minutesAgo) + '</span>';
+      list.appendChild(row);
+    });
+  }
+  renderDonorList(false);
+
+  function addDonor(name, amount) {
+    donors.unshift({ name, amount, minutesAgo: 0 });
+    donors = donors.slice(0, 10);
+    renderDonorList(true);
+  }
+
+  const donateBtn = document.getElementById('donateBtn');
+  const donateBtnStatus = document.getElementById('donateBtnStatus');
+  const donateBtnLabel = donateBtn.querySelector('.btn-label');
+
+  function setDonateBtnState(state) {
+    donateBtn.dataset.state = state;
+    if (state === 'loading') {
+      donateBtn.disabled = true;
+      donateBtn.setAttribute('aria-busy', 'true');
+      donateBtnLabel.innerHTML =
+        '<svg class="btn-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>Kısacık bekliyoruz...';
+      donateBtnStatus.textContent = 'Bağış işleniyor';
+    } else if (state === 'success') {
+      donateBtn.disabled = true;
+      donateBtn.removeAttribute('aria-busy');
+      donateBtnLabel.innerHTML =
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Teşekkürler!';
+      donateBtnStatus.textContent = 'Bağış başarıyla alındı';
+    } else {
+      donateBtn.disabled = false;
+      donateBtn.removeAttribute('aria-busy');
+      donateBtnLabel.textContent = 'Güvenli Ödemeye Geç';
+      donateBtnStatus.textContent = '';
+    }
+  }
+
+  donateBtn.addEventListener('click', async () => {
+    const session = await window.fjAuth.getSession();
+    if (!session) {
+      location.href = '../login.html?next=' + encodeURIComponent('pages/destek.html');
+      return;
+    }
+    setDonateBtnState('loading');
+    setTimeout(() => {
+      setDonateBtnState('success');
+      addDonor('Sen', donateAmount);
+      setTimeout(() => {
+        location.href = 'pro.html?donation=' + donateAmount + '&kaynak=destek';
+      }, 2000);
+    }, 3000);
+  });
+})();
+</script>
+<script src="../assets/js/tools-registry.js?v=7"></script>
+<script src="../assets/js/premium-components.js?v=13"></script>
+</body>
+</html>
