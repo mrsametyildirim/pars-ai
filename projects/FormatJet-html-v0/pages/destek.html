@@ -570,6 +570,22 @@
     document.getElementById('destekTutar').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
+  // Global event delegation for etap-card clicks (backup for listener attachment)
+  document.addEventListener('click', (event) => {
+    const card = event.target.closest('.etap-card');
+    if (!card) return;
+    event.preventDefault();
+    if (card.classList.contains('locked')) {
+      renderEtapTable(card.dataset.etap);
+      return;
+    }
+    document.querySelectorAll('.etap-card').forEach(c => { c.classList.remove('active'); c.setAttribute('aria-checked', 'false'); });
+    card.classList.add('active');
+    card.setAttribute('aria-checked', 'true');
+    window.fjPricing.setCurrentEtap(card.dataset.etap);
+    renderEtapTable(card.dataset.etap);
+  });
+
   let donateAmount = 250;
   const amountCards = document.querySelectorAll('.amount-card');
   const donateCustom = document.getElementById('donateCustomAmount');
