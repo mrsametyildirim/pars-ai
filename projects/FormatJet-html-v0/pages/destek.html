@@ -34,8 +34,9 @@
     .stat-detail-btn:hover { text-decoration: underline; }
 
     .mini-cards-col { display: flex; flex-direction: column; gap: 12px; }
-    .mini-card-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
-    .mini-card-price { font-size: 12px; }
+    .mini-cards-col .mini-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; min-height: 44px; text-decoration: none; }
+    .mini-card-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .mini-card-price { font-size: 13px; }
     .mini-card-arrow { flex-shrink: 0; }
     .mini-card--active { border-color: var(--fj-brand) !important; background: var(--fj-soft) !important; }
 
@@ -110,6 +111,29 @@
     }
     @media (max-width: 720px) {
       .etap-info-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .etap-info-section {
+      margin-top: 8px;
+      padding-top: 24px;
+      border-top: 1px solid var(--fj-line);
+    }
+    .etap-info-section .section-sub-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--fj-muted);
+      margin-bottom: 12px;
+    }
+    .etap-info-card {
+      border-style: dashed !important;
+      background: transparent !important;
+    }
+    .etap-info-card:hover {
+      background: var(--fj-soft) !important;
+      border-style: solid !important;
+      border-color: var(--fj-brand) !important;
     }
 
     .fj-tooltip-anchor { position: relative; }
@@ -260,7 +284,7 @@
           <span class="fj-tooltip" id="tooltipJet" role="tooltip">OCR, video, ses ve yapay zeka işlemleri için ek tüketim hakkı</span>
         </span>
         <span class="fj-tooltip-anchor">
-          <a href="pro.html?kaynak=destek" class="mini-card mini-card--active" aria-describedby="tooltipDestek">
+          <a href="#destekTutar" class="mini-card mini-card--active" aria-describedby="tooltipDestek" id="miniDestekLink">
             <div>
               <div class="mini-card-name" data-i18n="destek.miniDonate">Destek Ol</div>
               <div class="mini-card-price" data-i18n="destek.miniDonateFrom">₺100'den başlar</div>
@@ -316,22 +340,25 @@
       </table>
     </div>
 
-    <div class="etap-info-grid">
-      <div class="etap-info-card" data-etap="1">
-        <h3 data-i18n="destek.etapInfo1Title">Etap 1 — Kararlı Başlangıç</h3>
-        <p data-i18n="destek.etapInfo1Desc">Temel altyapı sürdürülebilir hâle gelir</p>
-      </div>
-      <div class="etap-info-card" data-etap="2">
-        <h3 data-i18n="destek.etapInfo2Title">Etap 2 — Büyüme Aşaması</h3>
-        <p data-i18n="destek.etapInfo2Desc">Sunucu kapasitesi ve işlem kotaları genişler</p>
-      </div>
-      <div class="etap-info-card" data-etap="3">
-        <h3 data-i18n="destek.etapInfo3Title">Etap 3 — Gelişmiş Yetenekler</h3>
-        <p data-i18n="destek.etapInfo3Desc">Yapay zeka ve OCR işlemleri hızlanır</p>
-      </div>
-      <div class="etap-info-card" data-etap="4">
-        <h3 data-i18n="destek.etapInfo4Title">Etap 4 — Tam Ölçek</h3>
-        <p data-i18n="destek.etapInfo4Desc">Kurumsal düzeyde limit ve öncelik herkese açılır</p>
+    <div class="etap-info-section">
+      <div class="section-sub-label">Etap açıklamaları</div>
+      <div class="etap-info-grid" id="etapInfoGrid">
+        <div class="etap-info-card" data-etap="1">
+          <h3 data-i18n="destek.etapInfo1Title">Etap 1 — Kararlı Başlangıç</h3>
+          <p data-i18n="destek.etapInfo1Desc">Temel altyapı sürdürülebilir hâle gelir</p>
+        </div>
+        <div class="etap-info-card" data-etap="2">
+          <h3 data-i18n="destek.etapInfo2Title">Etap 2 — Büyüme Aşaması</h3>
+          <p data-i18n="destek.etapInfo2Desc">Sunucu kapasitesi ve işlem kotaları genişler</p>
+        </div>
+        <div class="etap-info-card" data-etap="3">
+          <h3 data-i18n="destek.etapInfo3Title">Etap 3 — Gelişmiş Yetenekler</h3>
+          <p data-i18n="destek.etapInfo3Desc">Yapay zeka ve OCR işlemleri hızlanır</p>
+        </div>
+        <div class="etap-info-card" data-etap="4">
+          <h3 data-i18n="destek.etapInfo4Title">Etap 4 — Tam Ölçek</h3>
+          <p data-i18n="destek.etapInfo4Desc">Kurumsal düzeyde limit ve öncelik herkese açılır</p>
+        </div>
       </div>
     </div>
 
@@ -460,6 +487,11 @@
     document.getElementById('etapLimitTable').scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 
+  document.getElementById('miniDestekLink').addEventListener('click', (event) => {
+    event.preventDefault();
+    document.getElementById('destekTutar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
   let donateAmount = 250;
   const amountCards = document.querySelectorAll('.amount-card');
   const donateCustom = document.getElementById('donateCustomAmount');
@@ -524,6 +556,32 @@
   const donorNavNext = document.getElementById('donorNavNext');
   donorNavPrev.addEventListener('click', () => donorList.scrollBy({ left: -260, behavior: 'smooth' }));
   donorNavNext.addEventListener('click', () => donorList.scrollBy({ left: 260, behavior: 'smooth' }));
+
+  const DONOR_AUTO_SCROLL_MS = 2500;
+  let donorAutoScrollTimer = null;
+
+  function startDonorAutoScroll() {
+    stopDonorAutoScroll();
+    donorAutoScrollTimer = setInterval(() => {
+      const atEnd = donorList.scrollLeft + donorList.clientWidth >= donorList.scrollWidth - 4;
+      if (atEnd) {
+        donorList.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        donorList.scrollBy({ left: 260, behavior: 'smooth' });
+      }
+    }, DONOR_AUTO_SCROLL_MS);
+  }
+
+  function stopDonorAutoScroll() {
+    if (donorAutoScrollTimer) {
+      clearInterval(donorAutoScrollTimer);
+      donorAutoScrollTimer = null;
+    }
+  }
+
+  donorList.addEventListener('mouseenter', stopDonorAutoScroll);
+  donorList.addEventListener('mouseleave', startDonorAutoScroll);
+  startDonorAutoScroll();
 
   function addDonor(name, amount) {
     donors.unshift({ name, amount, minutesAgo: 0 });
