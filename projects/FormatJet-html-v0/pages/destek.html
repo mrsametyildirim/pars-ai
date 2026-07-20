@@ -234,7 +234,7 @@
     .btn-primary-full[data-state="loading"] { opacity: .85; cursor: wait; }
     .btn-spinner { width: 16px; height: 16px; animation: fj-spin .7s linear infinite; }
 
-    .etap-usage-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 40px; margin-bottom: 48px; }
+    .etap-usage-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; margin-top: 40px; margin-bottom: 48px; }
     .etap-usage-table th, .etap-usage-table td { padding: 12px 16px; text-align: left; border: 1px solid var(--fj-line); }
     .etap-usage-table th { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; background: var(--fj-soft); }
     @media (max-width: 720px) {
@@ -245,10 +245,10 @@
       .etap-usage-table { margin-bottom: 32px; font-size: 11px; overflow-x: auto; }
       .etap-usage-table th, .etap-usage-table td { padding: 8px 10px; }
     }
-    .etap-usage-table th:first-child { font-weight: 600; background: var(--fj-soft); min-width: 140px; border-right: none; }
-    .etap-usage-table td:first-child { font-weight: 600; background: transparent; min-width: 140px; border-right: none; }
-    .etap-usage-table th.etap-col { border-left: 3px solid var(--fj-line); }
-    .etap-usage-table th.etap-col.active { background: rgba(37,99,235,.12) !important; color: var(--fj-brand); border-color: var(--fj-brand); border-left: 3px solid var(--fj-brand) !important; font-weight: 700; }
+    .etap-usage-table th:first-child { font-weight: 600; background: var(--fj-soft); min-width: 140px; }
+    .etap-usage-table td:first-child { font-weight: 600; background: transparent; min-width: 140px; }
+    .etap-usage-table th.etap-col { border-left: 1px solid var(--fj-line); }
+    .etap-usage-table th.etap-col.active { background: rgba(37,99,235,.12) !important; color: var(--fj-brand); border-color: var(--fj-brand); border-left: 1px solid var(--fj-brand); font-weight: 700; }
     .etap-usage-table td { background: transparent; }
 
     /* Seçilen etap'a göre tüm highlight */
