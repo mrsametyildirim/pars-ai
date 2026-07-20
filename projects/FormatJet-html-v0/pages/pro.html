@@ -545,7 +545,68 @@
       }
     }
   }, 300);
+
+  // Business seçtikten sonra ek kullanıcı sorusu
+  document.getElementById('businessPlanBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    const modal = document.getElementById('addonUserModal');
+    if (modal) {
+      modal.removeAttribute('hidden');
+    }
+  });
+
+  // Modal seçim butonları
+  document.querySelectorAll('.addon-user-option').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const users = Number(e.target.dataset.users);
+      const modal = document.getElementById('addonUserModal');
+      if (modal) {
+        modal.setAttribute('hidden', '');
+      }
+      // Business + ek kullanıcı toplam fiyat hesapla
+      const pricing = window.etapConfig.pricing;
+      const period = document.querySelector('.billing-opt.active').dataset.period;
+      const businessPrice = pricing.business[period];
+      const addonPrice = (users - 5) * pricing.addonUser[period];
+      const totalPrice = businessPrice + addonPrice;
+      // Checkout'a geç
+      location.href = 'pro.html?plan=business&users=' + users + '&period=' + period;
+    });
+  });
+
+  // Modal backdrop click'i kapat
+  document.querySelector('.addon-user-backdrop')?.addEventListener('click', () => {
+    const modal = document.getElementById('addonUserModal');
+    if (modal) {
+      modal.setAttribute('hidden', '');
+    }
+  });
 })();
 </script>
+
+<!-- Ek Business Kullanıcısı Modal -->
+<div id="addonUserModal" class="addon-user-modal" hidden>
+  <div class="addon-user-backdrop"></div>
+  <div class="addon-user-content">
+    <h3 style="margin-bottom:20px;font-size:18px;font-weight:700">Kaç kullanıcı istiyorsunuz?</h3>
+    <div class="addon-user-options" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <button class="addon-user-option" data-users="3" style="padding:12px;border:1px solid var(--fj-line);border-radius:8px;background:transparent;cursor:pointer;font-weight:600">3 Kullanıcı</button>
+      <button class="addon-user-option" data-users="4" style="padding:12px;border:1px solid var(--fj-line);border-radius:8px;background:transparent;cursor:pointer;font-weight:600">4 Kullanıcı</button>
+      <button class="addon-user-option" data-users="5" style="padding:12px;border:1px solid var(--fj-line);border-radius:8px;background:transparent;cursor:pointer;font-weight:600">5 Kullanıcı</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.addon-user-modal {
+  position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;z-index:9999;font-family:inherit;
+}
+.addon-user-modal[hidden] { display:none; }
+.addon-user-backdrop { position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5); }
+.addon-user-content { position:relative;background:var(--bg);border:1px solid var(--fj-line);border-radius:12px;padding:32px;max-width:400px;z-index:10000; }
+.addon-user-option:hover { border-color:var(--fj-brand);background:rgba(var(--fj-brand-rgb,37,99,235),0.05); }
+.addon-user-option:active { background:rgba(var(--fj-brand-rgb,37,99,235),0.1); }
+</style>
+
 </body>
 </html>
