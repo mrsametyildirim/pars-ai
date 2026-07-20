@@ -615,14 +615,46 @@
     }
   }, 300);
 
-  // Business seçtikten sonra ek kullanıcı sorusu
-  document.getElementById('businessPlanBtn').addEventListener('click', (e) => {
-    e.preventDefault();
-    const modal = document.getElementById('addonUserModal');
-    if (modal) {
-      modal.removeAttribute('hidden');
-    }
-  });
+  // Business button: Modal aç YA DA checkout'a geç
+  const businessPlanBtn = document.getElementById('businessPlanBtn');
+  if (businessPlanBtn) {
+    businessPlanBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // URLUsers varsa checkout'a geç, yoksa modal aç
+      const urlUsers = new URLSearchParams(location.search).get('users');
+      if (urlUsers) {
+        // Business users pricing checkout
+        if (window.businessUsersPricing) {
+          const bup = window.businessUsersPricing;
+          selected.type = 'plan';
+          selected.plan = 'business';
+          selected.period = bup.period;
+          selected.amount = Math.round(bup.totalPrice);
+
+          document.getElementById('orderSummaryTitle').textContent = 'Sipariş Özeti';
+          document.getElementById('sumPlanLabel').textContent = 'Plan';
+          document.getElementById('sumPeriodLabel').textContent = 'Kullanıcı';
+          document.getElementById('sumPlan').textContent = 'Business - ' + bup.userCount + ' Kullanıcı';
+          document.getElementById('sumPeriod').textContent = bup.userCount + ' Kullanıcı' + (bup.discountPercent > 0 ? ' (%' + bup.discountPercent + ' indirim)' : '');
+          document.getElementById('sumVat').textContent = fmt(selected.amount * 0.2 / 1.2);
+          document.getElementById('sumTotal').textContent = fmt(selected.amount);
+
+          checkoutSection.classList.add('visible');
+          setTimeout(() => {
+            checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 100);
+        }
+      } else {
+        // Modal aç
+        const modal = document.getElementById('addonUserModal');
+        if (modal) {
+          modal.removeAttribute('hidden');
+        }
+      }
+    });
+  }
 
   // Modal seçim butonları (3, 4, 5, 6+)
   document.querySelectorAll('.addon-user-option').forEach(btn => {
@@ -683,20 +715,6 @@
     });
   }
 
-  // Business button click'i — modal aç
-  setTimeout(() => {
-    const businessBtn = document.getElementById('businessPlanBtn');
-    if (businessBtn) {
-      businessBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const modal = document.getElementById('addonUserModal');
-        if (modal) {
-          modal.removeAttribute('hidden');
-        }
-      });
-    }
-  }, 100);
 })();
 </script>
 
