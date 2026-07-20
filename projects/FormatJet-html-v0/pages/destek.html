@@ -229,6 +229,18 @@
     .etap-usage-table th:first-child, .etap-usage-table td:first-child { font-weight: 600; background: var(--fj-soft); }
     .etap-usage-table th.etap-col.active { background: rgba(37,99,235,.12); color: var(--fj-brand); border-color: var(--fj-brand); }
     .etap-usage-table td { background: transparent; }
+
+    /* Seçilen etap'a göre tüm highlight */
+    .etap-card.active { border-color: var(--fj-brand) !important; background: var(--fj-soft) !important; }
+    .compare-table th.active, .compare-table th.col-pro.active { background: rgba(37,99,235,.12); color: var(--fj-brand); }
+    .etap-info-card.active { border-style: solid !important; border-color: var(--fj-brand) !important; background: rgba(37,99,235,.06) !important; }
+
+    @media (max-width: 720px) {
+      .etap-grid { grid-template-columns: repeat(2, 1fr); }
+      .compare-table-wrap { margin-bottom: 24px; }
+      .etap-usage-table { margin-top: 24px; font-size: 12px; }
+      .etap-usage-table th, .etap-usage-table td { padding: 10px 12px; }
+    }
   </style>
   <link rel="stylesheet" href="../assets/css/components.css?v=14">
 </head>
@@ -518,10 +530,18 @@
       body.appendChild(tr);
     });
 
-    // Tablo header highlight et
+    // Tüm etap bölümlerini highlight et
     document.querySelectorAll('.etap-usage-table .etap-col').forEach(th => {
       th.classList.toggle('active', Number(th.dataset.etap) === etap);
     });
+
+    document.querySelectorAll('.etap-info-card').forEach(card => {
+      card.classList.toggle('active', Number(card.dataset.etap) === etap);
+    });
+
+    // Compare table sütunu highlight (Pro sütunu)
+    const compareTh = document.querySelector('.compare-table th.col-pro');
+    if (compareTh) compareTh.classList.toggle('active', etap === 2);
   }
   const activeEtap = window.fjPricing.getCurrentEtap();
   document.querySelectorAll('.etap-card').forEach(c => {
