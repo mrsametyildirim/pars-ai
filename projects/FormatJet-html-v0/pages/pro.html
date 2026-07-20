@@ -147,7 +147,7 @@
           <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.businessFeat4">API erişimi</span></div>
           <div class="plan-feat"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="pro.businessFeat5">Öncelikli destek</span></div>
         </div>
-        <button class="plan-btn plan-btn--ghost" id="businessPlanBtn" data-plan="business" role="radio" aria-checked="false" aria-label="Business planını seç" data-i18n="pro.businessBtn">Business'a Geç</button>
+        <button class="plan-btn plan-btn--ghost" id="businessPlanBtn" role="radio" aria-checked="false" aria-label="Business planını seç" data-i18n="pro.businessBtn">Business'a Geç</button>
       </div>
     </div>
 
@@ -662,6 +662,24 @@
       modal.setAttribute('hidden', '');
     }
   });
+
+  // Mini-card jet kredisi tıklaması
+  const jetMiniCard = document.querySelector('.mini-cards-col')?.children[1];
+  if (jetMiniCard) {
+    jetMiniCard.addEventListener('click', (e) => {
+      e.preventDefault();
+      location.href = 'pro.html?jetCredit=100';
+    });
+  }
+
+  // Mini-card destek tıklaması
+  const supportMiniCard = document.querySelector('.mini-cards-col')?.children[0];
+  if (supportMiniCard) {
+    supportMiniCard.addEventListener('click', (e) => {
+      e.preventDefault();
+      location.href = 'pro.html?donation=100';
+    });
+  }
 })();
 </script>
 
