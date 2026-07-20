@@ -663,23 +663,40 @@
     }
   });
 
-  // Mini-card jet kredisi tıklaması
+  // Mini-card jet kredisi tıklaması (children[1])
   const jetMiniCard = document.querySelector('.mini-cards-col')?.children[1];
   if (jetMiniCard) {
     jetMiniCard.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       location.href = 'pro.html?jetCredit=100';
     });
   }
 
-  // Mini-card destek tıklaması
-  const supportMiniCard = document.querySelector('.mini-cards-col')?.children[0];
+  // Mini-card destek tıklaması (children[2])
+  const supportMiniCard = document.querySelector('.mini-cards-col')?.children[2];
   if (supportMiniCard) {
     supportMiniCard.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       location.href = 'pro.html?donation=100';
     });
   }
+
+  // Business button click'i — modal aç
+  setTimeout(() => {
+    const businessBtn = document.getElementById('businessPlanBtn');
+    if (businessBtn) {
+      businessBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const modal = document.getElementById('addonUserModal');
+        if (modal) {
+          modal.removeAttribute('hidden');
+        }
+      });
+    }
+  }, 100);
 })();
 </script>
 
