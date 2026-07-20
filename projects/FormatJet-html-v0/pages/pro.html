@@ -387,7 +387,9 @@
       document.getElementById('sumVat').textContent    = fmt(selected.amount * 0.2 / 1.2);
       document.getElementById('sumTotal').textContent  = fmt(selected.amount);
       checkoutSection.classList.add('visible');
-      checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const rect = checkoutSection.getBoundingClientRect();
+      const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
     });
   });
 
@@ -405,7 +407,9 @@
     document.getElementById('sumVat').textContent   = fmt(amount * 0.2 / 1.2);
     document.getElementById('sumTotal').textContent = fmt(amount);
     checkoutSection.classList.add('visible');
-    checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const rect = checkoutSection.getBoundingClientRect();
+    const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
   }
 
   document.querySelectorAll('.pay-method').forEach(btn => {
@@ -505,7 +509,10 @@
     const yearlyBtn = document.querySelector('.billing-opt[data-period="yearly"]');
     if (yearlyBtn) {
       yearlyBtn.click();
-      document.getElementById('billingSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const section = document.getElementById('billingSection');
+      const rect = section.getBoundingClientRect();
+      const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
     }
   }
 
@@ -516,7 +523,10 @@
   } else if (urlPlan) {
     const planBtn = document.getElementById(urlPlan + 'PlanBtn');
     if (planBtn) {
-      document.getElementById('plansSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const section = document.getElementById('plansSection');
+      const rect = section.getBoundingClientRect();
+      const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
     }
   }
 })();
