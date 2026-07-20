@@ -575,15 +575,26 @@
     const card = event.target.closest('.etap-card');
     if (!card) return;
     event.preventDefault();
+
+    const etap = card.dataset.etap;
+
+    // Inline renderEtapTable logic
+    document.querySelectorAll('.etap-usage-table .etap-col').forEach(th => {
+      th.classList.toggle('active', Number(th.dataset.etap) === Number(etap));
+    });
+    document.querySelectorAll('.etap-info-card').forEach(c => {
+      c.classList.toggle('active', Number(c.dataset.etap) === Number(etap));
+    });
+    const compareTh = document.querySelector('.compare-table th.col-pro');
+    if (compareTh) compareTh.classList.toggle('active', etap == 2);
+
     if (card.classList.contains('locked')) {
-      renderEtapTable(card.dataset.etap);
       return;
     }
     document.querySelectorAll('.etap-card').forEach(c => { c.classList.remove('active'); c.setAttribute('aria-checked', 'false'); });
     card.classList.add('active');
     card.setAttribute('aria-checked', 'true');
-    window.fjPricing.setCurrentEtap(card.dataset.etap);
-    renderEtapTable(card.dataset.etap);
+    window.fjPricing.setCurrentEtap(etap);
   });
 
   let donateAmount = 250;
