@@ -3,8 +3,9 @@
 window.etapConfig = {
   currentEtap: 2,
   pricing: {
-    pro: { monthly: 279, yearly: 204 },
-    business: { monthly: 1049, yearly: 766 },
+    pro: { monthly: 349, yearly: 2790 },
+    business: { monthly: 1199, yearly: 9490 },
+    addonUser: { monthly: 299, yearly: 2490 },
   },
   etaps: {
     1: [
