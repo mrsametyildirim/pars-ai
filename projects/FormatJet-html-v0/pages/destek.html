@@ -90,8 +90,8 @@
       margin-bottom: 48px;
     }
     .etap-info-card {
-      background: var(--fj-panel-solid);
-      border: 1.5px solid var(--fj-line);
+      background: var(--fj-canvas);
+      border: 1.5px dashed var(--fj-line);
       border-radius: var(--fj-radius-sm);
       padding: 16px 12px;
       text-align: center;
@@ -114,6 +114,10 @@
     @media (max-width: 720px) {
       .etap-info-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    @media (max-width: 480px) {
+      .etap-info-grid { grid-template-columns: 1fr; }
+      .amount-grid { grid-template-columns: 1fr; }
+    }
 
     .etap-info-section {
       margin-top: 8px;
@@ -127,15 +131,6 @@
       letter-spacing: .05em;
       color: var(--fj-muted);
       margin-bottom: 12px;
-    }
-    .etap-info-card {
-      border-style: dashed !important;
-      background: transparent !important;
-    }
-    .etap-info-card:hover {
-      background: var(--fj-soft) !important;
-      border-style: solid !important;
-      border-color: var(--fj-brand) !important;
     }
 
     .fj-tooltip-anchor { position: relative; }
@@ -514,10 +509,11 @@
 <script src="../assets/js/i18n.js?v=13"></script>
 <script src="../assets/js/main.js?v=13"></script>
 <script>
-(function () {
-  const ETAP_LIMITS = window.etapConfig.etaps;
+setTimeout(() => {
+  (function () {
+    const ETAP_LIMITS = window.etapConfig.etaps;
 
-  function renderEtapTable(etap) {
+    function renderEtapTable(etap) {
     const body = document.getElementById('etapLimitBody');
     body.innerHTML = '';
     ETAP_LIMITS[etap].forEach(([i18nKey, label, free, pro, business]) => {
@@ -713,7 +709,8 @@
       }, 2000);
     }, 3000);
   });
-})();
+  })();
+}, 0);
 </script>
 <script src="../assets/js/tools-registry.js?v=7"></script>
 <script src="../assets/js/premium-components.js?v=13"></script>
