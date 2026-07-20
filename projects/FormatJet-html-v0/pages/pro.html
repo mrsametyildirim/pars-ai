@@ -287,12 +287,53 @@
   const rows = window.etapConfig.etaps[etap];
   const pricing = window.etapConfig.pricing;
 
+  // Fiyat kartlarını config'den güncelle
   document.querySelectorAll('.plan-price[data-plan-key]').forEach(p => {
     const plan = pricing[p.dataset.planKey];
     p.dataset.priceMonthly = formatTl(plan.monthly);
     p.dataset.priceYearly = formatTl(plan.yearly);
     p.innerHTML = formatTl(plan.monthly) + '<small>/ay</small>';
   });
+
+  // URL parametrelerinden business users pricing hesapla
+  const urlParams = new URLSearchParams(location.search);
+  const urlUsers = urlParams.get('users');
+  const urlPlan = urlParams.get('plan');
+  const urlPeriod = urlParams.get('period') || 'monthly';
+
+  if (urlPlan === 'business' && urlUsers) {
+    const userCount = Number(urlUsers);
+    const basePrice = pricing.business[urlPeriod];
+    const addonPrice = pricing.addonUser[urlPeriod];
+    let totalPrice = basePrice;
+    let addonCount = 0;
+    let discountPercent = 0;
+
+    if (userCount > 5) {
+      addonCount = userCount - 5;
+      discountPercent = Math.min(30, (userCount - 3) * 10);
+      totalPrice = basePrice + (addonCount * addonPrice * (1 - discountPercent / 100));
+    } else if (userCount === 5) {
+      addonCount = 2;
+      discountPercent = 20;
+      totalPrice = basePrice + (2 * addonPrice * 0.8);
+    } else if (userCount === 4) {
+      addonCount = 1;
+      discountPercent = 10;
+      totalPrice = basePrice + (addonPrice * 0.9);
+    }
+    // userCount === 3: Business standart fiyatı
+
+    window.businessUsersPricing = {
+      userCount,
+      basePrice,
+      addonCount,
+      addonPrice,
+      discountPercent,
+      totalPrice,
+      period: urlPeriod,
+    };
+  }
 
   const rowByKey = {};
   rows.forEach(r => { rowByKey[r[0]] = r; });
@@ -380,12 +421,25 @@
       selected.type   = 'plan';
       selected.plan   = btn.dataset.plan;
       selected.period = period;
-      selected.amount = Number(period === 'yearly' ? btn.dataset.amountYearly : btn.dataset.amountMonthly);
-      document.getElementById('orderSummaryTitle').textContent = 'Sipariş Özeti';
-      document.getElementById('sumPlanLabel').textContent   = 'Plan';
-      document.getElementById('sumPeriodLabel').textContent = 'Dönem';
-      document.getElementById('sumPlan').textContent   = PLANS[selected.plan];
-      document.getElementById('sumPeriod').textContent = selected.period === 'yearly' ? 'Yıllık' : 'Aylık';
+
+      // Business users pricing check
+      if (btn.dataset.plan === 'business' && window.businessUsersPricing) {
+        const bup = window.businessUsersPricing;
+        selected.amount = Math.round(bup.totalPrice);
+        document.getElementById('orderSummaryTitle').textContent = 'Sipariş Özeti';
+        document.getElementById('sumPlanLabel').textContent = 'Plan';
+        document.getElementById('sumPeriodLabel').textContent = 'Kullanıcı';
+        document.getElementById('sumPlan').textContent = 'Business - ' + bup.userCount + ' Kullanıcı';
+        document.getElementById('sumPeriod').textContent = bup.userCount + ' Kullanıcı' + (bup.discountPercent > 0 ? ' (%' + bup.discountPercent + ' indirim)' : '');
+      } else {
+        selected.amount = Number(period === 'yearly' ? btn.dataset.amountYearly : btn.dataset.amountMonthly);
+        document.getElementById('orderSummaryTitle').textContent = 'Sipariş Özeti';
+        document.getElementById('sumPlanLabel').textContent = 'Plan';
+        document.getElementById('sumPeriodLabel').textContent = 'Dönem';
+        document.getElementById('sumPlan').textContent = PLANS[selected.plan];
+        document.getElementById('sumPeriod').textContent = selected.period === 'yearly' ? 'Yıllık' : 'Aylık';
+      }
+
       document.getElementById('sumVat').textContent    = fmt(selected.amount * 0.2 / 1.2);
       document.getElementById('sumTotal').textContent  = fmt(selected.amount);
       checkoutSection.classList.add('visible');
@@ -503,6 +557,7 @@
 
   const urlParams    = new URLSearchParams(location.search);
   const urlPlan      = urlParams.get('plan');
+  const urlUsers     = urlParams.get('users');
   const urlPeriod    = urlParams.get('period');
   const urlJetCredit = urlParams.get('jetCredit');
   const urlDonation  = urlParams.get('donation');
@@ -522,7 +577,21 @@
       }
     }
 
-    if (urlJetCredit) {
+    // Business users seçimi checkout'a geç
+    if (urlPlan === 'business' && urlUsers) {
+      setTimeout(() => {
+        const businessBtn = document.querySelector('[data-plan="business"]');
+        if (businessBtn) {
+          businessBtn.click();
+          setTimeout(() => {
+            const section = document.getElementById('checkoutSection');
+            if (section && section.offsetHeight > 0) {
+              section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          }, 300);
+        }
+      }, 200);
+    } else if (urlJetCredit) {
       showJetOrDonationCheckout('jetCredit', Number(urlJetCredit));
       setTimeout(() => {
         const section = document.getElementById('checkoutSection');
