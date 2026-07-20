@@ -58,28 +58,44 @@
     .compare-table th:not(:first-child), .compare-table td:not(:first-child) { text-align: center; }
     .compare-table tr:last-child td { border-bottom: none; }
 
-    .fund-bars { display: flex; flex-direction: column; gap: 14px; margin-bottom: 48px; }
+    .fund-bars { display: flex; flex-direction: column; gap: 14px; margin-top: 64px; margin-bottom: 48px; padding-top: 48px; border-top: 1px solid var(--fj-line); }
     .fund-bar-row { display: grid; grid-template-columns: 160px 1fr 48px; align-items: center; gap: 14px; }
     .fund-bar-label { font-size: 13px; font-weight: 500; }
     .fund-bar-track { height: 10px; border-radius: 999px; background: var(--fj-soft); overflow: hidden; }
     .fund-bar-fill { height: 100%; border-radius: 999px; }
     .fund-bar-pct { font-size: 13px; font-weight: 700; text-align: right; }
-    @media (max-width: 560px) {
-      .fund-bar-row { grid-template-columns: 100px 1fr 40px; gap: 8px; }
+    @media (max-width: 720px) {
+      .fund-bars { margin-top: 48px; padding-top: 32px; gap: 12px; }
+      .fund-bar-row { grid-template-columns: 120px 1fr 40px; gap: 10px; }
       .fund-bar-label { font-size: 12px; }
+      .fund-bar-pct { font-size: 12px; }
+    }
+    @media (max-width: 480px) {
+      .fund-bars { margin-top: 32px; padding-top: 24px; }
+      .fund-bar-row { grid-template-columns: 100px 1fr 35px; gap: 8px; }
+      .fund-bar-label { font-size: 11px; }
+      .fund-bar-pct { font-size: 11px; }
     }
 
-    .amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
-    .amount-card { padding: 18px 12px; text-align: center; font-family: inherit; font-size: 16px; font-weight: 800; }
+    .amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .amount-card { padding: 18px 12px; text-align: center; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer; }
 
-    .donate-custom-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 32px; }
+    .donate-custom-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 40px; }
     .donate-custom-row .form-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; margin-bottom: auto; position: relative; }
     .donate-custom-row .form-group label { display: none; }
     .donate-custom-row .btn-primary-full { height: 48px; }
 
     @media (max-width: 720px) {
       .etap-grid { grid-template-columns: repeat(2, 1fr); }
-      .amount-grid { grid-template-columns: repeat(2, 1fr); }
+      .amount-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+      .amount-card { padding: 14px 10px; font-size: 15px; }
+      .donate-custom-row { gap: 10px; margin-bottom: 32px; }
+    }
+    @media (max-width: 480px) {
+      .amount-grid { grid-template-columns: 1fr; }
+      .donate-custom-row { flex-direction: column; }
+      .donate-custom-row .form-group { min-width: 100%; }
+      .donate-custom-row .btn-primary-full { max-width: 100% !important; width: 100%; }
     }
 
     .etap-info-grid {
@@ -218,9 +234,17 @@
     .btn-primary-full[data-state="loading"] { opacity: .85; cursor: wait; }
     .btn-spinner { width: 16px; height: 16px; animation: fj-spin .7s linear infinite; }
 
-    .etap-usage-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 40px; }
+    .etap-usage-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 40px; margin-bottom: 72px; }
     .etap-usage-table th, .etap-usage-table td { padding: 12px 16px; text-align: left; border: 1px solid var(--fj-line); }
     .etap-usage-table th { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; background: var(--fj-soft); }
+    @media (max-width: 720px) {
+      .etap-usage-table { margin-bottom: 48px; font-size: 12px; }
+      .etap-usage-table th, .etap-usage-table td { padding: 10px 12px; }
+    }
+    @media (max-width: 480px) {
+      .etap-usage-table { margin-bottom: 32px; font-size: 11px; overflow-x: auto; }
+      .etap-usage-table th, .etap-usage-table td { padding: 8px 10px; }
+    }
     .etap-usage-table th:first-child, .etap-usage-table td:first-child { font-weight: 600; background: var(--fj-soft); }
     .etap-usage-table th.etap-col.active { background: rgba(37,99,235,.12); color: var(--fj-brand); border-color: var(--fj-brand); }
     .etap-usage-table td { background: transparent; }
