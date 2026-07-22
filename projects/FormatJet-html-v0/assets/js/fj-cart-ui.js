@@ -164,7 +164,7 @@ window.fjCartUI = {
     if (totalEl) {
       var subtotal = window.fjCart.getTotal();
       var vat = Math.round(subtotal * 0.2 / 1.2);
-      var total = subtotal;
+      var total = subtotal + vat;
 
       var subtotalEl = document.getElementById('fjCartSubtotal');
       var vatEl = document.getElementById('fjCartVat');
