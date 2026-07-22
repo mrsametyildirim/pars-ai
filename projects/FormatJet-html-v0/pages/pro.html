@@ -581,7 +581,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Business users seçimi checkout'a geç
     if (urlPlan === 'business' && urlUsers) {
       setTimeout(() => {
-        const businessBtn = document.querySelector('[data-plan="business"]');
+        const businessBtn = document.getElementById('businessPlanBtn');
         if (businessBtn) {
           businessBtn.click();
           setTimeout(() => {
