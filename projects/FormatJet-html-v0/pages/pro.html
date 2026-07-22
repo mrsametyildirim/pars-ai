@@ -557,6 +557,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Scroll işlemlerini DOM render sonrası defer et (tüm resources yüklü)
+  const urlJetCredit = urlParams.get('jetCredit');
+  const urlDonation  = urlParams.get('donation');
+
   setTimeout(() => {
     if (urlPeriod === 'yearly') {
       const yearlyBtn = document.querySelector('.billing-opt[data-period="yearly"]');
