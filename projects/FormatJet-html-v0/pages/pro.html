@@ -617,8 +617,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 300);
 
   // Business button: Modal aç YA DA checkout'a geç
+  console.log('🔍 businessPlanBtn search:', document.getElementById('businessPlanBtn'));
   const businessPlanBtn = document.getElementById('businessPlanBtn');
+  console.log('🔍 businessPlanBtn found:', !!businessPlanBtn);
   if (businessPlanBtn) {
+    console.log('✅ Listener attaching...');
     businessPlanBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       e.stopPropagation();
