@@ -162,7 +162,17 @@ window.fjCartUI = {
     });
 
     if (totalEl) {
-      totalEl.textContent = '₺' + window.fjCart.getTotal().toLocaleString('tr-TR');
+      var subtotal = window.fjCart.getTotal();
+      var vat = Math.round(subtotal * 0.2 / 1.2);
+      var total = subtotal;
+
+      var subtotalEl = document.getElementById('fjCartSubtotal');
+      var vatEl = document.getElementById('fjCartVat');
+
+      if (subtotalEl) subtotalEl.textContent = '₺' + subtotal.toLocaleString('tr-TR');
+      if (vatEl) vatEl.textContent = '₺' + vat.toLocaleString('tr-TR');
+
+      totalEl.textContent = '₺' + total.toLocaleString('tr-TR');
     }
   },
 
