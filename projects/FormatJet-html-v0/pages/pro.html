@@ -359,7 +359,7 @@
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px" id="jetQuickSelect"></div>
       <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px">
         <input type="number" id="jetCustomAmount" class="form-input" placeholder="Diğer tutar (₺)" min="50" step="10" style="flex:1">
-        <button id="jetCustomAdd" class="btn-primary-full" style="flex:0;padding:10px 16px">Ekle</button>
+        <button id="jetCustomAdd" style="flex:0;padding:10px 16px;background:var(--fj-brand);color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600">Ekle</button>
       </div>
       <button id="jetSelectCancel" class="btn-cancel" style="width:100%">İptal</button>
     </div>
@@ -371,7 +371,7 @@
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px" id="donationQuickSelect"></div>
       <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px">
         <input type="number" id="donationCustomAmount" class="form-input" placeholder="Diğer tutar (₺)" min="10" step="10" style="flex:1">
-        <button id="donationCustomAdd" class="btn-primary-full" style="flex:0;padding:10px 16px">Ekle</button>
+        <button id="donationCustomAdd" style="flex:0;padding:10px 16px;background:var(--fj-brand);color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600">Ekle</button>
       </div>
       <button id="donationSelectCancel" class="btn-cancel" style="width:100%">İptal</button>
     </div>
@@ -891,7 +891,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var btn = document.createElement('button');
     btn.className = 'btn-primary-full';
     btn.textContent = '₺' + amt.toLocaleString('tr-TR');
-    btn.style.padding = '12px';
+    btn.style.cssText = 'padding:12px 16px;background:var(--fj-brand);color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-family:inherit;font-size:14px;';
     btn.dataset.amount = amt;
     btn.addEventListener('click', function() {
       window.fjCart.addWithUI({
@@ -933,7 +933,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var btn = document.createElement('button');
     btn.className = 'btn-primary-full';
     btn.textContent = '₺' + amt.toLocaleString('tr-TR');
-    btn.style.padding = '12px';
+    btn.style.cssText = 'padding:12px 16px;background:var(--fj-brand);color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-family:inherit;font-size:14px;';
     btn.dataset.amount = amt;
     btn.addEventListener('click', function() {
       window.fjCart.addWithUI({
