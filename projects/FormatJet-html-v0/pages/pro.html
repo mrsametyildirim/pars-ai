@@ -248,6 +248,7 @@
 
       <div class="checkout-box order-summary">
         <h2 class="checkout-title" id="orderSummaryTitle">Sipariş Özeti</h2>
+        <div id="orderItems" style="margin-bottom:20px;border-bottom:1px solid var(--fj-line);padding-bottom:16px;"></div>
         <div class="order-line"><span id="sumPlanLabel">Plan</span><strong id="sumPlan">Pro</strong></div>
         <div class="order-line"><span id="sumPeriodLabel">Dönem</span><strong id="sumPeriod">Aylık</strong></div>
         <div class="order-line"><span>KDV (%20)</span><strong id="sumVat">₺13,17</strong></div>
@@ -287,8 +288,11 @@
   </section>
 
   <style>
-    #fjCartPanel.open #fjCartContent { max-height: 400px; }
-    #fjCartPanel.open > div:first-child { border-bottom-width: 1px; }
+    #fjCartContainer { bottom: 0; }
+    #fjCartPanel { max-height: 90px; transition: max-height 0.3s ease; }
+    #fjCartPanel.open { max-height: 500px; }
+    #fjCartContent { max-height: 0; overflow: hidden; opacity: 0; transition: all 0.3s ease; }
+    #fjCartPanel.open #fjCartContent { max-height: 400px; opacity: 1; }
     .cart-item {
       display: grid;
       grid-template-columns: 1fr auto auto auto;
