@@ -177,21 +177,21 @@
     </div>
 
     <div class="mini-cards-col">
-      <a href="destek.html" class="mini-card">
+      <button id="supportMiniCard" class="mini-card" style="background:none;border:none;font-family:inherit;width:100%;text-align:left;cursor:pointer;">
         <div>
           <div class="mini-card-name" data-i18n="pro.supportMiniTitle">FormatJet'in büyümesine destek ol</div>
           <div class="mini-card-price" data-i18n="pro.supportMiniDesc">Bağışınla topluluk hedeflerine daha hızlı ulaşalım, limitler herkes için büyüsün.</div>
         </div>
         <svg class="mini-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
+      </button>
 
-      <a href="jet-limit.html" class="mini-card">
+      <button id="jetMiniCard" class="mini-card" style="background:none;border:none;font-family:inherit;width:100%;text-align:left;cursor:pointer;">
         <div>
           <div class="mini-card-name" data-i18n="pro.jetMiniTitle">Jet kredisiyle yapabileceklerini genişlet</div>
           <div class="mini-card-price" data-i18n="pro.jetMiniDesc">Bir kerelik satın alım, süresi dolmaz, iade edilmez. Hesabında saklanır, ihtiyacın kadar kullan.</div>
         </div>
         <svg class="mini-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
+      </button>
     </div>
   </div>
 
@@ -968,8 +968,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('donationCustomAmount').value = '';
   });
 
-  // Mini-card destek tıklaması (children[0])
-  var supportMiniCard = document.querySelector('.mini-cards-col')?.children[0];
+  // Mini-card destek tıklaması
+  var supportMiniCard = document.getElementById('supportMiniCard');
   if (supportMiniCard) {
     supportMiniCard.addEventListener('click', function(e) {
       e.preventDefault();
@@ -978,8 +978,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Mini-card jet kredisi tıklaması (children[1])
-  var jetMiniCard = document.querySelector('.mini-cards-col')?.children[1];
+  // Mini-card jet kredisi tıklaması
+  var jetMiniCard = document.getElementById('jetMiniCard');
   if (jetMiniCard) {
     jetMiniCard.addEventListener('click', function(e) {
       e.preventDefault();
