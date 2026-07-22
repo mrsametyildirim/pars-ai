@@ -968,23 +968,23 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('donationCustomAmount').value = '';
   });
 
-  // Mini-card jet kredisi tıklaması
+  // Mini-card destek tıklaması (children[0])
+  var supportMiniCard = document.querySelector('.mini-cards-col')?.children[0];
+  if (supportMiniCard) {
+    supportMiniCard.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      document.getElementById('donationSelectModal').classList.add('visible');
+    });
+  }
+
+  // Mini-card jet kredisi tıklaması (children[1])
   var jetMiniCard = document.querySelector('.mini-cards-col')?.children[1];
   if (jetMiniCard) {
     jetMiniCard.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
       document.getElementById('jetSelectModal').classList.add('visible');
-    });
-  }
-
-  // Mini-card destek tıklaması
-  var supportMiniCard = document.querySelector('.mini-cards-col')?.children[2];
-  if (supportMiniCard) {
-    supportMiniCard.addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      document.getElementById('donationSelectModal').classList.add('visible');
     });
   }
 
