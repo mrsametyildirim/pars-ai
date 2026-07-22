@@ -556,13 +556,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // urlParams zaten line 300'de declared, reuse et
-  const urlPlan      = urlParams.get('plan');
-  const urlUsers     = urlParams.get('users');
-  const urlPeriod    = urlParams.get('period');
-  const urlJetCredit = urlParams.get('jetCredit');
-  const urlDonation  = urlParams.get('donation');
-
   // Scroll işlemlerini DOM render sonrası defer et (tüm resources yüklü)
   setTimeout(() => {
     if (urlPeriod === 'yearly') {
