@@ -226,8 +226,9 @@
     });
 
     const vatAmount = Math.round(total * 0.2 / 1.2);
+    const grandTotal = total + vatAmount;
     sumVat.textContent = '₺' + vatAmount.toLocaleString('tr-TR');
-    sumTotal.textContent = '₺' + total.toLocaleString('tr-TR');
+    sumTotal.textContent = '₺' + grandTotal.toLocaleString('tr-TR');
   }
 
   // Payment method toggle
@@ -367,8 +368,9 @@
     });
 
     const vatAmount = Math.round(total * 0.2 / 1.2);
+    const grandTotal = total + vatAmount;
     successVat.textContent = '₺' + vatAmount.toLocaleString('tr-TR');
-    successTotal.textContent = '₺' + total.toLocaleString('tr-TR');
+    successTotal.textContent = '₺' + grandTotal.toLocaleString('tr-TR');
 
     // Clear cart and scroll to top
     window.fjCart.clear();
