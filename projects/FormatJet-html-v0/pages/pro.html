@@ -52,23 +52,7 @@
     }
     .pro-warning svg { flex-shrink: 0; margin-top: 2px; }
 
-    /* Checkout */
-    .checkout-section { max-width: 880px; margin: 0 auto; display: none; }
-    .checkout-section.visible { display: block; }
-    .checkout-grid { display: grid; grid-template-columns: 1fr 340px; gap: 32px; }
-    .checkout-box { padding: 28px; }
-    .checkout-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
-    .pay-methods { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-    .pay-method { display: flex; align-items: center; gap: 8px; padding: 10px 16px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
-    .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .order-summary { align-self: start; position: sticky; top: 90px; }
-    .order-line { display: flex; justify-content: space-between; font-size: 14px; padding: 10px 0; border-bottom: 1px solid var(--fj-line); }
-    .order-total { display: flex; justify-content: space-between; font-size: 16px; font-weight: 700; padding: 14px 0 0; }
-    .sandbox-note {
-      margin-top: 16px; padding: 10px 14px; font-size: 12px;
-      color: #92600a; background: rgba(217,119,6,.08);
-      border: 1px solid rgba(217,119,6,.25); border-radius: var(--fj-radius-md);
-    }
+    /* Checkout moved to checkout.html */
     .checkout-success { text-align: center; padding: 48px 24px; display: none; }
     .checkout-success.visible { display: block; }
     .success-icon { width: 64px; height: 64px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; background: rgba(5,150,105,.1); border-radius: 50%; color: var(--fj-success); }
@@ -194,68 +178,6 @@
       </button>
     </div>
   </div>
-
-  <section class="checkout-section" id="checkoutSection">
-    <div class="checkout-grid">
-      <div class="checkout-box">
-        <h2 class="checkout-title">Ödeme Bilgileri</h2>
-
-        <div class="pay-methods" id="payMethods">
-          <button class="pay-method active" data-method="card">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
-            Kredi / Banka Kartı
-          </button>
-          <button class="pay-method" data-method="transfer">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
-            Havale / EFT
-          </button>
-        </div>
-
-        <form id="cardForm" novalidate>
-          <div class="form-group">
-            <label class="form-label" for="cardName">Kart Üzerindeki İsim</label>
-            <input type="text" id="cardName" class="form-input" placeholder="AD SOYAD" autocomplete="cc-name">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="cardNumber">Kart Numarası</label>
-            <input type="text" id="cardNumber" class="form-input" placeholder="4242 4242 4242 4242" inputmode="numeric" autocomplete="cc-number" maxlength="19">
-          </div>
-          <div class="card-row">
-            <div class="form-group">
-              <label class="form-label" for="cardExpiry">Son Kullanma</label>
-              <input type="text" id="cardExpiry" class="form-input" placeholder="AA/YY" inputmode="numeric" autocomplete="cc-exp" maxlength="5">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="cardCvc">CVC</label>
-              <input type="text" id="cardCvc" class="form-input" placeholder="123" inputmode="numeric" autocomplete="cc-csc" maxlength="4">
-            </div>
-          </div>
-          <button type="submit" class="btn-primary-full" id="payBtn">Ödemeyi Tamamla</button>
-          <div class="sandbox-note">
-            <strong>Test modu:</strong> Bu ödeme ekranı sandbox modundadır; karttan gerçek tahsilat yapılmaz. Test kartı: 4242 4242 4242 4242
-          </div>
-        </form>
-
-        <div id="transferInfo" hidden style="padding:8px 0">
-          <p style="font-size:14px;color:var(--text-2);line-height:1.7">
-            <strong style="color:var(--text)">FormatJet Teknoloji A.Ş.</strong><br>
-            IBAN: TR12 0006 4000 0011 2345 6789 01<br>
-            Açıklama alanına e-posta adresinizi yazın. Ödemeniz onaylandığında planınız aktive edilir.
-          </p>
-          <button class="btn-primary-full" id="transferBtn">Havale Bildirimi Gönder</button>
-        </div>
-      </div>
-
-      <div class="checkout-box order-summary">
-        <h2 class="checkout-title" id="orderSummaryTitle">Sipariş Özeti</h2>
-        <div id="orderItems" style="margin-bottom:20px;border-bottom:1px solid var(--fj-line);padding-bottom:16px;"></div>
-        <div class="order-line"><span id="sumPlanLabel">Plan</span><strong id="sumPlan">Pro</strong></div>
-        <div class="order-line"><span id="sumPeriodLabel">Dönem</span><strong id="sumPeriod">Aylık</strong></div>
-        <div class="order-line"><span>KDV (%20)</span><strong id="sumVat">₺13,17</strong></div>
-        <div class="order-total"><span>Toplam</span><span id="sumTotal">₺79,00</span></div>
-      </div>
-    </div>
-  </section>
 
   <section class="checkout-success container" id="checkoutSuccess">
     <div class="success-icon">
