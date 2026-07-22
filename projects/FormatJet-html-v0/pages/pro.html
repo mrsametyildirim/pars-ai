@@ -910,6 +910,8 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
       if (window.fjCartUI && !window.fjCart.isEmpty()) {
         window.fjCartUI.openCart(); // Just open panel, don't show checkout yet
+        // Scroll to cart panel
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
       }
     }, 200);
   }
