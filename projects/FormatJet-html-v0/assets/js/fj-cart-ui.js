@@ -185,61 +185,10 @@ window.fjCartUI = {
       alert('Sepet boş. Lütfen bir ürün ekleyin.');
       return;
     }
-    // Render order summary from cart items
-    this.renderCheckout();
+    // Redirect to checkout page
+    location.href = 'checkout.html';
   },
 
-  renderCheckout: function () {
-    var orderSummaryTitle = document.getElementById('orderSummaryTitle');
-    var orderItems = document.getElementById('orderItems');
-
-    if (!orderItems) return;
-
-    // Clear previous items
-    orderItems.innerHTML = '';
-
-    var items = window.fjCart.items;
-    var total = 0;
-
-    items.forEach(function(item) {
-      var itemDiv = document.createElement('div');
-      itemDiv.className = 'order-line';
-      var itemTotal = item.pricePerUnit * item.quantity;
-      total += itemTotal;
-      itemDiv.innerHTML =
-        '<span>' + item.label + (item.quantity > 1 ? ' ×' + item.quantity : '') + '</span>' +
-        '<strong>₺' + itemTotal.toLocaleString('tr-TR') + '</strong>';
-      orderItems.appendChild(itemDiv);
-    });
-
-    // Update summary title
-    if (orderSummaryTitle) {
-      orderSummaryTitle.textContent = 'Sipariş Özeti (' + items.length + ' ürün)';
-    }
-
-    // Hide old plan fields
-    var oldFields = document.querySelectorAll('#sumPlanLabel, #sumPlan, #sumPeriodLabel, #sumPeriod');
-    oldFields.forEach(function(el) { el.style.display = 'none'; });
-
-    // Update total (with VAT)
-    var sumVat = document.getElementById('sumVat');
-    var sumTotal = document.getElementById('sumTotal');
-    var vatAmount = Math.round(total * 0.2 / 1.2);
-    if (sumVat) {
-      sumVat.textContent = '₺' + vatAmount.toLocaleString('tr-TR');
-      sumVat.parentElement.style.display = 'flex';
-    }
-    if (sumTotal) sumTotal.textContent = '₺' + total.toLocaleString('tr-TR');
-
-    // Show checkout section
-    var checkoutSection = document.getElementById('checkoutSection');
-    if (checkoutSection) {
-      checkoutSection.classList.add('visible');
-      setTimeout(function() {
-        checkoutSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 200);
-    }
-  },
 
   clearCart: function () {
     if (confirm('Sepeti tamamen temizlemek istediğinizden emin misiniz?')) {
