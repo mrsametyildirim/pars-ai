@@ -78,3 +78,82 @@ window.fjPricing = {
     localStorage.setItem('fj_current_etap', String(etap));
   },
 };
+
+window.fjCart = {
+  items: [],
+
+  _nextCartId: function () {
+    return Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  },
+
+  _findDuplicate: function (item) {
+    return this.items.find(existing => {
+      if (item.type === 'plan') {
+        return existing.type === 'plan' &&
+               existing.plan === item.plan &&
+               existing.period === item.period &&
+               existing.users === item.users;
+      } else if (item.type === 'jetCredit' || item.type === 'donation') {
+        return existing.type === item.type &&
+               existing.amount === item.amount;
+      }
+      return false;
+    });
+  },
+
+  _save: function () {
+    localStorage.setItem('fj_cart', JSON.stringify(this.items));
+    if (window.fjCartUI) window.fjCartUI.render();
+  },
+
+  _load: function () {
+    try {
+      var stored = localStorage.getItem('fj_cart');
+      this.items = stored ? JSON.parse(stored) : [];
+    } catch (e) {
+      this.items = [];
+    }
+  },
+
+  add: function (item) {
+    var duplicate = this._findDuplicate(item);
+    if (duplicate) {
+      return { isDuplicate: true, existingItem: duplicate };
+    }
+    item.cartId = this._nextCartId();
+    item.quantity = item.quantity || 1;
+    this.items.push(item);
+    this._save();
+    return { isDuplicate: false, item: item };
+  },
+
+  remove: function (cartId) {
+    this.items = this.items.filter(i => i.cartId !== cartId);
+    this._save();
+  },
+
+  update: function (cartId, quantity) {
+    var item = this.items.find(i => i.cartId === cartId);
+    if (item) {
+      item.quantity = Math.max(1, quantity);
+      this._save();
+    }
+  },
+
+  getTotal: function () {
+    return this.items.reduce(function (sum, item) {
+      return sum + (item.pricePerUnit * item.quantity);
+    }, 0);
+  },
+
+  clear: function () {
+    this.items = [];
+    this._save();
+  },
+
+  isEmpty: function () {
+    return this.items.length === 0;
+  }
+};
+
+window.fjCart._load();
