@@ -214,25 +214,35 @@
     #fjCartPanel {
       max-height: 90px;
       transition: max-height 0.3s ease;
-      background: rgba(20,28,50,0.85) !important;
-      backdrop-filter: blur(12px);
-      border-left: 1px solid rgba(255,255,255,0.12) !important;
+      background: linear-gradient(135deg, rgba(30,58,138,0.9) 0%, rgba(15,30,60,0.95) 100%) !important;
+      backdrop-filter: blur(16px);
+      border-left: 2px solid rgba(82,216,255,0.3) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
     }
-    #fjCartPanel.open { max-height: 500px; }
+    #fjCartPanel.open { max-height: 520px; }
     #fjCartContent { max-height: 0; overflow: hidden; opacity: 0; transition: all 0.3s ease; }
-    #fjCartPanel.open #fjCartContent { max-height: 400px; opacity: 1; }
+    #fjCartPanel.open #fjCartContent { max-height: 420px; opacity: 1; }
+    #fjCartToggle {
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 14px !important;
+    }
+    #fjCartTotal, #fjCartCount {
+      color: #52d8ff !important;
+      font-weight: 800 !important;
+    }
     .cart-item {
       display: grid;
       grid-template-columns: 1fr auto auto auto;
       gap: 12px;
       align-items: center;
       padding: 12px 8px;
-      border-bottom: 1px solid var(--fj-line);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       font-size: 13px;
-      color: #ffffff;
-      background: rgba(255,255,255,0.04);
+      color: #e0e7ff;
+      background: rgba(255,255,255,0.05);
       border-radius: 6px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
     .cart-item-label { font-weight: 600; color: #ffffff; }
     .cart-item-price { text-align: right; font-weight: 700; white-space: nowrap; }
