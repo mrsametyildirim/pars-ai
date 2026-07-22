@@ -556,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  const urlParams    = new URLSearchParams(location.search);
+  // urlParams zaten line 300'de declared, reuse et
   const urlPlan      = urlParams.get('plan');
   const urlUsers     = urlParams.get('users');
   const urlPeriod    = urlParams.get('period');
