@@ -316,7 +316,15 @@
   }
 
   // Load order on page load
-  setTimeout(renderOrderSummary, 200);
+  setTimeout(function() {
+    renderOrderSummary();
+    // Scroll past header to center on payment form
+    const pageHero = document.querySelector('.page-hero');
+    if (pageHero) {
+      const heroHeight = pageHero.offsetHeight;
+      window.scrollBy({ top: heroHeight - 80, behavior: 'smooth' });
+    }
+  }, 200);
 })();
 </script>
 <script src="../assets/js/tools-registry.js?v=7"></script>
