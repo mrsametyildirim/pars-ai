@@ -329,7 +329,53 @@
       color: var(--text-2);
     }
     .cart-item-remove:hover { background: var(--fj-line); color: var(--text); }
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; z-index: 2000; }
+    .modal-overlay.visible { display: flex; }
+    .modal-box { background: var(--bg); border-radius: var(--fj-radius-lg); padding: 32px; max-width: 400px; text-align: center; }
+    .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .modal-desc { font-size: 14px; color: var(--text-2); margin-bottom: 24px; line-height: 1.6; }
+    .modal-buttons { display: flex; gap: 12px; justify-content: center; }
+    .modal-buttons button { flex: 1; padding: 10px 16px; border: none; border-radius: var(--fj-radius-sm); cursor: pointer; font-weight: 600; }
+    .btn-increase { background: var(--fj-brand); color: white; }
+    .btn-add-new { background: var(--fj-soft); color: var(--text); }
+    .btn-cancel { background: var(--fj-line); color: var(--text-2); }
   </style>
+
+  <div id="duplicateModal" class="modal-overlay">
+    <div class="modal-box">
+      <h2 class="modal-title">Bu ürün zaten sepette</h2>
+      <p class="modal-desc" id="duplicateMsg"></p>
+      <div class="modal-buttons">
+        <button class="btn-increase" id="duplicateIncrease">Miktarı Artır</button>
+        <button class="btn-add-new" id="duplicateAddNew">Yeni Ekle</button>
+        <button class="btn-cancel" id="duplicateCancel">İptal</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="jetSelectModal" class="modal-overlay">
+    <div class="modal-box" style="max-width:480px">
+      <h2 class="modal-title">Ne kadar Jet Kredisi eklemek istersin?</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px" id="jetQuickSelect"></div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px">
+        <input type="number" id="jetCustomAmount" class="form-input" placeholder="Diğer tutar (₺)" min="50" step="10" style="flex:1">
+        <button id="jetCustomAdd" class="btn-primary-full" style="flex:0;padding:10px 16px">Ekle</button>
+      </div>
+      <button id="jetSelectCancel" class="btn-cancel" style="width:100%">İptal</button>
+    </div>
+  </div>
+
+  <div id="donationSelectModal" class="modal-overlay">
+    <div class="modal-box" style="max-width:480px">
+      <h2 class="modal-title">FormatJet'e kaç TL destek vermek istersin?</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px" id="donationQuickSelect"></div>
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:16px">
+        <input type="number" id="donationCustomAmount" class="form-input" placeholder="Diğer tutar (₺)" min="10" step="10" style="flex:1">
+        <button id="donationCustomAdd" class="btn-primary-full" style="flex:0;padding:10px 16px">Ekle</button>
+      </div>
+      <button id="donationSelectCancel" class="btn-cancel" style="width:100%">İptal</button>
+    </div>
+  </div>
 </main>
 
 <div data-fj-footer></div>
@@ -486,34 +532,30 @@ document.addEventListener('DOMContentLoaded', function() {
         location.href = '../login.html?next=' + encodeURIComponent('pro.html?plan=' + btn.dataset.plan + '&period=' + period);
         return;
       }
-      selected.type   = 'plan';
-      selected.plan   = btn.dataset.plan;
-      selected.period = period;
+
+      const plan = btn.dataset.plan;
+      const planName = PLANS[plan];
+      const amount = Number(period === 'yearly' ? btn.dataset.amountYearly : btn.dataset.amountMonthly);
+      let label = planName + ' (' + (period === 'yearly' ? 'Yıllık' : 'Aylık') + ')';
+      let users = null;
 
       // Business users pricing check
-      if (btn.dataset.plan === 'business' && window.businessUsersPricing) {
+      if (plan === 'business' && window.businessUsersPricing) {
         const bup = window.businessUsersPricing;
-        selected.amount = Math.round(bup.totalPrice);
-        document.getElementById('orderSummaryTitle').textContent = 'Sipariş Özeti';
-        document.getElementById('sumPlanLabel').textContent = 'Plan';
-        document.getElementById('sumPeriodLabel').textContent = 'Kullanıcı';
-        document.getElementById('sumPlan').textContent = 'Business - ' + bup.userCount + ' Kullanıcı';
-        document.getElementById('sumPeriod').textContent = bup.userCount + ' Kullanıcı' + (bup.discountPercent > 0 ? ' (%' + bup.discountPercent + ' indirim)' : '');
-      } else {
-        selected.amount = Number(period === 'yearly' ? btn.dataset.amountYearly : btn.dataset.amountMonthly);
-        document.getElementById('orderSummaryTitle').textContent = 'Sipariş Özeti';
-        document.getElementById('sumPlanLabel').textContent = 'Plan';
-        document.getElementById('sumPeriodLabel').textContent = 'Dönem';
-        document.getElementById('sumPlan').textContent = PLANS[selected.plan];
-        document.getElementById('sumPeriod').textContent = selected.period === 'yearly' ? 'Yıllık' : 'Aylık';
+        users = bup.userCount;
+        label = 'Business - ' + bup.userCount + ' Kullanıcı' + (bup.discountPercent > 0 ? ' (-%' + bup.discountPercent + ')' : '');
       }
 
-      document.getElementById('sumVat').textContent    = fmt(selected.amount * 0.2 / 1.2);
-      document.getElementById('sumTotal').textContent  = fmt(selected.amount);
-      checkoutSection.classList.add('visible');
-      const rect = checkoutSection.getBoundingClientRect();
-      const targetScroll = window.scrollY + rect.top + rect.height / 2 - window.innerHeight / 2;
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      const cartItem = {
+        type: 'plan',
+        plan: plan,
+        period: period,
+        users: users,
+        pricePerUnit: amount,
+        label: label
+      };
+
+      window.fjCart.addWithUI(cartItem);
     });
   });
 
@@ -724,16 +766,55 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 200);
   }
 
-  // Modal seçim butonları (3, 4, 5, 6+)
+  // Modal seçim butonları (3, 4, 5, 6+) - cart sistemine taşındı
   document.querySelectorAll('.addon-user-option').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', async (e) => {
       const users = Number(btn.dataset.users);
+      const period = document.querySelector('.billing-opt.active')?.dataset.period || 'monthly';
+
+      const session = await window.fjAuth.getSession();
+      if (!session) {
+        location.href = '../login.html?next=' + encodeURIComponent('pro.html?plan=business&users=' + users + '&period=' + period);
+        return;
+      }
+
+      // Hesapla fiyat
+      const bup = window.etapConfig.pricing.business;
+      const basePrice = bup[period];
+      const addonPrice = window.etapConfig.pricing.addonUser[period];
+      let totalPrice = basePrice;
+      let discountPercent = 0;
+      let addonCount = 0;
+
+      if (users > 5) {
+        addonCount = users - 5;
+        discountPercent = Math.min(30, (users - 3) * 10);
+        totalPrice = basePrice + (addonCount * addonPrice * (1 - discountPercent / 100));
+      } else if (users === 5) {
+        addonCount = 2;
+        discountPercent = 20;
+        totalPrice = basePrice + (2 * addonPrice * 0.8);
+      } else if (users === 4) {
+        addonCount = 1;
+        discountPercent = 10;
+        totalPrice = basePrice + (addonPrice * 0.9);
+      }
+
+      const cartItem = {
+        type: 'plan',
+        plan: 'business',
+        period: period,
+        users: users,
+        pricePerUnit: Math.round(totalPrice),
+        label: 'Business - ' + users + ' Kullanıcı' + (discountPercent > 0 ? ' (-%' + discountPercent + ')' : '')
+      };
+
+      window.fjCart.addWithUI(cartItem);
+
       const modal = document.getElementById('addonUserModal');
       if (modal) {
         modal.setAttribute('hidden', '');
       }
-      const period = document.querySelector('.billing-opt.active')?.dataset.period || 'monthly';
-      location.href = 'pro.html?plan=business&users=' + users + '&period=' + period;
     });
   });
 
@@ -741,14 +822,54 @@ document.addEventListener('DOMContentLoaded', function() {
   const customUserInput = document.getElementById('addonUserCustomInput');
   const confirmCustomBtn = document.getElementById('confirmCustomUser');
   if (confirmCustomBtn) {
-    confirmCustomBtn.addEventListener('click', () => {
+    confirmCustomBtn.addEventListener('click', async () => {
       const users = Number(customUserInput.value);
       if (users >= 3 && users <= 100) {
+        const period = document.querySelector('.billing-opt.active')?.dataset.period || 'monthly';
+
+        const session = await window.fjAuth.getSession();
+        if (!session) {
+          location.href = '../login.html?next=' + encodeURIComponent('pro.html?plan=business&users=' + users + '&period=' + period);
+          return;
+        }
+
+        // Hesapla fiyat
+        const bup = window.etapConfig.pricing.business;
+        const basePrice = bup[period];
+        const addonPrice = window.etapConfig.pricing.addonUser[period];
+        let totalPrice = basePrice;
+        let discountPercent = 0;
+        let addonCount = 0;
+
+        if (users > 5) {
+          addonCount = users - 5;
+          discountPercent = Math.min(30, (users - 3) * 10);
+          totalPrice = basePrice + (addonCount * addonPrice * (1 - discountPercent / 100));
+        } else if (users === 5) {
+          addonCount = 2;
+          discountPercent = 20;
+          totalPrice = basePrice + (2 * addonPrice * 0.8);
+        } else if (users === 4) {
+          addonCount = 1;
+          discountPercent = 10;
+          totalPrice = basePrice + (addonPrice * 0.9);
+        }
+
+        const cartItem = {
+          type: 'plan',
+          plan: 'business',
+          period: period,
+          users: users,
+          pricePerUnit: Math.round(totalPrice),
+          label: 'Business - ' + users + ' Kullanıcı' + (discountPercent > 0 ? ' (-%' + discountPercent + ')' : '')
+        };
+
+        window.fjCart.addWithUI(cartItem);
+
         const modal = document.getElementById('addonUserModal');
         if (modal) {
           modal.setAttribute('hidden', '');
         }
-        location.href = 'pro.html?plan=business&users=' + users + '&period=' + (document.querySelector('.billing-opt.active')?.dataset.period || 'monthly');
       } else {
         alert('Lütfen 3-100 arası sayı girin');
       }
@@ -763,23 +884,107 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Mini-card jet kredisi tıklaması (children[1])
-  const jetMiniCard = document.querySelector('.mini-cards-col')?.children[1];
+  // Jet Kredisi modal setup
+  var jetQuickAmounts = [100, 250, 500, 1000];
+  var jetSelectContainer = document.getElementById('jetQuickSelect');
+  jetQuickAmounts.forEach(function(amt) {
+    var btn = document.createElement('button');
+    btn.className = 'btn-primary-full';
+    btn.textContent = '₺' + amt.toLocaleString('tr-TR');
+    btn.style.padding = '12px';
+    btn.dataset.amount = amt;
+    btn.addEventListener('click', function() {
+      window.fjCart.addWithUI({
+        type: 'jetCredit',
+        amount: amt,
+        pricePerUnit: amt,
+        label: 'Jet Kredisi - ₺' + amt.toLocaleString('tr-TR'),
+        quantity: 1
+      });
+      document.getElementById('jetSelectModal').classList.remove('visible');
+    });
+    jetSelectContainer.appendChild(btn);
+  });
+
+  document.getElementById('jetCustomAdd').addEventListener('click', function() {
+    var amt = Number(document.getElementById('jetCustomAmount').value);
+    if (amt >= 50) {
+      window.fjCart.addWithUI({
+        type: 'jetCredit',
+        amount: amt,
+        pricePerUnit: amt,
+        label: 'Jet Kredisi - ₺' + amt.toLocaleString('tr-TR'),
+        quantity: 1
+      });
+      document.getElementById('jetSelectModal').classList.remove('visible');
+      document.getElementById('jetCustomAmount').value = '';
+    }
+  });
+
+  document.getElementById('jetSelectCancel').addEventListener('click', function() {
+    document.getElementById('jetSelectModal').classList.remove('visible');
+    document.getElementById('jetCustomAmount').value = '';
+  });
+
+  // Destek modal setup
+  var donationQuickAmounts = [50, 100, 250, 500];
+  var donationSelectContainer = document.getElementById('donationQuickSelect');
+  donationQuickAmounts.forEach(function(amt) {
+    var btn = document.createElement('button');
+    btn.className = 'btn-primary-full';
+    btn.textContent = '₺' + amt.toLocaleString('tr-TR');
+    btn.style.padding = '12px';
+    btn.dataset.amount = amt;
+    btn.addEventListener('click', function() {
+      window.fjCart.addWithUI({
+        type: 'donation',
+        amount: amt,
+        pricePerUnit: amt,
+        label: 'Destek Ol - ₺' + amt.toLocaleString('tr-TR'),
+        quantity: 1
+      });
+      document.getElementById('donationSelectModal').classList.remove('visible');
+    });
+    donationSelectContainer.appendChild(btn);
+  });
+
+  document.getElementById('donationCustomAdd').addEventListener('click', function() {
+    var amt = Number(document.getElementById('donationCustomAmount').value);
+    if (amt >= 10) {
+      window.fjCart.addWithUI({
+        type: 'donation',
+        amount: amt,
+        pricePerUnit: amt,
+        label: 'Destek Ol - ₺' + amt.toLocaleString('tr-TR'),
+        quantity: 1
+      });
+      document.getElementById('donationSelectModal').classList.remove('visible');
+      document.getElementById('donationCustomAmount').value = '';
+    }
+  });
+
+  document.getElementById('donationSelectCancel').addEventListener('click', function() {
+    document.getElementById('donationSelectModal').classList.remove('visible');
+    document.getElementById('donationCustomAmount').value = '';
+  });
+
+  // Mini-card jet kredisi tıklaması
+  var jetMiniCard = document.querySelector('.mini-cards-col')?.children[1];
   if (jetMiniCard) {
-    jetMiniCard.addEventListener('click', (e) => {
+    jetMiniCard.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      location.href = 'pro.html?jetCredit=100';
+      document.getElementById('jetSelectModal').classList.add('visible');
     });
   }
 
-  // Mini-card destek tıklaması (children[2])
-  const supportMiniCard = document.querySelector('.mini-cards-col')?.children[2];
+  // Mini-card destek tıklaması
+  var supportMiniCard = document.querySelector('.mini-cards-col')?.children[2];
   if (supportMiniCard) {
-    supportMiniCard.addEventListener('click', (e) => {
+    supportMiniCard.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      location.href = 'pro.html?donation=100';
+      document.getElementById('donationSelectModal').classList.add('visible');
     });
   }
 

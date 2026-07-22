@@ -127,6 +127,15 @@ window.fjCart = {
     return { isDuplicate: false, item: item };
   },
 
+  addWithUI: function (item) {
+    var result = this.add(item);
+    if (result.isDuplicate && window.fjCartUI) {
+      window.fjCartUI.showDuplicateModal(item, result.existingItem);
+    } else if (window.fjCartUI) {
+      window.fjCartUI.openCart();
+    }
+  },
+
   remove: function (cartId) {
     this.items = this.items.filter(i => i.cartId !== cartId);
     this._save();

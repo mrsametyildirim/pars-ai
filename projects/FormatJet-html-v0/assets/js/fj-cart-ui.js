@@ -2,6 +2,8 @@
 
 window.fjCartUI = {
   isOpen: false,
+  pendingItem: null,
+  pendingDuplicate: null,
 
   init: function () {
     var container = document.getElementById('fjCartContainer');
@@ -21,6 +23,33 @@ window.fjCartUI = {
     var clearBtn = document.getElementById('fjCartClear');
     if (clearBtn) {
       clearBtn.addEventListener('click', function () { self.clearCart(); });
+    }
+
+    // Duplicate modal buttons
+    var increaseBtn = document.getElementById('duplicateIncrease');
+    var addNewBtn = document.getElementById('duplicateAddNew');
+    var cancelBtn = document.getElementById('duplicateCancel');
+    if (increaseBtn) {
+      increaseBtn.addEventListener('click', function () {
+        if (self.pendingDuplicate) {
+          self.pendingDuplicate.quantity += self.pendingItem.quantity;
+          window.fjCart.update(self.pendingDuplicate.cartId, self.pendingDuplicate.quantity);
+          self.closeDuplicateModal();
+          self.openCart();
+        }
+      });
+    }
+    if (addNewBtn) {
+      addNewBtn.addEventListener('click', function () {
+        if (self.pendingItem) {
+          window.fjCart.add(self.pendingItem);
+          self.closeDuplicateModal();
+          self.openCart();
+        }
+      });
+    }
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', function () { self.closeDuplicateModal(); });
     }
 
     this.render();
@@ -46,10 +75,15 @@ window.fjCartUI = {
     var itemsList = document.getElementById('fjCartItemsList');
     var totalEl = document.getElementById('fjCartTotal');
     var emptyMsg = document.getElementById('fjCartEmpty');
+    var countEl = document.getElementById('fjCartCount');
 
     if (!itemsList) return;
 
     itemsList.innerHTML = '';
+
+    // Update item count badge
+    var itemCount = window.fjCart.items.reduce(function(sum, item) { return sum + (item.quantity || 1); }, 0);
+    if (countEl) countEl.textContent = itemCount;
 
     if (window.fjCart.isEmpty()) {
       if (emptyMsg) emptyMsg.style.display = 'block';
@@ -160,6 +194,24 @@ window.fjCartUI = {
     if (confirm('Sepeti tamamen temizlemek istediğinizden emin misiniz?')) {
       window.fjCart.clear();
     }
+  },
+
+  showDuplicateModal: function (item, existing) {
+    this.pendingItem = item;
+    this.pendingDuplicate = existing;
+    var modal = document.getElementById('duplicateModal');
+    var msgEl = document.getElementById('duplicateMsg');
+    if (modal && msgEl) {
+      msgEl.textContent = 'Bu ürünü aynı yapılandırmada zaten ' + existing.quantity + ' adet eklemişsiniz. Miktarı artırmak mı, yoksa yeni bir ürün olarak eklemek mi istersiniz?';
+      modal.classList.add('visible');
+    }
+  },
+
+  closeDuplicateModal: function () {
+    var modal = document.getElementById('duplicateModal');
+    if (modal) modal.classList.remove('visible');
+    this.pendingItem = null;
+    this.pendingDuplicate = null;
   }
 };
 
