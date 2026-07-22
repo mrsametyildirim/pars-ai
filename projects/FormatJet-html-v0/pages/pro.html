@@ -578,21 +578,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    // Business users seçimi checkout'a geç
-    if (urlPlan === 'business' && urlUsers) {
-      setTimeout(() => {
-        const businessBtn = document.getElementById('businessPlanBtn');
-        if (businessBtn) {
-          businessBtn.click();
-          setTimeout(() => {
-            const section = document.getElementById('checkoutSection');
-            if (section && section.offsetHeight > 0) {
-              section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-          }, 300);
-        }
-      }, 200);
-    } else if (urlJetCredit) {
+    // (Business users auto-click taşındı listener attachment'INDAN SONRAYA)
+
+    if (urlJetCredit) {
       showJetOrDonationCheckout('jetCredit', Number(urlJetCredit));
       setTimeout(() => {
         const section = document.getElementById('checkoutSection');
@@ -617,11 +605,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 300);
 
   // Business button: Modal aç YA DA checkout'a geç
-  console.log('🔍 businessPlanBtn search:', document.getElementById('businessPlanBtn'));
   const businessPlanBtn = document.getElementById('businessPlanBtn');
-  console.log('🔍 businessPlanBtn found:', !!businessPlanBtn);
   if (businessPlanBtn) {
-    console.log('✅ Listener attaching...');
     businessPlanBtn.addEventListener('click', async (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -658,6 +643,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     });
+  }
+
+  // Business users seçimi checkout'a geç (listener AFTER)
+  if (urlPlan === 'business' && urlUsers) {
+    setTimeout(() => {
+      const businessBtn = document.getElementById('businessPlanBtn');
+      if (businessBtn) {
+        businessBtn.click();
+        setTimeout(() => {
+          const section = document.getElementById('checkoutSection');
+          if (section && section.offsetHeight > 0) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 300);
+      }
+    }, 200);
   }
 
   // Modal seçim butonları (3, 4, 5, 6+)
