@@ -744,9 +744,9 @@
     window.fjCart.addWithUI(cartItem);
     addDonor('Sen', donateAmount);
 
-    // Redirect to pro.html checkout (wait for cart save + UI update)
+    // Redirect to pro.html with cart (panel will open automatically)
     setTimeout(() => {
-      location.href = 'pro.html?step=checkout';
+      location.href = 'pro.html?fromCart=1';
     }, 1200);
   });
 })();

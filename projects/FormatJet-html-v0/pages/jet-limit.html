@@ -180,9 +180,9 @@
     };
     window.fjCart.addWithUI(cartItem);
 
-    // Redirect to pro.html checkout (wait for cart save)
+    // Redirect to pro.html with cart (panel will open automatically)
     setTimeout(() => {
-      location.href = 'pro.html?step=checkout';
+      location.href = 'pro.html?fromCart=1';
     }, 800);
   });
 

@@ -982,18 +982,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Checkout flow: URL'de step=checkout varsa renderCheckout çağrıl
+  // Auto-open cart panel when coming from external pages (jet-limit, destek)
   var urlStep = urlParams.get('step');
-  if (urlStep === 'checkout') {
+  if (urlStep === 'checkout' || urlParams.get('fromCart')) {
     setTimeout(function() {
-      // Cart items varsa render et
-      if (window.fjCartUI && window.fjCart && !window.fjCart.isEmpty()) {
-        window.fjCartUI.renderCheckout();
-      } else if (!window.fjCart || window.fjCart.isEmpty()) {
-        // Cart boşsa fallback: siteyi refresh et
-        window.location.href = 'pro.html';
+      if (window.fjCartUI && !window.fjCart.isEmpty()) {
+        window.fjCartUI.openCart(); // Just open panel, don't show checkout yet
       }
-    }, 300);
+    }, 200);
   }
 
 })();
