@@ -333,13 +333,14 @@
       color: var(--text-2);
     }
     .cart-item-remove:hover { background: var(--fj-line); color: var(--text); }
-    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; z-index: 2000; }
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 16px; }
     .modal-overlay.visible { display: flex; }
-    .modal-box { background: var(--bg); border-radius: var(--fj-radius-lg); padding: 32px; max-width: 400px; text-align: center; }
+    .modal-box { background: var(--bg); border-radius: var(--fj-radius-lg); padding: 24px; max-width: 90vw; width: 100%; max-height: 90vh; overflow-y: auto; text-align: center; }
+    @media (min-width: 640px) { .modal-box { max-width: 420px; padding: 32px; } }
     .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-    .modal-desc { font-size: 14px; color: var(--text-2); margin-bottom: 24px; line-height: 1.6; }
-    .modal-buttons { display: flex; gap: 12px; justify-content: center; }
-    .modal-buttons button { flex: 1; padding: 10px 16px; border: none; border-radius: var(--fj-radius-sm); cursor: pointer; font-weight: 600; }
+    .modal-desc { font-size: 14px; color: var(--text-2); margin-bottom: 20px; line-height: 1.6; }
+    .modal-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .modal-buttons button { flex: 1; min-width: 100px; padding: 10px 16px; border: none; border-radius: var(--fj-radius-sm); cursor: pointer; font-weight: 600; font-size: 13px; }
     .btn-increase { background: var(--fj-brand); color: white; }
     .btn-add-new { background: var(--fj-soft); color: var(--text); }
     .btn-cancel { background: var(--fj-line); color: var(--text-2); }
@@ -689,23 +690,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // (Business users auto-click taşındı listener attachment'INDAN SONRAYA)
 
-    if (urlJetCredit) {
-      showJetOrDonationCheckout('jetCredit', Number(urlJetCredit));
-      setTimeout(() => {
-        const section = document.getElementById('checkoutSection');
-        if (section && section.offsetHeight > 0) {
-          section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 200);
-    } else if (urlDonation) {
-      showJetOrDonationCheckout('donation', Number(urlDonation));
-      setTimeout(() => {
-        const section = document.getElementById('checkoutSection');
-        if (section && section.offsetHeight > 0) {
-          section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 200);
-    } else if (urlPlan) {
+    // Old jet/donation flow deactivated - now using cart system
+    // if (urlJetCredit) { showJetOrDonationCheckout('jetCredit', ...); }
+    // if (urlDonation) { showJetOrDonationCheckout('donation', ...); }
+
+    if (urlPlan && urlPlan !== 'business') {
       const section = document.getElementById('plansSection');
       if (section && section.offsetHeight > 0) {
         section.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -994,9 +983,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Checkout flow: URL'de step=checkout varsa renderCheckout çağrıl
   var urlStep = urlParams.get('step');
-  if (urlStep === 'checkout' && window.fjCartUI && !window.fjCart.isEmpty()) {
+  if (urlStep === 'checkout') {
     setTimeout(function() {
-      window.fjCartUI.renderCheckout();
+      // Cart items varsa render et
+      if (window.fjCartUI && window.fjCart && !window.fjCart.isEmpty()) {
+        window.fjCartUI.renderCheckout();
+      } else if (!window.fjCart || window.fjCart.isEmpty()) {
+        // Cart boşsa fallback: siteyi refresh et
+        window.location.href = 'pro.html';
+      }
     }, 300);
   }
 

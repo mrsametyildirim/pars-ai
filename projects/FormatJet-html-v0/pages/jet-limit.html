@@ -29,18 +29,27 @@
     .jet-purchase-box { padding: 28px 24px; }
     .jet-purchase-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
     .jet-custom-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
-    .jet-custom-row .form-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; margin-bottom: auto; position: relative; }
+    .jet-custom-row .form-group { flex: 1; min-width: 160px; display: flex; flex-direction: column; margin-bottom: auto; position: relative; }
     .jet-custom-row .form-group label { display: none; }
     .jet-custom-row .btn-primary-full { height: 48px; }
 
     .jet-footnote { font-size: 12px; line-height: 1.7; margin-top: 20px; text-align: center; color: var(--fj-muted); }
 
     @media (max-width: 720px) {
-      .jet-credit-grid { grid-template-columns: repeat(2, 1fr); }
+      .jet-wrap { padding: 32px 16px 72px; }
+      .jet-credit-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .jet-feats { grid-template-columns: 1fr; }
+      .jet-custom-row { flex-direction: column; }
+      .jet-custom-row .form-group { min-width: 100%; }
+      .jet-custom-row .btn-primary-full { width: 100%; max-width: none; height: 44px; }
     }
     @media (max-width: 480px) {
-      .jet-credit-grid { grid-template-columns: 1fr; }
+      .jet-wrap { padding: 24px 12px 60px; }
+      .jet-credit-grid { grid-template-columns: 1fr; gap: 10px; }
+      .jet-credit-card { padding: 16px 12px; }
+      .jet-credit-amount { font-size: 18px; }
+      .jet-credit-note { font-size: 11px; }
+      .jet-purchase-box { padding: 20px 16px; }
     }
 
     #jetCustomAmount:focus {
@@ -171,10 +180,10 @@
     };
     window.fjCart.addWithUI(cartItem);
 
-    // Redirect to pro.html checkout
+    // Redirect to pro.html checkout (wait for cart save)
     setTimeout(() => {
       location.href = 'pro.html?step=checkout';
-    }, 500);
+    }, 800);
   });
 
   // Page load'ında header + 30px kadar scroll
