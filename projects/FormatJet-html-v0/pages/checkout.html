@@ -65,11 +65,27 @@
     .success-footer { text-align: center; padding-top: 20px; border-top: 1px solid var(--fj-line); }
     .success-footer-text { font-size: 12px; color: var(--fj-muted); margin: 0; line-height: 1.6; }
 
+    /* Animated Card Preview */
+    .card-preview-wrap { margin-bottom: 28px; display: flex; justify-content: center; perspective: 1000px; }
+    .card-preview { width: 280px; height: 160px; border-radius: 16px; background: linear-gradient(135deg, #1e40af 0%, #06b6d4 100%); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; position: relative; box-shadow: 0 10px 32px rgba(30,64,175,0.3); transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease; transform-style: preserve-3d; }
+    .card-preview:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(30,64,175,0.4); }
+    .card-preview.focus { animation: cardPulse 0.4s cubic-bezier(0.22,1,0.36,1); }
+    @keyframes cardPulse { 0%, 100% { transform: translateY(-4px) scale(1); } 50% { transform: translateY(-6px) scale(1.02); } }
+
+    .card-logo { font-size: 12px; font-weight: 800; letter-spacing: 0.05em; color: rgba(255,255,255,0.8); text-transform: uppercase; }
+    .card-number { font-size: 16px; font-weight: 600; letter-spacing: 0.08em; color: #fff; font-family: 'Courier New', monospace; margin: 16px 0; }
+    .card-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+    .card-name { font-size: 12px; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; }
+    .card-expiry { font-size: 12px; color: rgba(255,255,255,0.8); font-family: 'Courier New', monospace; font-weight: 600; }
+
     @media (max-width: 720px) {
       .success-checkmark { width: 64px; height: 64px; }
       .success-title { font-size: 24px; }
       .success-order-box { padding: 18px; }
       .success-actions { gap: 10px; }
+      .card-preview { width: 240px; height: 140px; padding: 16px; }
+      .card-logo { font-size: 11px; }
+      .card-number { font-size: 14px; margin: 12px 0; }
     }
   </style>
   <link rel="stylesheet" href="../assets/css/components.css?v=14">
@@ -100,6 +116,17 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
             Havale / EFT
           </button>
+        </div>
+
+        <div class="card-preview-wrap">
+          <div class="card-preview">
+            <div class="card-logo">💳</div>
+            <div class="card-number" id="previewCardNumber">•••• •••• •••• ••••</div>
+            <div class="card-bottom">
+              <div class="card-name" id="previewCardName">AD SOYAD</div>
+              <div class="card-expiry" id="previewCardExpiry">AA/YY</div>
+            </div>
+          </div>
         </div>
 
         <form id="cardForm" novalidate>
@@ -208,17 +235,44 @@
     });
   });
 
-  // Card input formatting
+  // Card input formatting + preview update
   const cardNumber = document.getElementById('cardNumber');
+  const cardName = document.getElementById('cardName');
+  const cardExpiry = document.getElementById('cardExpiry');
+  const previewCardNumber = document.getElementById('previewCardNumber');
+  const previewCardName = document.getElementById('previewCardName');
+  const previewCardExpiry = document.getElementById('previewCardExpiry');
+  const cardPreview = document.querySelector('.card-preview');
+
   cardNumber.addEventListener('input', () => {
     cardNumber.value = cardNumber.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+    updateCardPreview();
+    animateCard();
   });
-  const cardExpiry = document.getElementById('cardExpiry');
+
   cardExpiry.addEventListener('input', () => {
     let v = cardExpiry.value.replace(/\D/g, '').slice(0, 4);
     if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
     cardExpiry.value = v;
+    updateCardPreview();
+    animateCard();
   });
+
+  cardName.addEventListener('input', () => {
+    updateCardPreview();
+    animateCard();
+  });
+
+  function updateCardPreview() {
+    previewCardName.textContent = cardName.value.toUpperCase() || 'AD SOYAD';
+    previewCardExpiry.textContent = cardExpiry.value || 'AA/YY';
+    previewCardNumber.textContent = cardNumber.value || '•••• •••• •••• ••••';
+  }
+
+  function animateCard() {
+    cardPreview.classList.add('focus');
+    setTimeout(() => cardPreview.classList.remove('focus'), 400);
+  }
 
   // Payment submit
   document.getElementById('cardForm').addEventListener('submit', async (e) => {
