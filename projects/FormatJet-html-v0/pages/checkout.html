@@ -12,7 +12,13 @@
   <style>
     .checkout-wrap { max-width: 1200px; margin: 0 auto; padding: 40px 24px 96px; }
     .checkout-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: start; }
-    .checkout-box { padding: 28px; }
+    .checkout-box {
+      padding: 28px;
+      background: rgba(17,20,38,0.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
     .checkout-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
     .pay-methods { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
     .pay-method { display: flex; align-items: center; gap: 8px; padding: 12px 18px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
