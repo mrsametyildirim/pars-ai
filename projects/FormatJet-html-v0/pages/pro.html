@@ -333,14 +333,15 @@
       color: var(--text-2);
     }
     .cart-item-remove:hover { background: var(--fj-line); color: var(--text); }
-    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 16px; }
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 8px; overflow-y: auto; }
     .modal-overlay.visible { display: flex; }
-    .modal-box { background: var(--bg); border-radius: var(--fj-radius-lg); padding: 24px; max-width: 90vw; width: 100%; max-height: 90vh; overflow-y: auto; text-align: center; }
-    @media (min-width: 640px) { .modal-box { max-width: 420px; padding: 32px; } }
-    .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-    .modal-desc { font-size: 14px; color: var(--text-2); margin-bottom: 20px; line-height: 1.6; }
-    .modal-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .modal-buttons button { flex: 1; min-width: 100px; padding: 10px 16px; border: none; border-radius: var(--fj-radius-sm); cursor: pointer; font-weight: 600; font-size: 13px; }
+    .modal-box { background: var(--bg); border-radius: var(--fj-radius-lg); padding: 16px; max-width: 95vw; width: 100%; max-height: 95vh; overflow-y: auto; text-align: center; margin: auto; }
+    @media (min-width: 480px) { .modal-box { padding: 20px; max-width: 90vw; } }
+    @media (min-width: 640px) { .modal-box { max-width: 420px; padding: 28px; } }
+    .modal-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .modal-desc { font-size: 13px; color: var(--text-2); margin-bottom: 16px; line-height: 1.5; }
+    .modal-buttons { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .modal-buttons button { flex: 1; min-width: 80px; padding: 8px 12px; border: none; border-radius: var(--fj-radius-sm); cursor: pointer; font-weight: 600; font-size: 12px; }
     .btn-increase { background: var(--fj-brand); color: white; }
     .btn-add-new { background: var(--fj-soft); color: var(--text); }
     .btn-cancel { background: var(--fj-line); color: var(--text-2); }
