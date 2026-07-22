@@ -992,6 +992,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Checkout flow: URL'de step=checkout varsa renderCheckout çağrıl
+  var urlStep = urlParams.get('step');
+  if (urlStep === 'checkout' && window.fjCartUI && !window.fjCart.isEmpty()) {
+    setTimeout(function() {
+      window.fjCartUI.renderCheckout();
+    }, 300);
+  }
+
 })();
 });
 </script>
